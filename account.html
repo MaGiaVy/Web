@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài khoản của tôi - DVK Gunpla</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="account">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <nav class="breadcrumb"><a href="index.html">Trang chủ</a><span>›</span><b>Tài khoản của tôi</b></nav>
+
+    <div class="account-layout">
+      <aside class="card account-side">
+        <div class="profile" id="side-profile"></div>
+        <nav class="account-nav" id="account-nav"></nav>
+      </aside>
+
+      <div class="account-main">
+        <!-- Hồ sơ: cho phép tự sửa tên -->
+        <section class="card" id="profile">
+          <div class="card-head"><h2 id="h-profile"></h2></div>
+          <form class="card-pad" id="profile-form" autocomplete="off">
+            <div class="profile-head" id="profile-head"></div>
+            <div class="form-grid">
+              <label class="field"><span>Họ và tên</span><input class="input" id="pf-name"></label>
+              <label class="field"><span>Email</span><input class="input" id="pf-email"></label>
+              <label class="field"><span>Số điện thoại</span><input class="input" id="pf-phone"></label>
+              <label class="field"><span>Ngày sinh</span><input class="input" id="pf-birthday" type="date"></label>
+              <div class="field full"><span>Giới tính</span>
+                <div style="display:flex;gap:24px;height:42px;align-items:center" id="pf-gender"></div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-outline" id="pf-reset">Hủy thay đổi</button>
+              <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Sổ địa chỉ: thêm địa chỉ khác -->
+        <section class="card" id="addresses">
+          <div class="card-head"><h2 id="h-address"></h2><button class="btn btn-dark btn-sm" id="add-address-btn" type="button"></button></div>
+          <div class="card-pad">
+            <div class="address-grid" id="address-list"></div>
+            <form class="address-form" id="address-form" autocomplete="off">
+              <h3 style="margin-bottom:16px;font-size:16px">Thêm địa chỉ mới</h3>
+              <div class="form-grid">
+                <label class="field"><span>Họ tên người nhận</span><input class="input" id="ad-name" placeholder="Nhập họ tên"></label>
+                <label class="field"><span>Số điện thoại</span><input class="input" id="ad-phone" placeholder="Nhập số điện thoại"></label>
+                <label class="field"><span>Tỉnh / Thành phố</span><select class="select" id="ad-city"></select></label>
+                <label class="field"><span>Quận / Huyện</span><select class="select" id="ad-district"></select></label>
+                <label class="field"><span>Phường / Xã</span><input class="input" id="ad-ward" placeholder="Vd: Phường 3"></label>
+                <label class="field"><span>Số nhà, tên đường</span><input class="input" id="ad-street" placeholder="Vd: 273 An Dương Vương"></label>
+                <label class="field"><span>Loại địa chỉ</span><select class="select" id="ad-label"><option>Nhà riêng</option><option>Công ty</option><option>Khác</option></select></label>
+                <label class="field" style="justify-content:flex-end"><span style="display:flex;align-items:center;gap:8px;height:42px;font-weight:500"><input type="checkbox" id="ad-default"> Đặt làm địa chỉ mặc định</span></label>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="ad-cancel">Hủy</button>
+                <button type="submit" class="btn btn-primary">Lưu địa chỉ</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Đổi mật khẩu -->
+        <section class="card" id="password">
+          <div class="card-head"><h2 id="h-password"></h2></div>
+          <form class="card-pad" id="password-form" autocomplete="off">
+            <div class="form-grid">
+              <label class="field full"><span>Mật khẩu hiện tại</span><input class="input" type="password" placeholder="Nhập mật khẩu hiện tại"></label>
+              <label class="field"><span>Mật khẩu mới</span><input class="input" type="password" placeholder="Nhập mật khẩu mới"></label>
+              <label class="field"><span>Nhập lại mật khẩu mới</span><input class="input" type="password" placeholder="Nhập lại mật khẩu mới"></label>
+            </div>
+            <div class="form-actions"><button type="submit" class="btn btn-dark">Đổi mật khẩu</button></div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/account.js"></script>
+</body>
+</html>

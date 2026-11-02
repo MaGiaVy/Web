@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết đơn hàng - DVK Gunpla</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="order-detail">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <nav class="breadcrumb" id="breadcrumb"></nav>
+    <div class="page-title">
+      <div><h1 id="od-title">Chi tiết đơn hàng</h1><p id="od-sub"></p></div>
+      <div style="display:flex;gap:10px" id="od-actions"></div>
+    </div>
+
+    <div class="detail-layout">
+      <div class="checkout-stack">
+        <section class="card" id="od-timeline"></section>
+        <section class="card">
+          <div class="card-head"><h3>Sản phẩm trong đơn</h3></div>
+          <div id="od-items"></div>
+        </section>
+      </div>
+      <aside class="checkout-stack">
+        <section class="card">
+          <div class="card-head"><h3>Thông tin nhận hàng</h3></div>
+          <div class="info-list" id="od-info"></div>
+        </section>
+        <section class="card" id="od-totals"></section>
+      </aside>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/order-detail.js"></script>
+</body>
+</html>

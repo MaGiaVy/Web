@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f1606"/><stop offset="1" stop-color="#a16207"/></linearGradient>
+    <radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#facc15" stop-opacity=".55"/><stop offset="1" stop-color="#facc15" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0 L0,0 0,30" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#grid)"/>
+  <text x="590" y="250" font-family="Arial Black, Arial" font-weight="900" font-size="230" fill="#fff" fill-opacity=".06" text-anchor="end">PG</text>
+  <path d="M0,470 L600,330 L600,380 L0,520 Z" fill="#facc15" opacity=".18"/>
+  <circle cx="300" cy="300" r="210" fill="url(#halo)"/>
+  <circle cx="300" cy="300" r="180" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2" stroke-dasharray="6 10"/>
+  <circle cx="300" cy="300" r="240" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="1"/>
+  <path d="M300,40 L300,80 M300,520 L300,560 M40,300 L80,300 M520,300 L560,300" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+  <g transform="translate(300,315) scale(1)">
+  <g>
+    <path d="M-130,95 L-100,40 L100,40 L130,95 L110,150 L-110,150 Z" fill="#e23d4a"/>
+    <path d="M-130,95 L-100,40 L-80,40 L-96,150 L-110,150 Z" fill="#bf1a27"/>
+    <path d="M-97,-60 L-82,-122 L-32,-152 L32,-152 L82,-122 L97,-60 L104,42 L72,96 L-72,96 L-104,42 Z" fill="#f7f7f7" stroke="#d1d1d1" stroke-width="4"/>
+    <path d="M-97,-60 L-104,42 L-72,96 L-64,20 L-74,-60 Z" fill="#d1d1d1" opacity=".55"/>
+    <path d="M97,-60 L104,42 L72,96 L64,20 L74,-60 Z" fill="#d1d1d1" opacity=".35"/>
+    <rect x="-100" y="-96" width="20" height="30" rx="4" fill="#f7f7f7"/>
+    <rect x="80" y="-96" width="20" height="30" rx="4" fill="#f7f7f7"/>
+    <path d="M-12,-138 L0,-268 L12,-138 Z" fill="#f7f7f7" stroke="#cfcfcf" stroke-width="3"/>
+       <path d="M-4,-150 L0,-250 L4,-150 Z" fill="#dedede"/>
+    <path d="M-20,-152 L0,-188 L20,-152 L12,-118 L-12,-118 Z" fill="#e23d4a" stroke="#b00b18" stroke-width="3"/>
+    <rect x="-8" y="-146" width="16" height="12" rx="2" fill="#ff3b5c" opacity=".9"/>
+    <path d="M-64,-46 L64,-46 L57,-6 L-57,-6 Z" fill="#0c0f16"/>
+    <g filter="url(#glow)">
+      <path d="M-56,-38 L-12,-27 L-16,-12 L-51,-16 Z" fill="#ff3b5c"/>
+      <path d="M56,-38 L12,-27 L16,-12 L51,-16 Z" fill="#ff3b5c"/>
+    </g>
+    <path d="M-56,-6 L56,-6 L60,58 L30,92 L-30,92 L-60,58 Z" fill="#ffffff" stroke="#d1d1d1" stroke-width="3"/>
+    <path d="M-34,24 L34,24 M-30,40 L30,40 M-26,56 L26,56" stroke="#d1d1d1" stroke-width="5" stroke-linecap="round"/>
+    <path d="M-24,72 L24,72 L17,100 L-17,100 Z" fill="#e23d4a"/>
+    <path d="M-92,-50 L-60,-20 M92,-50 L60,-20 M-84,30 L-58,60 M84,30 L58,60" stroke="#e23d4a" stroke-width="7" stroke-linecap="round"/>
+  </g></g>
+  <g transform="translate(28,28)">
+    <rect width="86" height="46" rx="6" fill="#fff"/>
+    <text x="43" y="33" font-family="Arial Black, Arial" font-weight="900" font-size="28" fill="#a16207" text-anchor="middle">PG</text>
+    <text x="100" y="31" font-family="Arial" font-weight="700" font-size="20" fill="#fff">1/60</text>
+  </g>
+  <text x="572" y="54" font-family="Arial" font-weight="700" font-size="15" letter-spacing="3" fill="#fff" fill-opacity=".7" text-anchor="end">DVK GUNPLA</text>
+  <rect x="0" y="512" width="600" height="88" fill="#000" fill-opacity=".45"/>
+  <rect x="0" y="512" width="8" height="88" fill="#facc15"/>
+  <text x="30" y="552" font-family="Arial, Helvetica" font-weight="700" font-size="34" fill="#fff">UNICORN GUNDAM</text>
+  <text x="30" y="580" font-family="Arial, Helvetica" font-size="15" letter-spacing="2" fill="#fff" fill-opacity=".7">GUNDAM UNICORN</text>
+</svg>

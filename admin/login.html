@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập quản trị - DVK Gunpla</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-root="../">
+  <main class="admin-login">
+    <!-- Không ràng buộc: nhập gì cũng vào được -->
+    <form class="admin-login-box" id="admin-login-form" autocomplete="off" novalidate>
+      <a class="brand" href="../index.html">
+        <img src="../images/logo.svg" alt="Logo DVK Gunpla">
+        <span class="brand-text"><b>DVK <em style="color:var(--red)">GUNPLA</em></b><small style="color:var(--muted)">Trang quản trị</small></span>
+      </a>
+      <h1>Đăng nhập quản trị</h1>
+      <p>Dành riêng cho quản trị viên cửa hàng</p>
+      <div class="demo-note"><span>ℹ</span><span>Tài khoản mẫu: admin / admin123 (nhập gì cũng vào được).</span></div>
+      <label class="field"><span>Tên đăng nhập</span><input class="input" id="ad-user" value="admin" placeholder="Nhập tên đăng nhập"></label>
+      <label class="field"><span>Mật khẩu</span><input class="input" type="password" value="admin123" placeholder="Nhập mật khẩu"></label>
+      <button class="btn btn-dark btn-lg btn-block" type="submit">Đăng nhập</button>
+      <p class="admin-login-foot"><a class="link" href="../index.html">← Quay về trang bán hàng</a></p>
+    </form>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script>
+    document.getElementById("admin-login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("ad-user").value.trim() || "Admin";
+      toastThenGo("index.html", "Đăng nhập thành công", "Chào mừng " + escapeHtml(name) + " đến trang quản trị");
+    });
+  </script>
+</body>
+</html>

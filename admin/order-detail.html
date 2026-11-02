@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết đơn hàng - Quản trị DVK Gunpla</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="orders" data-title="Chi tiết đơn hàng" data-crumb="Đơn hàng / Chi tiết">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <div class="page-title" style="margin:0">
+          <div><h1 id="od-title" style="font-size:24px"></h1><p id="od-sub"></p></div>
+          <div style="display:flex;gap:10px" id="od-actions"></div>
+        </div>
+        <div class="detail-layout">
+          <div class="checkout-stack">
+            <section class="card" id="od-timeline"></section>
+            <section class="card"><div class="card-head"><h3>Sản phẩm trong đơn</h3></div><div id="od-items"></div></section>
+          </div>
+          <aside class="checkout-stack">
+            <section class="card" id="od-status"></section>
+            <section class="card"><div class="card-head"><h3>Khách hàng & giao hàng</h3></div><div class="info-list" id="od-info"></div></section>
+            <section class="card" id="od-totals"></section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/admin-layout.js"></script>
+  <script src="../js/admin/order-detail.js"></script>
+</body>
+</html>

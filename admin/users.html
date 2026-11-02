@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý người dùng - Quản trị DVK Gunpla</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="users" data-title="Quản lý người dùng" data-crumb="Người dùng">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <form class="card toolbar" id="user-filter" autocomplete="off">
+          <label class="field grow"><span>Tìm theo tên, email hoặc số điện thoại</span>
+            <div class="search-input"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="input" id="us-key" placeholder="Nhập từ khóa..."></div>
+          </label>
+          <label class="field"><span>Trạng thái</span>
+            <select class="select" id="us-status"><option value="">Tất cả</option><option value="active">Đang hoạt động</option><option value="locked">Đã khóa</option></select>
+          </label>
+          <div class="toolbar-actions">
+            <button class="btn btn-outline" type="button" id="us-reset">Đặt lại</button>
+            <button class="btn btn-dark" type="submit">Tìm kiếm</button>
+            <a class="btn btn-primary" href="user-form.html" id="add-user"></a>
+          </div>
+        </form>
+
+        <section class="card">
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th>Người dùng</th><th>Số điện thoại</th><th>Địa chỉ mặc định</th><th>Ngày tham gia</th><th class="center">Đơn hàng</th><th>Trạng thái</th><th class="right">Thao tác</th></tr></thead>
+            <tbody id="user-body"></tbody>
+          </table></div>
+          <div class="table-foot" id="user-foot"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/admin-layout.js"></script>
+  <script src="../js/admin/users.js"></script>
+</body>
+</html>

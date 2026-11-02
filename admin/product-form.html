@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sản phẩm - Quản trị DVK Gunpla</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="products" data-title="Thêm sản phẩm" data-crumb="Sản phẩm / Biểu mẫu">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <form class="form-layout" id="product-form" autocomplete="off" novalidate>
+          <section class="card">
+            <div class="card-head"><h2 id="form-title">Thông tin sản phẩm</h2><a class="link" href="products.html">← Quay lại danh sách</a></div>
+            <div class="card-pad">
+              <div class="form-grid">
+                <label class="field full"><span>Tên sản phẩm</span><input class="input" id="pf-name" placeholder="Vd: RX-78-2 Gundam Ver.2.0"></label>
+                <label class="field"><span>Phân loại</span><select class="select" id="pf-cat"></select></label>
+                <label class="field"><span>Series / Nhóm</span><input class="input" id="pf-series" placeholder="Vd: Mobile Suit Gundam"></label>
+                <label class="field"><span>Giá bán (đ)</span><input class="input" id="pf-price" type="number" min="0" step="1000" placeholder="Vd: 750000"></label>
+                <label class="field"><span>Giá gốc (đ) - để trống nếu không giảm giá</span><input class="input" id="pf-old" type="number" min="0" step="1000" placeholder="Vd: 820000"></label>
+                <label class="field"><span>Số lượng tồn kho</span><input class="input" id="pf-stock" type="number" min="0" placeholder="Vd: 20"></label>
+                <label class="field"><span>Tỷ lệ</span><input class="input" id="pf-scale" readonly></label>
+                <label class="field full"><span>Mô tả sản phẩm</span><textarea class="textarea" id="pf-desc" placeholder="Mô tả ngắn về sản phẩm"></textarea></label>
+              </div>
+            </div>
+            <div class="sticky-actions">
+              <a class="btn btn-outline" href="products.html" id="pf-cancel">Hủy</a>
+              <button class="btn btn-primary" type="submit" id="pf-submit">Lưu sản phẩm</button>
+            </div>
+          </section>
+
+          <aside class="card">
+            <div class="card-head"><h3>Hình ảnh sản phẩm</h3></div>
+            <div class="card-pad upload-box">
+              <div class="upload-preview" id="preview"></div>
+              <label class="btn btn-dark btn-block file-label">
+                <input type="file" id="pf-image" accept="image/*">
+                <span id="upload-text">Chọn ảnh từ máy</span>
+              </label>
+              <p class="file-name" id="file-name">Hỗ trợ JPG, PNG, SVG. Ảnh sẽ hiển thị xem trước trước khi lưu.</p>
+            </div>
+          </aside>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script>
+    // Đổi tiêu đề trước khi vẽ khung nếu đang sửa
+    if (getParam("id")) { document.body.dataset.title = "Sửa sản phẩm"; }
+  </script>
+  <script src="../js/admin/admin-layout.js"></script>
+  <script src="../js/admin/product-form.js"></script>
+</body>
+</html>

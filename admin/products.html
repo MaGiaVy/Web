@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý sản phẩm - Quản trị DVK Gunpla</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="products" data-title="Quản lý sản phẩm" data-crumb="Sản phẩm">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <!-- Tìm kiếm + lọc theo loại sản phẩm -->
+        <form class="card toolbar" id="product-filter" autocomplete="off">
+          <label class="field grow"><span>Tìm theo tên sản phẩm</span>
+            <div class="search-input"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="input" id="ps-name" placeholder="Nhập tên sản phẩm..."></div>
+          </label>
+          <label class="field"><span>Loại sản phẩm</span><select class="select" id="ps-cat"></select></label>
+          <label class="field"><span>Sắp xếp</span>
+            <select class="select" id="ps-sort">
+              <option value="new">Mới thêm gần đây</option>
+              <option value="name">Tên A - Z</option>
+              <option value="price-asc">Giá tăng dần</option>
+              <option value="price-desc">Giá giảm dần</option>
+              <option value="stock">Tồn kho ít nhất</option>
+            </select>
+          </label>
+          <div class="toolbar-actions">
+            <button class="btn btn-outline" type="button" id="ps-reset">Đặt lại</button>
+            <button class="btn btn-dark" type="submit">Tìm kiếm</button>
+            <a class="btn btn-primary" href="product-form.html" id="add-product"></a>
+          </div>
+          <div class="toolbar-note" id="ps-note"></div>
+        </form>
+
+        <section class="admin-products" id="admin-products"></section>
+        <div id="ps-pagination"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/admin-layout.js"></script>
+  <script src="../js/admin/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sản phẩm - DVK Gunpla</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="products">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <nav class="breadcrumb" id="breadcrumb"></nav>
+    <div class="page-title">
+      <div><h1 id="list-title">Tất cả sản phẩm</h1><p id="list-subtitle">Mô hình Gundam chính hãng và dụng cụ lắp ráp</p></div>
+    </div>
+
+    <div class="shop-layout">
+      <!-- Tìm kiếm nâng cao: kết hợp tên + phân loại + khoảng giá -->
+      <aside class="card filter-panel">
+        <div class="card-head"><h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Tìm kiếm nâng cao</h3></div>
+        <form class="filter-body" id="filter-form" autocomplete="off">
+          <div class="field">
+            <span>Tên sản phẩm</span>
+            <input class="input" id="f-name" placeholder="Nhập tên, vd: Freedom">
+          </div>
+          <div class="field">
+            <span>Phân loại</span>
+            <div class="filter-cats" id="f-cats"></div>
+          </div>
+          <div class="field">
+            <span>Khoảng giá</span>
+            <select class="select" id="f-range"></select>
+          </div>
+          <div class="field">
+            <span>Hoặc nhập giá (đ)</span>
+            <div class="price-inputs">
+              <input class="input" id="f-min" type="number" min="0" step="10000" placeholder="Từ">
+              <span>—</span>
+              <input class="input" id="f-max" type="number" min="0" step="10000" placeholder="Đến">
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" class="btn btn-outline" id="f-reset">Xóa lọc</button>
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+          </div>
+          <p class="filter-hint">Mẹo: nhấn Enter trong ô bất kỳ để tìm nhanh.</p>
+        </form>
+      </aside>
+
+      <section>
+        <div class="card result-bar">
+          <p id="result-count"></p>
+          <div class="sort">
+            Sắp xếp:
+            <select class="select" id="sort">
+              <option value="default">Mặc định</option>
+              <option value="best">Bán chạy nhất</option>
+              <option value="price-asc">Giá: thấp đến cao</option>
+              <option value="price-desc">Giá: cao đến thấp</option>
+              <option value="new">Hàng mới về</option>
+            </select>
+          </div>
+        </div>
+        <div class="active-filters" id="active-filters"></div>
+        <div class="product-grid cols-3" id="product-list"></div>
+        <div id="pagination"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

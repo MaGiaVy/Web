@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký - DVK Gunpla</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="register">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <div class="auth-wrap">
+      <div class="auth-art">
+        <img src="images/hero.svg" alt="">
+        <h2>Gia nhập cộng đồng<br>DVK Gunpla</h2>
+        <p>Tạo tài khoản để mua hàng nhanh hơn, lưu nhiều địa chỉ và nhận ưu đãi dành riêng cho thành viên.</p>
+      </div>
+      <!-- Không ràng buộc: không required, không kiểm tra định dạng -->
+      <form class="auth-form" id="register-form" autocomplete="off" novalidate>
+        <span class="eyebrow">Người mua hàng</span>
+        <h1>Đăng ký tài khoản</h1>
+        <p>Đã có tài khoản? <a class="link" href="login.html">Đăng nhập</a></p>
+        <div class="form-grid">
+          <label class="field full"><span>Họ và tên</span><input class="input" id="rg-name" placeholder="Nhập họ và tên"></label>
+          <label class="field"><span>Email</span><input class="input" placeholder="Nhập email"></label>
+          <label class="field"><span>Số điện thoại</span><input class="input" placeholder="Nhập số điện thoại"></label>
+          <label class="field full"><span>Địa chỉ</span><input class="input" placeholder="Số nhà, đường, phường, quận, thành phố"></label>
+          <label class="field"><span>Mật khẩu</span><input class="input" type="password" placeholder="Nhập mật khẩu"></label>
+          <label class="field"><span>Nhập lại mật khẩu</span><input class="input" type="password" placeholder="Nhập lại mật khẩu"></label>
+        </div>
+        <div class="auth-row" style="margin-top:16px"><label><input type="checkbox" checked> Tôi đồng ý với điều khoản sử dụng của DVK Gunpla</label></div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Tạo tài khoản</button>
+      </form>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    document.getElementById("register-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("rg-name").value.trim();
+      toastThenGo("login.html", "Đăng ký thành công", (name ? escapeHtml(name) + ", t" : "T") + "ài khoản đã được tạo. Mời bạn đăng nhập.");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tổng quan - Quản trị DVK Gunpla</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="dashboard" data-title="Tổng quan" data-crumb="Bảng điều khiển">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <section class="kpi-grid" id="kpis"></section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2 id="h-pending"></h2>
+            <a class="link" href="orders.html">Xem tất cả đơn hàng →</a>
+          </div>
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th><th class="right">Tổng tiền</th><th>Trạng thái</th><th></th></tr></thead>
+            <tbody id="pending-body"></tbody>
+          </table></div>
+        </section>
+
+        <!-- Khách hàng: chỉ hiện tổng tiền + số đơn, bấm nút mới xem danh sách đơn -->
+        <section class="card">
+          <div class="card-head">
+            <h2 id="h-customers"></h2>
+            <a class="link" href="users.html">Quản lý người dùng →</a>
+          </div>
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th>Khách hàng</th><th>Khu vực</th><th class="center">Số đơn hàng</th><th class="right">Tổng tiền mua</th><th class="right"></th></tr></thead>
+            <tbody id="customer-body"></tbody>
+          </table></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h2 id="h-stock"></h2><a class="link" href="products.html">Quản lý sản phẩm →</a></div>
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th>Sản phẩm</th><th class="right">Giá bán</th><th class="center">Tồn kho</th><th class="center">Đã bán</th><th></th></tr></thead>
+            <tbody id="stock-body"></tbody>
+          </table></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/admin-layout.js"></script>
+  <script src="../js/admin/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thống kê - Quản trị DVK Gunpla</title>
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="statistics" data-title="Thống kê khách hàng" data-crumb="Thống kê">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <form class="card toolbar" id="stat-form" autocomplete="off">
+          <label class="field"><span>Từ ngày</span><input class="input" type="date" id="st-from" value="2026-08-01"></label>
+          <label class="field"><span>Đến ngày</span><input class="input" type="date" id="st-to" value="2026-11-02"></label>
+          <div class="toolbar-actions">
+            <button class="btn btn-outline" type="button" data-preset="30">30 ngày gần nhất</button>
+            <button class="btn btn-outline" type="button" data-preset="month">Tháng này</button>
+            <button class="btn btn-primary" type="submit" id="st-submit"></button>
+          </div>
+          <div class="toolbar-note">Thống kê 5 khách hàng có tổng mua cao nhất trong khoảng thời gian đã chọn (không tính đơn đã hủy), sắp xếp giảm dần theo tổng tiền.</div>
+        </form>
+
+        <section class="kpi-grid" id="st-kpis"></section>
+
+        <section class="card">
+          <div class="card-head"><h2 id="st-title"></h2></div>
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th class="center">Hạng</th><th>Khách hàng</th><th class="center">Số đơn</th><th>Tỷ trọng</th><th class="right">Tổng mua</th><th class="right"></th></tr></thead>
+            <tbody id="st-body"></tbody>
+          </table></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/admin/admin-layout.js"></script>
+  <script src="../js/admin/statistics.js"></script>
+</body>
+</html>
