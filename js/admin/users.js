@@ -1,13 +1,12 @@
-// QUẢN LÝ NGƯỜI DÙNG: tìm kiếm, thêm, sửa, khóa / mở khóa
+// QUẢN LÝ NGƯỜI DÙNG: tìm kiếm (web tĩnh: chỉ hiện thông báo), thêm, sửa, khóa / mở khóa
 (function () {
   const $ = (id) => document.getElementById(id);
   const users = USERS.map((u) => ({ ...u }));
-  const state = { key: "", status: "" };
   $("add-user").innerHTML = `${icon("plus")} Thêm người dùng`;
 
+  // Danh sách cố định (không lọc thật)
   function filtered() {
-    const key = normalize(state.key);
-    return users.filter((u) => (!key || normalize(`${u.name} ${u.email} ${u.phone}`).includes(key)) && (!state.status || u.status === state.status));
+    return users;
   }
 
   function row(u) {
@@ -33,26 +32,21 @@
     $("user-body").innerHTML = list.length ? list.map(row).join("")
       : `<tr><td colspan="7"><div class="empty-state">${icon("users")}<h3>Không tìm thấy người dùng</h3></div></td></tr>`;
     const active = users.filter((u) => u.status === "active").length;
-    $("user-foot").innerHTML = `<span>Hiển thị <b>${list.length}</b> / ${users.length} người dùng</span><span>${active} đang hoạt động · ${users.length - active} đã khóa</span>`;
+    $("user-foot").innerHTML = `<span>Tổng cộng <b>${list.length}</b> người dùng</span><span>${active} đang hoạt động · ${users.length - active} đã khóa</span>`;
     return list.length;
   }
 
+  // Tìm kiếm / lọc: chỉ hiện thông báo, danh sách giữ nguyên
   $("user-filter").addEventListener("submit", (e) => {
     e.preventDefault();
-    state.key = $("us-key").value.trim();
-    state.status = $("us-status").value;
-    const n = render();
-    toast("Tìm kiếm hoàn tất", `Tìm thấy ${n} người dùng`, n ? "success" : "warning");
+    const key = $("us-key").value.trim();
+    toast("Đã tìm kiếm người dùng", `${key ? `Từ khóa: “${escapeHtml(key)}” · ` : ""}Trạng thái: ${$("us-status").selectedOptions[0].text}`);
   });
   $("us-status").addEventListener("change", () => {
-    state.status = $("us-status").value;
-    const n = render();
-    toast("Đã lọc theo trạng thái", `${$("us-status").selectedOptions[0].text}: ${n} người dùng`, "info");
+    toast("Đã lọc theo trạng thái", $("us-status").selectedOptions[0].text, "info");
   });
   $("us-reset").addEventListener("click", () => {
     $("user-filter").reset();
-    Object.assign(state, { key: "", status: "" });
-    render();
     toast("Đã đặt lại bộ lọc", "", "info");
   });
   $("add-user").addEventListener("click", (e) => {

@@ -10,6 +10,7 @@ Trang quản trị: **`admin/login.html`**. Nhập gì cũng đăng nhập đư�
 | Quy tắc | Đã làm ở đâu |
 |---|---|
 | Không có CSDL, thao tác chỉ hiện thông báo | Dữ liệu viết sẵn trong `js/data.js`. Mọi nút đều gọi `toast(...)` |
+| Tìm kiếm / lọc không lọc thật | Bấm tìm chỉ hiện thông báo. Trang kết quả cố định (`SEARCH_RESULT_IDS` trong `js/data.js`). Lọc ở admin cũng vậy |
 | Header giống nhau 100% trên mọi trang | Header/footer được vẽ từ **một file duy nhất** `js/layout.js` (admin: `js/admin/admin-layout.js`) |
 | Giá có dấu chấm hàng nghìn | Luôn dùng hàm `money(n)` → `1.150.000đ`. **Không tự viết giá bằng tay** |
 | Số trên icon giỏ hàng không lệch | `.cart-badge` trong `css/style.css` |

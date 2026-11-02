@@ -1,17 +1,17 @@
-// QUẢN LÝ ĐƠN HÀNG: lọc theo tình trạng / khoảng ngày / địa điểm, cập nhật trạng thái (chỉ xuôi)
+// QUẢN LÝ ĐƠN HÀNG: lọc theo tình trạng / khoảng ngày / địa điểm (web tĩnh: chỉ hiện thông báo), cập nhật trạng thái (chỉ xuôi)
+// orders.html?user=... : xem danh sách đơn của 1 khách (mở từ Tổng quan / Thống kê)
 (function () {
   const PER_PAGE = 10;
   const $ = (id) => document.getElementById(id);
   const orders = ORDERS.map((o) => ({ ...o })).sort((a, b) => b.datetime.localeCompare(a.datetime));
   const filterUser = getUser(getParam("user"));
-  const state = { key: "", status: getParam("status") || "", from: getParam("from") || "", to: getParam("to") || "", city: "", district: "", page: 1 };
+  const state = { page: 1 };
 
   $("of-submit").innerHTML = `${icon("filter")} Lọc đơn hàng`;
   $("of-status").innerHTML = `<option value="">Tất cả tình trạng</option>` +
     Object.entries(ORDER_STATUS).map(([k, v]) => `<option value="${k}">${v.label}</option>`).join("");
-  $("of-status").value = state.status;
-  $("of-from").value = state.from;
-  $("of-to").value = state.to;
+  $("of-from").value = getParam("from") || "";
+  $("of-to").value = getParam("to") || "";
   $("of-city").innerHTML = `<option value="">Tất cả thành phố</option>` + Object.keys(LOCATIONS).map((c) => `<option>${c}</option>`).join("");
   const fillDistricts = () => {
     const city = $("of-city").value;
@@ -21,19 +21,9 @@
   fillDistricts();
   $("of-city").addEventListener("change", fillDistricts);
 
+  // Danh sách cố định (không lọc thật). Chỉ khi mở từ trang khách hàng thì hiện đơn của khách đó
   function filtered() {
-    const key = normalize(state.key);
-    return orders.filter((o) => {
-      const u = getUser(o.userId);
-      const day = o.datetime.slice(0, 10);
-      return (!filterUser || o.userId === filterUser.id) &&
-        (!key || normalize(`${o.id} ${u.name} ${u.phone}`).includes(key)) &&
-        (!state.status || o.status === state.status) &&
-        (!state.from || day >= state.from) &&
-        (!state.to || day <= state.to) &&
-        (!state.city || o.address.city === state.city) &&
-        (!state.district || o.address.district === state.district);
-    });
+    return orders.filter((o) => !filterUser || o.userId === filterUser.id);
   }
 
   // Chỉ hiện các trạng thái kế tiếp hợp lệ -> không thể cập nhật ngược
@@ -71,38 +61,33 @@
     $("order-body").innerHTML = list.length ? list.slice(start, start + PER_PAGE).map(row).join("")
       : `<tr><td colspan="8"><div class="empty-state">${icon("orders")}<h3>Không có đơn hàng phù hợp</h3><p>Hãy thử thay đổi điều kiện lọc.</p></div></td></tr>`;
 
-    const tags = [];
-    if (filterUser) tags.push(`<span class="chip no-dot">Khách hàng: ${escapeHtml(filterUser.name)} <a href="orders.html" title="Bỏ lọc">✕</a></span>`);
-    if (state.status) tags.push(`<span class="chip no-dot">${ORDER_STATUS[state.status].label}</span>`);
-    if (state.from || state.to) tags.push(`<span class="chip no-dot">${state.from ? formatDate(state.from) : "..."} → ${state.to ? formatDate(state.to) : "..."}</span>`);
-    if (state.city) tags.push(`<span class="chip no-dot">${state.district ? state.district + ", " : ""}${state.city}</span>`);
     const sum = list.filter((o) => o.status !== "cancelled").reduce((s, o) => s + o.total, 0);
-    $("of-note").innerHTML = `Tìm thấy <b>${list.length}</b> đơn hàng · Tổng giá trị (trừ đơn hủy): <b class="text-red">${money(sum)}</b> ${tags.join("")}`;
+    $("of-note").innerHTML = (filterUser
+      ? `Danh sách đơn hàng của khách <b>${escapeHtml(filterUser.name)}</b>: <b>${list.length}</b> đơn · `
+      : `Tổng cộng <b>${list.length}</b> đơn hàng · `) +
+      `Tổng giá trị (trừ đơn hủy): <b class="text-red">${money(sum)}</b>` +
+      (filterUser ? ` <a class="link" href="orders.html">← Xem tất cả đơn hàng</a>` : "");
 
     $("order-foot").innerHTML = `<span>Trang ${state.page}/${pages} · ${list.length} đơn hàng</span><div id="order-pages"></div>`;
     renderPagination($("order-pages"), list.length, PER_PAGE, state.page, (page) => { state.page = page; render(); });
     return list.length;
   }
 
+  // Lọc: chỉ hiện thông báo, danh sách giữ nguyên
   $("order-filter").addEventListener("submit", (e) => {
     e.preventDefault();
-    Object.assign(state, {
-      key: $("of-key").value.trim(), status: $("of-status").value, from: $("of-from").value, to: $("of-to").value,
-      city: $("of-city").value, district: $("of-district").value, page: 1,
-    });
-    if (state.from && state.to && state.from > state.to) {
-      [state.from, state.to] = [state.to, state.from];
-      $("of-from").value = state.from; $("of-to").value = state.to;
-      toast("Khoảng ngày bị ngược", "Hệ thống đã tự đổi lại “Từ ngày” và “Đến ngày”", "warning");
-    }
-    const n = render();
-    toast("Lọc đơn hàng hoàn tất", `Tìm thấy ${n} đơn hàng`, n ? "success" : "warning");
+    const parts = [];
+    const key = $("of-key").value.trim();
+    const from = $("of-from").value, to = $("of-to").value;
+    if (key) parts.push(`Từ khóa: “${escapeHtml(key)}”`);
+    if ($("of-status").value) parts.push($("of-status").selectedOptions[0].text);
+    if (from || to) parts.push(`${from ? formatDate(from) : "..."} → ${to ? formatDate(to) : "..."}`);
+    if ($("of-city").value) parts.push(($("of-district").value ? $("of-district").value + ", " : "") + $("of-city").value);
+    toast("Đã lọc đơn hàng", parts.length ? parts.join(" · ") : "Tất cả đơn hàng");
   });
   $("of-reset").addEventListener("click", () => {
     $("order-filter").reset();
     fillDistricts();
-    Object.assign(state, { key: "", status: "", from: "", to: "", city: "", district: "", page: 1 });
-    render();
     toast("Đã đặt lại bộ lọc", "", "info");
   });
 

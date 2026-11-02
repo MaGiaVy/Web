@@ -207,6 +207,9 @@ const SAMPLE_CART = [
   { productId: 49, qty: 1 },
 ];
 
+// Trang kết quả tìm kiếm cố định (web tĩnh không lọc thật: tìm gì cũng ra danh sách này)
+const SEARCH_RESULT_IDS = [1, 11, 21, 31, 37, 7, 12, 28, 38, 8, 14, 27];
+
 // Đơn hàng vừa đặt (hiển thị ở trang đặt hàng thành công)
 const LAST_ORDER_ID = "DH26110201";
 

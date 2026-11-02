@@ -1,4 +1,5 @@
 // THỐNG KÊ: top 5 khách hàng mua nhiều nhất trong khoảng thời gian
+// Web tĩnh: bảng top 5 hiển thị sẵn, bấm "Thống kê" chỉ hiện thông báo
 // Mỗi khách chỉ hiện số đơn + tổng tiền; bấm "Xem danh sách đơn hàng" để sang trang danh sách đơn (mỗi đơn có link chi tiết)
 (function () {
   const $ = (id) => document.getElementById(id);
@@ -66,8 +67,8 @@
 
   $("stat-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    const n = render();
-    toast("Thống kê hoàn tất", n ? `Đã tìm ra top ${n} khách hàng` : "Không có dữ liệu trong khoảng thời gian này", n ? "success" : "warning");
+    const from = $("st-from").value, to = $("st-to").value;
+    toast("Đã thống kê", `Từ ${from ? formatDate(from) : "..."} đến ${to ? formatDate(to) : "..."}`);
   });
 
   document.querySelectorAll("[data-preset]").forEach((btn) => btn.addEventListener("click", () => {
@@ -76,8 +77,7 @@
     const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
     $("st-from").value = iso(start);
     $("st-to").value = iso(end);
-    const n = render();
-    toast(`Thống kê ${btn.textContent.toLowerCase()}`, `${n} khách hàng có phát sinh đơn`, "info");
+    toast(`Đã chọn ${btn.textContent.toLowerCase()}`, `Từ ${formatDate(iso(start))} đến ${formatDate(iso(end))}`, "info");
   }));
 
   render();

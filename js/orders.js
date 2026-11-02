@@ -1,4 +1,4 @@
-// LỊCH SỬ MUA HÀNG - nhóm theo từng đơn hàng, bấm "Xem chi tiết" mở trang order-detail.html riêng
+// LỊCH SỬ MUA HÀNG - nhóm theo từng đơn hàng (tab trạng thái chỉ hiện thông báo), bấm "Xem chi tiết" mở trang order-detail.html riêng
 (function () {
   const user = currentUser();
   const myOrders = ORDERS.filter((o) => o.userId === user.id).sort((a, b) => b.datetime.localeCompare(a.datetime));
@@ -10,13 +10,13 @@
   const tabs = [["all", "Tất cả"], ...Object.entries(ORDER_STATUS).map(([k, v]) => [k, v.label])];
   function renderTabs() {
     document.getElementById("status-tabs").innerHTML = tabs.map(([key, label]) => {
-      const count = key === "all" ? myOrders.length : myOrders.filter((o) => o.status === key).length;
-      return `<button data-status="${key}" class="${key === current ? "active" : ""}">${label}<span>${count}</span></button>`;
+      return `<button data-status="${key}" class="${key === current ? "active" : ""}">${label}</button>`;
     }).join("");
   }
 
   function renderList() {
-    const list = current === "all" ? myOrders : myOrders.filter((o) => o.status === current);
+    // Web tĩnh: bấm tab chỉ hiện thông báo, danh sách đơn giữ nguyên
+    const list = myOrders;
     document.getElementById("order-list").innerHTML = list.length ? list.map((o) => {
       const shown = o.items.slice(0, 2);
       const more = o.items.length - shown.length;
@@ -50,7 +50,7 @@
     current = btn.dataset.status;
     renderTabs();
     renderList();
-    toast("Đã lọc đơn hàng", btn.firstChild.textContent, "info");
+    toast("Đã lọc đơn hàng", btn.textContent, "info");
   });
 
   document.getElementById("order-list").addEventListener("click", (e) => {
