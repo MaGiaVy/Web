@@ -69,9 +69,7 @@
       okText: locking ? "Khóa" : "Mở khóa", danger: locking,
     });
     if (!ok) return toast("Đã hủy thao tác", "", "info");
-    u.status = locking ? "locked" : "active";
-    tr.outerHTML = row(u);
-    render();
+    // Web tĩnh: chỉ hiện thông báo, trạng thái trên bảng giữ nguyên
     toast(locking ? "Đã khóa tài khoản" : "Đã mở khóa tài khoản", u.name, locking ? "warning" : "success");
   });
 

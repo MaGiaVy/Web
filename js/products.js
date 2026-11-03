@@ -11,12 +11,10 @@
   let mode = keyword !== null ? "search" : cat ? "category" : "all";
   let page = 1;
 
-  // Danh sách phân loại dạng radio (điều kiện của tìm kiếm nâng cao)
-  $("f-cats").innerHTML = [{ id: "", name: "Tất cả" }, ...CATEGORIES].map((c) => {
-    const count = c.id ? PRODUCTS.filter((p) => p.category === c.id).length : PRODUCTS.length;
-    const label = c.id === "TOOL" ? "Dụng cụ & Sơn" : c.id ? `${c.name} (${c.id})` : "Tất cả";
-    return `<label><input type="radio" name="cat" value="${c.id}" ${(cat ? cat.id : "") === c.id ? "checked" : ""}> ${label}<span class="count">${count}</span></label>`;
-  }).join("");
+  // Dropdown phân loại (điều kiện của tìm kiếm nâng cao)
+  $("f-cat").innerHTML = `<option value="">Tất cả phân loại</option>` +
+    CATEGORIES.map((c) => `<option value="${c.id}">${c.id === "TOOL" ? "Dụng cụ & Sơn" : `${c.name} (${c.id})`}</option>`).join("");
+  if (cat) $("f-cat").value = cat.id;
 
   // Dropdown khoảng giá
   $("f-range").innerHTML = `<option value="">Tất cả mức giá</option>` +
@@ -59,8 +57,7 @@
   function conditionText() {
     const parts = [];
     const name = $("f-name").value.trim();
-    const checked = document.querySelector('input[name="cat"]:checked');
-    const c = getCategory(checked ? checked.value : "");
+    const c = getCategory($("f-cat").value);
     const min = $("f-min").value, max = $("f-max").value;
     if (name) parts.push(`Tên: “${escapeHtml(name)}”`);
     if (c) parts.push(`Loại: ${c.id === "TOOL" ? "Dụng cụ & Sơn" : c.id}`);
@@ -87,8 +84,6 @@
 
   $("f-reset").addEventListener("click", () => {
     $("filter-form").reset();
-    const all = document.querySelector('input[name="cat"][value=""]');
-    if (all) all.checked = true;
     toast("Đã xóa điều kiện tìm kiếm", "", "info");
   });
 

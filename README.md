@@ -10,7 +10,7 @@ Trang quản trị: **`admin/login.html`**. Nhập gì cũng đăng nhập đư�
 | Quy tắc | Đã làm ở đâu |
 |---|---|
 | Không có CSDL, thao tác chỉ hiện thông báo | Dữ liệu viết sẵn trong `js/data.js`. Mọi nút đều gọi `toast(...)` |
-| Tìm kiếm / lọc không lọc thật | Bấm tìm chỉ hiện thông báo. Trang kết quả cố định (`SEARCH_RESULT_IDS` trong `js/data.js`). Lọc ở admin cũng vậy |
+| **Web tĩnh: không lọc, không xóa/sửa thật** | Tìm kiếm, lọc, xóa, khóa user, đổi trạng thái, sửa tên, thêm địa chỉ, giỏ hàng... **chỉ hiện thông báo**, màn hình giữ nguyên. Trang kết quả tìm kiếm cố định (`SEARCH_RESULT_IDS` trong `js/data.js`) |
 | Header giống nhau 100% trên mọi trang | Header/footer được vẽ từ **một file duy nhất** `js/layout.js` (admin: `js/admin/admin-layout.js`) |
 | Giá có dấu chấm hàng nghìn | Luôn dùng hàm `money(n)` → `1.150.000đ`. **Không tự viết giá bằng tay** |
 | Số trên icon giỏ hàng không lệch | `.cart-badge` trong `css/style.css` |
@@ -20,7 +20,7 @@ Trang quản trị: **`admin/login.html`**. Nhập gì cũng đăng nhập đư�
 | Bỏ ràng buộc đăng ký/đăng nhập | `login.html`, `register.html`, `admin/login.html`: không `required`, nhập gì cũng vào |
 | Tự sửa tên, thêm địa chỉ khác | `account.html` |
 | Admin có ô tìm kiếm + dropdown lọc loại | `admin/products.html` |
-| Xóa SP đã bán → hỏi rồi ẩn (`display='none'`), chưa bán → hỏi rồi `card.remove()` | `js/admin/products.js` |
+| Xóa SP: đã bán → hỏi rồi báo "đã ẩn", chưa bán → hỏi rồi báo "đã xóa" (chỉ thông báo) | `js/admin/products.js` |
 | Dashboard chỉ hiện tổng tiền + số đơn của khách, bấm nút mới xem đơn | `admin/index.html`, `admin/statistics.html` |
 | Trạng thái đơn chỉ cập nhật xuôi | `ORDER_STATUS.next` trong `js/data.js` |
 

@@ -31,7 +31,8 @@
 - [ ] Đăng ký/đăng nhập: bỏ trống vẫn vào được
 - [ ] Sửa được tên, thêm được địa chỉ mới
 - [ ] Admin: có ô tìm kiếm + dropdown lọc loại sản phẩm
-- [ ] Xóa SP đã bán → hỏi → ẩn. Chưa bán → hỏi → gỡ thẻ
+- [ ] Xóa SP đã bán → hỏi → báo đã ẩn. Chưa bán → hỏi → báo đã xóa (chỉ thông báo)
+- [ ] Tìm kiếm, lọc, xóa, khóa, đổi trạng thái: chỉ hiện thông báo, không thay đổi thật
 - [ ] Trạng thái đơn không chọn ngược được
 - [ ] Dashboard/thống kê: chỉ hiện tổng tiền + số đơn, bấm "Xem danh sách đơn hàng" mới hiện chi tiết
 
@@ -41,7 +42,7 @@
 3. Mở chi tiết SP → thêm vào giỏ (chỉ báo, không nhảy trang) → vào giỏ, tăng/xóa SP.
 4. Đặt hàng: thông tin tự hiện → chọn "Giao đến địa chỉ khác" → chọn chuyển khoản → Đặt hàng.
 5. Trang thành công → Xem chi tiết đơn (trang riêng) → Lịch sử mua hàng.
-6. Tài khoản: sửa tên (header đổi theo), thêm địa chỉ mới.
-7. `admin/login.html` → Tổng quan → Sản phẩm: tìm + lọc loại, xóa 1 SP đã bán (bị ẩn) và 1 SP mới (bị xóa).
+6. Tài khoản: sửa tên, thêm địa chỉ mới (hiện thông báo).
+7. `admin/login.html` → Tổng quan → Sản phẩm: tìm + lọc loại, xóa 1 SP đã bán (báo đã ẩn) và 1 SP mới (báo đã xóa).
 8. Thêm/sửa SP (xem trước ảnh, đúng loại) → Người dùng: khóa/mở → Đơn hàng: lọc theo ngày + quận, cập nhật xuôi.
 9. Thống kê: chọn khoảng ngày → top 5 → "Xem danh sách đơn hàng" → bấm link chi tiết.

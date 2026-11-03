@@ -1,19 +1,18 @@
 // QUẢN LÝ SẢN PHẨM: tìm kiếm + lọc theo loại (web tĩnh: chỉ hiện thông báo), thêm/sửa (trang riêng), xóa
-// Xóa: đã bán -> hỏi xác nhận rồi ẨN (style.display = 'none')
-//      chưa bán -> hỏi xác nhận rồi GỠ HẲN thẻ (card.remove())
+// Xóa (web tĩnh, chỉ hiện thông báo): đã bán -> hỏi xác nhận rồi báo "đã ẩn"
+//                                    chưa bán -> hỏi xác nhận rồi báo "đã xóa"
 (function () {
   const PER_PAGE = 12;
   const $ = (id) => document.getElementById(id);
   const state = { page: 1 };
-  const removed = new Set(); // sản phẩm đã ẩn/xóa trong phiên xem trang này
 
   $("add-product").innerHTML = `${icon("plus")} Thêm sản phẩm`;
   $("ps-cat").innerHTML = `<option value="">Tất cả loại (${PRODUCTS.length})</option>` +
     CATEGORIES.map((c) => `<option value="${c.id}">${c.id === "TOOL" ? "Dụng cụ & Sơn" : `${c.name} (${c.id})`} - ${PRODUCTS.filter((p) => p.category === c.id).length}</option>`).join("");
 
-  // Danh sách cố định (không lọc thật), chỉ bỏ những thẻ đã ẩn/xóa trên màn hình
+  // Danh sách cố định (không lọc thật)
   function filtered() {
-    return PRODUCTS.filter((p) => !removed.has(p.id)).sort((a, b) => b.id - a.id);
+    return PRODUCTS.slice().sort((a, b) => b.id - a.id);
   }
 
   function card(p) {
@@ -49,8 +48,7 @@
       ? items.slice(start, start + PER_PAGE).map(card).join("")
       : `<div class="card empty-state" style="grid-column:1/-1">${icon("search")}<h3>Không tìm thấy sản phẩm</h3><p>Thử từ khóa khác hoặc chọn loại khác.</p></div>`;
 
-    $("ps-note").innerHTML = `Đang hiển thị <b>${items.length}</b> sản phẩm` +
-      (removed.size ? ` · <span>${removed.size} sản phẩm đã ẩn/xóa trong phiên này</span>` : "");
+    $("ps-note").innerHTML = `Đang hiển thị <b>${items.length}</b> sản phẩm`;
 
     renderPagination($("ps-pagination"), items.length, PER_PAGE, state.page, (page) => {
       state.page = page;
@@ -96,8 +94,6 @@
         okText: "Ẩn sản phẩm", danger: true,
       });
       if (!ok) return toast("Đã hủy thao tác xóa", p.name, "info");
-      cardEl.style.display = "none"; // ẩn sản phẩm đã bán
-      removed.add(p.id);
       toast("Đã ẩn sản phẩm", `“${p.name}” đã có người mua nên được ẩn khỏi website`, "warning");
     } else {
       const ok = await confirmDialog({
@@ -106,12 +102,8 @@
         okText: "Xóa sản phẩm", danger: true,
       });
       if (!ok) return toast("Đã hủy thao tác xóa", p.name, "info");
-      cardEl.remove(); // gỡ hẳn sản phẩm chưa bán
-      removed.add(p.id);
       toast("Đã xóa sản phẩm", `“${p.name}” đã được xóa khỏi hệ thống`);
     }
-    // Cập nhật lại số lượng đang hiển thị (thẻ đã ẩn/xóa ngay trên màn hình)
-    document.querySelector("#ps-note b").textContent = filtered().length;
   });
 
   render();

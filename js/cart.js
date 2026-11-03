@@ -44,26 +44,18 @@
     document.getElementById("go-checkout").classList.toggle("disabled", count === 0);
   }
 
+  // Web tĩnh: tăng/giảm/xóa chỉ hiện thông báo, giỏ hàng giữ nguyên
   body.addEventListener("click", async (e) => {
     const row = e.target.closest("tr[data-id]");
     if (!row) return;
-    const item = cart.find((i) => i.productId === Number(row.dataset.id));
-    const p = getProduct(item.productId);
+    const p = getProduct(row.dataset.id);
     if (e.target.closest("[data-plus]")) {
-      if (item.qty >= p.stock) return toast("Đã đạt số lượng tối đa", `Chỉ còn ${p.stock} sản phẩm trong kho`, "warning");
-      item.qty++;
-      render();
-      toast("Đã cập nhật số lượng", `${p.name}: ${item.qty}`, "info");
+      toast("Đã tăng số lượng", p.name, "info");
     } else if (e.target.closest("[data-minus]")) {
-      if (item.qty === 1) return toast("Số lượng tối thiểu là 1", "Bấm biểu tượng thùng rác nếu muốn xóa sản phẩm", "warning");
-      item.qty--;
-      render();
-      toast("Đã cập nhật số lượng", `${p.name}: ${item.qty}`, "info");
+      toast("Đã giảm số lượng", p.name, "info");
     } else if (e.target.closest("[data-remove]")) {
       const ok = await confirmDialog({ title: "Xóa khỏi giỏ hàng?", message: `Bạn có chắc muốn xóa “${escapeHtml(p.name)}” khỏi giỏ hàng?`, okText: "Xóa", danger: true });
       if (!ok) return toast("Đã hủy thao tác", "", "info");
-      cart.splice(cart.indexOf(item), 1);
-      render();
       toast("Đã xóa sản phẩm khỏi giỏ hàng", p.name);
     }
   });

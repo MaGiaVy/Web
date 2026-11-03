@@ -105,8 +105,8 @@
       okText: "Cập nhật", danger: next === "cancelled",
     });
     if (!ok) return toast("Đã hủy cập nhật", "", "info");
-    o.status = next;
-    tr.outerHTML = row(o);
+    // Web tĩnh: chỉ hiện thông báo, trạng thái trên bảng giữ nguyên
+    tr.querySelector("[data-next]").value = "";
     toast("Cập nhật trạng thái thành công", `Đơn #${o.id}: ${ORDER_STATUS[next].label}`, next === "cancelled" ? "warning" : "success");
   });
 

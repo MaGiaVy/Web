@@ -330,7 +330,7 @@ p { margin: 0; }
 
 /* ---------------- Trang danh sách sản phẩm ---------------- */
 .shop-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: start; }
-.filter-panel { position: sticky; top: 146px; }
+.filter-panel { position: sticky; top: 146px; max-height: calc(100vh - 166px); overflow-y: auto; }
 .filter-panel .card-head { padding: 16px 20px; }
 .filter-body { display: grid; gap: 18px; padding: 20px; }
 .filter-cats { display: grid; gap: 4px; }

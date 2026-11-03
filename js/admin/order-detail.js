@@ -41,9 +41,8 @@
         okText: "Cập nhật", danger: value === "cancelled",
       });
       if (!ok) return toast("Đã hủy cập nhật", "", "info");
-      order.status = value;
-      renderHead();
-      renderStatusBox();
+      // Web tĩnh: chỉ hiện thông báo, trạng thái giữ nguyên
+      $("next-status").value = "";
       toast("Cập nhật trạng thái thành công", `Đơn #${order.id}: ${ORDER_STATUS[value].label}`, value === "cancelled" ? "warning" : "success");
     });
   }

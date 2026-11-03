@@ -1,8 +1,8 @@
 // TÀI KHOẢN: sửa thông tin cá nhân (tên), sổ địa chỉ (thêm địa chỉ khác), đổi mật khẩu
+// Web tĩnh: mọi thao tác chỉ hiện thông báo, không lưu thật
 (function () {
   const user = currentUser();
   const addresses = user.addresses.map((a) => ({ ...a }));
-  let nextId = addresses.length + 1;
   const $ = (id) => document.getElementById(id);
 
   $("h-profile").innerHTML = `${icon("user")} Hồ sơ của tôi`;
@@ -28,10 +28,6 @@
   function renderName(name) {
     $("side-profile").innerHTML = `<span class="avatar">${initials(name)}</span><div><b>${escapeHtml(name)}</b><small>Thành viên từ ${formatDate(user.joined)}</small></div>`;
     $("profile-head").innerHTML = `<span class="avatar">${initials(name)}</span><div><h3>${escapeHtml(name)}</h3><p>${user.email} · Thành viên Bạc</p></div>`;
-    // Đổi luôn tên trên header của trang hiện tại
-    $("header-user-name").textContent = name;
-    $("dropdown-user-name").textContent = name;
-    $("header-avatar").textContent = initials(name);
   }
   function fillProfile() {
     $("pf-name").value = user.name;
@@ -46,10 +42,9 @@
 
   $("profile-form").addEventListener("submit", (e) => {
     e.preventDefault();
+    // Web tĩnh: chỉ hiện thông báo, không lưu thật
     const name = $("pf-name").value.trim() || user.name;
-    $("pf-name").value = name;
-    renderName(name);
-    toast("Cập nhật hồ sơ thành công", `Tên hiển thị: ${escapeHtml(name)}`);
+    toast("Cập nhật hồ sơ thành công", `Tên mới: ${escapeHtml(name)}`);
   });
   $("pf-reset").addEventListener("click", () => {
     fillProfile();
@@ -93,24 +88,14 @@
   // Không ràng buộc dữ liệu: ô nào để trống thì dùng giá trị mặc định
   $("address-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    const makeDefault = $("ad-default").checked;
-    if (makeDefault) addresses.forEach((a) => { a.isDefault = false; });
-    addresses.push({
-      id: nextId++,
-      receiver: $("ad-name").value.trim() || user.name,
-      phone: $("ad-phone").value.trim() || user.phone,
-      street: $("ad-street").value.trim() || "Chưa nhập số nhà",
-      ward: $("ad-ward").value.trim() || "Chưa nhập phường",
-      district: $("ad-district").value,
-      city: $("ad-city").value,
-      label: $("ad-label").value,
-      isDefault: makeDefault,
-    });
-    renderAddresses();
+    // Web tĩnh: chỉ hiện thông báo, không thêm thật vào danh sách
+    const street = $("ad-street").value.trim() || "Số nhà, tên đường";
+    const ward = $("ad-ward").value.trim() || "Phường/Xã";
+    const text = `${street}, ${ward}, ${$("ad-district").value}, ${$("ad-city").value}`;
     $("address-form").classList.remove("show");
     $("address-form").reset();
     fillDistricts();
-    toast("Đã thêm địa chỉ mới", fullAddress(addresses[addresses.length - 1]));
+    toast("Đã thêm địa chỉ mới", escapeHtml(text));
   });
 
   $("address-list").addEventListener("click", async (e) => {
@@ -118,16 +103,12 @@
     if (!card) return;
     const addr = addresses.find((a) => a.id === Number(card.dataset.id));
     if (e.target.closest("[data-default]")) {
-      addresses.forEach((a) => { a.isDefault = a === addr; });
-      renderAddresses();
       toast("Đã đặt địa chỉ mặc định", fullAddress(addr));
     } else if (e.target.closest("[data-delete]")) {
       if (addr.isDefault) return toast("Không thể xóa địa chỉ mặc định", "Hãy đặt địa chỉ khác làm mặc định trước", "warning");
       const ok = await confirmDialog({ title: "Xóa địa chỉ?", message: escapeHtml(fullAddress(addr)), okText: "Xóa", danger: true });
       if (!ok) return toast("Đã hủy thao tác", "", "info");
-      addresses.splice(addresses.indexOf(addr), 1);
-      card.remove();
-      toast("Đã xóa địa chỉ", "");
+      toast("Đã xóa địa chỉ", escapeHtml(fullAddress(addr)));
     }
   });
 
