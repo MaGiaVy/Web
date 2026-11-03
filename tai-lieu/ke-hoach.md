@@ -16,7 +16,7 @@
 ## Việc cụ thể của từng người
 **Đạt - Admin**
 - Đăng nhập/đăng xuất admin; Tổng quan; Sản phẩm (tìm kiếm + dropdown loại, xóa 2 trường hợp); Thêm/Sửa sản phẩm (xem trước ảnh, ô giá có dấu chấm).
-- Người dùng: thêm, **chỉ xem** thông tin khách, khóa/mở. Đơn hàng: lọc theo tình trạng / ngày / phường–tỉnh, cập nhật xuôi. Chi tiết đơn. Thống kê top 5.
+- Người dùng: thêm, **chỉ xem** thông tin khách, khóa (có lý do) / mở. Đơn hàng: lọc theo tình trạng / ngày / phường–tỉnh, xử lý đơn ở trang chi tiết (trạng thái chỉ đi tới, hủy có lý do). Chi tiết đơn. Thống kê top 5.
 - Gộp code các nhánh vào `main`, ghi % công việc vào biên bản.
 
 **Khang - Khách hàng**
@@ -54,7 +54,7 @@
 - [ ] Đăng ký/đăng nhập: bỏ trống vẫn vào được
 - [ ] Sửa được tên, thêm được địa chỉ mới (Phường/Xã - Tỉnh/Thành phố)
 - [ ] Admin: có ô tìm kiếm + dropdown lọc loại sản phẩm; ô giá tự có dấu chấm
-- [ ] Admin **chỉ xem** được thông tin khách hàng, không sửa
+- [ ] Admin **chỉ xem** được thông tin khách hàng, không sửa (để backend làm)
 - [ ] Xóa SP đã bán → hỏi → báo đã ẩn. Chưa bán → hỏi → báo đã xóa
 - [ ] Trạng thái đơn không chọn ngược được
 - [ ] Tổng quan/thống kê: chỉ hiện tổng tiền + số đơn, bấm "Xem danh sách đơn hàng" mới sang trang đơn
@@ -68,5 +68,5 @@
 5. Trang thành công → Xem chi tiết đơn (trang riêng) → Lịch sử mua hàng.
 6. Tài khoản: sửa tên, thêm địa chỉ mới (hiện thông báo).
 7. `admin/login.html` → Tổng quan → Sản phẩm: tìm + lọc loại, xóa 1 SP đã bán (báo đã ẩn) và 1 SP mới (báo đã xóa).
-8. Thêm/sửa SP (xem trước ảnh, đúng loại, ô giá có dấu chấm) → Người dùng: xem (chỉ đọc), khóa/mở → Đơn hàng: lọc theo ngày + phường/tỉnh, cập nhật xuôi.
+8. Thêm/sửa SP (xem trước ảnh, đúng loại, ô giá có dấu chấm) → Người dùng: xem (chỉ đọc), khóa/mở → Đơn hàng: lọc theo ngày + phường/tỉnh, xử lý đơn (xác nhận / giao / hủy có lý do).
 9. Thống kê: chọn khoảng ngày → top 5 → "Xem danh sách đơn hàng" → bấm link chi tiết.

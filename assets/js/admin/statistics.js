@@ -33,13 +33,13 @@
     const topSum = top.reduce((s, r) => s + r.total, 0);
 
     $("st-kpis").innerHTML = [
-      ["wallet", "Tổng giá trị đơn", money(revenue), `${from ? formatDate(from) : "..."} - ${to ? formatDate(to) : "..."}`],
-      ["orders", "Số đơn hàng", inRange.length, "Không tính đơn đã hủy"],
-      ["users", "Khách có mua hàng", ranking.length, "Trong khoảng thời gian trên"],
-      ["medal", "Top 5 đóng góp", revenue ? Math.round((topSum / revenue) * 100) + "%" : "0%", `${money(topSum)} từ 5 khách hàng`],
-    ].map(([ic, label, value, sub]) => `
+      ["wallet", "Doanh thu", money(revenue)],
+      ["orders", "Đơn hàng", inRange.length],
+      ["users", "Khách đã mua", ranking.length],
+      ["medal", "Top 5 khách chiếm", revenue ? Math.round((topSum / revenue) * 100) + "%" : "0%"],
+    ].map(([ic, label, value]) => `
       <div class="card kpi"><div class="kpi-icon">${icon(ic)}</div>
-        <div><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div></div>`).join("");
+        <div><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div></div></div>`).join("");
 
     $("st-title").innerHTML = `${icon("medal")} Top 5 khách hàng mua nhiều nhất`;
     $("st-body").innerHTML = top.length ? top.map((r, i) => {
@@ -48,9 +48,9 @@
         <tr>
           <td class="center"><span class="rank rank-${i + 1}">${i + 1}</span></td>
           <td><div class="cell-user"><span class="avatar">${initials(r.user.name)}</span><div><b>${escapeHtml(r.user.name)}</b><small>${r.user.email}</small></div></div></td>
-          <td class="center num"><b>${r.orders.length}</b> đơn</td>
-          <td><div class="share"><div class="share-bar"><span style="width:${share}%"></span></div>${share}%</div></td>
-          <td class="right num"><b class="text-red" style="font-size:16px">${money(r.total)}</b></td>
+          <td class="center num"><b>${r.orders.length}</b></td>
+          <td><div class="share"><div class="share-bar"><span style="width:${share}%"></span></div><span class="share-pct">${share}%</span></div></td>
+          <td class="right num nowrap"><b class="text-red" style="font-size:16px">${money(r.total)}</b></td>
           <td class="right"><a class="btn btn-dark btn-sm" data-view="${escapeHtml(r.user.name)}" href="orders.html?user=${r.user.id}&from=${from}&to=${to}">${icon("orders")} Xem danh sách đơn hàng</a></td>
         </tr>`;
     }).join("") : `<tr><td colspan="6"><div class="empty-state">${icon("chart")}<h3>Không có dữ liệu</h3><p>Không có đơn hàng nào trong khoảng thời gian này.</p></div></td></tr>`;

@@ -114,7 +114,7 @@
   });
 
   // Sản phẩm cùng loại
-  const related = PRODUCTS.filter((x) => x.category === p.category && x.id !== p.id).slice(0, 4);
+  const related = SHOP_PRODUCTS.filter((x) => x.category === p.category && x.id !== p.id).slice(0, 4);
   document.getElementById("related").innerHTML = related.map(productCard).join("");
   document.getElementById("related-more").href = `products.html?cat=${p.category}`;
 

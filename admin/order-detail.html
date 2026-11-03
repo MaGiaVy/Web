@@ -18,15 +18,19 @@
           <div><h1 id="od-title" style="font-size:24px"></h1><p id="od-sub"></p></div>
           <div style="display:flex;gap:10px" id="od-actions"></div>
         </div>
-        <div class="detail-layout">
+        <!-- Trái: tiến trình + sản phẩm và tổng tiền (như hóa đơn). Phải: xử lý, khách hàng, giao hàng, thanh toán -->
+        <div class="detail-layout od-layout">
           <div class="checkout-stack">
             <section class="card" id="od-timeline"></section>
-            <section class="card"><div class="card-head"><h3>Sản phẩm trong đơn</h3></div><div id="od-items"></div></section>
+            <section class="card">
+              <div class="card-head"><h3>Sản phẩm trong đơn</h3></div>
+              <div id="od-items"></div>
+              <div class="od-totals" id="od-totals"></div>
+            </section>
           </div>
           <aside class="checkout-stack">
             <section class="card" id="od-status"></section>
-            <section class="card"><div class="card-head"><h3>Khách hàng & giao hàng</h3></div><div class="info-list" id="od-info"></div></section>
-            <section class="card" id="od-totals"></section>
+            <section class="card"><div class="card-head"><h3>Thông tin đơn hàng</h3></div><div id="od-info"></div></section>
           </aside>
         </div>
       </main>

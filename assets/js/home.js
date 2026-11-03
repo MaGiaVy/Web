@@ -11,7 +11,7 @@
 
   // Danh mục: lấy ảnh sản phẩm bán chạy nhất của mỗi loại làm ảnh đại diện
   document.getElementById("home-categories").innerHTML = CATEGORIES.map((c) => {
-    const items = PRODUCTS.filter((p) => p.category === c.id);
+    const items = SHOP_PRODUCTS.filter((p) => p.category === c.id);
     const cover = items.slice().sort((a, b) => b.sold - a.sold)[0];
     return `
       <a class="cat-card" href="${page("products.html")}?cat=${c.id}">
@@ -23,10 +23,10 @@
       </a>`;
   }).join("");
 
-  const best = PRODUCTS.filter((p) => p.category !== "TOOL").sort((a, b) => b.sold - a.sold).slice(0, 8);
+  const best = SHOP_PRODUCTS.filter((p) => p.category !== "TOOL").sort((a, b) => b.sold - a.sold).slice(0, 8);
   document.getElementById("home-best").innerHTML = best.map(productCard).join("");
 
-  const fresh = PRODUCTS.filter((p) => p.isNew).slice(0, 4);
+  const fresh = SHOP_PRODUCTS.filter((p) => p.isNew).slice(0, 4);
   document.getElementById("home-new").innerHTML = fresh.map(productCard).join("");
 
   const guide = [

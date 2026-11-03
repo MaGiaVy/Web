@@ -1,7 +1,6 @@
 // NGƯỜI DÙNG (ADMIN) - web tĩnh
 // - user-form.html       : THÊM người dùng mới (lưu chỉ hiện thông báo)
-// - user-form.html?id=.. : XEM thông tin người dùng. Thông tin cá nhân là quyền lợi của khách hàng,
-//                          admin chỉ được xem, KHÔNG được sửa
+// - user-form.html?id=.. : XEM thông tin người dùng (chỉ xem, việc sửa để phía backend làm)
 (function () {
   const $ = (id) => document.getElementById(id);
   const u = getUser(getParam("id"));
@@ -9,6 +8,18 @@
   $("uf-city").innerHTML = Object.keys(LOCATIONS).map((c) => `<option>${c}</option>`).join("");
   const fillWards = () => { $("uf-ward").innerHTML = LOCATIONS[$("uf-city").value].map((w) => `<option>${w}</option>`).join(""); };
   fillWards();
+
+  // Số đơn, tổng chi tiêu (không tính đơn hủy), số đơn hủy
+  function userStats() {
+    const list = ORDERS.filter((o) => o.userId === u.id);
+    const spent = list.filter((o) => o.status !== "cancelled").reduce((s, o) => s + o.total, 0);
+    const cancelled = list.filter((o) => o.status === "cancelled").length;
+    return `<div class="uf-stats">
+      <div><b>${list.length}</b><small>Đơn hàng</small></div>
+      <div><b>${money(spent)}</b><small>Đã chi tiêu</small></div>
+      <div><b class="${cancelled ? "text-red" : ""}">${cancelled}</b><small>Đơn hủy</small></div>
+    </div>`;
+  }
 
   function preview() {
     const name = $("uf-name").value.trim() || "Tên người dùng";
@@ -19,11 +30,26 @@
         <b style="font-size:17px">${escapeHtml(name)}</b>
         <p class="muted">${escapeHtml($("uf-email").value || "email@vidu.com")}</p>
         <p class="muted">${escapeHtml($("uf-phone").value || "Số điện thoại")}</p>
-        <p style="margin-top:8px">${escapeHtml(($("uf-street").value || "Số nhà, tên đường") + ", " + $("uf-ward").value + ", " + $("uf-city").value)}</p>
+        <div class="uf-addr">
+          <b>${escapeHtml($("uf-street").value || "Số nhà, tên đường")}</b>
+          <span>${$("uf-ward").value}</span>
+          <span>${$("uf-city").value}</span>
+        </div>
         <p style="margin-top:12px"><span class="chip chip-${locked ? "locked" : "active"}">${locked ? "Đã khóa" : "Hoạt động"}</span></p>
+        ${locked && u.lockReason ? `<p class="lock-reason-box"><b>Khóa ngày ${formatDate(u.lockedAt)}</b><br>Lý do: ${escapeHtml(u.lockReason)}${u.lockNote ? `<br><small>${escapeHtml(u.lockNote)}</small>` : ""}</p>` : ""}
+        ${u ? userStats() : ""}
         ${u ? `<p class="muted" style="margin-top:12px;font-size:12.5px">Tham gia ngày ${formatDate(u.joined)}</p>` : ""}
       </div>`;
   }
+
+  // Gõ / chọn đến đâu thì khung "Thông tin tài khoản" cập nhật đến đó
+  $("uf-city").addEventListener("change", () => { fillWards(); preview(); });
+  ["uf-name", "uf-email", "uf-phone", "uf-street"].forEach((id) => $(id).addEventListener("input", preview));
+  $("uf-ward").addEventListener("change", preview);
+  $("uf-cancel").addEventListener("click", (e) => {
+    e.preventDefault();
+    toastThenGo("users.html", "Đã hủy", "Thông tin chưa được lưu", "info");
+  });
 
   if (u) {
     // ----- CHỈ XEM -----
@@ -39,40 +65,32 @@
     ["uf-city", "uf-ward"].forEach((id) => { $(id).disabled = true; });
     $("uf-pass-field").hidden = true;
     $("form-actions").hidden = true;
-    $("readonly-note").hidden = false;
-    $("readonly-note").innerHTML = `${icon("lock")}<span>Thông tin cá nhân thuộc quyền của khách hàng, quản trị viên <b>chỉ được xem</b>, không được chỉnh sửa.</span>`;
     document.title = `${u.name} - Quản trị DVK Gunpla`;
 
-    // Đơn hàng của khách (chỉ xem)
-    const orders = ORDERS.filter((o) => o.userId === u.id);
+    // Đơn hàng của khách
+    const orders = ORDERS.filter((o) => o.userId === u.id).sort((a, b) => b.datetime.localeCompare(a.datetime));
     $("uf-orders").hidden = false;
     $("uf-orders").innerHTML = `
-      <div class="card-head"><h3>Đơn hàng (${orders.length})</h3><a class="link" href="orders.html?user=${u.id}">Xem tất cả →</a></div>
-      <div class="info-list">${orders.slice(0, 4).map((o) => `
-        <div class="info-row" style="justify-content:space-between;align-items:center">
-          <div><a class="order-link" href="order-detail.html?id=${o.id}">#${o.id}</a><small>${formatDate(o.datetime)}</small></div>
-          <b class="num">${money(o.total)}</b>
-        </div>`).join("") || '<p class="muted">Chưa có đơn hàng</p>'}</div>`;
+      <div class="card-head"><h3>Lịch sử mua hàng (${orders.length} đơn)</h3><a class="link" href="orders.html?user=${u.id}">Xem trong Quản lý đơn hàng →</a></div>
+      ${orders.length ? `<div class="table-wrap"><table class="table">
+        <thead><tr><th>Mã đơn</th><th>Ngày đặt</th><th class="center">Sản phẩm</th><th class="right">Tổng tiền</th><th>Trạng thái</th></tr></thead>
+        <tbody>${orders.map((o) => `<tr>
+          <td><a class="order-link" href="order-detail.html?id=${o.id}">#${o.id}</a></td>
+          <td>${formatDate(o.datetime)}</td>
+          <td class="center">${orderItemCount(o)}</td>
+          <td class="right num"><b>${money(o.total)}</b></td>
+          <td>${statusChip(o.status)}</td>
+        </tr>`).join("")}</tbody></table></div>`
+      : `<div class="empty-state">${icon("orders")}<h3>Chưa có đơn hàng nào</h3></div>`}`;
 
-    // Bấm vào ô bị khóa -> nhắc là chỉ được xem
-    $("user-form").addEventListener("click", (e) => {
-      if (e.target.closest(".input, .select")) toast("Chỉ được xem", "Quản trị viên không được sửa thông tin cá nhân của khách hàng", "warning");
-    });
     $("user-form").addEventListener("submit", (e) => e.preventDefault());
   } else {
     // ----- THÊM MỚI -----
     $("form-title").innerHTML = `${icon("plus")} Thêm người dùng mới`;
-    $("uf-city").addEventListener("change", () => { fillWards(); preview(); });
-    ["uf-name", "uf-email", "uf-phone", "uf-street"].forEach((id) => $(id).addEventListener("input", preview));
-    $("uf-ward").addEventListener("change", preview);
     $("user-form").addEventListener("submit", (e) => {
       e.preventDefault();
       const name = $("uf-name").value.trim() || "Người dùng mới";
       toastThenGo("users.html", "Thêm người dùng thành công", escapeHtml(name));
-    });
-    $("uf-cancel").addEventListener("click", (e) => {
-      e.preventDefault();
-      toastThenGo("users.html", "Đã hủy", "Thông tin chưa được lưu", "info");
     });
   }
   preview();

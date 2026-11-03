@@ -22,14 +22,14 @@
             <button class="btn btn-outline" type="button" data-preset="month">Tháng này</button>
             <button class="btn btn-primary" type="submit" id="st-submit"></button>
           </div>
-          <div class="toolbar-note">Thống kê 5 khách hàng có tổng mua cao nhất trong khoảng thời gian đã chọn (không tính đơn đã hủy), sắp xếp giảm dần theo tổng tiền.</div>
         </form>
 
         <section class="kpi-grid" id="st-kpis"></section>
 
         <section class="card">
           <div class="card-head"><h2 id="st-title"></h2></div>
-          <div class="table-wrap"><table class="table">
+          <div class="table-wrap"><table class="table stat-table">
+            <colgroup><col style="width:72px"><col style="width:250px"><col style="width:90px"><col><col style="width:150px"><col style="width:230px"></colgroup>
             <thead><tr><th class="center">Hạng</th><th>Khách hàng</th><th class="center">Số đơn</th><th>Tỷ trọng</th><th class="right">Tổng mua</th><th class="right"></th></tr></thead>
             <tbody id="st-body"></tbody>
           </table></div>

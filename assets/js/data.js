@@ -22,6 +22,9 @@ const PRICE_RANGES = [
 ];
 
 // [id, tên, mã/series, phân loại, giá, giá cũ, tồn kho, đã bán, kiểu hình, mô tả ngắn]
+// Sản phẩm đã có người mua nên bị ẩn (không xóa được): admin vẫn thấy, khách hàng không thấy
+const HIDDEN_PRODUCT_IDS = [42, 43];
+
 const PRODUCTS = [
   [1, "RX-78-2 Gundam (Revive)", "Mobile Suit Gundam", "HG", 350000, 390000, 42, 318, "gundam:rx78", "Phiên bản Revive của chiếc Gundam huyền thoại, khớp cử động tốt, màu nhựa chuẩn."],
   [2, "Gundam Aerial", "The Witch from Mercury", "HG", 420000, 0, 35, 276, "gundam:aerial", "Nhân vật chính của series Witch from Mercury với các khiên Bit có thể tháo rời."],
@@ -80,7 +83,11 @@ const PRODUCTS = [
   image: "images/products/p" + String(id).padStart(2, "0") + ".svg",
   rating: sold > 250 ? 4.9 : sold > 0 ? 4.8 : 5.0,
   isNew: sold === 0,
+  hidden: HIDDEN_PRODUCT_IDS.includes(id),
 }));
+
+// Sản phẩm đang bán (trang khách hàng chỉ dùng danh sách này)
+const SHOP_PRODUCTS = PRODUCTS.filter((p) => !p.hidden);
 
 // ============================================================
 // NGƯỜI DÙNG MẪU
@@ -101,7 +108,7 @@ const USERS = [
   },
   {
     id: 3, name: "Trần Minh Khoa", email: "minhkhoa@gmail.com", phone: "0987 654 321", password: "123456",
-    status: "locked", joined: "2026-02-14", gender: "Nam", birthday: "2002-11-20",
+    status: "locked", lockReason: "Không nhận hàng COD", lockNote: "2 đơn COD liên tiếp không nhận hàng (14/09 và 27/09)", lockedAt: "2026-10-03", joined: "2026-02-14", gender: "Nam", birthday: "2002-11-20",
     addresses: [{ id: 1, receiver: "Trần Minh Khoa", phone: "0987 654 321", street: "210 Điện Biên Phủ", ward: "Phường Thạnh Mỹ Tây", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
   },
   {
@@ -129,6 +136,116 @@ const USERS = [
     status: "active", joined: "2026-06-21", gender: "Nam", birthday: "2003-06-16",
     addresses: [{ id: 1, receiver: "Bùi Tuấn Kiệt", phone: "0977 456 123", street: "9 Võ Nguyên Giáp", ward: "Phường An Hải", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
   },
+  {
+    id: 9, name: "Ngô Thanh Tùng", email: "thanhtung@gmail.com", phone: "0903 118 245", password: "123456",
+    status: "active", joined: "2026-06-28", gender: "Nam", birthday: "2001-03-12",
+    addresses: [{ id: 1, receiver: "Ngô Thanh Tùng", phone: "0903 118 245", street: "45 Lê Lợi", ward: "Phường Bến Thành", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 10, name: "Đỗ Khánh Linh", email: "khanhlinh@gmail.com", phone: "0914 552 310", password: "123456",
+    status: "active", joined: "2026-07-03", gender: "Nữ", birthday: "2004-08-25",
+    addresses: [{ id: 1, receiver: "Đỗ Khánh Linh", phone: "0914 552 310", street: "17 Kim Mã", ward: "Phường Ngọc Hà", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 11, name: "Lý Gia Bảo", email: "giabao@gmail.com", phone: "0938 664 102", password: "123456",
+    status: "locked", lockReason: "Thông tin sai", lockNote: "Số điện thoại không liên lạc được", lockedAt: "2026-07-08", joined: "2026-07-05", gender: "Nam", birthday: "2006-01-09",
+    addresses: [{ id: 1, receiver: "Lý Gia Bảo", phone: "0938 664 102", street: "102 Hai Bà Trưng", ward: "Phường Tân Định", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 12, name: "Trương Mỹ Duyên", email: "myduyen@gmail.com", phone: "0905 773 418", password: "123456",
+    status: "active", joined: "2026-07-09", gender: "Nữ", birthday: "2003-12-01",
+    addresses: [{ id: 1, receiver: "Trương Mỹ Duyên", phone: "0905 773 418", street: "56 Nguyễn Văn Linh", ward: "Phường Thanh Khê", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 13, name: "Phan Đức Thịnh", email: "ducthinh@gmail.com", phone: "0967 201 556", password: "123456",
+    status: "active", joined: "2026-07-14", gender: "Nam", birthday: "2002-04-17",
+    addresses: [{ id: 1, receiver: "Phan Đức Thịnh", phone: "0967 201 556", street: "8 Cách Mạng Tháng Tám", ward: "Phường Bàn Cờ", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 14, name: "Vũ Hải Yến", email: "haiyen@gmail.com", phone: "0983 445 129", password: "123456",
+    status: "active", joined: "2026-07-18", gender: "Nữ", birthday: "2005-06-30",
+    addresses: [{ id: 1, receiver: "Vũ Hải Yến", phone: "0983 445 129", street: "33 Xuân Thủy", ward: "Phường Cầu Giấy", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 15, name: "Hồ Quang Huy", email: "quanghuy@gmail.com", phone: "0916 338 740", password: "123456",
+    status: "locked", lockReason: "Tài khoản ảo", lockNote: "Tạo nhiều tài khoản để nhận mã giảm giá", lockedAt: "2026-07-25", joined: "2026-07-22", gender: "Nam", birthday: "2000-10-21",
+    addresses: [{ id: 1, receiver: "Hồ Quang Huy", phone: "0916 338 740", street: "71 Nguyễn Trãi", ward: "Phường Chợ Quán", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 16, name: "Dương Ngọc Hân", email: "ngochan@gmail.com", phone: "0942 129 663", password: "123456",
+    status: "active", joined: "2026-07-27", gender: "Nữ", birthday: "2004-02-14",
+    addresses: [{ id: 1, receiver: "Dương Ngọc Hân", phone: "0942 129 663", street: "19 Hoàng Quốc Việt", ward: "Phường Nghĩa Đô", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 17, name: "Mai Xuân Phúc", email: "xuanphuc@gmail.com", phone: "0909 870 214", password: "123456",
+    status: "active", joined: "2026-08-02", gender: "Nam", birthday: "2003-09-05",
+    addresses: [{ id: 1, receiver: "Mai Xuân Phúc", phone: "0909 870 214", street: "5 Ngô Quyền", ward: "Phường Sơn Trà", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 18, name: "Châu Bảo Ngọc", email: "baongoc@gmail.com", phone: "0932 556 081", password: "123456",
+    status: "active", joined: "2026-08-06", gender: "Nữ", birthday: "2006-05-19",
+    addresses: [{ id: 1, receiver: "Châu Bảo Ngọc", phone: "0932 556 081", street: "128 Phan Văn Trị", ward: "Phường Hạnh Thông", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 19, name: "Tạ Minh Trí", email: "minhtri@gmail.com", phone: "0971 310 928", password: "123456",
+    status: "locked", lockReason: "Không nhận hàng COD", lockNote: "Cả 3 đơn COD đều không nhận hàng", lockedAt: "2026-10-10", joined: "2026-08-11", gender: "Nam", birthday: "2002-11-11",
+    addresses: [{ id: 1, receiver: "Tạ Minh Trí", phone: "0971 310 928", street: "64 Láng Hạ", ward: "Phường Láng", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 20, name: "Lâm Thảo Vy", email: "thaovy@gmail.com", phone: "0918 204 667", password: "123456",
+    status: "active", joined: "2026-08-15", gender: "Nữ", birthday: "2005-03-03",
+    addresses: [{ id: 1, receiver: "Lâm Thảo Vy", phone: "0918 204 667", street: "22 Trường Chinh", ward: "Phường Tân Sơn Nhất", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 21, name: "Kiều Anh Dũng", email: "anhdung@gmail.com", phone: "0961 447 390", password: "123456",
+    status: "active", joined: "2026-08-20", gender: "Nam", birthday: "2001-07-28",
+    addresses: [{ id: 1, receiver: "Kiều Anh Dũng", phone: "0961 447 390", street: "90 Lê Duẩn", ward: "Phường Hải Châu", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 22, name: "Đinh Phương Thảo", email: "phuongthao@gmail.com", phone: "0936 718 205", password: "123456",
+    status: "active", joined: "2026-08-26", gender: "Nữ", birthday: "2003-01-16",
+    addresses: [{ id: 1, receiver: "Đinh Phương Thảo", phone: "0936 718 205", street: "14 Bạch Mai", ward: "Phường Bạch Mai", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 23, name: "Quách Tấn Phát", email: "tanphat@gmail.com", phone: "0908 562 731", password: "123456",
+    status: "locked", lockReason: "Đánh giá sai sự thật", lockNote: "Đăng nhiều đánh giá 1 sao cho sản phẩm chưa mua", lockedAt: "2026-09-20", joined: "2026-09-01", gender: "Nam", birthday: "2004-12-08",
+    addresses: [{ id: 1, receiver: "Quách Tấn Phát", phone: "0908 562 731", street: "37 Kha Vạn Cân", ward: "Phường Linh Xuân", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 24, name: "La Thị Thu Hà", email: "thuha@gmail.com", phone: "0912 683 054", password: "123456",
+    status: "active", joined: "2026-09-07", gender: "Nữ", birthday: "2002-08-09",
+    addresses: [{ id: 1, receiver: "La Thị Thu Hà", phone: "0912 683 054", street: "6 Tôn Đức Thắng", ward: "Phường Cửa Nam", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 25, name: "Nguyễn Hoàng Nam", email: "hoangnam@gmail.com", phone: "0989 027 413", password: "123456",
+    status: "active", joined: "2026-09-12", gender: "Nam", birthday: "2005-10-24",
+    addresses: [{ id: 1, receiver: "Nguyễn Hoàng Nam", phone: "0989 027 413", street: "150 Phạm Văn Đồng", ward: "Phường Hiệp Bình", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 26, name: "Trần Bảo Châu", email: "baochau@gmail.com", phone: "0947 391 862", password: "123456",
+    status: "active", joined: "2026-09-18", gender: "Nữ", birthday: "2006-04-02",
+    addresses: [{ id: 1, receiver: "Trần Bảo Châu", phone: "0947 391 862", street: "11 Võ Văn Kiệt", ward: "Phường An Hải", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 27, name: "Lê Văn Hậu", email: "vanhau@gmail.com", phone: "0965 830 147", password: "123456",
+    status: "active", joined: "2026-09-25", gender: "Nam", birthday: "2000-06-13",
+    addresses: [{ id: 1, receiver: "Lê Văn Hậu", phone: "0965 830 147", street: "48 Phan Đăng Lưu", ward: "Phường Gia Định", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 28, name: "Phạm Gia Huy", email: "giahuy@gmail.com", phone: "0923 615 309", password: "123456",
+    status: "locked", lockReason: "Khách yêu cầu khóa", lockNote: "Khách gửi email yêu cầu tạm khóa tài khoản", lockedAt: "2026-10-20", joined: "2026-10-04", gender: "Nam", birthday: "2004-09-27",
+    addresses: [{ id: 1, receiver: "Phạm Gia Huy", phone: "0923 615 309", street: "27 Lý Thường Kiệt", ward: "Phường Hoàn Kiếm", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 29, name: "Võ Thị Kim Ngân", email: "kimngan@gmail.com", phone: "0902 448 576", password: "123456",
+    status: "active", joined: "2026-10-15", gender: "Nữ", birthday: "2003-05-21",
+    addresses: [{ id: 1, receiver: "Võ Thị Kim Ngân", phone: "0902 448 576", street: "3 Nguyễn Tri Phương", ward: "Phường Hòa Cường", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
+  },
+  {
+    id: 30, name: "Hà Minh Quân", email: "minhquan@gmail.com", phone: "0976 254 830", password: "123456",
+    status: "active", joined: "2026-10-29", gender: "Nam", birthday: "2005-02-11",
+    addresses: [{ id: 1, receiver: "Hà Minh Quân", phone: "0976 254 830", street: "81 Hậu Giang", ward: "Phường Chợ Lớn", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+  },
 ];
 
 // Đơn vị hành chính 2 cấp theo quy định mới (từ 01/07/2025): Tỉnh/Thành phố -> Phường/Xã
@@ -147,7 +264,7 @@ const LOCATIONS = {
 const CURRENT_USER_ID = 1;
 
 // ============================================================
-// TRẠNG THÁI ĐƠN HÀNG - chỉ được cập nhật xuôi
+// TRẠNG THÁI ĐƠN HÀNG - chỉ đi tới (next), không quay lại
 // ============================================================
 const ORDER_STATUS = {
   pending: { label: "Chưa xác nhận", next: ["confirmed", "cancelled"] },
@@ -161,6 +278,17 @@ const PAYMENT_METHODS = {
   bank: "Chuyển khoản trực tuyến",
 };
 
+// Lý do của các đơn đã hủy: [lý do, ghi chú]
+const CANCEL_REASONS = {
+  DH26082010: ["Khách yêu cầu hủy", "Khách đặt nhầm sản phẩm"],
+  DH26082919: ["Khách không nhận hàng", "Shipper gọi nhiều lần không nghe máy"],
+  DH26091409: ["Khách không nhận hàng", "Khách từ chối nhận khi shipper giao tới"],
+  DH26091719: ["Khách không nhận hàng", "Shipper gọi nhiều lần không nghe máy"],
+  DH26092703: ["Khách không nhận hàng", "Khách hẹn lại rồi không nhận"],
+  DH26100819: ["Khách không nhận hàng", "Không liên lạc được khách"],
+  DH26101203: ["Sản phẩm hết hàng", "Đã gọi báo khách, khách đồng ý hủy"],
+};
+
 // [mã đơn, mã khách, ngày giờ đặt, trạng thái, thanh toán, địa chỉ số, [[mã SP, số lượng]], ghi chú]
 const ORDERS = [
   ["DH26080501", 1, "2026-08-05 09:12", "delivered", "cod", 1, [[1, 1], [46, 1]], ""],
@@ -169,14 +297,18 @@ const ORDERS = [
   ["DH26081815", 4, "2026-08-18 10:30", "delivered", "bank", 1, [[34, 1], [51, 1]], ""],
   ["DH26082010", 1, "2026-08-20 19:02", "cancelled", "cod", 1, [[33, 1]], ""],
   ["DH26082506", 5, "2026-08-25 08:47", "delivered", "cod", 1, [[32, 1]], ""],
+  ["DH26082919", 19, "2026-08-29 20:05", "cancelled", "cod", 1, [[10, 1]], ""],
   ["DH26090107", 6, "2026-09-01 16:20", "delivered", "cod", 1, [[5, 1], [7, 1], [4, 1]], ""],
   ["DH26090312", 1, "2026-09-03 12:15", "delivered", "bank", 2, [[23, 1]], "Giao giờ hành chính"],
   ["DH26091102", 5, "2026-09-11 21:10", "delivered", "bank", 1, [[21, 1], [29, 1]], ""],
-  ["DH26091409", 3, "2026-09-14 11:33", "cancelled", "bank", 1, [[24, 1]], ""],
+  ["DH26091409", 3, "2026-09-14 11:33", "cancelled", "cod", 1, [[24, 1]], ""],
+  ["DH26091719", 19, "2026-09-17 22:40", "cancelled", "cod", 1, [[17, 1], [46, 1]], ""],
   ["DH26091905", 8, "2026-09-19 09:58", "delivered", "bank", 1, [[25, 1], [27, 1]], ""],
   ["DH26092205", 2, "2026-09-22 15:44", "delivered", "cod", 1, [[22, 1], [45, 1]], ""],
+  ["DH26092703", 3, "2026-09-27 21:15", "cancelled", "cod", 1, [[6, 1], [44, 1]], ""],
   ["DH26092808", 7, "2026-09-28 18:25", "delivered", "bank", 1, [[40, 2], [41, 1]], ""],
   ["DH26100304", 4, "2026-10-03 13:07", "delivered", "cod", 1, [[38, 2], [39, 1]], ""],
+  ["DH26100819", 19, "2026-10-08 19:30", "cancelled", "cod", 1, [[19, 1]], "Giao buổi tối"],
   ["DH26101203", 6, "2026-10-12 10:16", "cancelled", "cod", 1, [[35, 1]], ""],
   ["DH26101507", 1, "2026-10-15 20:30", "confirmed", "cod", 1, [[12, 1], [47, 2]], ""],
   ["DH26101809", 7, "2026-10-18 17:52", "delivered", "cod", 1, [[8, 1], [9, 1]], ""],
@@ -185,6 +317,7 @@ const ORDERS = [
   ["DH26102506", 6, "2026-10-25 14:40", "confirmed", "bank", 1, [[16, 1], [50, 1]], ""],
   ["DH26102811", 2, "2026-10-28 19:20", "pending", "cod", 1, [[15, 1]], ""],
   ["DH26103002", 4, "2026-10-30 08:12", "confirmed", "bank", 1, [[26, 1]], ""],
+  ["DH26103105", 4, "2026-10-31 16:40", "confirmed", "bank", 1, [[2, 1], [13, 1], [37, 3], [46, 2], [47, 4], [49, 2]], "Giao giờ hành chính, gọi trước 15 phút"],
   ["DH26110103", 5, "2026-11-01 11:48", "pending", "cod", 1, [[11, 1], [48, 1]], ""],
   ["DH26110104", 8, "2026-11-01 15:26", "pending", "bank", 1, [[18, 1], [46, 1]], ""],
   ["DH26110201", 1, "2026-11-02 10:05", "pending", "bank", 1, [[13, 1], [37, 2], [49, 1]], "Gọi trước khi giao"],
@@ -199,6 +332,7 @@ const ORDERS = [
   const shipping = subtotal >= 1000000 ? 0 : 30000;
   return {
     id, userId, datetime, status, payment, note,
+    cancelReason: CANCEL_REASONS[id] ? { reason: CANCEL_REASONS[id][0], note: CANCEL_REASONS[id][1] } : null,
     address: { ...address },
     items: lines,
     subtotal, shipping, total: subtotal + shipping,

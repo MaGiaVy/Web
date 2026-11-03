@@ -413,6 +413,7 @@ p { margin: 0; }
 .summary-body { padding: 20px 24px 24px; }
 .summary-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; color: var(--text-2); }
 .summary-row b { font-variant-numeric: tabular-nums; color: var(--text); }
+.table .line-calc { display: block; color: var(--muted); font-size: 12px; font-weight: 400; } /* thành tiền = đơn giá × số lượng */
 .summary-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; padding-top: 16px; border-top: 1px dashed var(--line); }
 .summary-total span { font-weight: 600; }
 .summary-total b { font-size: 24px; color: var(--red); font-variant-numeric: tabular-nums; }

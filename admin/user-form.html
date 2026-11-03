@@ -15,17 +15,17 @@
       <div id="admin-topbar"></div>
       <main class="admin-content">
         <!-- user-form.html       : THÊM người dùng mới
-             user-form.html?id=.. : XEM thông tin người dùng (chỉ xem, admin không được sửa thông tin khách) -->
+             user-form.html?id=.. : XEM thông tin người dùng (chỉ xem) -->
         <form class="form-layout" id="user-form" autocomplete="off" novalidate>
+          <div class="checkout-stack">
           <section class="card">
             <div class="card-head"><h2 id="form-title"></h2><a class="link" href="users.html">← Quay lại danh sách</a></div>
             <div class="card-pad">
-              <div class="demo-note" id="readonly-note" hidden></div>
               <div class="form-grid">
                 <label class="field"><span>Họ và tên</span><input class="input" id="uf-name" placeholder="Nhập họ và tên"></label>
                 <label class="field"><span>Email</span><input class="input" id="uf-email" placeholder="Nhập email"></label>
                 <label class="field"><span>Số điện thoại</span><input class="input" id="uf-phone" placeholder="Nhập số điện thoại"></label>
-                <label class="field" id="uf-pass-field"><span>Mật khẩu</span><input class="input" id="uf-pass" type="password" placeholder="Nhập mật khẩu"></label>
+                <label class="field" id="uf-pass-field"><span id="uf-pass-label">Mật khẩu</span><input class="input" id="uf-pass" type="password" placeholder="Nhập mật khẩu"></label>
                 <label class="field"><span>Tỉnh / Thành phố</span><select class="select" id="uf-city"></select></label>
                 <label class="field"><span>Phường / Xã</span><select class="select" id="uf-ward"></select></label>
                 <label class="field full"><span>Số nhà, tên đường</span><input class="input" id="uf-street" placeholder="Vd: 12 Võ Văn Ngân"></label>
@@ -36,12 +36,14 @@
               <button class="btn btn-primary" type="submit" id="uf-submit">Thêm người dùng</button>
             </div>
           </section>
+          <!-- Lịch sử mua hàng (chỉ có khi xem người dùng) -->
+          <section class="card" id="uf-orders" hidden></section>
+          </div>
           <aside class="checkout-stack">
             <section class="card">
               <div class="card-head"><h3>Thông tin tài khoản</h3></div>
               <div class="card-pad" id="uf-preview"></div>
             </section>
-            <section class="card" id="uf-orders" hidden></section>
           </aside>
         </form>
       </main>

@@ -1,26 +1,31 @@
-// QUẢN LÝ SẢN PHẨM: tìm kiếm + lọc theo loại (web tĩnh: chỉ hiện thông báo), thêm/sửa (trang riêng), xóa
-// Xóa (web tĩnh, chỉ hiện thông báo): đã bán -> hỏi xác nhận rồi báo "đã ẩn"
-//                                    chưa bán -> hỏi xác nhận rồi báo "đã xóa"
+// QUẢN LÝ SẢN PHẨM: tìm kiếm (web tĩnh: tìm gì cũng ra 1 trang kết quả mẫu), thêm/sửa (trang riêng), xóa
+// Xóa (web tĩnh, chỉ hiện thông báo): đã bán -> nút "Ẩn", hỏi xác nhận rồi báo "đã ẩn"
+//                                    chưa bán -> nút "Xóa", hỏi xác nhận rồi báo "đã xóa vĩnh viễn"
 (function () {
   const PER_PAGE = 12;
   const $ = (id) => document.getElementById(id);
-  const state = { page: 1 };
+  const state = { page: 1, search: null }; // search: điều kiện đã tìm (null = đang xem tất cả)
 
   $("add-product").innerHTML = `${icon("plus")} Thêm sản phẩm`;
   $("ps-cat").innerHTML = `<option value="">Tất cả loại (${PRODUCTS.length})</option>` +
     CATEGORIES.map((c) => `<option value="${c.id}">${c.id === "TOOL" ? "Dụng cụ & Sơn" : `${c.name} (${c.id})`} - ${PRODUCTS.filter((p) => p.category === c.id).length}</option>`).join("");
 
-  // Danh sách cố định (không lọc thật)
+  // Web tĩnh: không lọc thật. Bấm Tìm kiếm với điều kiện nào cũng ra cùng 1 trang kết quả mẫu
+  // (SEARCH_RESULT_IDS trong data.js, dùng chung với trang tìm kiếm bên khách hàng)
   function filtered() {
+    if (state.search) return SEARCH_RESULT_IDS.map(getProduct);
     return PRODUCTS.slice().sort((a, b) => b.id - a.id);
   }
+  const catText = () => $("ps-cat").selectedOptions[0].text.split(" - ")[0].replace(/ \(\d+\)$/, "");
 
   function card(p) {
     return `
-      <article class="ap-card" data-id="${p.id}">
+      <article class="ap-card ${p.hidden ? "is-hidden" : ""}" data-id="${p.id}">
         <div class="ap-thumb">
           <img src="${asset(p.image)}" alt="${escapeHtml(p.name)}">
-          <span class="ap-status chip ${p.sold > 0 ? "chip-delivered" : "chip-pending"}">${p.sold > 0 ? "Đã có người mua" : "Chưa bán"}</span>
+          ${p.hidden
+            ? `<span class="ap-status chip chip-hidden">Đang ẩn</span>`
+            : `<span class="ap-status chip ${p.sold > 0 ? "chip-delivered" : "chip-pending"}">${p.sold > 0 ? "Đã có người mua" : "Chưa bán"}</span>`}
         </div>
         <div class="ap-body">
           <div class="top"><span class="grade grade-${p.category}">${p.category}</span><span>Mã: GP${String(p.id).padStart(4, "0")}</span></div>
@@ -34,7 +39,11 @@
         </div>
         <div class="ap-actions">
           <a class="btn btn-outline btn-sm" href="product-form.html?id=${p.id}">${icon("edit")} Sửa</a>
-          <button class="btn btn-danger-outline btn-sm" data-delete>${icon("trash")} Xóa</button>
+          ${p.hidden
+            ? `<button class="btn btn-blue btn-sm" data-show title="Sản phẩm đang ẩn, bấm để mở bán lại">${icon("eye")} Mở bán</button>`
+            : p.sold > 0
+            ? `<button class="btn btn-warning-outline btn-sm" data-delete title="Đã có người mua nên chỉ ẩn được, không xóa">${icon("eyeOff")} Ẩn</button>`
+            : `<button class="btn btn-danger-outline btn-sm" data-delete title="Chưa bán nên được xóa vĩnh viễn">${icon("trash")} Xóa</button>`}
         </div>
       </article>`;
   }
@@ -48,7 +57,13 @@
       ? items.slice(start, start + PER_PAGE).map(card).join("")
       : `<div class="card empty-state" style="grid-column:1/-1">${icon("search")}<h3>Không tìm thấy sản phẩm</h3><p>Thử từ khóa khác hoặc chọn loại khác.</p></div>`;
 
-    $("ps-note").innerHTML = `Đang hiển thị <b>${items.length}</b> sản phẩm`;
+    $("ps-note").innerHTML = state.search
+      ? `<div class="search-result-bar">
+          <span>${icon("search")}<span>Kết quả tìm kiếm: <b>${items.length}</b> sản phẩm</span></span>
+          ${state.search.map((c) => `<span class="chip chip-confirmed">${c}</span>`).join("")}
+          <button type="button" class="link" id="ps-clear">← Xem tất cả sản phẩm</button>
+        </div>`
+      : ""; // chỉ hiện khi đang xem kết quả tìm kiếm
 
     renderPagination($("ps-pagination"), items.length, PER_PAGE, state.page, (page) => {
       state.page = page;
@@ -58,51 +73,94 @@
     return items.length;
   }
 
-  // Tìm kiếm / lọc / sắp xếp: chỉ hiện thông báo, danh sách giữ nguyên
+  // Tìm kiếm: điều kiện nào cũng ra trang kết quả mẫu
   $("product-filter").addEventListener("submit", (e) => {
     e.preventDefault();
     const name = $("ps-name").value.trim();
-    const cat = $("ps-cat").selectedOptions[0].text.split(" - ")[0].replace(/ \(\d+\)$/, "");
-    toast("Đã tìm kiếm sản phẩm", `${name ? `Tên: “${escapeHtml(name)}” · ` : ""}Loại: ${cat}`);
+    state.search = [
+      name ? `Tên: “${escapeHtml(name)}”` : "",
+      `Loại: ${catText()}`,
+      `Sắp xếp: ${$("ps-sort").selectedOptions[0].text}`,
+    ].filter(Boolean);
+    state.page = 1;
+    render();
+    toast("Đã tìm kiếm sản phẩm", `Tìm thấy ${SEARCH_RESULT_IDS.length} sản phẩm`);
   });
-  $("ps-cat").addEventListener("change", () => {
-    toast("Đã lọc theo loại", $("ps-cat").selectedOptions[0].text.split(" - ")[0].replace(/ \(\d+\)$/, ""), "info");
-  });
-  $("ps-sort").addEventListener("change", () => {
-    toast("Đã sắp xếp", $("ps-sort").selectedOptions[0].text, "info");
-  });
-  $("ps-reset").addEventListener("click", () => {
+  // Đặt lại / Xem tất cả: quay về danh sách đầy đủ
+  function showAll() {
     $("product-filter").reset();
-    toast("Đã đặt lại bộ lọc", "", "info");
-  });
+    state.search = null;
+    state.page = 1;
+    render();
+    toast("Đã đặt lại", "Đang hiển thị tất cả sản phẩm", "info");
+  }
+  $("ps-reset").addEventListener("click", showAll);
+  $("ps-note").addEventListener("click", (e) => { if (e.target.closest("#ps-clear")) showAll(); });
   $("add-product").addEventListener("click", (e) => {
     e.preventDefault();
     toastThenGo("product-form.html", "Mở biểu mẫu thêm sản phẩm", "", "info");
   });
 
-  // XÓA SẢN PHẨM
+  // XÓA / ẨN / MỞ BÁN LẠI SẢN PHẨM (web tĩnh: chỉ hỏi xác nhận rồi hiện thông báo)
   $("admin-products").addEventListener("click", async (e) => {
-    const btn = e.target.closest("[data-delete]");
+    const btn = e.target.closest("[data-delete], [data-show]");
     if (!btn) return;
     const cardEl = btn.closest(".ap-card");
     const p = getProduct(cardEl.dataset.id);
 
-    if (p.sold > 0) {
+    // Thông báo chỉ ghi mã + tên ngắn gọn để không bị dài nhiều dòng
+    const code = `<strong>GP${String(p.id).padStart(4, "0")}</strong> ${escapeHtml(p.name)}`;
+    // Thông tin sản phẩm trong hộp thoại để admin nhìn là biết đang thao tác với sản phẩm nào
+    const info = `
+      <div class="del-product">
+        <img src="${asset(p.image)}" alt="">
+        <div>
+          <b>${escapeHtml(p.name)}</b>
+          <small>Mã GP${String(p.id).padStart(4, "0")} · ${money(p.price)}</small>
+          <small>Đã bán <b>${numberDot(p.sold)}</b> · Tồn kho <b>${p.stock}</b></small>
+        </div>
+      </div>`;
+
+    if (p.hidden) {
       const ok = await confirmDialog({
-        title: "Xác nhận xóa sản phẩm?",
-        message: `“${escapeHtml(p.name)}” đã có <b>${numberDot(p.sold)}</b> lượt mua nên không thể xóa vĩnh viễn. Hệ thống sẽ <b>ẩn</b> sản phẩm khỏi trang bán hàng. Bạn có muốn tiếp tục?`,
-        okText: "Ẩn sản phẩm", danger: true,
+        title: "Mở bán lại sản phẩm?",
+        message: "Sản phẩm đang bị ẩn khỏi trang bán hàng.",
+        body: `${info}
+          <ul class="del-effects show">
+            <li>${icon("eye")} Hiển thị lại trên trang bán hàng</li>
+            <li>${icon("cart")} Khách hàng có thể tìm thấy và đặt mua</li>
+          </ul>`,
+        iconName: "eye", okText: "Mở bán lại", cancelText: "Không, vẫn ẩn",
       });
-      if (!ok) return toast("Đã hủy thao tác xóa", p.name, "info");
-      toast("Đã ẩn sản phẩm", `“${p.name}” đã có người mua nên được ẩn khỏi website`, "warning");
+      if (!ok) return toast("Đã hủy mở bán", `${code} vẫn đang ẩn`, "info");
+      toast("Đã mở bán lại sản phẩm", `${code}<br>Đã hiển thị lại trên trang bán hàng`);
+    } else if (p.sold > 0) {
+      const ok = await confirmDialog({
+        title: "Ẩn sản phẩm này?",
+        message: `Sản phẩm đã có <b>${numberDot(p.sold)} lượt mua</b> nên không thể xóa, chỉ có thể ẩn.`,
+        body: `${info}
+          <ul class="del-effects">
+            <li>${icon("eyeOff")} Khách hàng không còn thấy và mua được sản phẩm</li>
+            <li>${icon("orders")} Các đơn hàng cũ vẫn giữ nguyên thông tin</li>
+            <li>${icon("refresh")} Có thể mở bán lại bất cứ lúc nào</li>
+          </ul>`,
+        iconName: "eyeOff", okText: "Ẩn sản phẩm", cancelText: "Không, giữ lại",
+      });
+      if (!ok) return toast("Đã hủy ẩn sản phẩm", `${code} vẫn đang được bán`, "info");
+      toast("Đã ẩn sản phẩm", `${code}<br>Đã ẩn khỏi trang bán hàng`);
     } else {
       const ok = await confirmDialog({
-        title: "Xác nhận xóa sản phẩm?",
-        message: `“${escapeHtml(p.name)}” chưa được bán ra. Sản phẩm sẽ bị <b>xóa vĩnh viễn</b>. Bạn có chắc chắn?`,
-        okText: "Xóa sản phẩm", danger: true,
+        title: "Xóa vĩnh viễn sản phẩm?",
+        message: "Sản phẩm <b>chưa có ai mua</b> nên sẽ bị xóa hẳn khỏi hệ thống.",
+        body: `${info}
+          <ul class="del-effects danger">
+            <li>${icon("trash")} Xóa hết thông tin, hình ảnh và mô tả</li>
+            <li>${icon("warning")} Không thể khôi phục sau khi xóa</li>
+          </ul>`,
+        okText: "Xóa vĩnh viễn", cancelText: "Không, giữ lại", danger: true,
       });
-      if (!ok) return toast("Đã hủy thao tác xóa", p.name, "info");
-      toast("Đã xóa sản phẩm", `“${p.name}” đã được xóa khỏi hệ thống`);
+      if (!ok) return toast("Đã hủy xóa sản phẩm", `${code} chưa bị xóa`, "info");
+      toast("Đã xóa sản phẩm", `${code}<br>Đã xóa vĩnh viễn khỏi hệ thống`);
     }
   });
 

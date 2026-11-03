@@ -20,6 +20,13 @@
     if (c) toast("Đã chọn phân loại", c.id === "TOOL" ? "Dụng cụ & Sơn" : c.name, "info");
   });
 
+  // Sửa giá: ghi giá hiện tại bên dưới ô để lỡ xóa vẫn biết giá cũ mà nhập lại
+  function rememberPrice(id, oldValue) {
+    const hint = $(id + "-hint");
+    hint.innerHTML = `Giá hiện tại: <b>${oldValue ? money(oldValue) : "chưa có"}</b>`;
+    hint.hidden = false;
+  }
+
   function showPreview(src) {
     $("preview").innerHTML = src
       ? `<img src="${src}" alt="Ảnh xem trước">`
@@ -34,6 +41,8 @@
     $("pf-series").value = editing.series;
     setMoneyValue($("pf-price"), editing.price);
     setMoneyValue($("pf-old"), editing.oldPrice || "");
+    rememberPrice("pf-price", editing.price);
+    rememberPrice("pf-old", editing.oldPrice);
     $("pf-stock").value = editing.stock;
     $("pf-desc").value = editing.desc;
     $("pf-submit").textContent = "Lưu thay đổi";
@@ -57,6 +66,7 @@
       $("file-name").textContent = `Đã chọn: ${file.name} (${Math.round(file.size / 1024)} KB)`;
       toast("Đã tải ảnh lên", "Xem trước ảnh ở khung bên phải", "info");
     };
+    reader.onerror = () => toast("Không đọc được ảnh", "Hãy chọn lại ảnh khác", "error");
     reader.readAsDataURL(file);
   });
 

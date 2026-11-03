@@ -14,8 +14,8 @@
 
   function items() {
     if (mode === "search") return SEARCH_RESULT_IDS.map(getProduct);
-    if (mode === "category") return PRODUCTS.filter((p) => p.category === cat.id);
-    return PRODUCTS;
+    if (mode === "category") return SHOP_PRODUCTS.filter((p) => p.category === cat.id);
+    return SHOP_PRODUCTS;
   }
 
   function catLabel(c) {

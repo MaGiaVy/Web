@@ -1,4 +1,4 @@
-// QUẢN LÝ ĐƠN HÀNG: lọc theo tình trạng / khoảng ngày / địa điểm (tỉnh/thành, phường/xã) (web tĩnh: chỉ hiện thông báo), cập nhật trạng thái (chỉ xuôi)
+// QUẢN LÝ ĐƠN HÀNG: lọc theo tình trạng / khoảng ngày / địa điểm (tỉnh/thành, phường/xã) (web tĩnh: chỉ hiện thông báo), bấm Xử lý / Xem để mở trang chi tiết (xác nhận, hủy đơn làm ở trang chi tiết)
 // orders.html?user=... : xem danh sách đơn của 1 khách (mở từ Tổng quan / Thống kê)
 (function () {
   const PER_PAGE = 10;
@@ -26,30 +26,18 @@
     return orders.filter((o) => !filterUser || o.userId === filterUser.id);
   }
 
-  // Chỉ hiện các trạng thái kế tiếp hợp lệ -> không thể cập nhật ngược
-  function statusControl(o) {
-    const next = ORDER_STATUS[o.status].next;
-    if (!next.length) return `<span class="final-note">${icon("lock")} Đã hoàn tất, không thể đổi</span>`;
-    return `<div class="status-update">
-      <select class="select" data-next>
-        <option value="">-- Chuyển sang --</option>
-        ${next.map((s) => `<option value="${s}">${ORDER_STATUS[s].label}</option>`).join("")}
-      </select>
-      <button class="btn btn-dark btn-sm" data-save>Lưu</button>
-    </div>`;
-  }
-
   function row(o) {
     const u = getUser(o.userId);
     return `<tr data-id="${o.id}">
       <td><a class="order-link" href="order-detail.html?id=${o.id}">#${o.id}</a></td>
       <td><div class="cell-user"><span class="avatar">${initials(u.name)}</span><div><b>${escapeHtml(u.name)}</b><small>${u.phone}</small></div></div></td>
       <td>${formatDate(o.datetime)}<br><small class="muted">${o.datetime.split(" ")[1]}</small></td>
-      <td>${o.address.ward}<br><small class="muted">${o.address.city}</small></td>
+      <td class="nowrap">${o.address.ward}<br><small class="muted">${o.address.city}</small></td>
       <td class="right num"><b>${money(o.total)}</b><br><small class="muted">${orderItemCount(o)} sản phẩm</small></td>
       <td>${statusChip(o.status)}</td>
-      <td>${statusControl(o)}</td>
-      <td class="right"><a class="icon-btn" href="order-detail.html?id=${o.id}" title="Xem chi tiết đơn hàng">${icon("eye")}</a></td>
+      <td class="right">${ORDER_STATUS[o.status].next.length
+        ? `<a class="btn btn-dark btn-sm" href="order-detail.html?id=${o.id}">Xử lý ${icon("chevronRight")}</a>`
+        : `<a class="btn btn-outline btn-sm" href="order-detail.html?id=${o.id}">Xem ${icon("chevronRight")}</a>`}</td>
     </tr>`;
   }
 
@@ -59,14 +47,13 @@
     if (state.page > pages) state.page = pages;
     const start = (state.page - 1) * PER_PAGE;
     $("order-body").innerHTML = list.length ? list.slice(start, start + PER_PAGE).map(row).join("")
-      : `<tr><td colspan="8"><div class="empty-state">${icon("orders")}<h3>Không có đơn hàng phù hợp</h3><p>Hãy thử thay đổi điều kiện lọc.</p></div></td></tr>`;
+      : `<tr><td colspan="7"><div class="empty-state">${icon("orders")}<h3>Không có đơn hàng phù hợp</h3><p>Hãy thử thay đổi điều kiện lọc.</p></div></td></tr>`;
 
-    const sum = list.filter((o) => o.status !== "cancelled").reduce((s, o) => s + o.total, 0);
-    $("of-note").innerHTML = (filterUser
-      ? `Danh sách đơn hàng của khách <b>${escapeHtml(filterUser.name)}</b>: <b>${list.length}</b> đơn · `
-      : `Tổng cộng <b>${list.length}</b> đơn hàng · `) +
-      `Tổng giá trị (trừ đơn hủy): <b class="text-red">${money(sum)}</b>` +
-      (filterUser ? ` <a class="link" href="orders.html">← Xem tất cả đơn hàng</a>` : "");
+    // Chỉ hiện dòng này khi đang xem đơn của 1 khách (từ trang Người dùng / Thống kê)
+    $("of-note").innerHTML = filterUser
+      ? `<div class="search-result-bar"><span>${icon("user")}<span>Đơn hàng của khách <b>${escapeHtml(filterUser.name)}</b>: <b>${list.length}</b> đơn</span></span>
+          <a class="link" href="orders.html" style="margin-left:auto">← Xem tất cả đơn hàng</a></div>`
+      : "";
 
     $("order-foot").innerHTML = `<span>Trang ${state.page}/${pages} · ${list.length} đơn hàng</span><div id="order-pages"></div>`;
     renderPagination($("order-pages"), list.length, PER_PAGE, state.page, (page) => { state.page = page; render(); });
@@ -92,24 +79,6 @@
   });
 
   // Cập nhật trạng thái
-  $("order-body").addEventListener("click", async (e) => {
-    const btn = e.target.closest("[data-save]");
-    if (!btn) return;
-    const tr = btn.closest("tr");
-    const o = orders.find((x) => x.id === tr.dataset.id);
-    const next = tr.querySelector("[data-next]").value;
-    if (!next) return toast("Chưa chọn trạng thái mới", "Hãy chọn trạng thái trong danh sách trước khi lưu", "warning");
-    const ok = await confirmDialog({
-      title: "Cập nhật trạng thái?",
-      message: `Đơn <b>#${o.id}</b>: ${ORDER_STATUS[o.status].label} → <b>${ORDER_STATUS[next].label}</b>.<br>Lưu ý: không thể quay lại trạng thái trước.`,
-      okText: "Cập nhật", danger: next === "cancelled",
-    });
-    if (!ok) return toast("Đã hủy cập nhật", "", "info");
-    // Web tĩnh: chỉ hiện thông báo, trạng thái trên bảng giữ nguyên
-    tr.querySelector("[data-next]").value = "";
-    toast("Cập nhật trạng thái thành công", `Đơn #${o.id}: ${ORDER_STATUS[next].label}`, next === "cancelled" ? "warning" : "success");
-  });
-
   render();
   if (filterUser) toast("Danh sách đơn hàng của khách", filterUser.name, "info");
 })();

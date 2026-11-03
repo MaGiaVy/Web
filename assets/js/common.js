@@ -171,15 +171,17 @@ function toastThenGo(url, title, message, type = "success") {
 // ============================================================
 // HỘP THOẠI XÁC NHẬN (thay cho confirm() mặc định cho đẹp hơn)
 // ============================================================
-function confirmDialog({ title, message, okText = "Đồng ý", cancelText = "Hủy", danger = false }) {
+// body: HTML thêm bên dưới lời nhắn (vd: ô nhập lý do)
+function confirmDialog({ title, message, body = "", iconName, okText = "Đồng ý", cancelText = "Hủy", danger = false }) {
   return new Promise((resolve) => {
     const wrap = document.createElement("div");
     wrap.className = "confirm-backdrop";
     wrap.innerHTML = `
       <div class="confirm-box ${danger ? "danger" : ""}" role="dialog" aria-modal="true">
-        <div class="confirm-icon">${icon(danger ? "trash" : "warning")}</div>
+        <div class="confirm-icon">${icon(iconName || (danger ? "trash" : "warning"))}</div>
         <h3>${title}</h3>
         <p>${message}</p>
+        ${body}
         <div class="confirm-actions">
           <button class="btn btn-outline" data-act="cancel">${cancelText}</button>
           <button class="btn ${danger ? "btn-primary" : "btn-dark"}" data-act="ok">${okText}</button>
@@ -296,7 +298,7 @@ function orderItemsTable(order, productLink = page("product.html") + "?id=") {
         <td><div class="cell-product"><img src="${asset(p.image)}" alt="${escapeHtml(p.name)}"><div><a href="${productLink}${p.id}"><b>${escapeHtml(p.name)}</b></a><small><span class="grade grade-${p.category}">${p.category}</span> ${escapeHtml(p.series)}</small></div></div></td>
         <td class="right num">${money(it.price)}</td>
         <td class="center num">${it.qty}</td>
-        <td class="right num"><b>${money(it.price * it.qty)}</b></td>
+        <td class="right num"><b>${money(it.price * it.qty)}</b>${it.qty > 1 ? `<small class="line-calc">${money(it.price)} × ${it.qty}</small>` : ""}</td>
       </tr>`;
     }).join("")}</tbody>
   </table></div>`;
@@ -324,17 +326,32 @@ function setMoneyValue(input, value) {
 
 function bindMoneyInput(input) {
   input.setAttribute("inputmode", "numeric");
+  const group = (digits) => digits.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  // Backspace ngay sau dấu chấm / Delete ngay trước dấu chấm: nhảy qua dấu chấm để xóa luôn chữ số
+  input.addEventListener("keydown", (e) => {
+    const pos = input.selectionStart;
+    if (pos !== input.selectionEnd) return;
+    if (e.key === "Backspace" && input.value[pos - 1] === ".") input.setSelectionRange(pos - 1, pos - 1);
+    if (e.key === "Delete" && input.value[pos] === ".") input.setSelectionRange(pos + 1, pos + 1);
+  });
+
   input.addEventListener("input", () => {
     // Giữ vị trí con trỏ theo số chữ số đứng trước nó
     const caret = input.selectionStart;
     const digitsBefore = input.value.slice(0, caret).replace(/\D/g, "").length;
-    const digits = input.value.replace(/\D/g, "").replace(/^0+(?=\d)/, "").slice(0, 12);
-    input.value = digits ? numberDot(digits) : "";
+    // Xóa 1 chữ số thì chỉ mất đúng chữ số đó (1.000 xóa số 1 -> 000, không thành 0)
+    input.value = group(input.value.replace(/\D/g, "").slice(0, 12));
     let pos = 0, count = 0;
     while (pos < input.value.length && count < digitsBefore) {
       if (/\d/.test(input.value[pos])) count++;
       pos++;
     }
     input.setSelectionRange(pos, pos);
+  });
+
+  // Rời ô thì bỏ số 0 thừa ở đầu (000 -> 0)
+  input.addEventListener("blur", () => {
+    input.value = group(input.value.replace(/\D/g, "").replace(/^0+(?=\d)/, ""));
   });
 }
