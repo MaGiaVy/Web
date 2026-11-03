@@ -13,16 +13,19 @@
   // Chọn khoảng giá có sẵn -> tự điền 2 ô Từ / Đến
   $("a-range").addEventListener("change", () => {
     const r = PRICE_RANGES.find((x) => x.id === $("a-range").value);
-    $("a-min").value = r ? r.min : "";
-    $("a-max").value = r && r.max !== Infinity ? r.max : "";
+    setMoneyValue($("a-min"), r ? r.min : "");
+    setMoneyValue($("a-max"), r && r.max !== Infinity ? r.max : "");
   });
-  ["a-min", "a-max"].forEach((id) => $(id).addEventListener("input", () => { $("a-range").value = "custom"; }));
+  ["a-min", "a-max"].forEach((id) => {
+    bindMoneyInput($(id)); // tự thêm dấu chấm hàng nghìn khi gõ
+    $(id).addEventListener("input", () => { $("a-range").value = "custom"; });
+  });
 
   $("adv-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const name = $("a-name").value.trim();
     const c = getCategory($("a-cat").value);
-    const min = $("a-min").value, max = $("a-max").value;
+    const min = parseMoney($("a-min").value), max = parseMoney($("a-max").value);
     const parts = [];
     if (name) parts.push(`Tên: “${escapeHtml(name)}”`);
     if (c) parts.push(`Loại: ${c.id === "TOOL" ? "Dụng cụ & Sơn" : c.id}`);

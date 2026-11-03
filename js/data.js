@@ -15,10 +15,10 @@ const CATEGORIES = [
 
 // Khoảng giá dùng cho tìm kiếm nâng cao
 const PRICE_RANGES = [
-  { id: "duoi-500", label: "Dưới 500.000đ", min: 0, max: 499999 },
+  { id: "duoi-500", label: "Dưới 500.000đ", min: 0, max: 500000 },
   { id: "500-1tr", label: "500.000đ - 1.000.000đ", min: 500000, max: 1000000 },
-  { id: "1tr-3tr", label: "1.000.000đ - 3.000.000đ", min: 1000001, max: 3000000 },
-  { id: "tren-3tr", label: "Trên 3.000.000đ", min: 3000001, max: Infinity },
+  { id: "1tr-3tr", label: "1.000.000đ - 3.000.000đ", min: 1000000, max: 3000000 },
+  { id: "tren-3tr", label: "Trên 3.000.000đ", min: 3000000, max: Infinity },
 ];
 
 // [id, tên, mã/series, phân loại, giá, giá cũ, tồn kho, đã bán, kiểu hình, mô tả ngắn]
@@ -90,52 +90,57 @@ const USERS = [
     id: 1, name: "Nguyễn Minh Anh", email: "minhanh@gmail.com", phone: "0901 234 567", password: "123456",
     status: "active", joined: "2025-12-10", gender: "Nam", birthday: "2004-05-18",
     addresses: [
-      { id: 1, receiver: "Nguyễn Minh Anh", phone: "0901 234 567", street: "12 Võ Văn Ngân", ward: "P. Linh Chiểu", district: "TP. Thủ Đức", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" },
-      { id: 2, receiver: "Nguyễn Minh Anh", phone: "0901 234 567", street: "45 Nguyễn Huệ", ward: "P. Bến Nghé", district: "Quận 1", city: "TP. Hồ Chí Minh", isDefault: false, label: "Công ty" },
+      { id: 1, receiver: "Nguyễn Minh Anh", phone: "0901 234 567", street: "12 Võ Văn Ngân", ward: "Phường Thủ Đức", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" },
+      { id: 2, receiver: "Nguyễn Minh Anh", phone: "0901 234 567", street: "45 Nguyễn Huệ", ward: "Phường Sài Gòn", city: "TP. Hồ Chí Minh", isDefault: false, label: "Công ty" },
     ],
   },
   {
     id: 2, name: "Lê Gia Hân", email: "giahan@gmail.com", phone: "0912 345 678", password: "123456",
     status: "active", joined: "2026-01-05", gender: "Nữ", birthday: "2003-09-02",
-    addresses: [{ id: 1, receiver: "Lê Gia Hân", phone: "0912 345 678", street: "88 Trần Duy Hưng", ward: "P. Trung Hòa", district: "Quận Cầu Giấy", city: "Hà Nội", isDefault: true, label: "Nhà riêng" }],
+    addresses: [{ id: 1, receiver: "Lê Gia Hân", phone: "0912 345 678", street: "88 Trần Duy Hưng", ward: "Phường Yên Hòa", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
   },
   {
     id: 3, name: "Trần Minh Khoa", email: "minhkhoa@gmail.com", phone: "0987 654 321", password: "123456",
     status: "locked", joined: "2026-02-14", gender: "Nam", birthday: "2002-11-20",
-    addresses: [{ id: 1, receiver: "Trần Minh Khoa", phone: "0987 654 321", street: "210 Điện Biên Phủ", ward: "P. 15", district: "Quận Bình Thạnh", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+    addresses: [{ id: 1, receiver: "Trần Minh Khoa", phone: "0987 654 321", street: "210 Điện Biên Phủ", ward: "Phường Thạnh Mỹ Tây", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
   },
   {
     id: 4, name: "Phạm Thu Trang", email: "thutrang@gmail.com", phone: "0935 111 222", password: "123456",
     status: "active", joined: "2026-03-01", gender: "Nữ", birthday: "2005-01-30",
-    addresses: [{ id: 1, receiver: "Phạm Thu Trang", phone: "0935 111 222", street: "15 Bạch Đằng", ward: "P. Thạch Thang", district: "Quận Hải Châu", city: "Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
+    addresses: [{ id: 1, receiver: "Phạm Thu Trang", phone: "0935 111 222", street: "15 Bạch Đằng", ward: "Phường Hải Châu", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
   },
   {
     id: 5, name: "Võ Quốc Bảo", email: "quocbao@gmail.com", phone: "0908 777 888", password: "123456",
     status: "active", joined: "2026-03-22", gender: "Nam", birthday: "2001-07-07",
-    addresses: [{ id: 1, receiver: "Võ Quốc Bảo", phone: "0908 777 888", street: "102 Nguyễn Thị Thập", ward: "P. Tân Phú", district: "Quận 7", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+    addresses: [{ id: 1, receiver: "Võ Quốc Bảo", phone: "0908 777 888", street: "102 Nguyễn Thị Thập", ward: "Phường Tân Mỹ", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
   },
   {
     id: 6, name: "Đặng Hoàng Long", email: "hoanglong@gmail.com", phone: "0966 333 444", password: "123456",
     status: "active", joined: "2026-04-18", gender: "Nam", birthday: "2000-12-12",
-    addresses: [{ id: 1, receiver: "Đặng Hoàng Long", phone: "0966 333 444", street: "36 Tây Sơn", ward: "P. Quang Trung", district: "Quận Đống Đa", city: "Hà Nội", isDefault: true, label: "Nhà riêng" }],
+    addresses: [{ id: 1, receiver: "Đặng Hoàng Long", phone: "0966 333 444", street: "36 Tây Sơn", ward: "Phường Đống Đa", city: "TP. Hà Nội", isDefault: true, label: "Nhà riêng" }],
   },
   {
     id: 7, name: "Huỳnh Ngọc Mai", email: "ngocmai@gmail.com", phone: "0938 222 999", password: "123456",
     status: "active", joined: "2026-05-09", gender: "Nữ", birthday: "2004-03-25",
-    addresses: [{ id: 1, receiver: "Huỳnh Ngọc Mai", phone: "0938 222 999", street: "24 Quang Trung", ward: "P. 10", district: "Quận Gò Vấp", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
+    addresses: [{ id: 1, receiver: "Huỳnh Ngọc Mai", phone: "0938 222 999", street: "24 Quang Trung", ward: "Phường Gò Vấp", city: "TP. Hồ Chí Minh", isDefault: true, label: "Nhà riêng" }],
   },
   {
     id: 8, name: "Bùi Tuấn Kiệt", email: "tuankiet@gmail.com", phone: "0977 456 123", password: "123456",
     status: "active", joined: "2026-06-21", gender: "Nam", birthday: "2003-06-16",
-    addresses: [{ id: 1, receiver: "Bùi Tuấn Kiệt", phone: "0977 456 123", street: "9 Võ Nguyên Giáp", ward: "P. Phước Mỹ", district: "Quận Sơn Trà", city: "Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
+    addresses: [{ id: 1, receiver: "Bùi Tuấn Kiệt", phone: "0977 456 123", street: "9 Võ Nguyên Giáp", ward: "Phường An Hải", city: "TP. Đà Nẵng", isDefault: true, label: "Nhà riêng" }],
   },
 ];
 
-// Tỉnh/thành và quận/huyện (dùng cho nhập địa chỉ mới và lọc đơn hàng theo địa điểm)
+// Đơn vị hành chính 2 cấp theo quy định mới (từ 01/07/2025): Tỉnh/Thành phố -> Phường/Xã
+// (bỏ cấp quận/huyện). Dùng cho nhập địa chỉ mới và lọc đơn hàng theo địa điểm
 const LOCATIONS = {
-  "TP. Hồ Chí Minh": ["Quận 1", "Quận 3", "Quận 5", "Quận 7", "Quận Bình Thạnh", "Quận Gò Vấp", "Quận Tân Bình", "TP. Thủ Đức"],
-  "Hà Nội": ["Quận Ba Đình", "Quận Cầu Giấy", "Quận Đống Đa", "Quận Hoàn Kiếm", "Quận Hai Bà Trưng"],
-  "Đà Nẵng": ["Quận Hải Châu", "Quận Sơn Trà", "Quận Thanh Khê", "Quận Ngũ Hành Sơn"],
+  "TP. Hồ Chí Minh": ["Phường Sài Gòn", "Phường Bến Thành", "Phường Tân Định", "Phường Bàn Cờ", "Phường Chợ Quán", "Phường Chợ Lớn",
+    "Phường Tân Mỹ", "Phường Tân Hưng", "Phường Thạnh Mỹ Tây", "Phường Gia Định", "Phường Gò Vấp", "Phường Hạnh Thông",
+    "Phường Tân Sơn Nhất", "Phường Bảy Hiền", "Phường Thủ Đức", "Phường Linh Xuân", "Phường Hiệp Bình", "Phường Thủ Dầu Một"],
+  "TP. Hà Nội": ["Phường Ba Đình", "Phường Ngọc Hà", "Phường Hoàn Kiếm", "Phường Cửa Nam", "Phường Cầu Giấy", "Phường Nghĩa Đô",
+    "Phường Yên Hòa", "Phường Đống Đa", "Phường Láng", "Phường Kim Liên", "Phường Hai Bà Trưng", "Phường Bạch Mai"],
+  "TP. Đà Nẵng": ["Phường Hải Châu", "Phường Hòa Cường", "Phường Thanh Khê", "Phường Sơn Trà", "Phường An Hải", "Phường Ngũ Hành Sơn",
+    "Phường Hòa Khánh", "Phường Tam Kỳ", "Phường Hội An"],
 };
 
 // Người dùng đang đăng nhập (giao diện mẫu)

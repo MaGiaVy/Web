@@ -44,5 +44,5 @@
 5. Trang thành công → Xem chi tiết đơn (trang riêng) → Lịch sử mua hàng.
 6. Tài khoản: sửa tên, thêm địa chỉ mới (hiện thông báo).
 7. `admin/login.html` → Tổng quan → Sản phẩm: tìm + lọc loại, xóa 1 SP đã bán (báo đã ẩn) và 1 SP mới (báo đã xóa).
-8. Thêm/sửa SP (xem trước ảnh, đúng loại) → Người dùng: khóa/mở → Đơn hàng: lọc theo ngày + quận, cập nhật xuôi.
+8. Thêm/sửa SP (xem trước ảnh, đúng loại) → Người dùng: khóa/mở → Đơn hàng: lọc theo ngày + phường/tỉnh, cập nhật xuôi.
 9. Thống kê: chọn khoảng ngày → top 5 → "Xem danh sách đơn hàng" → bấm link chi tiết.

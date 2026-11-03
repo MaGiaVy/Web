@@ -1,4 +1,4 @@
-// QUẢN LÝ ĐƠN HÀNG: lọc theo tình trạng / khoảng ngày / địa điểm (web tĩnh: chỉ hiện thông báo), cập nhật trạng thái (chỉ xuôi)
+// QUẢN LÝ ĐƠN HÀNG: lọc theo tình trạng / khoảng ngày / địa điểm (tỉnh/thành, phường/xã) (web tĩnh: chỉ hiện thông báo), cập nhật trạng thái (chỉ xuôi)
 // orders.html?user=... : xem danh sách đơn của 1 khách (mở từ Tổng quan / Thống kê)
 (function () {
   const PER_PAGE = 10;
@@ -12,10 +12,10 @@
     Object.entries(ORDER_STATUS).map(([k, v]) => `<option value="${k}">${v.label}</option>`).join("");
   $("of-from").value = getParam("from") || "";
   $("of-to").value = getParam("to") || "";
-  $("of-city").innerHTML = `<option value="">Tất cả thành phố</option>` + Object.keys(LOCATIONS).map((c) => `<option>${c}</option>`).join("");
+  $("of-city").innerHTML = `<option value="">Tất cả tỉnh/thành</option>` + Object.keys(LOCATIONS).map((c) => `<option>${c}</option>`).join("");
   const fillDistricts = () => {
     const city = $("of-city").value;
-    $("of-district").innerHTML = `<option value="">Tất cả quận/huyện</option>` + (city ? LOCATIONS[city].map((d) => `<option>${d}</option>`).join("") : "");
+    $("of-district").innerHTML = `<option value="">Tất cả phường/xã</option>` + (city ? LOCATIONS[city].map((d) => `<option>${d}</option>`).join("") : "");
     $("of-district").disabled = !city;
   };
   fillDistricts();
@@ -45,7 +45,7 @@
       <td><a class="order-link" href="order-detail.html?id=${o.id}">#${o.id}</a></td>
       <td><div class="cell-user"><span class="avatar">${initials(u.name)}</span><div><b>${escapeHtml(u.name)}</b><small>${u.phone}</small></div></div></td>
       <td>${formatDate(o.datetime)}<br><small class="muted">${o.datetime.split(" ")[1]}</small></td>
-      <td>${o.address.district}<br><small class="muted">${o.address.city}</small></td>
+      <td>${o.address.ward}<br><small class="muted">${o.address.city}</small></td>
       <td class="right num"><b>${money(o.total)}</b><br><small class="muted">${orderItemCount(o)} sản phẩm</small></td>
       <td>${statusChip(o.status)}</td>
       <td>${statusControl(o)}</td>

@@ -41,7 +41,7 @@
     const addr = u.addresses.find((a) => a.isDefault);
     return `<tr>
       <td><div class="cell-user"><span class="avatar">${initials(u.name)}</span><div><b>${u.name}</b><small>${u.email}</small></div></div></td>
-      <td>${addr.district}, ${addr.city}</td>
+      <td>${addr.ward}, ${addr.city}</td>
       <td class="center num"><b>${count}</b> đơn</td>
       <td class="right num"><b class="text-red">${money(total)}</b></td>
       <td class="right"><a class="btn btn-dark btn-sm" href="orders.html?user=${u.id}" data-view-orders="${u.name}">${icon("orders")} Xem danh sách đơn hàng</a></td>

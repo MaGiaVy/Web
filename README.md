@@ -19,6 +19,9 @@ Trang quản trị: **`admin/login.html`**. Nhập gì cũng đăng nhập đư�
 | Chi tiết đơn hàng là trang HTML riêng | `order-detail.html?id=...` và `admin/order-detail.html?id=...` |
 | Bỏ ràng buộc đăng ký/đăng nhập | `login.html`, `register.html`, `admin/login.html`: không `required`, nhập gì cũng vào |
 | Tự sửa tên, thêm địa chỉ khác | `account.html` |
+| Admin **chỉ được xem** thông tin khách hàng, không được sửa | `admin/user-form.html?id=...` (chỉ đọc). Thêm user mới vẫn nhập đủ |
+| Ô nhập giá tự thêm dấu chấm khi gõ | `bindMoneyInput()` trong `js/common.js` |
+| Địa chỉ theo đơn vị hành chính mới (bỏ quận/huyện) | Số nhà → Phường/Xã → Tỉnh/Thành phố, danh sách trong `LOCATIONS` (`js/data.js`) |
 | Admin có ô tìm kiếm + dropdown lọc loại | `admin/products.html` |
 | Xóa SP: đã bán → hỏi rồi báo "đã ẩn", chưa bán → hỏi rồi báo "đã xóa" (chỉ thông báo) | `js/admin/products.js` |
 | Dashboard chỉ hiện tổng tiền + số đơn của khách, bấm nút mới xem đơn | `admin/index.html`, `admin/statistics.html` |

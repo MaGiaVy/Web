@@ -136,7 +136,7 @@ function renderFooter() {
       <div>
         <h4>Liên hệ</h4>
         <ul class="footer-contact">
-          <li>${icon("map")} <span>273 An Dương Vương, Phường 3, Quận 5, TP. Hồ Chí Minh</span></li>
+          <li>${icon("map")} <span>273 An Dương Vương, Phường Chợ Quán, TP. Hồ Chí Minh</span></li>
           <li>${icon("phone")} <span>1900 6868 (8:00 - 21:00)</span></li>
           <li>${icon("mail")} <span>hotro@dvkgunpla.vn</span></li>
           <li>${icon("users")} <span>Nhóm thực hiện: Đạt - Vỹ - Khang</span></li>

@@ -50,7 +50,7 @@ function getOrder(id) { return ORDERS.find((o) => o.id === id); }
 function getCategory(id) { return CATEGORIES.find((c) => c.id === id); }
 function currentUser() { return getUser(CURRENT_USER_ID); }
 function cartCount() { return SAMPLE_CART.reduce((sum, item) => sum + item.qty, 0); }
-function fullAddress(a) { return `${a.street}, ${a.ward}, ${a.district}, ${a.city}`; }
+function fullAddress(a) { return `${a.street}, ${a.ward}, ${a.city}`; }
 function discountPercent(p) { return p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0; }
 function orderItemCount(order) { return order.items.reduce((s, i) => s + i.qty, 0); }
 
@@ -300,4 +300,33 @@ function orderTotalsBox(order) {
     <div class="summary-row"><span>Phí vận chuyển</span><b>${order.shipping ? money(order.shipping) : "Miễn phí"}</b></div>
     <div class="summary-total"><span>Tổng cộng</span><b>${money(order.total)}</b></div>
   </div>`;
+}
+
+// ============================================================
+// Ô NHẬP GIÁ: tự thêm dấu chấm hàng nghìn khi gõ (1250000 -> 1.250.000)
+// ============================================================
+function parseMoney(text) {
+  const digits = String(text).replace(/\D/g, "");
+  return digits === "" ? "" : Number(digits);
+}
+
+function setMoneyValue(input, value) {
+  input.value = value === "" || value === null || value === undefined ? "" : numberDot(value);
+}
+
+function bindMoneyInput(input) {
+  input.setAttribute("inputmode", "numeric");
+  input.addEventListener("input", () => {
+    // Giữ vị trí con trỏ theo số chữ số đứng trước nó
+    const caret = input.selectionStart;
+    const digitsBefore = input.value.slice(0, caret).replace(/\D/g, "").length;
+    const digits = input.value.replace(/\D/g, "").replace(/^0+(?=\d)/, "").slice(0, 12);
+    input.value = digits ? numberDot(digits) : "";
+    let pos = 0, count = 0;
+    while (pos < input.value.length && count < digitsBefore) {
+      if (/\d/.test(input.value[pos])) count++;
+      pos++;
+    }
+    input.setSelectionRange(pos, pos);
+  });
 }

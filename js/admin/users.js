@@ -1,4 +1,4 @@
-// QUẢN LÝ NGƯỜI DÙNG: tìm kiếm (web tĩnh: chỉ hiện thông báo), thêm, sửa, khóa / mở khóa
+// QUẢN LÝ NGƯỜI DÙNG: tìm kiếm (web tĩnh: chỉ hiện thông báo), thêm, xem (không được sửa thông tin khách), khóa / mở khóa
 (function () {
   const $ = (id) => document.getElementById(id);
   const users = USERS.map((u) => ({ ...u }));
@@ -16,12 +16,12 @@
     return `<tr data-id="${u.id}" class="${locked ? "is-locked" : ""}">
       <td><div class="cell-user"><span class="avatar">${initials(u.name)}</span><div><b>${escapeHtml(u.name)}</b><small>${u.email}</small></div></div></td>
       <td class="num">${u.phone}</td>
-      <td>${addr.district}, ${addr.city}</td>
+      <td>${addr.ward}, ${addr.city}</td>
       <td>${formatDate(u.joined)}</td>
       <td class="center"><a class="link" href="orders.html?user=${u.id}">${orders} đơn</a></td>
       <td><span class="chip chip-${u.status}">${locked ? "Đã khóa" : "Hoạt động"}</span></td>
       <td><div class="row-actions">
-        <a class="btn btn-outline btn-sm" href="user-form.html?id=${u.id}">${icon("edit")} Sửa</a>
+        <a class="btn btn-outline btn-sm" href="user-form.html?id=${u.id}">${icon("eye")} Xem</a>
         <button class="btn btn-sm ${locked ? "btn-blue" : "btn-danger-outline"}" data-toggle>${icon(locked ? "unlock" : "lock")} ${locked ? "Mở khóa" : "Khóa"}</button>
       </div></td>
     </tr>`;

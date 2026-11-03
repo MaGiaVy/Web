@@ -14,31 +14,34 @@
     <div class="admin-main">
       <div id="admin-topbar"></div>
       <main class="admin-content">
+        <!-- user-form.html       : THÊM người dùng mới
+             user-form.html?id=.. : XEM thông tin người dùng (chỉ xem, admin không được sửa thông tin khách) -->
         <form class="form-layout" id="user-form" autocomplete="off" novalidate>
           <section class="card">
             <div class="card-head"><h2 id="form-title"></h2><a class="link" href="users.html">← Quay lại danh sách</a></div>
             <div class="card-pad">
+              <div class="demo-note" id="readonly-note" hidden></div>
               <div class="form-grid">
                 <label class="field"><span>Họ và tên</span><input class="input" id="uf-name" placeholder="Nhập họ và tên"></label>
                 <label class="field"><span>Email</span><input class="input" id="uf-email" placeholder="Nhập email"></label>
                 <label class="field"><span>Số điện thoại</span><input class="input" id="uf-phone" placeholder="Nhập số điện thoại"></label>
-                <label class="field"><span id="uf-pass-label">Mật khẩu</span><input class="input" id="uf-pass" type="password" placeholder="Nhập mật khẩu"></label>
+                <label class="field" id="uf-pass-field"><span>Mật khẩu</span><input class="input" id="uf-pass" type="password" placeholder="Nhập mật khẩu"></label>
                 <label class="field"><span>Tỉnh / Thành phố</span><select class="select" id="uf-city"></select></label>
-                <label class="field"><span>Quận / Huyện</span><select class="select" id="uf-district"></select></label>
-                <label class="field full"><span>Số nhà, đường, phường</span><input class="input" id="uf-street" placeholder="Vd: 12 Võ Văn Ngân, P. Linh Chiểu"></label>
-                <label class="field"><span>Trạng thái tài khoản</span>
-                  <select class="select" id="uf-status"><option value="active">Đang hoạt động</option><option value="locked">Khóa</option></select>
-                </label>
+                <label class="field"><span>Phường / Xã</span><select class="select" id="uf-ward"></select></label>
+                <label class="field full"><span>Số nhà, tên đường</span><input class="input" id="uf-street" placeholder="Vd: 12 Võ Văn Ngân"></label>
               </div>
             </div>
-            <div class="sticky-actions">
+            <div class="sticky-actions" id="form-actions">
               <a class="btn btn-outline" href="users.html" id="uf-cancel">Hủy</a>
               <button class="btn btn-primary" type="submit" id="uf-submit">Thêm người dùng</button>
             </div>
           </section>
-          <aside class="card">
-            <div class="card-head"><h3>Xem trước</h3></div>
-            <div class="card-pad" id="uf-preview"></div>
+          <aside class="checkout-stack">
+            <section class="card">
+              <div class="card-head"><h3>Thông tin tài khoản</h3></div>
+              <div class="card-pad" id="uf-preview"></div>
+            </section>
+            <section class="card" id="uf-orders" hidden></section>
           </aside>
         </form>
       </main>
@@ -48,62 +51,9 @@
   <script src="../js/data.js"></script>
   <script src="../js/common.js"></script>
   <script>
-    if (getParam("id")) { document.body.dataset.title = "Sửa người dùng"; }
+    if (getParam("id")) { document.body.dataset.title = "Thông tin người dùng"; document.body.dataset.crumb = "Người dùng / Xem"; }
   </script>
   <script src="../js/admin/admin-layout.js"></script>
-  <script>
-    // THÊM / SỬA NGƯỜI DÙNG
-    (function () {
-      const $ = (id) => document.getElementById(id);
-      const u = getUser(getParam("id"));
-      $("uf-city").innerHTML = Object.keys(LOCATIONS).map((c) => `<option>${c}</option>`).join("");
-      const fillDistricts = () => { $("uf-district").innerHTML = LOCATIONS[$("uf-city").value].map((d) => `<option>${d}</option>`).join(""); };
-      $("uf-city").addEventListener("change", () => { fillDistricts(); preview(); });
-      fillDistricts();
-
-      if (u) {
-        const a = u.addresses.find((x) => x.isDefault);
-        $("form-title").innerHTML = `${icon("edit")} Sửa thông tin: ${escapeHtml(u.name)}`;
-        $("uf-name").value = u.name;
-        $("uf-email").value = u.email;
-        $("uf-phone").value = u.phone;
-        $("uf-pass-label").textContent = "Mật khẩu mới (để trống nếu không đổi)";
-        $("uf-city").value = a.city; fillDistricts();
-        $("uf-district").value = a.district;
-        $("uf-street").value = `${a.street}, ${a.ward}`;
-        $("uf-status").value = u.status;
-        $("uf-submit").textContent = "Lưu thay đổi";
-      } else {
-        $("form-title").innerHTML = `${icon("plus")} Thêm người dùng mới`;
-      }
-
-      function preview() {
-        const name = $("uf-name").value.trim() || "Tên người dùng";
-        const locked = $("uf-status").value === "locked";
-        $("uf-preview").innerHTML = `
-          <div style="text-align:center">
-            <span class="avatar" style="width:72px;height:72px;font-size:26px;margin:0 auto 12px">${initials(name)}</span>
-            <b style="font-size:17px">${escapeHtml(name)}</b>
-            <p class="muted">${escapeHtml($("uf-email").value || "email@vidu.com")}</p>
-            <p class="muted">${escapeHtml($("uf-phone").value || "Số điện thoại")}</p>
-            <p style="margin-top:8px">${escapeHtml(($("uf-street").value || "Địa chỉ") + ", " + $("uf-district").value + ", " + $("uf-city").value)}</p>
-            <p style="margin-top:12px"><span class="chip chip-${locked ? "locked" : "active"}">${locked ? "Đã khóa" : "Hoạt động"}</span></p>
-          </div>`;
-      }
-      ["uf-name", "uf-email", "uf-phone", "uf-street"].forEach((id) => $(id).addEventListener("input", preview));
-      ["uf-district", "uf-status"].forEach((id) => $(id).addEventListener("change", preview));
-      preview();
-
-      $("user-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const name = $("uf-name").value.trim() || "Người dùng mới";
-        toastThenGo("users.html", u ? "Cập nhật người dùng thành công" : "Thêm người dùng thành công", escapeHtml(name));
-      });
-      $("uf-cancel").addEventListener("click", (e) => {
-        e.preventDefault();
-        toastThenGo("users.html", "Đã hủy", "Thông tin chưa được lưu", "info");
-      });
-    })();
-  </script>
+  <script src="../js/admin/user-form.js"></script>
 </body>
 </html>

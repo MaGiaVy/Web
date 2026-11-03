@@ -27,10 +27,10 @@
       <div class="option-main"><b>${icon("plus")} Giao đến địa chỉ khác</b><p>Nhập một địa chỉ nhận hàng mới cho đơn này</p></div>
     </label>`;
 
-  // Tỉnh/thành -> quận/huyện
+  // Tỉnh/thành -> phường/xã (đơn vị hành chính 2 cấp mới)
   $("na-city").innerHTML = Object.keys(LOCATIONS).map((c) => `<option>${c}</option>`).join("");
   const fillDistricts = () => {
-    $("na-district").innerHTML = LOCATIONS[$("na-city").value].map((d) => `<option>${d}</option>`).join("");
+    $("na-ward").innerHTML = LOCATIONS[$("na-city").value].map((d) => `<option>${d}</option>`).join("");
   };
   fillDistricts();
   $("na-city").addEventListener("change", fillDistricts);

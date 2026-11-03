@@ -67,7 +67,7 @@
   renderAddresses();
 
   $("ad-city").innerHTML = Object.keys(LOCATIONS).map((c) => `<option>${c}</option>`).join("");
-  const fillDistricts = () => { $("ad-district").innerHTML = LOCATIONS[$("ad-city").value].map((d) => `<option>${d}</option>`).join(""); };
+  const fillDistricts = () => { $("ad-ward").innerHTML = LOCATIONS[$("ad-city").value].map((d) => `<option>${d}</option>`).join(""); };
   fillDistricts();
   $("ad-city").addEventListener("change", fillDistricts);
 
@@ -90,8 +90,7 @@
     e.preventDefault();
     // Web tĩnh: chỉ hiện thông báo, không thêm thật vào danh sách
     const street = $("ad-street").value.trim() || "Số nhà, tên đường";
-    const ward = $("ad-ward").value.trim() || "Phường/Xã";
-    const text = `${street}, ${ward}, ${$("ad-district").value}, ${$("ad-city").value}`;
+    const text = `${street}, ${$("ad-ward").value}, ${$("ad-city").value}`;
     $("address-form").classList.remove("show");
     $("address-form").reset();
     fillDistricts();

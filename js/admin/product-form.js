@@ -10,6 +10,10 @@
     const c = getCategory($("pf-cat").value);
     $("pf-scale").value = c ? (c.scale || "Không áp dụng") : "";
   };
+  // Ô giá tự thêm dấu chấm hàng nghìn khi gõ
+  bindMoneyInput($("pf-price"));
+  bindMoneyInput($("pf-old"));
+
   $("pf-cat").addEventListener("change", () => {
     updateScale();
     const c = getCategory($("pf-cat").value);
@@ -28,8 +32,8 @@
     $("pf-name").value = editing.name;
     $("pf-cat").value = editing.category;
     $("pf-series").value = editing.series;
-    $("pf-price").value = editing.price;
-    $("pf-old").value = editing.oldPrice || "";
+    setMoneyValue($("pf-price"), editing.price);
+    setMoneyValue($("pf-old"), editing.oldPrice || "");
     $("pf-stock").value = editing.stock;
     $("pf-desc").value = editing.desc;
     $("pf-submit").textContent = "Lưu thay đổi";
