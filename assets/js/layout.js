@@ -3,11 +3,31 @@
 // Mỗi trang chỉ cần đặt <div id="site-header"></div> và <div id="site-footer"></div>
 // => header giống nhau 100% trên mọi trang
 // ============================================================
+const LOGOUT_KEY = "dvk_logged_out";
+function isLoggedIn() {
+  try { return sessionStorage.getItem(LOGOUT_KEY) !== "1"; } catch (e) { return true; }
+}
+function setLoggedIn(value) {
+  try { value ? sessionStorage.removeItem(LOGOUT_KEY) : sessionStorage.setItem(LOGOUT_KEY, "1"); } catch (e) { /* bỏ qua */ }
+}
+
+// Chưa đăng nhập (đã đăng xuất) => giỏ hàng trống: số trên icon giỏ = 0, trang giỏ hàng không có sản phẩm.
+// Layout nạp trước cart.js nên xóa dữ liệu mẫu ở đây là đủ.
+if (!isLoggedIn()) SAMPLE_CART.length = 0;
+
+// Trang bắt buộc đăng nhập: chưa đăng nhập thì chuyển về trang đăng nhập
+(function guardPrivatePages() {
+  const privatePages = ["account", "orders", "order-detail", "checkout", "order-success"];
+  if (privatePages.includes(document.body.dataset.page) && !isLoggedIn()) {
+    location.replace(page("login.html"));
+  }
+})();
 
 function renderHeader() {
   const holder = document.getElementById("site-header");
   if (!holder) return;
   const user = currentUser();
+  const loggedIn = isLoggedIn();
   const currentPage = document.body.dataset.page || "";
   const cat = getParam("cat");
   const q = currentPage === "products" ? getParam("q") || "" : "";
@@ -30,7 +50,7 @@ function renderHeader() {
         <span>${icon("truck")} Miễn phí giao hàng cho đơn từ 1.000.000đ</span>
       </div>
       <div class="topbar-right">
-        <a href="${page("orders.html")}">${icon("orders")} Tra cứu đơn hàng</a>
+        ${loggedIn ? `<a href="${page("orders.html")}">${icon("orders")} Tra cứu đơn hàng</a>` : ""}
         <a href="${ROOT}admin/login.html">${icon("dashboard")} Trang quản trị</a>
       </div>
     </div>
@@ -48,6 +68,7 @@ function renderHeader() {
           <button type="submit">Tìm kiếm</button>
         </form>
         <div class="header-actions">
+          ${loggedIn ? `
           <div class="user-menu" id="user-menu">
             <button class="header-action" id="user-menu-btn" type="button" aria-haspopup="true">
               <span class="avatar" id="header-avatar">${initials(user.name)}</span>
@@ -61,7 +82,9 @@ function renderHeader() {
               <a href="${page("orders.html")}">${icon("orders")} Lịch sử mua hàng</a>
               <button type="button" class="danger" data-logout>${icon("logout")} Đăng xuất</button>
             </div>
-          </div>
+          </div>` : `
+          <a class="header-action" href="${page("login.html")}">${icon("login")}<span class="header-action-text"><b>Đăng nhập</b></span></a>
+          <a class="btn btn-primary btn-sm" href="${page("register.html")}">Đăng ký</a>`}
           <a class="header-action" href="${page("cart.html")}" aria-label="Giỏ hàng">
             <span class="cart-icon-wrap">${icon("cart")}<span class="cart-badge" id="cart-badge">${cartCount()}</span></span>
             <span class="header-action-text"><small>Giỏ hàng</small><b>${cartCount()} sản phẩm</b></span>
@@ -79,13 +102,15 @@ function renderHeader() {
 
   // Menu tài khoản
   const menu = document.getElementById("user-menu");
-  document.getElementById("user-menu-btn").addEventListener("click", (e) => {
-    e.stopPropagation();
-    menu.classList.toggle("open");
-  });
-  document.addEventListener("click", (e) => {
-    if (!menu.contains(e.target)) menu.classList.remove("open");
-  });
+  if (menu) {
+    document.getElementById("user-menu-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      menu.classList.toggle("open");
+    });
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target)) menu.classList.remove("open");
+    });
+  }
 
   // Ô tìm kiếm trên header
   document.getElementById("header-search").addEventListener("submit", () => {
@@ -100,7 +125,10 @@ function bindLogout(scope = document) {
   scope.querySelectorAll("[data-logout]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const ok = await confirmDialog({ title: "Đăng xuất?", message: "Bạn có chắc muốn đăng xuất khỏi tài khoản này không?", okText: "Đăng xuất" });
-      if (ok) toastThenGo(page("login.html"), "Đăng xuất thành công", "Hẹn gặp lại bạn!");
+      if (ok) {
+        setLoggedIn(false); // từ giờ các trang ẩn avatar, thông tin khách và lịch sử mua hàng
+        toastThenGo(page("login.html"), "Đăng xuất thành công", "Hẹn gặp lại bạn!");
+      }
       else toast("Đã hủy đăng xuất", "", "info");
     });
   });
@@ -126,8 +154,8 @@ function renderFooter() {
       <div>
         <h4>Hỗ trợ</h4>
         <ul>
-          <li><a href="${page("orders.html")}">Lịch sử mua hàng</a></li>
-          <li><a href="${page("account.html")}">Tài khoản của tôi</a></li>
+          ${isLoggedIn() ? `<li><a href="${page("orders.html")}">Lịch sử mua hàng</a></li>
+          <li><a href="${page("account.html")}">Tài khoản của tôi</a></li>` : ""}
           <li><a href="${page("cart.html")}">Giỏ hàng</a></li>
           <li><a href="${page("advanced-search.html")}">Tìm kiếm nâng cao</a></li>
           <li><a href="${ROOT}admin/login.html">Trang quản trị</a></li>
@@ -152,5 +180,10 @@ function renderFooter() {
   </footer>`;
 }
 
+// Bấm Đăng nhập => đăng nhập lại (hiện lại avatar, thông tin khách, lịch sử mua hàng)
+const loginForm = document.getElementById("login-form");
+if (loginForm) loginForm.addEventListener("submit", () => setLoggedIn(true));
+
 renderHeader();
 renderFooter();
+
