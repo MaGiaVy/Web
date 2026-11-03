@@ -17,7 +17,7 @@ function renderHeader() {
 
   const nav = [
     navItem("index.html", "Trang chủ", page === "home", icon("home")),
-    navItem("products.html", "Tất cả sản phẩm", page === "products" && !cat && !getParam("q") && !getParam("adv"), icon("grid")),
+    navItem("products.html", "Tất cả sản phẩm", page === "products" && !cat && getParam("q") === null, icon("grid")),
     ...CATEGORIES.map((c) =>
       navItem(`products.html?cat=${c.id}`, c.id === "TOOL" ? "Dụng cụ & Sơn" : c.name, page === "products" && cat === c.id)),
   ].join("");
@@ -72,7 +72,7 @@ function renderHeader() {
     <nav class="header-nav">
       <div class="container">
         ${nav}
-        <a href="products.html?adv=1" class="nav-right ${page === "products" && getParam("adv") ? "active" : ""}">${icon("sliders")} Tìm kiếm nâng cao</a>
+        <a href="advanced-search.html" class="nav-right ${page === "advanced-search" ? "active" : ""}">${icon("sliders")} Tìm kiếm nâng cao</a>
       </div>
     </nav>
   </header>`;
@@ -129,7 +129,7 @@ function renderFooter() {
           <li><a href="orders.html">Lịch sử mua hàng</a></li>
           <li><a href="account.html">Tài khoản của tôi</a></li>
           <li><a href="cart.html">Giỏ hàng</a></li>
-          <li><a href="products.html?adv=1">Tìm kiếm nâng cao</a></li>
+          <li><a href="advanced-search.html">Tìm kiếm nâng cao</a></li>
           <li><a href="admin/login.html">Trang quản trị</a></li>
         </ul>
       </div>

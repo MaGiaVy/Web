@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tìm kiếm nâng cao - DVK Gunpla</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="advanced-search">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <nav class="breadcrumb"><a href="index.html">Trang chủ</a><span>›</span><b>Tìm kiếm nâng cao</b></nav>
+
+    <div class="adv-wrap">
+      <div class="page-title">
+        <div><h1>Tìm kiếm nâng cao</h1><p>Kết hợp nhiều điều kiện trong 1 lần tìm: tên sản phẩm, phân loại và khoảng giá.</p></div>
+      </div>
+
+      <!-- Tìm kiếm nâng cao: tên + phân loại + khoảng giá -->
+      <form class="card adv-form" id="adv-form" autocomplete="off">
+        <div class="form-grid">
+          <label class="field full"><span>Tên sản phẩm</span><input class="input" id="a-name" placeholder="Nhập tên sản phẩm, vd: Freedom, Unicorn..."></label>
+          <label class="field"><span>Phân loại</span><select class="select" id="a-cat"></select></label>
+          <label class="field"><span>Khoảng giá</span><select class="select" id="a-range"></select></label>
+          <div class="field full"><span>Hoặc nhập khoảng giá (đ)</span>
+            <div class="price-inputs">
+              <input class="input" id="a-min" type="number" min="0" step="10000" placeholder="Giá từ">
+              <span>—</span>
+              <input class="input" id="a-max" type="number" min="0" step="10000" placeholder="Giá đến">
+            </div>
+          </div>
+        </div>
+        <div class="adv-actions">
+          <span class="filter-hint">Mẹo: nhấn Enter trong ô bất kỳ để tìm nhanh.</span>
+          <button type="button" class="btn btn-outline" id="a-reset">Xóa điều kiện</button>
+          <button type="submit" class="btn btn-primary btn-lg" id="a-submit">Tìm kiếm</button>
+        </div>
+      </form>
+
+      <section class="card adv-quick">
+        <h3>Tìm nhanh theo phân loại</h3>
+        <div class="adv-chips" id="a-quick"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/advanced-search.js"></script>
+</body>
+</html>

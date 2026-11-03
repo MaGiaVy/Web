@@ -27,7 +27,8 @@ Trang quản trị: **`admin/login.html`**. Nhập gì cũng đăng nhập đư�
 ## Cấu trúc thư mục
 ```
 index.html            Trang chủ
-products.html         Danh sách theo phân loại + tìm kiếm cơ bản/nâng cao + phân trang
+products.html         Danh sách theo phân loại / trang kết quả tìm kiếm (cố định) + phân trang
+advanced-search.html  Tìm kiếm nâng cao (tên + phân loại + khoảng giá) - trang riêng
 product.html?id=      Chi tiết sản phẩm
 cart.html             Giỏ hàng (dữ liệu mẫu)
 checkout.html         Đặt hàng: thông tin người đăng nhập, chọn/nhập địa chỉ, chọn thanh toán
