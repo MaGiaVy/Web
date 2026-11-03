@@ -1,48 +1,48 @@
 # Kế hoạch 7 ngày - DVK Gunpla
 
 ## Phân công
-> Tên trong bảng là gợi ý, nhóm đổi người cho hợp sở trường. Mỗi người **sở hữu một nhóm file riêng** để không sửa đè lên nhau.
-
 | Vai trò | Người | Phụ trách | File chính |
 |---|---|---|---|
-| **Admin** | Khang | Toàn bộ trang quản trị (9 trang) | `admin/*.html`, `js/admin/*.js`, `css/admin.css` |
-| **Khách hàng** | Vỹ | Toàn bộ trang người mua (12 trang) | `index`, `products`, `advanced-search`, `product`, `cart`, `checkout`, `order-success`, `orders`, `order-detail`, `account`, `login`, `register` (`.html` + `js/` cùng tên) |
-| **Kiểm thử + phần dùng chung** | Đạt (nhóm trưởng) | Kiểm thử toàn bộ web, giữ các file dùng chung, gộp code vào `main`, báo cáo | `js/data.js`, `js/common.js`, `js/layout.js`, `css/style.css`, `images/`, `fonts/`, `README.md` |
+| **Admin** | **Đạt** (nhóm trưởng) | Toàn bộ trang quản trị (9 trang), gộp code vào `main` | `admin/*.html`, `js/admin/*.js`, `css/admin.css` |
+| **Khách hàng** | **Khang** | Toàn bộ trang người mua (12 trang) | `index`, `products`, `advanced-search`, `product`, `cart`, `checkout`, `order-success`, `orders`, `order-detail`, `account`, `login`, `register` (`.html` + `js/` cùng tên) |
+| **Ảnh + kiểm thử + đề xuất** | **Vỹ** | Tìm ảnh sản phẩm, dữ liệu mẫu, kiểm thử toàn bộ web, đề xuất thêm chức năng / chỉnh giao diện | `images/`, `js/data.js`, `README.md`, GitHub Issues |
 
 **Quy tắc làm việc**
-- Mỗi người làm trên **nhánh riêng** (`admin`, `khach-hang`, `chung`). Chỉ Đạt gộp vào `main` sau khi kiểm tra.
-- File dùng chung (header, CSS chung, dữ liệu mẫu, hàm `money`, `toast`…) **chỉ Đạt sửa**. Ai cần đổi thì nhắn Đạt.
-- Lỗi tìm được ghi vào **GitHub Issues**: tên trang, các bước bấm, ảnh chụp, người phụ trách sửa.
+- Mỗi người làm trên **nhánh riêng** (`admin`, `khach-hang`, `anh-du-lieu`). Đạt xem lại rồi gộp vào `main`.
+- File dùng chung cho cả 2 phía (`js/common.js`, `js/layout.js`, `css/style.css`): **sửa thì báo cả nhóm trước**, tránh 2 người sửa cùng lúc.
+- Vỹ ghi lỗi và đề xuất vào **GitHub Issues**: tên trang, các bước bấm, ảnh chụp, gắn tên người phụ trách (Đạt: admin, Khang: khách hàng).
 - Mọi thao tác **chỉ hiện thông báo**, không lọc, xóa hay sửa thật (web tĩnh).
 
 ## Việc cụ thể của từng người
-**Khang - Admin**
+**Đạt - Admin**
 - Đăng nhập/đăng xuất admin; Tổng quan; Sản phẩm (tìm kiếm + dropdown loại, xóa 2 trường hợp); Thêm/Sửa sản phẩm (xem trước ảnh, ô giá có dấu chấm).
 - Người dùng: thêm, **chỉ xem** thông tin khách, khóa/mở. Đơn hàng: lọc theo tình trạng / ngày / phường–tỉnh, cập nhật xuôi. Chi tiết đơn. Thống kê top 5.
-- Kiểm tra chéo phần khách hàng vào ngày 4.
+- Gộp code các nhánh vào `main`, ghi % công việc vào biên bản.
 
-**Vỹ - Khách hàng**
+**Khang - Khách hàng**
 - Trang chủ, danh sách theo phân loại, tìm kiếm + trang kết quả, tìm kiếm nâng cao, phân trang, chi tiết sản phẩm.
 - Giỏ hàng, đặt hàng (thông tin tự hiện, chọn/nhập địa chỉ, chọn thanh toán), đặt hàng thành công, lịch sử + chi tiết đơn.
 - Tài khoản (sửa tên, thêm địa chỉ), đăng ký/đăng nhập không ràng buộc.
 
-**Đạt - Kiểm thử + dùng chung**
-- Giữ header/footer, CSS chung, dữ liệu mẫu (sản phẩm, đơn, user, phường/xã), ảnh, font.
-- Kiểm thử theo checklist bên dưới trên **Chrome, tắt mạng, mở file trực tiếp**; tải thử ZIP từ GitHub.
-- Đối chiếu từng dòng biên bản chấm + file ghi chú; viết báo cáo, ghi % công việc; chuẩn bị kịch bản demo.
+**Vỹ - Ảnh, kiểm thử, đề xuất**
+- **Tìm ảnh** cho 52 sản phẩm: lưu vào `images/products/` tên `p01.jpg` ... `p52.jpg` (khớp mã trong `js/data.js`), ảnh vuông khoảng 600×600, dung lượng dưới 200 KB, rồi đổi đuôi `.svg` → `.jpg` ở dòng `image:` trong `js/data.js`. **Không dùng link ảnh trên mạng.** Ưu tiên ảnh nhóm tự chụp hoặc ảnh được phép dùng.
+- Rà dữ liệu mẫu: tên, giá, mô tả sản phẩm; tên phường/xã mới trong `LOCATIONS`.
+- **Kiểm thử** theo checklist bên dưới trên Chrome, tắt mạng, mở file trực tiếp; tải thử ZIP từ GitHub.
+- **Đề xuất** thêm chức năng hoặc chỉnh giao diện (ghi vào Issues kèm ảnh chụp), ví dụ: gợi ý khi gõ tìm kiếm, trang liên hệ, trang sửa sản phẩm giống trang xem sản phẩm, banner trang chủ.
+- Soạn kịch bản demo và báo cáo.
 
 ## Lịch làm việc
-| Ngày | Đạt (kiểm thử + chung) | Vỹ (khách hàng) | Khang (admin) |
+| Ngày | Đạt (admin) | Khang (khách hàng) | Vỹ (ảnh + kiểm thử + đề xuất) |
 |---|---|---|---|
-| **1** | Tạo nhánh, hướng dẫn cả nhóm cách chạy. Soạn bảng kiểm thử từ biên bản chấm | Đọc hiểu 12 trang khách hàng | Đọc hiểu 9 trang admin |
-| **2** | Rà dữ liệu mẫu, tên phường/xã mới, ảnh sản phẩm (thay ảnh thật nếu muốn) | Rà trang chủ, phân loại, tìm kiếm, chi tiết SP | Rà đăng nhập, tổng quan, sản phẩm, thêm/sửa SP |
-| **3** | **Kiểm thử vòng 1** toàn bộ web, ghi lỗi vào Issues | Rà giỏ hàng, đặt hàng, lịch sử, tài khoản | Rà người dùng, đơn hàng, thống kê |
-| **4** | Kiểm tra lại các lỗi đã sửa | Sửa lỗi phần khách hàng | Sửa lỗi admin + **kiểm tra chéo** phần khách hàng |
-| **5** | **Kiểm thử vòng 2** trên máy khác, tắt mạng; tải ZIP từ GitHub kiểm tra ảnh, font | Sửa lỗi còn lại | Sửa lỗi còn lại |
-| **6** | Gộp code vào `main`, viết báo cáo, ghi % công việc | Tập vấn đáp: giải thích phần mình **và** 1 trang admin | Tập vấn đáp: giải thích phần mình **và** 1 trang khách hàng |
+| **1** | Tạo nhánh, hướng dẫn cả nhóm cách chạy. Đọc hiểu 9 trang admin | Đọc hiểu 12 trang khách hàng | Đọc hiểu cả web, soạn bảng kiểm thử từ biên bản chấm. Bắt đầu tìm ảnh |
+| **2** | Rà đăng nhập, tổng quan, sản phẩm, thêm/sửa SP | Rà trang chủ, phân loại, tìm kiếm, chi tiết SP | Tìm ảnh (HG, RG, MG), rà dữ liệu mẫu |
+| **3** | Rà người dùng, đơn hàng, thống kê | Rà giỏ hàng, đặt hàng, lịch sử, tài khoản | Tìm ảnh (PG, SD, dụng cụ), thay vào web. **Kiểm thử vòng 1**, ghi lỗi + đề xuất vào Issues |
+| **4** | Sửa lỗi + làm đề xuất được chọn (admin) | Sửa lỗi + làm đề xuất được chọn (khách hàng) | Kiểm tra lại lỗi đã sửa, kiểm tra ảnh không vỡ ở mọi trang |
+| **5** | Sửa lỗi còn lại | Sửa lỗi còn lại | **Kiểm thử vòng 2** trên máy khác, tắt mạng; tải ZIP từ GitHub kiểm tra ảnh, font |
+| **6** | Gộp code vào `main`, ghi % công việc. Tập vấn đáp phần admin + 1 trang khách hàng | Tập vấn đáp phần khách hàng + 1 trang admin | Viết báo cáo, kịch bản demo. Tập vấn đáp: giải thích dữ liệu mẫu, ảnh và 1 trang mỗi phía |
 | **7** | Cả nhóm chạy thử theo kịch bản demo như thầy chấm, đóng gói nộp | | |
 
-## Checklist kiểm thử (Đạt dùng)
+## Checklist kiểm thử (Vỹ dùng)
 - [ ] Header giống hệt nhau trên **mọi** trang (kể cả login, giỏ hàng, chi tiết đơn)
 - [ ] Mọi giá tiền đều có dấu chấm: `1.150.000đ`; số tiền trong bảng căn phải
 - [ ] Số trên icon giỏ hàng nằm gọn, không lệch
