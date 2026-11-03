@@ -2,9 +2,17 @@
 // DVK GUNPLA - HÀM DÙNG CHUNG
 // ============================================================
 
-// Đường dẫn gốc: trang trong thư mục admin/ đặt data-root="../" trên thẻ body
+// ĐƯỜNG DẪN - để link và ảnh không bị vỡ dù trang nằm ở đâu
+// index.html ở thư mục gốc; trang trong pages/ và admin/ đặt data-root="../" trên thẻ body
 const ROOT = document.body.dataset.root || "";
-const asset = (path) => ROOT + path;
+// Ảnh, file trong assets/:  asset("images/logo.svg")
+const asset = (path) => ROOT + "assets/" + path;
+// Trang khách hàng:  page("cart.html"), page("index.html")
+function page(name) {
+  if (name === "index.html") return ROOT + "index.html";
+  if (document.body.classList.contains("admin")) return ROOT + "pages/" + name;
+  return (ROOT ? "" : "pages/") + name;
+}
 
 // Định dạng giá tiền: 1150000 -> "1.150.000đ"
 function money(n) {
@@ -195,7 +203,7 @@ function productCard(p) {
   const off = discountPercent(p);
   return `
     <article class="product-card">
-      <a class="product-thumb" href="${asset("product.html?id=" + p.id)}">
+      <a class="product-thumb" href="${page("product.html")}?id=${p.id}">
         <img src="${asset(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy">
         <div class="product-flags">
           ${off ? `<span class="flag flag-sale">-${off}%</span>` : ""}
@@ -204,7 +212,7 @@ function productCard(p) {
       </a>
       <div class="product-body">
         <div class="product-meta"><span class="grade grade-${p.category}">${p.category === "TOOL" ? "TOOL" : p.category}</span><span>${escapeHtml(p.series)}</span></div>
-        <a class="product-name" href="${asset("product.html?id=" + p.id)}" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</a>
+        <a class="product-name" href="${page("product.html")}?id=${p.id}" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</a>
         <div class="product-stats">
           <span class="star">${icon("star")} ${p.rating.toFixed(1)}</span>
           <span>Đã bán ${numberDot(p.sold)}</span>
@@ -249,10 +257,10 @@ function renderPagination(container, totalItems, perPage, current, onChange) {
   container.innerHTML = html;
   container.querySelectorAll("[data-page]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const page = Number(btn.dataset.page);
-      if (page < 1 || page > pages || page === current) return;
-      onChange(page);
-      toast(`Đã chuyển sang trang ${page}/${pages}`, "", "info");
+      const target = Number(btn.dataset.page);
+      if (target < 1 || target > pages || target === current) return;
+      onChange(target);
+      toast(`Đã chuyển sang trang ${target}/${pages}`, "", "info");
     });
   });
 }
@@ -279,7 +287,7 @@ function orderTimeline(order) {
   }).join("")}</div>`;
 }
 
-function orderItemsTable(order, productLink = "product.html?id=") {
+function orderItemsTable(order, productLink = page("product.html") + "?id=") {
   return `<div class="table-wrap"><table class="table">
     <thead><tr><th>Sản phẩm</th><th class="right">Đơn giá</th><th class="center">Số lượng</th><th class="right">Thành tiền</th></tr></thead>
     <tbody>${order.items.map((it) => {

@@ -9,7 +9,7 @@
       return `
         <tr data-id="${p.id}">
           <td><div class="cell-product">
-            <img src="${p.image}" alt="${escapeHtml(p.name)}">
+            <img src="${asset(p.image)}" alt="${escapeHtml(p.name)}">
             <div><a href="product.html?id=${p.id}"><b>${escapeHtml(p.name)}</b></a><small><span class="grade grade-${p.category}">${p.category}</span> ${escapeHtml(p.series)}</small></div>
           </div></td>
           <td class="right num">${money(p.price)}</td>

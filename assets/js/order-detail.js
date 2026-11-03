@@ -4,7 +4,7 @@
   const $ = (id) => document.getElementById(id);
   document.title = `Đơn hàng #${order.id} - DVK Gunpla`;
 
-  $("breadcrumb").innerHTML = `<a href="index.html">Trang chủ</a>${icon("chevronRight")}<a href="orders.html">Lịch sử mua hàng</a>${icon("chevronRight")}<b>Đơn #${order.id}</b>`;
+  $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<a href="orders.html">Lịch sử mua hàng</a>${icon("chevronRight")}<b>Đơn #${order.id}</b>`;
   $("od-title").innerHTML = `Đơn hàng #${order.id} &nbsp;${statusChip(order.status)}`;
   $("od-sub").textContent = `Đặt lúc ${formatDateTime(order.datetime)} · ${orderItemCount(order)} sản phẩm`;
 

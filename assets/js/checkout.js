@@ -74,7 +74,7 @@
   $("summary-items").innerHTML = SAMPLE_CART.map((i) => {
     const p = getProduct(i.productId);
     return `<div class="summary-item">
-      <div class="thumb"><img src="${p.image}" alt="${escapeHtml(p.name)}"><span>${i.qty}</span></div>
+      <div class="thumb"><img src="${asset(p.image)}" alt="${escapeHtml(p.name)}"><span>${i.qty}</span></div>
       <div><b>${escapeHtml(p.name)}</b><small>${p.category} · ${money(p.price)}</small></div>
       <span class="num">${money(p.price * i.qty)}</span>
     </div>`;

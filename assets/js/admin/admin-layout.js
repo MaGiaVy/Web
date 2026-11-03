@@ -2,7 +2,7 @@
 // KHUNG TRANG QUẢN TRỊ: thanh bên + thanh trên (giống nhau ở mọi trang admin)
 // ============================================================
 (function () {
-  const page = document.body.dataset.adminPage;
+  const activePage = document.body.dataset.adminPage;
   const title = document.body.dataset.title || "Quản trị";
   const crumb = document.body.dataset.crumb || "";
   const pending = ORDERS.filter((o) => o.status === "pending").length;
@@ -19,13 +19,13 @@
   sidebar.outerHTML = `
     <aside class="sidebar">
       <a class="brand" href="index.html">
-        <img src="../images/logo.svg" alt="Logo DVK Gunpla">
+        <img src="${asset("images/logo.svg")}" alt="Logo DVK Gunpla">
         <span class="brand-text"><b>DVK <em>GUNPLA</em></b><small>Trang quản trị</small></span>
       </a>
       <div class="side-label">Quản lý</div>
       <nav class="side-nav">
         ${links.map(([key, href, ic, label, badge]) =>
-          `<a href="${href}" class="${page === key ? "active" : ""}">${icon(ic)} ${label}${badge ? `<span class="badge">${badge}</span>` : ""}</a>`).join("")}
+          `<a href="${href}" class="${activePage === key ? "active" : ""}">${icon(ic)} ${label}${badge ? `<span class="badge">${badge}</span>` : ""}</a>`).join("")}
       </nav>
       <div class="side-label">Khác</div>
       <nav class="side-nav">

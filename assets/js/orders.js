@@ -29,7 +29,7 @@
           <div class="order-items">
             ${shown.map((it) => {
               const p = getProduct(it.productId);
-              return `<div class="order-item"><img src="${p.image}" alt="${escapeHtml(p.name)}"><div><b>${escapeHtml(p.name)}</b><small>${p.category} · x${it.qty}</small></div><span class="num">${money(it.price * it.qty)}</span></div>`;
+              return `<div class="order-item"><img src="${asset(p.image)}" alt="${escapeHtml(p.name)}"><div><b>${escapeHtml(p.name)}</b><small>${p.category} · x${it.qty}</small></div><span class="num">${money(it.price * it.qty)}</span></div>`;
             }).join("")}
             ${more > 0 ? `<p class="order-more">và ${more} sản phẩm khác...</p>` : ""}
           </div>

@@ -14,8 +14,8 @@
     const items = PRODUCTS.filter((p) => p.category === c.id);
     const cover = items.slice().sort((a, b) => b.sold - a.sold)[0];
     return `
-      <a class="cat-card" href="products.html?cat=${c.id}">
-        <img src="${cover.image}" alt="${c.name}">
+      <a class="cat-card" href="${page("products.html")}?cat=${c.id}">
+        <img src="${asset(cover.image)}" alt="${c.name}">
         <div>
           <b>${c.id === "TOOL" ? "Dụng cụ" : c.id} <span class="count">${items.length} SP</span></b>
           <small>${c.desc}</small>

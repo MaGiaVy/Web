@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đăng nhập - DVK Gunpla</title>
-  <link rel="icon" href="images/logo.svg">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="../assets/images/logo.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body data-page="login">
+<body data-page="login" data-root="../">
   <div id="site-header"></div>
 
   <main class="container page">
     <div class="auth-wrap">
       <div class="auth-art">
-        <img src="images/hero.svg" alt="">
+        <img src="../assets/images/hero.svg" alt="">
         <h2>Chào mừng trở lại,<br>Pilot!</h2>
         <p>Đăng nhập để đặt hàng, lưu địa chỉ và theo dõi lịch sử mua hàng của bạn.</p>
       </div>
@@ -34,16 +34,16 @@
           <a class="link" href="#" id="forgot">Quên mật khẩu?</a>
         </div>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Đăng nhập</button>
-        <p class="auth-alt">Bạn là quản trị viên? <a class="link" href="admin/login.html">Đăng nhập trang quản trị</a></p>
+        <p class="auth-alt">Bạn là quản trị viên? <a class="link" href="../admin/login.html">Đăng nhập trang quản trị</a></p>
       </form>
     </div>
   </main>
 
   <div id="site-footer"></div>
 
-  <script src="js/data.js"></script>
-  <script src="js/common.js"></script>
-  <script src="js/layout.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/layout.js"></script>
   <script>
     document.getElementById("login-form").addEventListener("submit", function (e) {
       e.preventDefault();

@@ -7,7 +7,7 @@
   document.title = `${p.name} - DVK Gunpla`;
 
   document.getElementById("breadcrumb").innerHTML =
-    `<a href="index.html">Trang chủ</a>${icon("chevronRight")}<a href="products.html?cat=${p.category}">${catName}</a>${icon("chevronRight")}<b>${escapeHtml(p.name)}</b>`;
+    `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<a href="products.html?cat=${p.category}">${catName}</a>${icon("chevronRight")}<b>${escapeHtml(p.name)}</b>`;
 
   const isKit = p.category !== "TOOL";
   const specs = isKit
@@ -18,7 +18,7 @@
     <div class="card">
       <div class="pd-layout">
         <div class="pd-gallery">
-          <img src="${p.image}" alt="${escapeHtml(p.name)}">
+          <img src="${asset(p.image)}" alt="${escapeHtml(p.name)}">
         </div>
         <div class="pd-info">
           <span class="grade grade-${p.category}">${isKit ? cat.name.toUpperCase() : "DỤNG CỤ & SƠN"}</span>

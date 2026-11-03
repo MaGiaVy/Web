@@ -10,7 +10,7 @@
   const cat = getCategory(getParam("cat"));
   const keyword = getParam("q");
   const mode = keyword !== null ? "search" : cat ? "category" : "all";
-  let page = 1;
+  let pageNum = 1;
 
   function items() {
     if (mode === "search") return SEARCH_RESULT_IDS.map(getProduct);
@@ -27,7 +27,7 @@
   $("list-title").textContent = titles[mode];
   $("list-subtitle").textContent = mode === "search" ? "Các sản phẩm phù hợp với yêu cầu của bạn"
     : mode === "category" ? cat.desc : "Mô hình Gundam chính hãng và dụng cụ lắp ráp";
-  $("breadcrumb").innerHTML = `<a href="index.html">Trang chủ</a>${icon("chevronRight")}<a href="products.html">Sản phẩm</a>` +
+  $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<a href="products.html">Sản phẩm</a>` +
     (mode !== "all" ? `${icon("chevronRight")}<b>${titles[mode]}</b>` : "");
 
   // Điều kiện đã tìm (chỉ hiển thị lại)
@@ -43,12 +43,12 @@
 
   function render() {
     const data = items();
-    const start = (page - 1) * PER_PAGE;
+    const start = (pageNum - 1) * PER_PAGE;
     $("result-count").innerHTML = mode === "search" ? `Tìm thấy <b>${data.length}</b> sản phẩm` : `Có <b>${data.length}</b> sản phẩm`;
     list.innerHTML = data.slice(start, start + PER_PAGE).map(productCard).join("");
     bindAddToCart(list);
-    renderPagination($("pagination"), data.length, PER_PAGE, page, (p) => {
-      page = p;
+    renderPagination($("pagination"), data.length, PER_PAGE, pageNum, (p) => {
+      pageNum = p;
       render();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });

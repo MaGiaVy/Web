@@ -3,13 +3,13 @@
 ## Phân công
 | Vai trò | Người | Phụ trách | File chính |
 |---|---|---|---|
-| **Admin** | **Đạt** (nhóm trưởng) | Toàn bộ trang quản trị (9 trang), gộp code vào `main` | `admin/*.html`, `js/admin/*.js`, `css/admin.css` |
-| **Khách hàng** | **Khang** | Toàn bộ trang người mua (12 trang) | `index`, `products`, `advanced-search`, `product`, `cart`, `checkout`, `order-success`, `orders`, `order-detail`, `account`, `login`, `register` (`.html` + `js/` cùng tên) |
-| **Ảnh + kiểm thử + đề xuất** | **Vỹ** | Tìm ảnh sản phẩm, dữ liệu mẫu, kiểm thử toàn bộ web, đề xuất thêm chức năng / chỉnh giao diện | `images/`, `js/data.js`, `README.md`, GitHub Issues |
+| **Admin** | **Đạt** (nhóm trưởng) | Toàn bộ trang quản trị (9 trang), gộp code vào `main` | `admin/*.html`, `assets/js/admin/*.js`, `assets/css/admin.css` |
+| **Khách hàng** | **Khang** | Toàn bộ trang người mua (12 trang) | `index.html` + `pages/*.html` + `assets/js/` cùng tên |
+| **Ảnh + kiểm thử + đề xuất** | **Vỹ** | Tìm ảnh sản phẩm, dữ liệu mẫu, kiểm thử toàn bộ web, đề xuất thêm chức năng / chỉnh giao diện | `assets/images/`, `assets/js/data.js`, `README.md`, GitHub Issues |
 
 **Quy tắc làm việc**
 - Mỗi người làm trên **nhánh riêng** (`admin`, `khach-hang`, `anh-du-lieu`). Đạt xem lại rồi gộp vào `main`.
-- File dùng chung cho cả 2 phía (`js/common.js`, `js/layout.js`, `css/style.css`): **sửa thì báo cả nhóm trước**, tránh 2 người sửa cùng lúc.
+- File dùng chung cho cả 2 phía (`assets/js/common.js`, `assets/js/layout.js`, `assets/css/style.css`): **sửa thì báo cả nhóm trước**, tránh 2 người sửa cùng lúc.
 - Vỹ ghi lỗi và đề xuất vào **GitHub Issues**: tên trang, các bước bấm, ảnh chụp, gắn tên người phụ trách (Đạt: admin, Khang: khách hàng).
 - Mọi thao tác **chỉ hiện thông báo**, không lọc, xóa hay sửa thật (web tĩnh).
 
@@ -25,7 +25,7 @@
 - Tài khoản (sửa tên, thêm địa chỉ), đăng ký/đăng nhập không ràng buộc.
 
 **Vỹ - Ảnh, kiểm thử, đề xuất**
-- **Tìm ảnh** cho 52 sản phẩm: lưu vào `images/products/` tên `p01.jpg` ... `p52.jpg` (khớp mã trong `js/data.js`), ảnh vuông khoảng 600×600, dung lượng dưới 200 KB, rồi đổi đuôi `.svg` → `.jpg` ở dòng `image:` trong `js/data.js`. **Không dùng link ảnh trên mạng.** Ưu tiên ảnh nhóm tự chụp hoặc ảnh được phép dùng.
+- **Tìm ảnh** cho 52 sản phẩm: lưu vào `assets/images/products/` tên `p01.jpg` ... `p52.jpg` (khớp mã trong `assets/js/data.js`), ảnh vuông khoảng 600×600, dung lượng dưới 200 KB, rồi đổi đuôi `.svg` → `.jpg` ở dòng `image:` trong `assets/js/data.js`. **Không dùng link ảnh trên mạng.** Ưu tiên ảnh nhóm tự chụp hoặc ảnh được phép dùng.
 - Rà dữ liệu mẫu: tên, giá, mô tả sản phẩm; tên phường/xã mới trong `LOCATIONS`.
 - **Kiểm thử** theo checklist bên dưới trên Chrome, tắt mạng, mở file trực tiếp; tải thử ZIP từ GitHub.
 - **Đề xuất** thêm chức năng hoặc chỉnh giao diện (ghi vào Issues kèm ảnh chụp), ví dụ: gợi ý khi gõ tìm kiếm, trang liên hệ, trang sửa sản phẩm giống trang xem sản phẩm, banner trang chủ.
