@@ -274,15 +274,16 @@ function orderTimeline(order) {
   const steps = [
     { key: "pending", label: "Chưa xác nhận", sub: "Đã đặt hàng", ic: "orders" },
     { key: "confirmed", label: "Đã xác nhận", sub: "Đang chuẩn bị hàng", ic: "box" },
+    { key: "shipping", label: "Đang giao", sub: "Đang vận chuyển", ic: "truck" },
     { key: "delivered", label: "Đã giao thành công", sub: "Hoàn tất", ic: "checkCircle" },
   ];
-  const order3 = ["pending", "confirmed", "delivered"];
+  const order4 = ["pending", "confirmed", "shipping", "delivered"];
   const cancelled = order.status === "cancelled";
-  const idx = cancelled ? -1 : order3.indexOf(order.status);
-  if (cancelled) steps[2] = { key: "cancelled", label: "Đã hủy", sub: "Đơn hàng bị hủy", ic: "x" };
+  const idx = cancelled ? -1 : order4.indexOf(order.status);
+  if (cancelled) steps[3] = { key: "cancelled", label: "Đã hủy", sub: "Đơn hàng bị hủy", ic: "x" };
   return `<div class="timeline">${steps.map((s, i) => {
     let cls = "";
-    if (cancelled) cls = i === 0 ? "done" : i === 2 ? "cancel" : "";
+    if (cancelled) cls = i === 0 ? "done" : i === 3 ? "cancel" : "";
     else if (i < idx || (i === idx && s.key === "delivered")) cls = "done";
     else if (i === idx) cls = "current";
     return `<div class="tl-step ${cls}"><div class="tl-dot">${icon(s.ic)}</div><b>${s.label}</b><small>${i === 0 ? formatDateTime(order.datetime) : s.sub}</small></div>`;

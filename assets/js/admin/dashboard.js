@@ -39,7 +39,7 @@
   const new7 = between(ORDERS, daysAgo(6), iso(today)).length;
   const newPrev = between(ORDERS, daysAgo(13), daysAgo(7)).length;
   const waitConfirm = ORDERS.filter((o) => o.status === "pending").length;
-  const waitShip = ORDERS.filter((o) => o.status === "confirmed").length;
+  const waitShip = ORDERS.filter((o) => o.status === "confirmed" || o.status === "shipping").length;
   const lowStock = PRODUCTS.filter((p) => p.stock <= LOW_STOCK);
 
   const kpis = [
@@ -55,7 +55,7 @@
       <div><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div></a>`).join("");
 
   $("h-pending").innerHTML = `${icon("clock")} Đơn hàng cần xử lý`;
-  const todo = ORDERS.filter((o) => o.status === "pending" || o.status === "confirmed").sort((a, b) => b.datetime.localeCompare(a.datetime));
+  const todo = ORDERS.filter((o) => o.status === "pending" || o.status === "confirmed" || o.status === "shipping").sort((a, b) => b.datetime.localeCompare(a.datetime));
   pagedTable("pending", todo, (o) => {
     const u = getUser(o.userId);
     return `<tr>

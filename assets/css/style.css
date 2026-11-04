@@ -100,6 +100,7 @@ p { margin: 0; }
 .chip.no-dot::before { display: none; }
 .chip-pending { background: var(--orange-soft); color: #b45f06; }
 .chip-confirmed { background: var(--blue-soft); color: var(--blue); }
+.chip-shipping { background: #e0f2fe; color: #0284c7; }
 .chip-delivered { background: var(--green-soft); color: var(--green); }
 .chip-cancelled { background: var(--red-soft); color: var(--red-dark); }
 .chip-active { background: var(--green-soft); color: var(--green); }

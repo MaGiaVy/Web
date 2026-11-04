@@ -73,7 +73,8 @@
 // ============================================================
 const ORDER_ACTIONS = {
   confirmed: { text: "Xác nhận đơn hàng", short: "Xác nhận", ic: "check", cls: "btn-dark", done: "Đã xác nhận đơn hàng" },
-  delivered: { text: "Xác nhận đã giao hàng", short: "Đã giao", ic: "truck", cls: "btn-dark", done: "Đã cập nhật: giao thành công" },
+  shipping: { text: "Giao cho vận chuyển", short: "Giao hàng", ic: "truck", cls: "btn-dark", done: "Đã chuyển sang: Đang giao hàng" },
+  delivered: { text: "Xác nhận đã giao hàng", short: "Đã giao", ic: "checkCircle", cls: "btn-dark", done: "Đã cập nhật: giao thành công" },
   cancelled: { text: "Hủy đơn hàng", short: "Hủy", ic: "x", cls: "btn-danger-outline", done: "Đã hủy đơn hàng" },
 };
 
