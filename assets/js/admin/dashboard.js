@@ -18,7 +18,7 @@
       <div><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div></div>`).join("");
 
   $("h-pending").innerHTML = `${icon("clock")} Đơn hàng cần xử lý`;
-  const todo = ORDERS.filter((o) => o.status === "pending" || o.status === "confirmed").sort((a, b) => b.datetime.localeCompare(a.datetime)).slice(0, 5);
+  const todo = ORDERS.filter((o) => o.status === "pending" || o.status === "confirmed" || o.status === "shipping").sort((a, b) => b.datetime.localeCompare(a.datetime)).slice(0, 5);
   $("pending-body").innerHTML = todo.map((o) => {
     const u = getUser(o.userId);
     return `<tr>

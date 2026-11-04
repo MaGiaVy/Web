@@ -3,23 +3,19 @@
 // Mỗi trang chỉ cần đặt <div id="site-header"></div> và <div id="site-footer"></div>
 // => header giống nhau 100% trên mọi trang
 // ============================================================
-const LOGOUT_KEY = "dvk_logged_out";
+const LOGIN_KEY = "dvk_logged_in";
 function isLoggedIn() {
-  try { return sessionStorage.getItem(LOGOUT_KEY) !== "1"; } catch (e) { return true; }
+  try { return sessionStorage.getItem(LOGIN_KEY) === "1"; } catch (e) { return false; }
 }
 function setLoggedIn(value) {
-  try { value ? sessionStorage.removeItem(LOGOUT_KEY) : sessionStorage.setItem(LOGOUT_KEY, "1"); } catch (e) { /* bỏ qua */ }
+  try { value ? sessionStorage.setItem(LOGIN_KEY, "1") : sessionStorage.removeItem(LOGIN_KEY); } catch (e) { /* bỏ qua */ }
 }
-
-// Chưa đăng nhập (đã đăng xuất) => giỏ hàng trống: số trên icon giỏ = 0, trang giỏ hàng không có sản phẩm.
-// Layout nạp trước cart.js nên xóa dữ liệu mẫu ở đây là đủ.
-if (!isLoggedIn()) SAMPLE_CART.length = 0;
 
 // Trang bắt buộc đăng nhập: chưa đăng nhập thì chuyển về trang đăng nhập
 (function guardPrivatePages() {
   const privatePages = ["account", "orders", "order-detail", "checkout", "order-success"];
   if (privatePages.includes(document.body.dataset.page) && !isLoggedIn()) {
-    location.replace(page("login.html"));
+    location.replace(page("login.html") + (document.body.dataset.page === "checkout" ? "?redirect=checkout" : ""));
   }
 })();
 

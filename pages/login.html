@@ -46,8 +46,10 @@
   <script>
     document.getElementById("login-form").addEventListener("submit", function (e) {
       e.preventDefault();
+      setLoggedIn(true);
       const email = document.getElementById("login-email").value.trim();
-      toastThenGo("../index.html", "Đăng nhập thành công", email ? "Xin chào " + escapeHtml(email) + "!" : "Chào mừng bạn quay lại DVK Gunpla!");
+      const redirect = getParam("redirect") === "checkout" ? "checkout.html" : "../index.html";
+      toastThenGo(redirect, "Đăng nhập thành công", email ? "Xin chào " + escapeHtml(email) + "!" : "Chào mừng bạn quay lại DVK Gunpla!");
     });
     document.getElementById("forgot").addEventListener("click", function (e) {
       e.preventDefault();

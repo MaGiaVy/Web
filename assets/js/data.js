@@ -151,7 +151,8 @@ const CURRENT_USER_ID = 1;
 // ============================================================
 const ORDER_STATUS = {
   pending: { label: "Chưa xác nhận", next: ["confirmed", "cancelled"] },
-  confirmed: { label: "Đã xác nhận", next: ["delivered", "cancelled"] },
+  confirmed: { label: "Đã xác nhận", next: ["shipping", "cancelled"] },
+  shipping: { label: "Đang giao", badgeClass: "chip-shipping", next: ["delivered"] },
   delivered: { label: "Đã giao thành công", next: [] },
   cancelled: { label: "Đã hủy", next: [] },
 };
@@ -182,9 +183,9 @@ const ORDERS = [
   ["DH26101809", 7, "2026-10-18 17:52", "delivered", "cod", 1, [[8, 1], [9, 1]], ""],
   ["DH26102009", 5, "2026-10-20 09:05", "delivered", "cod", 1, [[14, 1]], ""],
   ["DH26102204", 8, "2026-10-22 22:14", "delivered", "cod", 1, [[33, 1]], ""],
-  ["DH26102506", 6, "2026-10-25 14:40", "confirmed", "bank", 1, [[16, 1], [50, 1]], ""],
+  ["DH26102506", 6, "2026-10-25 14:40", "shipping", "bank", 1, [[16, 1], [50, 1]], ""],
   ["DH26102811", 2, "2026-10-28 19:20", "pending", "cod", 1, [[15, 1]], ""],
-  ["DH26103002", 4, "2026-10-30 08:12", "confirmed", "bank", 1, [[26, 1]], ""],
+  ["DH26103002", 4, "2026-10-30 08:12", "shipping", "bank", 1, [[26, 1]], ""],
   ["DH26110103", 5, "2026-11-01 11:48", "pending", "cod", 1, [[11, 1], [48, 1]], ""],
   ["DH26110104", 8, "2026-11-01 15:26", "pending", "bank", 1, [[18, 1], [46, 1]], ""],
   ["DH26110201", 1, "2026-11-02 10:05", "pending", "bank", 1, [[13, 1], [37, 2], [49, 1]], "Gọi trước khi giao"],

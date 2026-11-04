@@ -65,3 +65,51 @@
     });
   });
 })();
+
+// ============================================================
+// XỬ LÝ ĐƠN HÀNG (dùng chung cho orders.html và order-detail.html)
+// Trạng thái chỉ đi tới: Chưa xác nhận -> Đã xác nhận -> Đã giao, đơn chưa giao có thể hủy
+// Web tĩnh: chỉ hỏi xác nhận rồi hiện thông báo, trạng thái giữ nguyên
+// ============================================================
+const ORDER_ACTIONS = {
+  confirmed: { text: "Xác nhận đơn hàng", short: "Xác nhận", ic: "check", cls: "btn-dark", done: "Đã xác nhận đơn hàng" },
+  shipping: { text: "Giao cho vận chuyển", short: "Giao hàng", ic: "truck", cls: "btn-dark", done: "Đã chuyển sang: Đang giao hàng" },
+  delivered: { text: "Xác nhận đã giao hàng", short: "Đã giao", ic: "checkCircle", cls: "btn-dark", done: "Đã cập nhật: giao thành công" },
+  cancelled: { text: "Hủy đơn hàng", short: "Hủy", ic: "x", cls: "btn-danger-outline", done: "Đã hủy đơn hàng" },
+};
+
+const ORDER_CANCEL_REASONS = ["Khách yêu cầu hủy", "Không liên lạc được khách", "Sản phẩm hết hàng", "Sai thông tin giao hàng", "Khách không nhận hàng", "Lý do khác"];
+
+async function askOrderStatus(order, value) {
+  const cancel = value === "cancelled";
+  // Hủy đơn: chọn lý do (bấm 1 ô) + ghi chú
+  const reasonForm = `
+    <div class="lock-form">
+      <div class="field"><span>Lý do hủy</span>
+        <div class="reason-grid">${ORDER_CANCEL_REASONS.map((r, i) => `
+          <label class="reason-option"><input type="radio" name="cancel-reason" value="${r}" ${i === 0 ? "checked" : ""}><span>${r}</span></label>`).join("")}
+        </div>
+      </div>
+      <label class="field"><span>Ghi chú</span>
+        <textarea class="textarea" id="cancel-note" rows="2" placeholder="Vd: Khách gọi điện báo đổi ý"></textarea>
+      </label>
+    </div>`;
+  const asking = confirmDialog({
+    title: cancel ? "Hủy đơn hàng này?" : `${ORDER_ACTIONS[value].text}?`,
+    message: cancel
+      ? `Đơn <b>#${order.id}</b> sẽ bị hủy và không khôi phục lại được.`
+      : `Đơn <b>#${order.id}</b> sẽ chuyển sang <b>“${ORDER_STATUS[value].label}”</b>.<br>Sau khi cập nhật sẽ không quay lại được.`,
+    okText: cancel ? "Hủy đơn" : "Xác nhận", cancelText: cancel ? "Không hủy" : "Để sau",
+    body: cancel ? reasonForm : "",
+    iconName: ORDER_ACTIONS[value].ic, danger: cancel,
+  });
+  // Lấy ô nhập trước khi hộp thoại đóng
+  const box = document.querySelector(".confirm-box"), noteEl = document.getElementById("cancel-note");
+  const ok = await asking;
+  if (!ok) return toast("Chưa cập nhật", `Đơn #${order.id} vẫn ở trạng thái “${ORDER_STATUS[order.status].label}”`, "info");
+  if (cancel) {
+    const note = noteEl.value.trim();
+    return toast("Đã hủy đơn hàng", `Đơn #${order.id} · Lý do: ${escapeHtml(box.querySelector('[name="cancel-reason"]:checked').value)}${note ? `<br>${escapeHtml(note)}` : ""}`);
+  }
+  toast(ORDER_ACTIONS[value].done, `Đơn #${order.id} · ${escapeHtml(getUser(order.userId).name)}`);
+}

@@ -100,6 +100,7 @@ p { margin: 0; }
 .chip.no-dot::before { display: none; }
 .chip-pending { background: var(--orange-soft); color: #b45f06; }
 .chip-confirmed { background: var(--blue-soft); color: var(--blue); }
+.chip-shipping { background: #e0f2fe; color: #0369a1; }
 .chip-delivered { background: var(--green-soft); color: var(--green); }
 .chip-cancelled { background: var(--red-soft); color: var(--red-dark); }
 .chip-active { background: var(--green-soft); color: var(--green); }
@@ -497,7 +498,7 @@ p { margin: 0; }
 .order-foot .actions { display: flex; gap: 8px; }
 
 .detail-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
-.timeline { display: grid; grid-template-columns: repeat(3, 1fr); padding: 28px 24px 24px; }
+.timeline { display: grid; grid-template-columns: repeat(4, 1fr); padding: 28px 24px 24px; }
 .tl-step { position: relative; text-align: center; color: var(--muted); }
 .tl-step::before { content: ""; position: absolute; top: 21px; left: -50%; right: 50%; height: 3px; background: var(--line); }
 .tl-step:first-child::before { display: none; }
@@ -592,3 +593,10 @@ p { margin: 0; }
 .money-input { position: relative; }
 .money-input .input { padding-right: 34px; font-variant-numeric: tabular-nums; }
 .money-input em { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); font-style: normal; font-weight: 600; color: var(--muted); pointer-events: none; }
+
+@media (min-width: 861px) {
+  .cart-layout aside.summary {
+    position: sticky;
+    top: 96px;
+  }
+}
