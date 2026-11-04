@@ -44,14 +44,14 @@
 
   const kpis = [
     ["wallet", "Doanh thu 30 ngày", money(rev30), trend(rev30, revPrev, "so với kỳ trước"), "statistics.html",
-      `Đơn đã giao từ ${formatDate(daysAgo(29))} đến ${formatDate(iso(today))}`],
+      `Đơn đã giao từ ${formatDate(daysAgo(29))} đến ${formatDate(iso(today))}`, "kpi-green"],
     ["orders", "Đơn mới 7 ngày", new7, trend(new7, newPrev, "so với kỳ trước"), "orders.html",
-      `Đơn đặt từ ${formatDate(daysAgo(6))} đến ${formatDate(iso(today))}`],
-    ["clock", "Đơn cần xử lý", waitConfirm + waitShip, `${waitConfirm} chờ xác nhận · ${waitShip} chờ giao`, "#h-pending", "Xem các đơn cần xử lý"],
-    ["warning", "Sắp hết hàng", lowStock.length, `${lowStock.filter((p) => p.stock <= 5).length} sản phẩm còn ≤ 5`, "#h-stock", `Sản phẩm còn từ ${LOW_STOCK} cái trở xuống`],
+      `Đơn đặt từ ${formatDate(daysAgo(6))} đến ${formatDate(iso(today))}`, "kpi-blue"],
+    ["clock", "Đơn cần xử lý", waitConfirm + waitShip, `${waitConfirm} chờ xác nhận · ${waitShip} chờ giao`, "#h-pending", "Xem các đơn cần xử lý", "kpi-purple"],
+    ["warning", "Sắp hết hàng", lowStock.length, `${lowStock.filter((p) => p.stock <= 5).length} sản phẩm còn ≤ 5`, "#h-stock", `Sản phẩm còn từ ${LOW_STOCK} cái trở xuống`, "kpi-amber"],
   ];
-  $("kpis").innerHTML = kpis.map(([ic, label, value, sub, href, tip]) => `
-    <a class="card kpi kpi-link" href="${href}" title="${tip}"><div class="kpi-icon">${icon(ic)}</div>
+  $("kpis").innerHTML = kpis.map(([ic, label, value, sub, href, tip, color]) => `
+    <a class="card kpi kpi-link" href="${href}" title="${tip}"><div class="kpi-icon ${color}">${icon(ic)}</div>
       <div><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div></div></a>`).join("");
 
   $("h-pending").innerHTML = `${icon("clock")} Đơn hàng cần xử lý`;

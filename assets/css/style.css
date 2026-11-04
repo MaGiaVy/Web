@@ -499,6 +499,12 @@ p { margin: 0; }
 .order-foot .actions { display: flex; gap: 8px; }
 
 .detail-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
+@media (min-width: 861px) {
+  .detail-layout aside.checkout-stack {
+    position: sticky;
+    top: 96px;
+  }
+}
 .timeline { display: grid; grid-template-columns: repeat(3, 1fr); padding: 28px 24px 24px; }
 .tl-step { position: relative; text-align: center; color: var(--muted); }
 .tl-step::before { content: ""; position: absolute; top: 21px; left: -50%; right: 50%; height: 3px; background: var(--line); }
