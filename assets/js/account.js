@@ -4,6 +4,11 @@
   const user = currentUser();
   const addresses = user.addresses.map((a) => ({ ...a }));
   const $ = (id) => document.getElementById(id);
+  let editingId = null; // null = đang thêm mới, số = đang sửa địa chỉ có id đó
+  // Giá trị "đã lưu gần nhất" (chỉ nhớ trong trang, không lưu thật).
+  // Chỉ thông báo khi giá trị nhập khác với giá trị này, rồi cập nhật lại để lần bấm sau không báo trùng.
+  const saved = { name: user.name, email: user.email, phone: user.phone, birthday: user.birthday };
+  let lastAddressText = null; // địa chỉ vừa thông báo gần nhất
 
   $("h-profile").innerHTML = `${icon("user")} Hồ sơ của tôi`;
   $("h-address").innerHTML = `${icon("map")} Sổ địa chỉ`;
@@ -30,21 +35,32 @@
     $("profile-head").innerHTML = `<span class="avatar">${initials(name)}</span><div><h3>${escapeHtml(name)}</h3><p>${user.email} · Thành viên Bạc</p></div>`;
   }
   function fillProfile() {
-    $("pf-name").value = user.name;
-    $("pf-email").value = user.email;
-    $("pf-phone").value = user.phone;
-    $("pf-birthday").value = user.birthday;
+    $("pf-name").value = saved.name;
+    $("pf-email").value = saved.email;
+    $("pf-phone").value = saved.phone;
+    $("pf-birthday").value = saved.birthday;
     $("pf-gender").innerHTML = ["Nam", "Nữ", "Khác"].map((g) =>
       `<label style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="radio" name="gender" value="${g}" ${user.gender === g ? "checked" : ""}> ${g}</label>`).join("");
-    renderName(user.name);
+    renderName(saved.name);
   }
   fillProfile();
 
   $("profile-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    // Web tĩnh: chỉ hiện thông báo, không lưu thật
-    const name = $("pf-name").value.trim() || user.name;
-    toast("Cập nhật hồ sơ thành công", `Tên mới: ${escapeHtml(name)}`);
+    // Web tĩnh: chỉ hiện thông báo, không lưu thật (giá trị trong ô nhập giữ nguyên)
+    const name = $("pf-name").value.trim();
+    const email = $("pf-email").value.trim();
+    const phone = $("pf-phone").value.trim();
+    const birthday = $("pf-birthday").value;
+    const changed = (name && name !== saved.name) || (email && email !== saved.email) || (phone && phone !== saved.phone) || (birthday && birthday !== saved.birthday);
+    // Không có gì mới so với lần lưu trước thì không báo lại
+    if (!changed) return;
+    // Ghi nhận giá trị mới làm mốc, thông báo 1 lần duy nhất
+    if (name) saved.name = name;
+    if (email) saved.email = email;
+    if (phone) saved.phone = phone;
+    if (birthday) saved.birthday = birthday;
+    toast("Đã cập nhật thông tin");
   });
   $("pf-reset").addEventListener("click", () => {
     fillProfile();
@@ -60,6 +76,7 @@
         <p>${escapeHtml(fullAddress(a))}</p>
         <div class="actions">
           ${a.isDefault ? "" : `<button class="btn btn-outline btn-sm" data-default>${icon("check")} Đặt mặc định</button>`}
+          <button class="btn btn-outline btn-sm" data-edit>${icon("edit")} Sửa</button>
           <button class="btn btn-ghost btn-sm" data-delete style="margin-left:auto;color:var(--red)">${icon("trash")} Xóa</button>
         </div>
       </div>`).join("");
@@ -72,6 +89,8 @@
   $("ad-city").addEventListener("change", fillDistricts);
 
   $("add-address-btn").addEventListener("click", () => {
+    editingId = null;
+    $("address-form").querySelector("h3").textContent = "Thêm địa chỉ mới";
     $("address-form").classList.add("show");
     $("ad-name").value = user.name;
     $("ad-phone").value = user.phone;
@@ -79,6 +98,7 @@
     toast("Thêm địa chỉ mới", "Điền thông tin vào biểu mẫu bên dưới", "info");
   });
   $("ad-cancel").addEventListener("click", () => {
+    editingId = null;
     $("address-form").classList.remove("show");
     $("address-form").reset();
     fillDistricts();
@@ -88,20 +108,40 @@
   // Không ràng buộc dữ liệu: ô nào để trống thì dùng giá trị mặc định
   $("address-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    // Web tĩnh: chỉ hiện thông báo, không thêm thật vào danh sách
+    // Web tĩnh: chỉ hiện thông báo, không thêm / sửa thật vào danh sách
     const street = $("ad-street").value.trim() || "Số nhà, tên đường";
     const text = `${street}, ${$("ad-ward").value}, ${$("ad-city").value}`;
+    const isEdit = editingId !== null;
+    editingId = null;
     $("address-form").classList.remove("show");
     $("address-form").reset();
     fillDistricts();
-    toast("Đã thêm địa chỉ mới", escapeHtml(text));
+    // Địa chỉ giống lần vừa báo thì không báo lại
+    if (text === lastAddressText) return;
+    lastAddressText = text;
+    toast(isEdit ? "Đã đổi địa chỉ" : "Đã thêm địa chỉ mới", escapeHtml(text));
   });
 
   $("address-list").addEventListener("click", async (e) => {
     const card = e.target.closest(".address-card");
     if (!card) return;
     const addr = addresses.find((a) => a.id === Number(card.dataset.id));
-    if (e.target.closest("[data-default]")) {
+    if (e.target.closest("[data-edit]")) {
+      editingId = addr.id;
+      const f = $("address-form");
+      f.querySelector("h3").textContent = "Sửa địa chỉ";
+      f.classList.add("show");
+      $("ad-name").value = addr.receiver;
+      $("ad-phone").value = addr.phone;
+      $("ad-city").value = addr.city;
+      fillDistricts();
+      $("ad-ward").value = addr.ward;
+      $("ad-street").value = addr.street;
+      $("ad-label").value = addr.label;
+      $("ad-default").checked = addr.isDefault;
+      f.scrollIntoView({ behavior: "smooth", block: "center" });
+      toast("Sửa địa chỉ", "Chỉnh thông tin trong biểu mẫu rồi bấm Lưu địa chỉ", "info");
+    } else if (e.target.closest("[data-default]")) {
       toast("Đã đặt địa chỉ mặc định", fullAddress(addr));
     } else if (e.target.closest("[data-delete]")) {
       if (addr.isDefault) return toast("Không thể xóa địa chỉ mặc định", "Hãy đặt địa chỉ khác làm mặc định trước", "warning");

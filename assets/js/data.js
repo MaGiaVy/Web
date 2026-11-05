@@ -269,7 +269,7 @@ const CURRENT_USER_ID = 1;
 const ORDER_STATUS = {
   pending: { label: "Chưa xác nhận", next: ["confirmed", "cancelled"] },
   confirmed: { label: "Đã xác nhận", next: ["shipping", "cancelled"] },
-  shipping: { label: "Đang giao", next: ["delivered", "cancelled"] },
+  shipping: { label: "Đang giao", badgeClass: "chip-shipping", next: ["delivered", "cancelled"] },
   delivered: { label: "Đã giao thành công", next: [] },
   cancelled: { label: "Đã hủy", next: [] },
 };

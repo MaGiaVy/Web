@@ -23,6 +23,11 @@
             + `<p class="status-hint">${icon("info")} Trạng thái đã cập nhật thì không quay lại bước trước được.</p>`
           : `${order.cancelReason ? `<p class="lock-reason-box"><b>Lý do hủy: ${order.cancelReason.reason}</b>${order.cancelReason.note ? `<br><small>${escapeHtml(order.cancelReason.note)}</small>` : ""}</p>` : ""}
              <p class="status-hint">${icon("lock")} ${order.status === "delivered" ? "Đơn hàng đã hoàn tất." : "Đơn hàng đã bị hủy."}</p>`}
+      </div>
+      <div class="flow-note" style="border-top:1px solid var(--line)">
+        <b>Quy trình (chỉ cập nhật xuôi):</b>
+        <div>${statusChip("pending")} ${icon("arrowRight")} ${statusChip("confirmed")} ${icon("arrowRight")} ${statusChip("shipping")} ${icon("arrowRight")} ${statusChip("delivered")}</div>
+        <div class="muted">Đơn chưa giao có thể chuyển sang ${statusChip("cancelled")}</div>
       </div>`;
   }
 
