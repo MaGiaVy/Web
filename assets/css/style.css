@@ -1316,6 +1316,12 @@ p { margin: 0; }
   background: rgba(255, 255, 255, 0.2);
 }
 
+.cosmos-universe-body .pd-price {
+  background: #0d152e !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  border-radius: var(--radius) !important;
+}
+
 .cosmos-universe-body .pd-price .price {
   color: #f43f5e !important;
   font-family: var(--font-display) !important;
@@ -1334,9 +1340,9 @@ p { margin: 0; }
 }
 
 .cosmos-universe-body .pd-spec {
-  background: #0d152e;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  border-radius: var(--radius-sm);
+  background: #0d152e !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: var(--radius-sm) !important;
 }
 
 .cosmos-universe-body .pd-spec .icon {
@@ -1352,23 +1358,29 @@ p { margin: 0; }
 }
 
 .cosmos-universe-body .qty {
-  background: #0d152e;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  border-radius: var(--radius-sm);
+  background: #0d152e !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  border-radius: var(--radius-sm) !important;
 }
 
 .cosmos-universe-body .qty button {
-  color: #94a3b8;
+  color: #94a3b8 !important;
+  background: transparent !important;
 }
 
 .cosmos-universe-body .qty button:hover {
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.15) !important;
 }
 
 .cosmos-universe-body .qty input {
-  color: #ffffff;
-  font-weight: 700;
+  background: #060c20 !important;
+  border-left: 1px solid rgba(56, 189, 248, 0.35) !important;
+  border-right: 1px solid rgba(56, 189, 248, 0.35) !important;
+  color: #38bdf8 !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  font-family: var(--font-display) !important;
 }
 
 .cosmos-universe-body .pd-stock {
@@ -1380,14 +1392,30 @@ p { margin: 0; }
 }
 
 .cosmos-universe-body .pd-policy {
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: var(--radius-sm);
-  color: #cbd5e1;
+  background: rgba(56, 189, 248, 0.08) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 14px 16px !important;
+  margin-top: 24px !important;
+}
+
+.cosmos-universe-body .pd-policy div {
+  color: #cbd5e1 !important;
+  font-weight: 600 !important;
 }
 
 .cosmos-universe-body .pd-policy .icon {
-  color: #38bdf8;
+  color: #38bdf8 !important;
+}
+
+.cosmos-universe-body .spec-table td {
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2) !important;
+  color: #f8fafc !important;
+}
+
+.cosmos-universe-body .spec-table td:first-child {
+  background: #0d152e !important;
+  color: #94a3b8 !important;
 }
 
 .cosmos-universe-body .tabs {
