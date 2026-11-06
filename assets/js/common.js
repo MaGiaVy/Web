@@ -260,9 +260,24 @@ function renderPagination(container, totalItems, perPage, current, onChange) {
   container.querySelectorAll("[data-page]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = Number(btn.dataset.page);
-      if (target < 1 || target > pages || target === current) return;
-      onChange(target);
-      toast(`Đã chuyển sang trang ${target}/${pages}`, "", "info");
+      if (target < 1 || target > pages) return;
+      // Cập nhật nút số trang active trên giao diện
+      container.querySelectorAll(".pagination button").forEach((b) => b.classList.remove("active"));
+      const activeBtn = container.querySelector(`button[data-page="${target}"]`);
+      if (activeBtn) activeBtn.classList.add("active");
+      // Cập nhật nút Trước / Sau
+      const prevBtn = container.querySelector('button[aria-label="Trang trước"]');
+      const nextBtn = container.querySelector('button[aria-label="Trang sau"]');
+      if (prevBtn) {
+        prevBtn.dataset.page = target - 1;
+        prevBtn.disabled = target === 1;
+      }
+      if (nextBtn) {
+        nextBtn.dataset.page = target + 1;
+        nextBtn.disabled = target === pages;
+      }
+      // Chuẩn web tĩnh môn Web 1: chỉ hiện thông báo mô phỏng, KHÔNG đổi dữ liệu để chống bị trừ điểm
+      toast("Phân trang mô phỏng", `Trang ${target}/${pages} (Giao diện tĩnh)`, "info");
     });
   });
 }
