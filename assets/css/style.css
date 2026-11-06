@@ -1088,3 +1088,646 @@ p { margin: 0; }
     height: 180px;
   }
 }
+
+/* ============================================================
+   ĐỒNG BỘ GIAO DIỆN VŨ TRỤ CHO TẤT CẢ TRANG CON (SUBPAGES)
+   ============================================================ */
+
+/* Định dạng cơ bản cho vùng trang con */
+.cosmos-universe-body .page {
+  padding-top: 24px;
+  padding-bottom: 56px;
+  position: relative;
+  z-index: 2;
+}
+
+.cosmos-universe-body .page-title h1 {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+}
+
+.cosmos-universe-body .page-title p {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .breadcrumb {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .breadcrumb a {
+  color: #cbd5e1;
+  transition: color 0.15s ease;
+}
+
+.cosmos-universe-body .breadcrumb a:hover {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .breadcrumb span {
+  color: #64748b;
+}
+
+.cosmos-universe-body .breadcrumb b {
+  color: #ffffff;
+}
+
+/* Thẻ Titanium Pod trên toàn bộ trang con (chống chìm 100%) */
+.cosmos-universe-body .card {
+  background: #070d20 !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 15px rgba(2, 6, 23, 0.8) !important;
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .card-head {
+  background: rgba(10, 18, 44, 0.85);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.cosmos-universe-body .card-head h2,
+.cosmos-universe-body .card-head h3 {
+  color: #ffffff;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.cosmos-universe-body .card-head h2 .icon,
+.cosmos-universe-body .card-head h3 .icon {
+  color: #38bdf8;
+}
+
+/* Điều khiển biểu mẫu: Input, Select, Textarea */
+.cosmos-universe-body .field > span,
+.cosmos-universe-body .field > label {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.cosmos-universe-body .input,
+.cosmos-universe-body .select,
+.cosmos-universe-body .textarea {
+  background: #0d152e !important;
+  border: 1px solid rgba(56, 189, 248, 0.38) !important;
+  color: #f8fafc !important;
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cosmos-universe-body .select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+}
+
+.cosmos-universe-body .input:focus,
+.cosmos-universe-body .select:focus,
+.cosmos-universe-body .textarea:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25), 0 0 14px rgba(56, 189, 248, 0.35) !important;
+}
+
+.cosmos-universe-body .input[readonly],
+.cosmos-universe-body .select:disabled {
+  background-color: #050917 !important;
+  color: #64748b !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.cosmos-universe-body .btn-outline {
+  background: #0d152e;
+  color: #cbd5e1;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.cosmos-universe-body .btn-outline:hover {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+.cosmos-universe-body .btn-ghost {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .btn-ghost:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+}
+
+/* Thanh kết quả và bộ lọc (Trang Tất cả sản phẩm) */
+.cosmos-universe-body .result-bar {
+  background: #070d20 !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .result-bar .sort-sep {
+  background: rgba(56, 189, 248, 0.25);
+}
+
+.cosmos-universe-body .result-bar p {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .active-filters .chip {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .active-filters .chip button {
+  color: #38bdf8;
+}
+
+/* Phân trang Vũ Trụ (Pagination) */
+.cosmos-universe-body .pagination {
+  margin-top: 32px;
+}
+
+.cosmos-universe-body .pagination button {
+  background: #070d20;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #cbd5e1;
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cosmos-universe-body .pagination button:hover:not(:disabled):not(.active) {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.cosmos-universe-body .pagination button.active {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%) !important;
+  color: #020617 !important;
+  font-weight: 700 !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6) !important;
+}
+
+.cosmos-universe-body .pagination button:disabled {
+  background: #050a18;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #475569;
+}
+
+.cosmos-universe-body .pagination-info {
+  color: #94a3b8;
+}
+
+/* Trang Chi Tiết Sản Phẩm */
+.cosmos-universe-body .pd-layout {
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .pd-gallery {
+  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.2) 0%, rgba(129, 140, 248, 0.08) 50%, #040816 85%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius);
+}
+
+.cosmos-universe-body .pd-gallery img {
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.95));
+}
+
+.cosmos-universe-body .pd-info h1 {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+}
+
+.cosmos-universe-body .pd-sub {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .pd-sub b {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .pd-sub i {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cosmos-universe-body .pd-price .price {
+  color: #f43f5e !important;
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+  font-size: 28px !important;
+  text-shadow: 0 0 16px rgba(244, 63, 94, 0.5) !important;
+}
+
+.cosmos-universe-body .pd-price .price-old {
+  color: #64748b;
+}
+
+.cosmos-universe-body .pd-desc {
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.cosmos-universe-body .pd-spec {
+  background: #0d152e;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-sm);
+}
+
+.cosmos-universe-body .pd-spec .icon {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .pd-spec small {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .pd-spec b {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .qty {
+  background: #0d152e;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-sm);
+}
+
+.cosmos-universe-body .qty button {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .qty button:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.cosmos-universe-body .qty input {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.cosmos-universe-body .pd-stock {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .pd-stock b {
+  color: #34d399;
+}
+
+.cosmos-universe-body .pd-policy {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-sm);
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .pd-policy .icon {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .tabs {
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.cosmos-universe-body .tabs button {
+  color: #94a3b8;
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.cosmos-universe-body .tabs button:hover {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .tabs button.active {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.cosmos-universe-body .tabs button.active::after {
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+}
+
+.cosmos-universe-body .tab-panel {
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .tab-panel b,
+.cosmos-universe-body .tab-panel strong {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .review-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cosmos-universe-body .review-user b {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .review-date {
+  color: #64748b;
+}
+
+/* Trang Giỏ Hàng & Thanh Toán */
+.cosmos-universe-body .table th {
+  background: rgba(10, 18, 44, 0.85);
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+  font-family: var(--font-display);
+}
+
+.cosmos-universe-body .table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.cosmos-universe-body .table tr:hover td {
+  background: rgba(56, 189, 248, 0.04);
+}
+
+.cosmos-universe-body .table a.cart-item-title {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.cosmos-universe-body .table a.cart-item-title:hover {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .table .line-calc {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .summary {
+  background: #070d20 !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75) !important;
+}
+
+.cosmos-universe-body .summary-row {
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .summary-row b {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .summary-total {
+  border-top: 1px dashed rgba(56, 189, 248, 0.35);
+  color: #ffffff;
+}
+
+.cosmos-universe-body .summary-total b {
+  color: #f43f5e;
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-shadow: 0 0 14px rgba(244, 63, 94, 0.5);
+}
+
+.cosmos-universe-body .summary-note {
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.cosmos-universe-body .coupon .input {
+  background: #0d152e;
+}
+
+.cosmos-universe-body .pay-method {
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: #0d152e;
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .pay-method:hover,
+.cosmos-universe-body .pay-method.active {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.cosmos-universe-body .pay-method b {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .addr-card {
+  background: #0d152e;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .addr-card.selected {
+  border-color: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+}
+
+.cosmos-universe-body .addr-card b {
+  color: #ffffff;
+}
+
+/* Trang Hoàn Tất Đơn Hàng (Order Success) */
+.cosmos-universe-body .step {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .step.active,
+.cosmos-universe-body .step.done {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.cosmos-universe-body .step span {
+  background: #0d152e;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .step.active span,
+.cosmos-universe-body .step.done span {
+  background: #38bdf8;
+  color: #020617;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+.cosmos-universe-body .step-line {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cosmos-universe-body .step-line.done {
+  background: #38bdf8;
+}
+
+.cosmos-universe-body .success-hero h1 {
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+.cosmos-universe-body .success-hero p {
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .order-code {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .order-code b {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .info-row {
+  color: #cbd5e1;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.cosmos-universe-body .info-row .icon {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .info-row small {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .info-row b {
+  color: #ffffff;
+}
+
+/* Trang Đơn Hàng & Chi Tiết Đơn Hàng */
+.cosmos-universe-body .order-card {
+  background: #070d20 !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+}
+
+.cosmos-universe-body .order-card .card-head {
+  background: rgba(10, 18, 44, 0.95);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.cosmos-universe-body .order-card .order-id b {
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+.cosmos-universe-body .order-card .order-id small {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .order-item {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.cosmos-universe-body .order-item-name {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .order-item-meta {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .order-card-foot {
+  background: rgba(10, 18, 44, 0.6);
+  border-top: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.cosmos-universe-body .order-card-foot .total b {
+  color: #f43f5e;
+  font-family: var(--font-display);
+}
+
+.cosmos-universe-body .timeline-step b {
+  color: #ffffff;
+}
+
+.cosmos-universe-body .timeline-step small {
+  color: #94a3b8;
+}
+
+/* Trang Tài Khoản & Tìm Kiếm Nâng Cao */
+.cosmos-universe-body .account-nav a {
+  color: #cbd5e1;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.cosmos-universe-body .account-nav a:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .account-nav a.active {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  font-weight: 700;
+  border-left: 3px solid #38bdf8;
+}
+
+.cosmos-universe-body .account-nav a .icon {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .account-nav a.active .icon,
+.cosmos-universe-body .account-nav a:hover .icon {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .adv-chip {
+  background: #0d152e;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .adv-chip:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.cosmos-universe-body .adv-actions {
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+/* Trang Đăng Nhập & Đăng Ký */
+.cosmos-universe-body .auth-form {
+  background: #070d20 !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .auth-form h1 {
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+.cosmos-universe-body .auth-form p {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .auth-art h2 {
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+.cosmos-universe-body .auth-art p {
+  color: #cbd5e1;
+}
+
+.cosmos-universe-body .input-icon .icon {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .auth-alt {
+  color: #94a3b8;
+}
