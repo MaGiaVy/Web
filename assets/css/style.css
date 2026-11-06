@@ -985,7 +985,81 @@ p { margin: 0; }
 }
 .cosmos-universe-body .header-nav {
   background: rgba(4, 9, 22, 0.96);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Đảm bảo toàn bộ chữ trên thanh menu header đạt chuẩn tương phản cao WCAG AAA (chống chìm) */
+.cosmos-universe-body .header-nav a {
+  color: #cbd5e1 !important;
+  font-weight: 600;
+  transition: color .15s ease;
+}
+
+.cosmos-universe-body .header-nav a:hover {
+  color: #38bdf8 !important;
+}
+
+.cosmos-universe-body .header-nav a.active {
+  color: #38bdf8 !important;
+  font-weight: 700;
+}
+
+.cosmos-universe-body .header-nav a.active::after {
+  background: #38bdf8 !important;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+}
+
+.cosmos-universe-body .header-nav .nav-right {
+  color: #fb7185 !important;
+  font-weight: 700;
+}
+
+.cosmos-universe-body .header-nav .nav-right:hover {
+  color: #fda4af !important;
+  text-shadow: 0 0 10px rgba(244, 63, 94, 0.6);
+}
+
+.cosmos-universe-body .header-nav .icon {
+  color: #94a3b8;
+}
+
+.cosmos-universe-body .header-nav a:hover .icon,
+.cosmos-universe-body .header-nav a.active .icon {
+  color: #38bdf8;
+}
+
+.cosmos-universe-body .header-nav .nav-right .icon {
+  color: #fb7185;
+}
+
+/* Menu Dropdown Tài khoản đạt chuẩn tương phản */
+.cosmos-universe-body .dropdown {
+  background: #080e22;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #f8fafc;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+}
+.cosmos-universe-body .dropdown-head {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+.cosmos-universe-body .dropdown-head b { color: #fff; }
+.cosmos-universe-body .dropdown-head small { color: #94a3b8; }
+.cosmos-universe-body .dropdown a,
+.cosmos-universe-body .dropdown button {
+  color: #cbd5e1;
+}
+.cosmos-universe-body .dropdown a:hover,
+.cosmos-universe-body .dropdown button:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+}
+.cosmos-universe-body .dropdown .icon {
+  color: #94a3b8;
+}
+.cosmos-universe-body .dropdown .danger,
+.cosmos-universe-body .dropdown .danger .icon {
+  color: #fb7185;
 }
 .cosmos-universe-body .site-footer {
   background: #02050e;

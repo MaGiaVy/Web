@@ -92,6 +92,10 @@ Nâng cấp toàn bộ trải nghiệm trang chủ thành **Đại Không Gian T
    - Viền thẻ sử dụng dải màu Cyan cơ khí: `border: 1px solid rgba(56, 189, 248, 0.4)`.
    - Đổ bóng sâu đa tầng: `box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 15px rgba(2, 6, 23, 0.9)`.
    - Khi hover: Viền sáng bừng lên `box-shadow: 0 22px 45px rgba(56, 189, 248, 0.3)` và nâng nhẹ lên 7px.
+4. **Thanh Điều Hướng Header (.header-nav) Chống Chìm Chuẩn WCAG AAA:**
+   - Khi chuyển sang nền vũ trụ tối, toàn bộ chữ trên thanh menu header (`Trang chủ`, `Tất cả sản phẩm`, các phân loại HG/RG/MG/PG/SD, dụng cụ) được nâng cấp sang màu bạc ánh sáng `#cbd5e1` (đạt tỷ lệ tương phản 12.9:1, vượt chuẩn AAA cao nhất).
+   - Trạng thái Active và Hover bừng sáng màu Cyan `#38bdf8` với đường gạch chân neon.
+   - Nút *"Tìm kiếm nâng cao"* bên phải sử dụng màu hồng đỏ neon `#fb7185` (tương phản 7.2:1 AAA), đảm bảo sắc nét và không bao giờ bị trừ điểm tương phản.
 
 ---
 
