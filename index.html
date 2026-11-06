@@ -7,31 +7,37 @@
   <link rel="icon" href="assets/images/logo.svg">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-page="home">
+<body data-page="home" class="cosmos-universe-body">
+  <!-- Lớp thiên thể vũ trụ (Mặt Trời, Trái Đất) -->
+  <div class="celestial-orbit-overlay" aria-hidden="true">
+    <div class="solar-flare-beacon"></div>
+    <div class="earth-marble"></div>
+  </div>
+
   <div id="site-header"></div>
 
   <main class="container">
-    <!-- Banner chính -->
-    <section class="hero">
-      <div class="hero-inner">
+    <!-- Banner chính: Đại Chiến Vũ Trụ Gundam -->
+    <section class="hero hero-cosmic-banner">
+      <div class="hero-cosmic-inner">
         <div>
-          <span class="eyebrow">Gunpla chính hãng Bandai</span>
-          <h1>Lắp ráp <span>huyền thoại</span><br>của riêng bạn</h1>
-          <p>Hơn 50 mẫu Gundam từ HG cho người mới đến PG cho dân sưu tầm, kèm đầy đủ dụng cụ và sơn để hoàn thiện mô hình như ý.</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary btn-lg" href="pages/products.html">Mua sắm ngay <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="btn btn-outline btn-lg" href="pages/products.html?cat=PG">Xem dòng PG</a>
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">GUNPLA CHÍNH HÃNG BANDAI · ĐẠI CHIẾN KHÔNG GIAN</span>
           </div>
-          <div class="hero-stats">
-            <div><b>52+</b><span>Mẫu mô hình</span></div>
-            <div><b>6.000+</b><span>Khách hàng</span></div>
-            <div><b>100%</b><span>Hàng chính hãng</span></div>
+          <h1 class="hero-cosmic-title">LẮP RÁP HUYỀN THOẠI<br><span class="text-cosmic-gradient">VŨ TRỤ GUNDAM</span></h1>
+          <p class="hero-cosmic-desc">Hơn 50 mẫu Gundam từ HG cho người mới đến PG cho dân sưu tầm, kèm đầy đủ dụng cụ và sơn để hoàn thiện mô hình như ý.</p>
+          <div class="hero-cosmic-cta">
+            <div class="btn-cosmic-wrapper">
+              <a class="btn-cosmic-primary" href="pages/products.html">MUA SẮM NGAY</a>
+            </div>
+            <a class="btn-cosmic-secondary" href="pages/products.html?cat=PG">XEM DÒNG PG</a>
           </div>
-        </div>
-        <div class="hero-art">
-          <img src="assets/images/hero.svg" alt="Mô hình RX-78-2 Gundam">
-          <div class="hero-tag t1"><b>RX-78-2</b>Gundam huyền thoại</div>
-          <div class="hero-tag t2"><b>Giảm đến 10%</b>Cho dòng PG</div>
+          <div class="hero-cosmic-stats">
+            <div class="stat-item stat-cyan"><b>52+</b><span>Mẫu mô hình</span></div>
+            <div class="stat-item stat-purple"><b>6.000+</b><span>Khách hàng</span></div>
+            <div class="stat-item stat-red"><b>100%</b><span>Hàng chính hãng</span></div>
+          </div>
         </div>
       </div>
     </section>

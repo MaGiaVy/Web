@@ -5,3 +5,7 @@ desktop.ini
 .vscode/
 .idea/
 *.log
+
+# Superpowers visual brainstorming
+.superpowers/
+scratch/

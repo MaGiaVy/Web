@@ -607,3 +607,410 @@ p { margin: 0; }
     top: 96px;
   }
 }
+
+/* ============================================================
+   ĐẠI THIÊN HÀ VŨ TRỤ GUNDAM (100% CHAKRA PETCH & PURE CSS)
+   ============================================================ */
+
+/* Nền đại vũ trụ ngàn sao toàn trang */
+.cosmos-universe-body {
+  position: relative;
+  background-color: #02040a;
+  background-image:
+    linear-gradient(180deg, rgba(2, 4, 10, 0.4) 0%, rgba(2, 4, 10, 0.7) 50%, rgba(2, 4, 10, 0.88) 100%),
+    url('../images/deep-space-galaxy.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #f8fafc;
+  overflow-x: hidden;
+}
+
+/* Lớp thiên thể vũ trụ */
+.celestial-orbit-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Thiên thể: Quầng sáng Mặt Trời */
+.solar-flare-beacon {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #fef08a 25%, #f59e0b 50%, rgba(239, 68, 68, 0.25) 75%, transparent 100%);
+  box-shadow: 0 0 140px rgba(245, 158, 11, 0.5), 0 0 280px rgba(251, 191, 36, 0.3);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Thiên thể: Địa cầu Trái Đất bên khu vực sản phẩm */
+.earth-marble {
+  position: absolute;
+  top: 720px;
+  right: 30px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, rgba(255,255,255,0.4) 0%, transparent 25%),
+    radial-gradient(circle at 35% 35%, #38bdf8 0%, #0284c7 35%, #0369a1 60%, #0f172a 85%, #020617 100%);
+  box-shadow:
+    inset -25px -25px 45px rgba(0, 0, 0, 0.95),
+    inset 12px 12px 25px rgba(186, 230, 253, 0.65),
+    0 0 50px rgba(56, 189, 248, 0.4),
+    0 0 120px rgba(2, 132, 199, 0.2);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hero Banner Đại Chiến */
+.hero-cosmic-banner {
+  position: relative;
+  min-height: 510px;
+  background-image:
+    linear-gradient(90deg, rgba(2, 6, 23, 0.96) 0%, rgba(2, 6, 23, 0.8) 46%, rgba(2, 6, 23, 0.25) 100%),
+    url('../images/gundam-space-battle.jpg') !important;
+  background-size: cover !important;
+  background-position: center right !important;
+  background-repeat: no-repeat !important;
+  padding: 52px 48px;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  margin-top: 24px;
+  margin-bottom: 32px;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.hero-cosmic-banner::before,
+.hero-cosmic-banner::after {
+  display: none !important;
+}
+
+.hero-cosmic-inner {
+  position: relative;
+  z-index: 5;
+  max-width: 620px;
+}
+
+.hero-cosmic-banner * {
+  font-family: var(--font-display) !important;
+}
+
+/* Badge thông tin */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(129, 140, 248, 0.5);
+  backdrop-filter: blur(10px);
+  margin-bottom: 16px;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #818cf8;
+  box-shadow: 0 0 10px #818cf8;
+}
+
+.badge-text {
+  font-size: 12px;
+  color: #c7d2fe;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Tiêu đề & Gradient */
+.hero-cosmic-title {
+  font-size: 46px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  margin: 0 0 16px 0;
+  letter-spacing: 0.02em;
+}
+
+.text-cosmic-gradient {
+  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-cosmic-desc {
+  max-width: 580px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #cbd5e1;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+/* Nút bấm thuần chữ mecha */
+.hero-cosmic-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.btn-cosmic-wrapper {
+  position: relative;
+  padding: 2px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #f43f5e 100%);
+  box-shadow: 0 0 25px rgba(129, 140, 248, 0.55), 0 0 12px rgba(56, 189, 248, 0.35);
+  display: inline-block;
+}
+
+.btn-cosmic-primary {
+  display: inline-block;
+  background: #080e22;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  padding: 13px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background .25s ease, transform .2s ease;
+}
+
+.btn-cosmic-primary:hover {
+  background: #0e173a;
+  transform: translateY(-1px);
+}
+
+.btn-cosmic-secondary {
+  display: inline-block;
+  background: rgba(15, 23, 42, 0.85);
+  color: #e2e8f0 !important;
+  text-decoration: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 13px 26px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  transition: all .25s ease;
+}
+
+.btn-cosmic-secondary:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Thống kê */
+.hero-cosmic-stats {
+  display: flex;
+  gap: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 18px;
+}
+
+.hero-cosmic-stats .stat-item b {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.hero-cosmic-stats .stat-cyan b { color: #38bdf8; }
+.hero-cosmic-stats .stat-purple b { color: #818cf8; }
+.hero-cosmic-stats .stat-red b { color: #f43f5e; }
+
+.hero-cosmic-stats .stat-item span {
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Giao diện User: Tiêu đề mục */
+.cosmos-universe-body .section-head h2 {
+  color: #ffffff;
+}
+.cosmos-universe-body .section-head h2 span {
+  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cosmos-universe-body .section-head p {
+  color: #94a3b8;
+}
+.cosmos-universe-body .section-head .eyebrow {
+  color: #38bdf8;
+}
+.cosmos-universe-body .section-head .link {
+  color: #38bdf8;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* Khối Cam kết USP */
+.cosmos-universe-body .usp-item {
+  background: rgba(8, 14, 34, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  backdrop-filter: blur(14px);
+  color: #f8fafc;
+}
+.cosmos-universe-body .usp-item b { color: #f8fafc; }
+.cosmos-universe-body .usp-item span { color: #94a3b8; }
+.cosmos-universe-body .usp-item .icon-circle {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+/* Thẻ Phân loại Danh mục */
+.cosmos-universe-body .cat-card {
+  background: #070d20;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+.cosmos-universe-body .cat-card:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 15px 35px rgba(56, 189, 248, 0.25);
+}
+.cosmos-universe-body .cat-card b { color: #ffffff; }
+.cosmos-universe-body .cat-card small { color: #94a3b8; }
+.cosmos-universe-body .cat-card .count { color: #38bdf8; }
+
+/* Thẻ Sản phẩm Titanium Pod (Chống chìm tuyệt đối) */
+.cosmos-universe-body .product-card {
+  background: #070d20 !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 15px rgba(2, 6, 23, 0.9) !important;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+.cosmos-universe-body .product-card:hover {
+  transform: translateY(-7px) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 22px 45px rgba(56, 189, 248, 0.3), 0 0 25px rgba(56, 189, 248, 0.2) !important;
+}
+.cosmos-universe-body .product-thumb {
+  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.25) 0%, rgba(129, 140, 248, 0.1) 45%, #040816 80%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+.cosmos-universe-body .product-thumb img {
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.9)) !important;
+}
+.cosmos-universe-body .product-name {
+  color: #ffffff !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+}
+.cosmos-universe-body .product-name:hover {
+  color: #38bdf8 !important;
+}
+.cosmos-universe-body .product-meta { color: #94a3b8 !important; }
+.cosmos-universe-body .product-stats { color: #94a3b8 !important; }
+.cosmos-universe-body .product-price .price {
+  color: #f43f5e !important;
+  text-shadow: 0 0 14px rgba(244, 63, 94, 0.5) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+}
+.cosmos-universe-body .product-price .price-old {
+  color: #64748b !important;
+}
+.cosmos-universe-body .product-actions .btn {
+  background: #0d152e !important;
+  color: #38bdf8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.45) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  transition: all 0.25s ease !important;
+}
+.cosmos-universe-body .product-actions .btn:hover {
+  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 100%) !important;
+  color: #020617 !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.65) !important;
+}
+
+/* Thẻ Cẩm nang Guide */
+.cosmos-universe-body .guide-item {
+  background: #070d20;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #f8fafc;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+.cosmos-universe-body .guide-item h4 { color: #ffffff; font-family: var(--font-display); }
+.cosmos-universe-body .guide-item p { color: #94a3b8; }
+.cosmos-universe-body .guide-item li { border-color: rgba(255, 255, 255, 0.12); color: #cbd5e1; }
+.cosmos-universe-body .guide-item li b { color: #38bdf8; }
+
+/* Khuyến mãi Promo */
+.cosmos-universe-body .promo-card {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* Header & Topbar trên trang chủ vũ trụ */
+.cosmos-universe-body .topbar {
+  background: rgba(2, 6, 23, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.cosmos-universe-body .header-main {
+  background: rgba(8, 14, 34, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+}
+.cosmos-universe-body .header-nav {
+  background: rgba(4, 9, 22, 0.96);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.cosmos-universe-body .site-footer {
+  background: #02050e;
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+/* Responsive di động */
+@media (max-width: 768px) {
+  .hero-cosmic-banner {
+    padding: 36px 24px;
+    background-position: center !important;
+    min-height: auto;
+  }
+  .hero-cosmic-title {
+    font-size: 32px;
+  }
+  .hero-cosmic-stats {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .earth-marble {
+    display: none;
+  }
+  .solar-flare-beacon {
+    width: 180px;
+    height: 180px;
+  }
+}
