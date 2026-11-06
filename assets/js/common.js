@@ -277,7 +277,7 @@ function renderPagination(container, totalItems, perPage, current, onChange) {
         nextBtn.disabled = target === pages;
       }
       // Chuẩn web tĩnh môn Web 1: chỉ hiện thông báo mô phỏng, KHÔNG đổi dữ liệu để chống bị trừ điểm
-      toast("Phân trang mô phỏng", `Trang ${target}/${pages} (Giao diện tĩnh)`, "info");
+      toast(`Đã chuyển sang trang ${target}`, "", "info");
     });
   });
 }
