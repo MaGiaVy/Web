@@ -1,7 +1,7 @@
 // TÌM KIẾM NÂNG CAO (web tĩnh): bấm Tìm kiếm -> hiện thông báo rồi sang trang kết quả có sẵn
 (function () {
   const $ = (id) => document.getElementById(id);
-  const catLabel = (c) => (c.id === "TOOL" ? "Dụng cụ & Sơn" : `${c.name} (${c.id})`);
+  const catLabel = (c) => CATEGORY_LABELS[c.id];
 
   $("a-submit").innerHTML = `${icon("search")} Tìm kiếm`;
   $("a-cat").innerHTML = `<option value="">Tất cả phân loại</option>` +
@@ -28,7 +28,7 @@
     const min = parseMoney($("a-min").value), max = parseMoney($("a-max").value);
     const parts = [];
     if (name) parts.push(`Tên: “${escapeHtml(name)}”`);
-    if (c) parts.push(`Loại: ${c.id === "TOOL" ? "Dụng cụ & Sơn" : c.id}`);
+    if (c) parts.push(`Loại: ${catLabel(c)}`);
     if (min !== "" || max !== "") parts.push(`Giá: ${min !== "" ? money(min) : "0đ"} - ${max !== "" ? money(max) : "không giới hạn"}`);
 
     const params = new URLSearchParams({ q: name });
@@ -43,6 +43,10 @@
     toast("Đã xóa điều kiện tìm kiếm", "", "info");
   });
 
-  $("a-quick").innerHTML = CATEGORIES.map((c) =>
-    `<a class="adv-chip" href="products.html?cat=${c.id}"><span class="grade grade-${c.id}">${c.id === "TOOL" ? "TOOL" : c.id}</span> ${c.id === "TOOL" ? "Dụng cụ & Sơn" : c.name}</a>`).join("");
+  $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<b>Tìm kiếm nâng cao</b>`;
+
+  // Gợi ý từ khóa phổ biến: bấm vào -> sang trang kết quả tìm kiếm có sẵn
+  const suggestions = ["Freedom", "Unicorn", "RX-78-2", "Zaku", "Kìm cắt"];
+  $("a-quick").innerHTML = suggestions.map((k) =>
+    `<a class="adv-chip" href="products.html?q=${encodeURIComponent(k)}">${icon("search")} ${k}</a>`).join("");
 })();

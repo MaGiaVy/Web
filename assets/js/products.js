@@ -4,7 +4,7 @@
 // - products.html?q=...        : trang KẾT QUẢ TÌM KIẾM có sẵn (không lọc thật)
 //   (từ tìm kiếm nâng cao có thêm &loai=..&tu=..&den=.. chỉ để hiện lại điều kiện đã nhập)
 (function () {
-  const PER_PAGE = 8;
+  const PER_PAGE = 12;
   const $ = (id) => document.getElementById(id);
   const list = $("product-list");
   const cat = getCategory(getParam("cat"));
@@ -18,17 +18,21 @@
     return SHOP_PRODUCTS;
   }
 
-  function catLabel(c) {
-    return c.id === "TOOL" ? "Dụng cụ & Sơn" : `${c.name} (${c.id})`;
-  }
+  const catLabel = (c) => CATEGORY_LABELS[c.id];
 
   // Tiêu đề, breadcrumb
-  const titles = { search: "Kết quả tìm kiếm", category: cat ? catLabel(cat) : "", all: "Tất cả sản phẩm" };
+  const titles = { search: "Kết quả tìm kiếm", category: cat ? catLabel(cat) : "", all: "Tất cả mô hình" };
   $("list-title").textContent = titles[mode];
   $("list-subtitle").textContent = mode === "search" ? "Các sản phẩm phù hợp với yêu cầu của bạn"
-    : mode === "category" ? cat.desc : "Mô hình Gundam chính hãng và dụng cụ lắp ráp";
-  $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<a href="products.html">Sản phẩm</a>` +
-    (mode !== "all" ? `${icon("chevronRight")}<b>${titles[mode]}</b>` : "");
+    : mode === "category" ? (cat.id === "TOOL" ? cat.desc : `${cat.name} (${cat.id}) · tỉ lệ ${cat.scale} — ${cat.desc}`)
+    : "Mô hình Gundam chính hãng và dụng cụ lắp ráp";
+  $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}${mode === "all" ? "<b>Tất cả mô hình</b>" : `<a href="products.html">Tất cả mô hình</a>${icon("chevronRight")}<b>${titles[mode]}</b>`}`;
+
+  // Hàng nút danh mục (xem theo phân loại)
+  if (mode !== "search") {
+    $("cat-tabs").innerHTML = `<a href="products.html" class="${mode === "all" ? "active" : ""}">Tất cả</a>` +
+      CATEGORIES.map((c) => `<a href="products.html?cat=${c.id}" class="${cat && cat.id === c.id ? "active" : ""}">${CATEGORY_LABELS[c.id]}</a>`).join("");
+  }
 
   // Điều kiện đã tìm (chỉ hiển thị lại)
   if (mode === "search") {
@@ -62,6 +66,6 @@
   if (mode === "search") {
     toast("Đã tìm kiếm", keyword ? `Từ khóa: “${escapeHtml(keyword)}”` : "Hiển thị kết quả tìm kiếm");
   } else if (mode === "category") {
-    toast(`Danh mục ${cat.id === "TOOL" ? "Dụng cụ & Sơn" : cat.name}`, `Có ${items().length} sản phẩm`, "info");
+    toast(`Danh mục ${CATEGORY_LABELS[cat.id]}`, `Có ${items().length} sản phẩm`, "info");
   }
 })();

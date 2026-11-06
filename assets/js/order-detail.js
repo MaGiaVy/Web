@@ -2,7 +2,7 @@
 (function () {
   const order = getOrder(getParam("id")) || ORDERS.find((o) => o.userId === CURRENT_USER_ID);
   const $ = (id) => document.getElementById(id);
-  document.title = `Đơn hàng #${order.id} - DVK Gunpla`;
+  document.title = `Đơn hàng #${order.id} - Frame & Form`;
 
   $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<a href="orders.html">Lịch sử mua hàng</a>${icon("chevronRight")}<b>Đơn #${order.id}</b>`;
   $("od-title").innerHTML = `Đơn hàng #${order.id} &nbsp;${statusChip(order.status)}`;

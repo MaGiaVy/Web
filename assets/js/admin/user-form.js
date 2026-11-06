@@ -65,7 +65,7 @@
     ["uf-city", "uf-ward"].forEach((id) => { $(id).disabled = true; });
     $("uf-pass-field").hidden = true;
     $("form-actions").hidden = true;
-    document.title = `${u.name} - Quản trị DVK Gunpla`;
+    document.title = `${u.name} - Quản trị Frame & Form`;
 
     // Đơn hàng của khách
     const orders = ORDERS.filter((o) => o.userId === u.id).sort((a, b) => b.datetime.localeCompare(a.datetime));

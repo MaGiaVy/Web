@@ -5,7 +5,7 @@
 // ĐƯỜNG DẪN - để link và ảnh không bị vỡ dù trang nằm ở đâu
 // index.html ở thư mục gốc; trang trong pages/ và admin/ đặt data-root="../" trên thẻ body
 const ROOT = document.body.dataset.root || "";
-// Ảnh, file trong assets/:  asset("images/logo.svg")
+// Ảnh, file trong assets/:  asset("images/frame-form.svg")
 const asset = (path) => ROOT + "assets/" + path;
 // Trang khách hàng:  page("cart.html"), page("index.html")
 function page(name) {
@@ -201,6 +201,14 @@ function confirmDialog({ title, message, body = "", iconName, okText = "Đồng 
 // ============================================================
 // THẺ SẢN PHẨM & PHÂN TRANG
 // ============================================================
+// Tên danh mục dễ hiểu, dùng chung cho thẻ sản phẩm, tiêu đề trang, nút danh mục
+const CATEGORY_LABELS = { HG: "Mẫu gọn nhẹ", RG: "Mẫu nhiều chi tiết", MG: "Mẫu trưng bày", PG: "Mô hình cỡ lớn", SD: "Mẫu mini", TOOL: "Đồ nghề lắp ráp" };
+
+// Mức giảm cao nhất trong các mẫu đang có giá gốc (lấy từ dữ liệu, không ghi cứng)
+function maxSaleDiscount() {
+  return Math.max(0, ...SHOP_PRODUCTS.filter((p) => p.oldPrice).map(discountPercent));
+}
+
 function productCard(p) {
   const off = discountPercent(p);
   return `
@@ -213,14 +221,10 @@ function productCard(p) {
         </div>
       </a>
       <div class="product-body">
-        <div class="product-meta"><span class="grade grade-${p.category}">${p.category === "TOOL" ? "TOOL" : p.category}</span><span>${escapeHtml(p.series)}</span></div>
+        <div class="product-meta"><span class="product-type">${CATEGORY_LABELS[p.category] || "Mô hình sưu tầm"}</span><span>${escapeHtml(p.series)}</span></div>
         <a class="product-name" href="${page("product.html")}?id=${p.id}" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</a>
-        <div class="product-stats">
-          <span class="star">${icon("star")} ${p.rating.toFixed(1)}</span>
-          <span>Đã bán ${numberDot(p.sold)}</span>
-        </div>
         <div class="product-price">
-          <span class="price">${money(p.price)}</span>
+          <span class="price${p.oldPrice ? " price-sale" : ""}">${money(p.price)}</span>
           ${p.oldPrice ? `<span class="price-old">${money(p.oldPrice)}</span>` : ""}
         </div>
         <div class="product-actions">
@@ -247,6 +251,14 @@ function bindAddToCart(scope = document) {
 function renderPagination(container, totalItems, perPage, current, onChange) {
   const pages = Math.max(1, Math.ceil(totalItems / perPage));
   if (totalItems <= perPage) { container.innerHTML = ""; return; }
+  // Bảng nằm trong khung có chân bảng (admin, Tổng quan...): chuyển trang không cuộn, nên giữ chiều cao
+  // bằng trang đầy đủ để nút phân trang đứng yên. Trang danh sách bên khách tự cuộn lên đầu nên để co tự nhiên.
+  const foot = container.closest(".table-foot");
+  const box = foot && foot.previousElementSibling;
+  if (box) {
+    box.style.minHeight = Math.max(parseFloat(box.style.minHeight) || 0, box.offsetHeight) + "px";
+    box.style.alignContent = "start"; // xếp sát lên trên, không kéo giãn dòng cho đầy chiều cao
+  }
   let html = `<div class="pagination">
     <button data-page="${current - 1}" ${current === 1 ? "disabled" : ""} aria-label="Trang trước">${icon("chevronLeft")}</button>`;
   for (let i = 1; i <= pages; i++) {

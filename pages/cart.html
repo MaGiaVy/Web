@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giỏ hàng - DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
+  <title>Giỏ hàng - Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body data-page="cart" data-root="../">
@@ -36,6 +36,14 @@
         <div class="summary-body">
           <div class="summary-row"><span>Tạm tính (<span id="sum-count">0</span> sản phẩm)</span><b id="sum-sub">0đ</b></div>
           <div class="summary-row"><span>Phí vận chuyển</span><b id="sum-ship">0đ</b></div>
+          <form class="coupon-box" id="coupon-form" autocomplete="off">
+            <label for="coupon-input">Mã giảm giá</label>
+            <div class="coupon-row">
+              <input class="input" id="coupon-input" placeholder="Nhập mã, vd: GUNPLA10">
+              <button class="btn btn-outline" type="submit">Áp dụng</button>
+            </div>
+            <small id="coupon-hint"></small>
+          </form>
           <div class="summary-total"><span>Tổng cộng</span><b id="sum-total">0đ</b></div>
           <div class="summary-note" id="ship-note"></div>
           <a class="btn btn-primary btn-lg btn-block" id="go-checkout" href="checkout.html">Tiến hành đặt hàng</a>

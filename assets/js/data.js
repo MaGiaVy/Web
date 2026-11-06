@@ -32,41 +32,41 @@ const PRODUCTS = [
   [4, "Zaku II Char's Custom", "Mobile Suit Gundam", "HG", 360000, 0, 30, 189, "mono:char", "Chiếc Zaku đỏ nhanh gấp ba lần của Char Aznable."],
   [5, "Gundam Calibarn", "The Witch from Mercury", "HG", 480000, 520000, 18, 143, "gundam:calibarn", "Thiết kế thanh mảnh, đi kèm bộ Bit Staves trong suốt."],
   [6, "Gundam Exia", "Mobile Suit Gundam 00", "HG", 300000, 0, 40, 256, "gundam:exia", "Bảy thanh kiếm GN, màu xanh trắng kinh điển của series 00."],
-  [7, "Strike Freedom Gundam", "Gundam SEED Destiny", "HG", 520000, 0, 25, 233, "gundam:freedom", "Đôi cánh vàng DRAGOON tháo rời, phiên bản Revive."],
+  [7, "Strike Freedom Gundam", "Gundam SEED Destiny", "HG", 520000, 570000, 25, 233, "gundam:freedom", "Đôi cánh vàng DRAGOON tháo rời, phiên bản Revive."],
   [8, "Unicorn Gundam (Destroy Mode)", "Gundam Unicorn", "HG", 450000, 0, 22, 164, "unicorn:unicorn", "Khung Psycho-frame đỏ dạng trong, sừng chữ V mở rộng."],
-  [9, "Wing Gundam", "Gundam Wing", "HG", 320000, 0, 33, 147, "gundam:wing", "Có thể chuyển đổi sang dạng Bird Mode."],
+  [9, "Wing Gundam", "Gundam Wing", "HG", 320000, 350000, 33, 147, "gundam:wing", "Có thể chuyển đổi sang dạng Bird Mode."],
   [10, "Gundam Lfrith", "The Witch from Mercury", "HG", 390000, 0, 20, 0, "gundam:lfrith", "Hàng mới về - phối màu trắng hồng thanh lịch."],
   [11, "RX-78-2 Gundam Ver.2.0", "Mobile Suit Gundam", "RG", 750000, 820000, 26, 154, "gundam:rx78", "Khung Advanced MS Joint giúp tạo dáng cực kỳ linh hoạt."],
   [12, "Strike Freedom Gundam", "Gundam SEED Destiny", "RG", 850000, 0, 19, 211, "gundam:freedom", "Khung trong mạ vàng, cánh xòe đẹp mắt."],
   [13, "Nu Gundam", "Char's Counterattack", "RG", 1150000, 1290000, 15, 132, "gundam:nu", "Sáu Fin Funnel lớn, khung Psycho-frame chi tiết."],
-  [14, "Unicorn Gundam", "Gundam Unicorn", "RG", 1050000, 0, 17, 98, "unicorn:unicorn", "Chuyển đổi Unicorn Mode - Destroy Mode ngay trên một mô hình."],
+  [14, "Unicorn Gundam", "Gundam Unicorn", "RG", 1050000, 1150000, 17, 98, "unicorn:unicorn", "Chuyển đổi Unicorn Mode - Destroy Mode ngay trên một mô hình."],
   [15, "Wing Gundam Zero EW", "Gundam Wing Endless Waltz", "RG", 780000, 0, 21, 120, "gundam:wing", "Đôi cánh thiên thần với lông vũ tách rời từng lớp."],
   [16, "Sazabi", "Char's Counterattack", "RG", 1350000, 0, 12, 87, "mono:sazabi", "Khối giáp đỏ đồ sộ, mono-eye có thể di chuyển."],
   [17, "Zaku II Mass Production", "Mobile Suit Gundam", "RG", 650000, 0, 24, 76, "mono:zaku", "Phiên bản sản xuất hàng loạt với ống dẫn khí linh hoạt."],
   [18, "Gundam Exia", "Mobile Suit Gundam 00", "RG", 720000, 0, 20, 102, "gundam:exia", "Đi kèm sticker hiệu ứng và GN Sword mở rộng."],
-  [19, "Hi-Nu Gundam", "Beltorchika's Children", "RG", 1250000, 0, 14, 93, "gundam:hinu", "Fin Funnel dạng cánh, phối màu xanh tím sang trọng."],
+  [19, "Hi-Nu Gundam", "Beltorchika's Children", "RG", 1250000, 1350000, 14, 93, "gundam:hinu", "Fin Funnel dạng cánh, phối màu xanh tím sang trọng."],
   [20, "Destiny Gundam", "Gundam SEED Destiny", "RG", 880000, 0, 16, 0, "gundam:destiny", "Hàng mới về - cánh Wings of Light đỏ rực."],
-  [21, "Freedom Gundam Ver.2.0", "Gundam SEED", "MG", 1250000, 0, 14, 88, "gundam:freedom", "Khung xương đầy đủ, cánh xòe 10 cánh tuyệt đẹp."],
+  [21, "Freedom Gundam Ver.2.0", "Gundam SEED", "MG", 1250000, 1390000, 14, 88, "gundam:freedom", "Khung xương đầy đủ, cánh xòe 10 cánh tuyệt đẹp."],
   [22, "Gundam Barbatos", "Iron-Blooded Orphans", "MG", 1150000, 0, 13, 74, "gundam:barbatos", "Lộ rõ khung Gundam Frame bên trong, kèm Mace khổng lồ."],
   [23, "Sazabi Ver.Ka", "Char's Counterattack", "MG", 2400000, 2650000, 8, 61, "mono:sazabi", "Thiết kế của Hajime Katoki, kèm decal nước cao cấp."],
   [24, "Nu Gundam Ver.Ka", "Char's Counterattack", "MG", 2300000, 0, 9, 57, "gundam:nu", "Fin Funnel có thể tạo dáng tấn công độc lập."],
   [25, "Gundam Exia", "Mobile Suit Gundam 00", "MG", 1100000, 0, 15, 69, "gundam:exia", "Có đèn LED cho cụm GN Drive (bán kèm riêng)."],
-  [26, "Zaku II Ver.2.0", "Mobile Suit Gundam", "MG", 950000, 0, 18, 53, "mono:zaku", "Bản 2.0 với tỷ lệ cơ thể cân đối hơn."],
+  [26, "Zaku II Ver.2.0", "Mobile Suit Gundam", "MG", 950000, 1050000, 18, 53, "mono:zaku", "Bản 2.0 với tỷ lệ cơ thể cân đối hơn."],
   [27, "Unicorn Gundam Ver.Ka", "Gundam Unicorn", "MG", 1650000, 0, 11, 66, "unicorn:unicorn", "Psycho-frame tách màu rõ nét, chuyển đổi hoàn chỉnh."],
   [28, "Strike Freedom Full Burst", "Gundam SEED Destiny", "MG", 1450000, 0, 10, 48, "gundam:freedom", "Khung mạ vàng, tư thế Full Burst đặc trưng."],
-  [29, "Wing Gundam Zero EW Ver.Ka", "Gundam Wing Endless Waltz", "MG", 1550000, 0, 12, 59, "gundam:wing", "Cánh lông vũ tỉ mỉ, kèm Twin Buster Rifle."],
+  [29, "Wing Gundam Zero EW Ver.Ka", "Gundam Wing Endless Waltz", "MG", 1550000, 1690000, 12, 59, "gundam:wing", "Cánh lông vũ tỉ mỉ, kèm Twin Buster Rifle."],
   [30, "RX-78-2 Gundam Ver.3.0", "Mobile Suit Gundam", "MG", 1050000, 0, 16, 0, "gundam:rx78", "Hàng mới về - giáp mở để lộ khung trong."],
   [31, "RX-78-2 Gundam Unleashed", "Mobile Suit Gundam", "PG", 6500000, 7200000, 5, 23, "gundam:rx78", "Đỉnh cao Gunpla với hơn 1.000 chi tiết và hệ thống đèn LED."],
   [32, "Strike Freedom Gundam", "Gundam SEED Destiny", "PG", 5200000, 0, 4, 18, "gundam:freedom", "Khung mạ vàng sang trọng, cánh DRAGOON kích thước lớn."],
   [33, "Unicorn Gundam", "Gundam Unicorn", "PG", 6800000, 0, 3, 15, "unicorn:unicorn", "Hỗ trợ bộ LED chuyển đổi Psycho-frame phát sáng."],
-  [34, "Gundam Exia", "Mobile Suit Gundam 00", "PG", 4800000, 0, 6, 21, "gundam:exia", "Đèn LED tích hợp, chi tiết cơ khí cực kỳ dày đặc."],
+  [34, "Gundam Exia", "Mobile Suit Gundam 00", "PG", 4800000, 5200000, 6, 21, "gundam:exia", "Đèn LED tích hợp, chi tiết cơ khí cực kỳ dày đặc."],
   [35, "00 Raiser", "Mobile Suit Gundam 00", "PG", 5900000, 0, 4, 12, "gundam:raiser", "Kết hợp 00 Gundam và O Raiser, kích thước đồ sộ."],
   [36, "Wing Gundam Zero EW", "Gundam Wing Endless Waltz", "PG", 4500000, 0, 5, 0, "gundam:wing", "Hàng mới về - cánh lông vũ khép mở như thật."],
   [37, "SDEX RX-78-2 Gundam", "Mobile Suit Gundam", "SD", 180000, 0, 60, 412, "gundam:rx78", "Phiên bản chibi nhỏ xinh, lắp trong 30 phút."],
-  [38, "SDCS Strike Freedom", "Gundam SEED Destiny", "SD", 250000, 0, 45, 265, "gundam:freedom", "Khung Cross Silhouette, đổi được tỉ lệ cơ thể."],
+  [38, "SDCS Strike Freedom", "Gundam SEED Destiny", "SD", 250000, 270000, 45, 265, "gundam:freedom", "Khung Cross Silhouette, đổi được tỉ lệ cơ thể."],
   [39, "SDCS Unicorn Gundam", "Gundam Unicorn", "SD", 260000, 0, 38, 198, "unicorn:unicorn", "Unicorn dạng SD với khung Cross Silhouette."],
   [40, "BB Senshi Sazabi", "Char's Counterattack", "SD", 220000, 0, 32, 176, "mono:sazabi", "Sazabi phiên bản BB Senshi dễ thương."],
-  [41, "SDEX Gundam Barbatos", "Iron-Blooded Orphans", "SD", 180000, 0, 50, 233, "gundam:barbatos", "Kèm Mace thu nhỏ, màu sắc tách sẵn."],
+  [41, "SDEX Gundam Barbatos", "Iron-Blooded Orphans", "SD", 180000, 200000, 50, 233, "gundam:barbatos", "Kèm Mace thu nhỏ, màu sắc tách sẵn."],
   [42, "SDEX Wing Gundam Zero EW", "Gundam Wing Endless Waltz", "SD", 180000, 0, 47, 210, "gundam:wing", "Đôi cánh trắng nhỏ gọn, dễ trưng bày."],
   [43, "SDEX Gundam Exia", "Mobile Suit Gundam 00", "SD", 180000, 0, 44, 187, "gundam:exia", "Exia phiên bản SD với GN Sword gập được."],
   [44, "SDCS Gundam Aerial", "The Witch from Mercury", "SD", 280000, 0, 30, 0, "gundam:aerial", "Hàng mới về - Aerial chibi kèm khiên Bit."],
@@ -75,12 +75,12 @@ const PRODUCTS = [
   [47, "Bút kẻ lằn chìm Panel Line", "Bút kẻ lằn", "TOOL", 45000, 0, 120, 512, "tool:marker", "Mực chảy vào rãnh, lau sạch phần thừa dễ dàng."],
   [48, "Dao mũi nhọn kỹ thuật 30°", "Dụng cụ cắt", "TOOL", 85000, 0, 70, 284, "tool:knife", "Dùng để gọt bavia và cắt decal chính xác."],
   [49, "Bộ giấy nhám 6 cấp độ", "Dụng cụ mài", "TOOL", 60000, 0, 150, 455, "tool:sand", "Từ độ nhám 400 đến 2000, xử lý vết cắt hoàn hảo."],
-  [50, "Sơn phủ Mr. Hobby Top Coat (mờ)", "Sơn phủ", "TOOL", 180000, 0, 40, 198, "tool:spray", "Phủ mờ giúp mô hình trông như thật, che dấu kẻ lằn."],
+  [50, "Sơn phủ Mr. Hobby Top Coat (mờ)", "Sơn phủ", "TOOL", 180000, 195000, 40, 198, "tool:spray", "Phủ mờ giúp mô hình trông như thật, che dấu kẻ lằn."],
   [51, "Đế trưng bày Action Base 1", "Phụ kiện", "TOOL", 150000, 0, 55, 167, "tool:base", "Đế tạo dáng bay cho HG, RG và MG."],
-  [52, "Bộ dụng cụ lắp ráp cơ bản 8 món", "Bộ dụng cụ", "TOOL", 320000, 0, 35, 0, "tool:kit", "Hàng mới về - đủ kìm, dao, nhíp, nhám cho người mới."],
+  [52, "Bộ dụng cụ lắp ráp cơ bản 8 món", "Bộ dụng cụ", "TOOL", 320000, 350000, 35, 0, "tool:kit", "Hàng mới về - đủ kìm, dao, nhíp, nhám cho người mới."],
 ].map(([id, name, series, category, price, oldPrice, stock, sold, art, desc]) => ({
   id, name, series, category, price, oldPrice, stock, sold, art, desc,
-  image: "images/products/p" + String(id).padStart(2, "0") + ".svg",
+  image: "images/studio/p" + String(id).padStart(2, "0") + ".svg",
   rating: sold > 250 ? 4.9 : sold > 0 ? 4.8 : 5.0,
   isNew: sold === 0,
   hidden: HIDDEN_PRODUCT_IDS.includes(id),
@@ -292,6 +292,13 @@ const CANCEL_REASONS = {
 
 // [mã đơn, mã khách, ngày giờ đặt, trạng thái, thanh toán, địa chỉ số, [[mã SP, số lượng]], ghi chú]
 const ORDERS = [
+  ["DH26011801", 1, "2026-01-18 14:20", "delivered", "cod", 1, [[37, 1], [47, 1]], ""],
+  ["DH26020901", 1, "2026-02-09 10:45", "delivered", "bank", 1, [[2, 1]], ""],
+  ["DH26030701", 1, "2026-03-07 19:30", "delivered", "cod", 2, [[6, 1], [49, 2]], ""],
+  ["DH26041201", 1, "2026-04-12 09:05", "delivered", "cod", 1, [[11, 1]], ""],
+  ["DH26052301", 1, "2026-05-23 16:40", "delivered", "bank", 1, [[41, 1], [42, 1], [43, 1]], ""],
+  ["DH26061401", 1, "2026-06-14 11:10", "delivered", "cod", 2, [[48, 1], [51, 1]], "Giao giờ hành chính"],
+  ["DH26072801", 1, "2026-07-28 20:15", "delivered", "bank", 1, [[17, 1]], ""],
   ["DH26080501", 1, "2026-08-05 09:12", "delivered", "cod", 1, [[1, 1], [46, 1]], ""],
   ["DH26080808", 3, "2026-08-08 20:41", "delivered", "cod", 1, [[2, 1], [3, 1]], ""],
   ["DH26081203", 2, "2026-08-12 14:05", "delivered", "bank", 1, [[31, 1]], "Gói kỹ giúp mình nhé"],
@@ -352,6 +359,104 @@ const SEARCH_RESULT_IDS = [1, 11, 21, 31, 37, 7, 12, 28, 38, 8, 14, 27, 33, 39, 
 
 // Đơn hàng vừa đặt (hiển thị ở trang đặt hàng thành công)
 const LAST_ORDER_ID = "DH26110201";
+
+// ============================================================
+// THÔNG TIN CỬA HÀNG (1 chỗ duy nhất: header, footer, Liên hệ, Hướng dẫn, giỏ hàng
+// và trang admin "Cài đặt cửa hàng" đều đọc từ đây nên luôn khớp nhau)
+// ============================================================
+const STORE_INFO = {
+  street: "12 Đường Mô Hình",
+  ward: "Phường Sài Gòn",
+  city: "TP. Hồ Chí Minh",
+  hotline: "1900 6868",
+  email: "hotro@frameform.vn",
+  hours: "8:00 – 21:00, mỗi ngày",
+  shipFee: 30000,          // phí giao hàng mỗi đơn
+  freeShipFrom: 1000000,   // đơn từ mức này được miễn phí giao hàng
+  returnDays: 7,           // số ngày được đổi trả
+  deliveryDays: "2 – 5",   // thời gian giao dự kiến (ngày làm việc)
+};
+const storeAddress = () => `${STORE_INFO.street}, ${STORE_INFO.ward}, ${STORE_INFO.city}`;
+
+// ============================================================
+// CHƯƠNG TRÌNH KHUYẾN MÃI + MÃ GIẢM GIÁ (dữ liệu mẫu, không có ngày hết hạn thật
+// để thầy mở ngày nào cũng hiển thị đúng)
+// ============================================================
+const PROMOTION = {
+  name: "Tuần lễ Gunpla",
+  desc: "Ưu đãi dành cho người yêu sưu tầm: nhiều mẫu được giảm giá tại Frame & Form.",
+  active: true,       // đang chạy
+  showTopbar: true,   // hiện dòng thông báo trên thanh đen đầu trang
+};
+
+// type: percent = giảm %, amount = giảm số tiền, ship = miễn phí giao hàng
+const COUPONS = [
+  { code: "GUNPLA10", type: "percent", value: 10, maxDiscount: 200000, minOrder: 1500000, used: 18, limit: 100, status: "active", desc: "Giảm 10% (tối đa 200.000đ) cho đơn từ 1.500.000đ" },
+  { code: "MOIBATDAU", type: "amount", value: 50000, minOrder: 500000, used: 31, limit: 200, status: "active", desc: "Giảm 50.000đ cho đơn từ 500.000đ, dành cho người mới" },
+  { code: "FREESHIP", type: "ship", value: 0, minOrder: 300000, used: 42, limit: 150, status: "active", desc: "Miễn phí giao hàng cho đơn từ 300.000đ" },
+  { code: "PG500K", type: "amount", value: 500000, minOrder: 5000000, used: 3, limit: 20, status: "paused", desc: "Giảm 500.000đ cho đơn mô hình cỡ lớn từ 5.000.000đ" },
+  { code: "THANG10", type: "percent", value: 5, maxDiscount: 100000, minOrder: 800000, used: 60, limit: 60, status: "ended", desc: "Giảm 5% cho đơn từ 800.000đ (chương trình tháng 10)" },
+  { code: "DUNGCU15", type: "percent", value: 8, maxDiscount: 50000, minOrder: 300000, used: 12, limit: 80, status: "active", desc: "Giảm 8% (tối đa 50.000đ) cho đơn đồ nghề lắp ráp từ 300.000đ" },
+  { code: "SINHVIEN", type: "amount", value: 30000, minOrder: 400000, used: 27, limit: 100, status: "active", desc: "Giảm 30.000đ cho đơn từ 400.000đ, dành cho học sinh, sinh viên" },
+  { code: "MINI2026", type: "amount", value: 20000, minOrder: 350000, used: 9, limit: 50, status: "active", desc: "Giảm 20.000đ cho đơn mẫu mini từ 350.000đ" },
+  { code: "TRUNGBAY", type: "percent", value: 5, maxDiscount: 150000, minOrder: 2000000, used: 4, limit: 30, status: "paused", desc: "Giảm 5% (tối đa 150.000đ) cho đơn mẫu trưng bày từ 2.000.000đ" },
+  { code: "SINHNHAT", type: "amount", value: 100000, minOrder: 1000000, used: 15, limit: 15, status: "ended", desc: "Giảm 100.000đ mừng sinh nhật cửa hàng cho đơn từ 1.000.000đ" },
+  { code: "THANG9", type: "percent", value: 5, maxDiscount: 100000, minOrder: 800000, used: 48, limit: 50, status: "ended", desc: "Giảm 5% cho đơn từ 800.000đ (chương trình tháng 9)" },
+  { code: "TRUNGTHU", type: "ship", value: 0, minOrder: 200000, used: 70, limit: 70, status: "ended", desc: "Miễn phí giao hàng dịp Trung thu cho đơn từ 200.000đ" },
+];
+const COUPON_STATUS = {
+  active: { label: "Đang chạy", chip: "chip-delivered" },
+  paused: { label: "Tạm dừng", chip: "chip-pending" },
+  ended: { label: "Đã kết thúc", chip: "chip-gray" },
+};
+function couponValueText(c) {
+  if (c.type === "percent") return `Giảm ${c.value}%${c.maxDiscount ? ` (tối đa ${money(c.maxDiscount)})` : ""}`;
+  if (c.type === "amount") return `Giảm ${money(c.value)}`;
+  return "Miễn phí giao hàng";
+}
+
+// ============================================================
+// EMAIL GỬI KHÁCH HÀNG (chiến dịch mẫu)
+// ============================================================
+const EMAIL_AUDIENCES = {
+  all: "Tất cả khách hàng",
+  buyers: "Khách đã từng mua hàng",
+  new: "Khách chưa mua lần nào",
+};
+const EMAIL_CAMPAIGNS = [
+  { id: 4, subject: "Tuần lễ Gunpla đã bắt đầu – giảm đến 11%", audience: "all", coupon: "GUNPLA10", date: "2026-11-01 08:00", sent: 24, opened: 15, status: "sent" },
+  { id: 3, subject: "Quà chào mừng: mã MOIBATDAU giảm 50.000đ", audience: "new", coupon: "MOIBATDAU", date: "2026-10-20 09:30", sent: 14, opened: 8, status: "sent" },
+  { id: 2, subject: "Mẫu mới về: Gundam Lfrith và Wing Gundam", audience: "buyers", coupon: "", date: "2026-10-05 19:00", sent: 6, opened: 5, status: "sent" },
+  { id: 5, subject: "Đơn đầu tiên? Miễn phí giao hàng cho bạn", audience: "new", coupon: "FREESHIP", date: "", sent: 0, opened: 0, status: "draft" },
+  { id: 12, subject: "Ưu đãi riêng cho học sinh, sinh viên: mã SINHVIEN", audience: "new", coupon: "SINHVIEN", date: "", sent: 0, opened: 0, status: "draft" },
+  { id: 11, subject: "Đồ nghề lắp ráp giảm 8% – mã DUNGCU15", audience: "buyers", coupon: "DUNGCU15", date: "2026-10-28 18:30", sent: 7, opened: 5, status: "sent" },
+  { id: 10, subject: "Cảm ơn bạn đã mua hàng tháng 10", audience: "buyers", coupon: "", date: "2026-10-25 09:00", sent: 7, opened: 4, status: "sent" },
+  { id: 9, subject: "Mẫu mini giá chỉ từ 180.000đ", audience: "all", coupon: "MINI2026", date: "2026-10-12 20:00", sent: 23, opened: 13, status: "sent" },
+  { id: 8, subject: "Mừng sinh nhật Frame & Form – giảm 100.000đ", audience: "all", coupon: "SINHNHAT", date: "2026-09-20 08:30", sent: 22, opened: 16, status: "sent" },
+  { id: 7, subject: "Chương trình tháng 9: giảm 5% mọi đơn từ 800.000đ", audience: "all", coupon: "THANG9", date: "2026-09-01 08:00", sent: 21, opened: 12, status: "sent" },
+  { id: 6, subject: "Trung thu miễn phí giao hàng", audience: "all", coupon: "TRUNGTHU", date: "2026-08-28 19:00", sent: 20, opened: 11, status: "sent" },
+  { id: 1, subject: "Chào mừng bạn đến với Frame & Form", audience: "new", coupon: "", date: "2026-08-15 09:00", sent: 12, opened: 9, status: "sent" },
+];
+
+// ============================================================
+// LỜI NHẮN TỪ TRANG LIÊN HỆ (mẫu)
+// ============================================================
+const CONTACT_MESSAGES = [
+  { id: 14, name: "Mai Quốc Thịnh", phone: "0981 777 345", email: "quocthinh@gmail.com", date: "2026-11-02 21:30", status: "new", message: "Mã SINHVIEN có cần xuất trình thẻ sinh viên không ạ?" },
+  { id: 13, name: "Đỗ Thanh Tùng", phone: "0938 112 233", email: "thanhtung@gmail.com", date: "2026-11-02 20:15", status: "new", message: "Shop có còn mẫu Unicorn Gundam bản PG không? Mình muốn đặt trước 1 hộp." },
+  { id: 12, name: "Nguyễn Minh Anh", phone: "0901 234 567", email: "minhanh@gmail.com", date: "2026-11-01 10:02", status: "new", message: "Mã GUNPLA10 có dùng chung với miễn phí giao hàng được không ạ?" },
+  { id: 11, name: "Hồ Bảo Ngọc", phone: "0977 888 120", email: "baongoc@gmail.com", date: "2026-10-29 14:40", status: "replied", message: "Mình mới bắt đầu chơi, nên mua bộ dụng cụ nào trước?" },
+  { id: 10, name: "Võ Quốc Bảo", phone: "0908 777 888", email: "quocbao@gmail.com", date: "2026-10-24 09:18", status: "replied", message: "Hộp Sazabi nhận được bị móp góc, mình muốn đổi hộp mới." },
+  { id: 9, name: "Lương Khánh Linh", phone: "0965 432 109", email: "khanhlinh@gmail.com", date: "2026-10-18 16:55", status: "replied", message: "Shop có giao hàng ra Phú Quốc không?" },
+  { id: 8, name: "Phan Đức Huy", phone: "0912 004 556", email: "duchuy@gmail.com", date: "2026-10-15 11:20", status: "replied", message: "Kìm GodHand có bảo hành không shop?" },
+  { id: 7, name: "Trịnh Mai Phương", phone: "0989 321 654", email: "maiphuong@gmail.com", date: "2026-10-12 08:45", status: "replied", message: "Mình muốn mua làm quà sinh nhật, shop có gói quà không?" },
+  { id: 6, name: "Bùi Tuấn Kiệt", phone: "0977 456 123", email: "tuankiet@gmail.com", date: "2026-10-09 21:10", status: "replied", message: "Đơn của mình bao giờ giao tới Đà Nẵng vậy shop?" },
+  { id: 5, name: "Ngô Thanh Hà", phone: "0903 555 777", email: "thanhha@gmail.com", date: "2026-10-05 15:30", status: "replied", message: "Shop có bán sơn xịt màu không hay chỉ có sơn phủ?" },
+  { id: 4, name: "Đặng Gia Bảo", phone: "0938 246 802", email: "giabao@gmail.com", date: "2026-09-30 10:05", status: "replied", message: "Mẫu RG khác HG chỗ nào, nên mua loại nào trước?" },
+  { id: 3, name: "Lê Gia Hân", phone: "0912 345 678", email: "giahan@gmail.com", date: "2026-09-26 19:40", status: "replied", message: "Mình đổi địa chỉ nhận hàng được không ạ?" },
+  { id: 2, name: "Châu Minh Trí", phone: "0966 135 790", email: "minhtri@gmail.com", date: "2026-09-21 13:15", status: "replied", message: "Shop có nhận đặt hàng số lượng lớn cho câu lạc bộ không?" },
+  { id: 1, name: "Vũ Ngọc Ánh", phone: "0947 864 213", email: "ngocanh@gmail.com", date: "2026-09-17 09:50", status: "replied", message: "Đế trưng bày Action Base có vừa mẫu MG không?" },
+];
 
 // Cho phép script Node đọc dữ liệu để tạo hình (không ảnh hưởng trình duyệt)
 if (typeof module !== "undefined") module.exports = { PRODUCTS, CATEGORIES };

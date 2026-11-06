@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1480" viewBox="0 0 1920 1480">
+<defs>
+  <linearGradient id="goldHero" x2="1" y2="1"><stop stop-color="#181512"/><stop offset="1" stop-color="#393023"/></linearGradient>
+  <linearGradient id="oliveHero" x2="1" y2="1"><stop stop-color="#e8e4d9"/><stop offset="1" stop-color="#d6d4c5"/></linearGradient>
+  <linearGradient id="blueHero" x2="1" y2="1"><stop stop-color="#e9eff8"/><stop offset="1" stop-color="#d7e1ef"/></linearGradient>
+  <linearGradient id="cyberHero" x2="1" y2="1"><stop stop-color="#182833"/><stop offset="1" stop-color="#263f4a"/></linearGradient>
+  <radialGradient id="glowGold"><stop stop-color="#d6b88a" stop-opacity=".44"/><stop offset="1" stop-color="#d6b88a" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowBlue"><stop stop-color="#6c91d2" stop-opacity=".38"/><stop offset="1" stop-color="#6c91d2" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowCyan"><stop stop-color="#5de3e2" stop-opacity=".38"/><stop offset="1" stop-color="#5de3e2" stop-opacity="0"/></radialGradient>
+  <symbol id="mech" viewBox="0 0 180 250">
+    <g stroke="currentColor" stroke-width="5" stroke-linejoin="round">
+      <path fill="currentColor" d="M77 12h26l8 21-9 17H78l-9-17z"/><path fill="currentColor" d="M73 29 49 9l7 37 17 9M107 29l24-20-7 37-17 9"/>
+      <path fill="currentColor" d="m69 53 42 0 21 25-8 51H56l-8-51z"/><path fill="none" d="M69 64h42m-21 0v48m-28-19h28m22 0H84"/>
+      <path fill="currentColor" d="m56 68-31 8-9 62 19 8 18-47m80-31 31 8 9 62-19 8-18-47"/>
+      <path fill="currentColor" d="m59 129 62 0 8 20-12 25H63l-12-25z"/><path fill="none" d="M69 141h42m-34 22h27"/>
+      <path fill="currentColor" d="m64 174 28 0-4 57-17 14-12-8 5-38zm26 0h28l5 63-12 8-17-14z"/><path fill="none" d="m65 197 21 0m9 0h22"/>
+      <path fill="currentColor" d="M20 84h12v60H20z"/><path fill="none" d="M20 91h12m-12 7h12"/>
+    </g>
+  </symbol>
+</defs>
+<rect width="1920" height="1480" fill="#e9ebef"/>
+<text x="64" y="58" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#101318">FRAME &amp; FORM  HOMEPAGE STYLE STUDIES</text>
+<text x="64" y="89" font-family="Arial,sans-serif" font-size="16" fill="#5e6570">Four visual directions built around the same collector-friendly storefront</text>
+
+<!-- OPTION 01: NOIR / CHAMPAGNE -->
+<g transform="translate(50 120)">
+ <rect width="900" height="620" rx="18" fill="#fff"/><text x="24" y="31" font-family="Arial" font-size="14" font-weight="700" fill="#8d7049" letter-spacing="2">01  NOIR / CHAMPAGNE</text>
+ <g transform="translate(12 48)"><rect width="876" height="558" rx="8" fill="#0b0b0c"/>
+  <rect width="876" height="38" fill="#101011"/><path d="M0 38h876" stroke="#292725"/>
+  <text x="23" y="25" font-family="Arial" font-size="16" font-weight="700" fill="#d9c09b" letter-spacing="3">FRAME &amp; FORM</text>
+  <text x="368" y="24" font-family="Arial" font-size="10" fill="#c9c1b5">COLLECTIONS NEW ARRIVALS ABOUT</text><text x="817" y="24" font-family="Arial" font-size="11" fill="#e1d2b8"> BAG</text>
+  <rect x="17" y="50" width="842" height="231" rx="6" fill="url(#goldHero)"/><circle cx="657" cy="164" r="176" fill="url(#glowGold)"/>
+  <text x="47" y="91" font-family="Arial" font-size="9" fill="#d9c09b" letter-spacing="2">OBJECTS FOR YOUR COLLECTION</text><text x="47" y="132" font-family="Arial" font-size="28" font-weight="700" fill="#f5f0e7">A collection,</text><text x="47" y="164" font-family="Arial" font-size="28" font-weight="700" fill="#f5f0e7">built your way.</text>
+  <text x="47" y="190" font-family="Arial" font-size="10" fill="#c3b9a8">Discover considered pieces to build, display and keep.</text><rect x="47" y="207" width="112" height="29" rx="2" fill="#d4b78c"/><text x="62" y="225" font-family="Arial" font-size="9" font-weight="700" fill="#15120e">EXPLORE THE EDIT</text>
+  <g color="#d7c09b" transform="translate(608 72) scale(.78)"><use href="#mech" width="180" height="250"/></g><path d="M558 252h230" stroke="#b89a6b" opacity=".5"/>
+  <text x="22" y="309" font-family="Arial" font-size="14" font-weight="700" fill="#f3eee5">Curated for collectors</text><text x="750" y="309" font-family="Arial" font-size="9" fill="#d5c3a6">VIEW ALL  </text>
+  <g font-family="Arial"><rect x="20" y="321" width="198" height="167" rx="4" fill="#171716"/><rect x="229" y="321" width="198" height="167" rx="4" fill="#171716"/><rect x="438" y="321" width="198" height="167" rx="4" fill="#171716"/><rect x="647" y="321" width="207" height="167" rx="4" fill="#171716"/>
+  <g color="#d8d9d7" transform="translate(78 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#d3b07e" transform="translate(287 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#aeb9c6" transform="translate(496 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#c8c4bb" transform="translate(706 329) scale(.43)"><use href="#mech" width="180" height="250"/></g>
+  <text x="32" y="468" font-size="9" fill="#d4b78c">DISPLAY PIECE</text><text x="32" y="481" font-size="11" fill="#f4efe6">The Signature Build $48</text><text x="241" y="468" font-size="9" fill="#d4b78c">NEW ARRIVAL</text><text x="241" y="481" font-size="11" fill="#f4efe6">Atlas Frame Kit $62</text><text x="450" y="468" font-size="9" fill="#d4b78c">EDITOR'S PICK</text><text x="450" y="481" font-size="11" fill="#f4efe6">Aero Unit $39</text><text x="659" y="468" font-size="9" fill="#d4b78c">COLLECTOR SERIES</text><text x="659" y="481" font-size="11" fill="#f4efe6">No. 04 $75</text></g>
+  <path d="M20 512h836" stroke="#302d28"/><text x="24" y="535" font-family="Arial" font-size="9" fill="#aca79d">A considered space for objects worth keeping.</text><text x="744" y="535" font-family="Arial" font-size="9" fill="#d4b78c">FRAME &amp; FORM</text>
+ </g>
+</g>
+
+<!-- OPTION 02: WARM IVORY / OLIVE -->
+<g transform="translate(970 120)">
+ <rect width="900" height="620" rx="18" fill="#fff"/><text x="24" y="31" font-family="Arial" font-size="14" font-weight="700" fill="#56634d" letter-spacing="2">02  WARM IVORY / OLIVE</text>
+ <g transform="translate(12 48)"><rect width="876" height="558" rx="8" fill="#f5f2e9"/>
+  <rect width="876" height="39" fill="#faf8f2"/><path d="M0 39h876" stroke="#dfddd3"/>
+  <text x="23" y="26" font-family="Georgia" font-size="15" font-weight="700" fill="#374338" letter-spacing="2">FRAME &amp; FORM</text><text x="371" y="25" font-family="Arial" font-size="10" fill="#555d50">SHOP JOURNAL OUR STUDIO</text><text x="817" y="25" font-family="Arial" font-size="11" fill="#374338"> BAG</text>
+  <rect x="17" y="51" width="842" height="228" rx="7" fill="url(#oliveHero)"/><circle cx="669" cy="164" r="176" fill="#b2b49e" opacity=".38"/>
+  <text x="47" y="91" font-family="Arial" font-size="9" fill="#56634d" letter-spacing="2">A LITTLE ROOM FOR YOUR NEXT OBSESSION</text><text x="47" y="132" font-family="Georgia" font-size="29" font-weight="700" fill="#29342c">Make room</text><text x="47" y="165" font-family="Georgia" font-size="29" font-weight="700" fill="#29342c">for wonder.</text>
+  <text x="47" y="191" font-family="Arial" font-size="10" fill="#596056">Thoughtful finds for builders, dreamers and collectors.</text><rect x="47" y="208" width="111" height="29" rx="14" fill="#56634d"/><text x="63" y="226" font-family="Arial" font-size="9" font-weight="700" fill="#fff">FIND YOUR NEXT</text>
+  <g color="#5b6853" transform="translate(610 72) scale(.78)"><use href="#mech" width="180" height="250"/></g><path d="M574 250h214" stroke="#90947e" opacity=".5"/>
+  <text x="22" y="309" font-family="Georgia" font-size="16" font-weight="700" fill="#29342c">Chosen for the shelf</text><text x="750" y="309" font-family="Arial" font-size="9" fill="#56634d">SEE EVERYTHING </text>
+  <g font-family="Arial"><rect x="20" y="321" width="198" height="167" rx="7" fill="#fffdf8"/><rect x="229" y="321" width="198" height="167" rx="7" fill="#fffdf8"/><rect x="438" y="321" width="198" height="167" rx="7" fill="#fffdf8"/><rect x="647" y="321" width="207" height="167" rx="7" fill="#fffdf8"/>
+  <g color="#899184" transform="translate(78 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#b47b57" transform="translate(287 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#667d8c" transform="translate(496 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#8b8b78" transform="translate(706 329) scale(.43)"><use href="#mech" width="180" height="250"/></g>
+  <text x="32" y="468" font-size="9" fill="#78816e">EASY TO START</text><text x="32" y="481" font-size="11" fill="#30372e">The First Build $48</text><text x="241" y="468" font-size="9" fill="#78816e">A NEW FAVORITE</text><text x="241" y="481" font-size="11" fill="#30372e">Atlas Frame Kit $62</text><text x="450" y="468" font-size="9" fill="#78816e">DISPLAY READY</text><text x="450" y="481" font-size="11" fill="#30372e">Aero Unit $39</text><text x="659" y="468" font-size="9" fill="#78816e">COLLECTOR'S PICK</text><text x="659" y="481" font-size="11" fill="#30372e">No. 04 $75</text></g>
+  <path d="M20 512h836" stroke="#dedbd0"/><text x="24" y="535" font-family="Arial" font-size="9" fill="#74796e">Objects to build, display and enjoy.</text><text x="744" y="535" font-family="Arial" font-size="9" fill="#56634d">EST. FOR COLLECTORS</text>
+ </g>
+</g>
+
+<!-- OPTION 03: PAPER WHITE / COBALT -->
+<g transform="translate(50 790)">
+ <rect width="900" height="620" rx="18" fill="#fff"/><text x="24" y="31" font-family="Arial" font-size="14" font-weight="700" fill="#315da8" letter-spacing="2">03  PAPER WHITE / COBALT</text>
+ <g transform="translate(12 48)"><rect width="876" height="558" rx="8" fill="#fbfcfe"/>
+  <rect width="876" height="39" fill="#fff"/><path d="M0 39h876" stroke="#dfe5ef"/>
+  <text x="23" y="26" font-family="Arial" font-size="15" font-weight="700" fill="#192438" letter-spacing="2">FRAME &amp; FORM</text><text x="368" y="25" font-family="Arial" font-size="10" fill="#46546a">SHOP ALL JUST IN DISCOVER</text><text x="817" y="25" font-family="Arial" font-size="11" fill="#192438"> BAG</text>
+  <rect x="17" y="51" width="842" height="228" rx="5" fill="url(#blueHero)"/><circle cx="671" cy="164" r="176" fill="url(#glowBlue)"/>
+  <text x="47" y="91" font-family="Arial" font-size="9" fill="#315da8" letter-spacing="2">THE OBJECTS WE KEEP</text><text x="47" y="132" font-family="Arial" font-size="29" font-weight="700" fill="#192438">Find your next</text><text x="47" y="165" font-family="Arial" font-size="29" font-weight="700" fill="#192438">favorite piece.</text>
+  <text x="47" y="191" font-family="Arial" font-size="10" fill="#58677d">A clear, considered catalog for every kind of collector.</text><rect x="47" y="208" width="103" height="29" rx="4" fill="#315da8"/><text x="66" y="226" font-family="Arial" font-size="9" font-weight="700" fill="#fff">BROWSE THE SHOP</text>
+  <g color="#375a8d" transform="translate(610 72) scale(.78)"><use href="#mech" width="180" height="250"/></g><path d="M570 250h218" stroke="#718bb3" opacity=".5"/>
+  <text x="22" y="309" font-family="Arial" font-size="15" font-weight="700" fill="#192438">Popular right now</text><text x="750" y="309" font-family="Arial" font-size="9" fill="#315da8">VIEW ALL  </text>
+  <g font-family="Arial"><rect x="20" y="321" width="198" height="167" rx="5" fill="#f1f4f9"/><rect x="229" y="321" width="198" height="167" rx="5" fill="#f1f4f9"/><rect x="438" y="321" width="198" height="167" rx="5" fill="#f1f4f9"/><rect x="647" y="321" width="207" height="167" rx="5" fill="#f1f4f9"/>
+  <g color="#9baec8" transform="translate(78 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#5a77a4" transform="translate(287 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#a37a76" transform="translate(496 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#687b91" transform="translate(706 329) scale(.43)"><use href="#mech" width="180" height="250"/></g>
+  <text x="32" y="468" font-size="9" fill="#315da8">BEGINNER FRIENDLY</text><text x="32" y="481" font-size="11" fill="#192438">The First Build $48</text><text x="241" y="468" font-size="9" fill="#315da8">NEW</text><text x="241" y="481" font-size="11" fill="#192438">Atlas Frame Kit $62</text><text x="450" y="468" font-size="9" fill="#315da8">DISPLAY FAVORITE</text><text x="450" y="481" font-size="11" fill="#192438">Aero Unit $39</text><text x="659" y="468" font-size="9" fill="#315da8">LIMITED EDITION</text><text x="659" y="481" font-size="11" fill="#192438">No. 04 $75</text></g>
+  <path d="M20 512h836" stroke="#dfe5ef"/><text x="24" y="535" font-family="Arial" font-size="9" fill="#66738a">Build something. Keep it close.</text><text x="744" y="535" font-family="Arial" font-size="9" fill="#315da8">FRAME &amp; FORM</text>
+ </g>
+</g>
+
+<!-- OPTION 04: SLATE / CYAN -->
+<g transform="translate(970 790)">
+ <rect width="900" height="620" rx="18" fill="#fff"/><text x="24" y="31" font-family="Arial" font-size="14" font-weight="700" fill="#287e82" letter-spacing="2">04  SLATE / CYAN</text>
+ <g transform="translate(12 48)"><rect width="876" height="558" rx="8" fill="#101b21"/>
+  <rect width="876" height="39" fill="#132127"/><path d="M0 39h876" stroke="#2d4148"/>
+  <text x="23" y="26" font-family="Arial" font-size="15" font-weight="700" fill="#e8f0ed" letter-spacing="2">FRAME &amp; FORM</text><text x="368" y="25" font-family="Arial" font-size="10" fill="#b4c8c6">SHOP COLLECTIONS FIELD NOTES</text><text x="817" y="25" font-family="Arial" font-size="11" fill="#d8e7e2"> BAG</text>
+  <rect x="17" y="51" width="842" height="228" rx="5" fill="url(#cyberHero)"/><circle cx="675" cy="165" r="177" fill="url(#glowCyan)"/>
+  <text x="47" y="91" font-family="Arial" font-size="9" fill="#70d6d0" letter-spacing="2">COLLECT WHAT MOVES YOU</text><text x="47" y="132" font-family="Arial" font-size="29" font-weight="700" fill="#f1f5f3">Made to build.</text><text x="47" y="165" font-family="Arial" font-size="29" font-weight="700" fill="#f1f5f3">Meant to display.</text>
+  <text x="47" y="191" font-family="Arial" font-size="10" fill="#b9cbc8">Discover your next project, at your own pace.</text><rect x="47" y="208" width="105" height="29" rx="3" fill="#51c7c2"/><text x="66" y="226" font-family="Arial" font-size="9" font-weight="700" fill="#102326">EXPLORE MODELS</text>
+  <g color="#9ee6df" transform="translate(610 72) scale(.78)"><use href="#mech" width="180" height="250"/></g><path d="M570 250h218" stroke="#51c7c2" opacity=".55"/>
+  <text x="22" y="309" font-family="Arial" font-size="15" font-weight="700" fill="#edf3f0">Picked for your shelf</text><text x="750" y="309" font-family="Arial" font-size="9" fill="#70d6d0">SEE ALL  </text>
+  <g font-family="Arial"><rect x="20" y="321" width="198" height="167" rx="5" fill="#1a2a30"/><rect x="229" y="321" width="198" height="167" rx="5" fill="#1a2a30"/><rect x="438" y="321" width="198" height="167" rx="5" fill="#1a2a30"/><rect x="647" y="321" width="207" height="167" rx="5" fill="#1a2a30"/>
+  <g color="#cad5d5" transform="translate(78 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#70c7c5" transform="translate(287 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#c89a78" transform="translate(496 329) scale(.43)"><use href="#mech" width="180" height="250"/></g><g color="#90adbb" transform="translate(706 329) scale(.43)"><use href="#mech" width="180" height="250"/></g>
+  <text x="32" y="468" font-size="9" fill="#70d6d0">START HERE</text><text x="32" y="481" font-size="11" fill="#edf3f0">The First Build $48</text><text x="241" y="468" font-size="9" fill="#70d6d0">NEW ARRIVAL</text><text x="241" y="481" font-size="11" fill="#edf3f0">Atlas Frame Kit $62</text><text x="450" y="468" font-size="9" fill="#70d6d0">DISPLAY PICK</text><text x="450" y="481" font-size="11" fill="#edf3f0">Aero Unit $39</text><text x="659" y="468" font-size="9" fill="#70d6d0">COLLECTOR'S EDIT</text><text x="659" y="481" font-size="11" fill="#edf3f0">No. 04 $75</text></g>
+  <path d="M20 512h836" stroke="#2d4148"/><text x="24" y="535" font-family="Arial" font-size="9" fill="#a5b9b7">Find a piece. Make it part of your story.</text><text x="744" y="535" font-family="Arial" font-size="9" fill="#70d6d0">FRAME &amp; FORM</text>
+ </g>
+</g>
+</svg>
+

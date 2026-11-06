@@ -16,7 +16,7 @@
     render();
   }
   const valid = ORDERS.filter((o) => o.status !== "cancelled");
-  const LOW_STOCK = 15; // còn từ 15 sản phẩm trở xuống thì báo sắp hết
+  const LOW_STOCK = 5; // còn từ 5 sản phẩm trở xuống thì báo sắp hết
 
   // Mốc "hôm nay" = ngày của đơn mới nhất trong dữ liệu mẫu (thầy mở ngày nào số liệu vẫn đúng)
   const DAY = 86400000;
@@ -39,7 +39,8 @@
   const new7 = between(ORDERS, daysAgo(6), iso(today)).length;
   const newPrev = between(ORDERS, daysAgo(13), daysAgo(7)).length;
   const waitConfirm = ORDERS.filter((o) => o.status === "pending").length;
-  const waitShip = ORDERS.filter((o) => o.status === "confirmed" || o.status === "shipping").length;
+  const waitShip = ORDERS.filter((o) => o.status === "confirmed").length;
+  const shipping = ORDERS.filter((o) => o.status === "shipping").length;
   const lowStock = PRODUCTS.filter((p) => p.stock <= LOW_STOCK);
 
   const kpis = [
@@ -47,8 +48,8 @@
       `Đơn đã giao từ ${formatDate(daysAgo(29))} đến ${formatDate(iso(today))}`, "kpi-green"],
     ["orders", "Đơn mới 7 ngày", new7, trend(new7, newPrev, "so với kỳ trước"), "orders.html",
       `Đơn đặt từ ${formatDate(daysAgo(6))} đến ${formatDate(iso(today))}`, "kpi-blue"],
-    ["clock", "Đơn cần xử lý", waitConfirm + waitShip, `${waitConfirm} chờ xác nhận · ${waitShip} chờ giao`, "#h-pending", "Xem các đơn cần xử lý", "kpi-purple"],
-    ["warning", "Sắp hết hàng", lowStock.length, `${lowStock.filter((p) => p.stock <= 5).length} sản phẩm còn ≤ 5`, "#h-stock", `Sản phẩm còn từ ${LOW_STOCK} cái trở xuống`, "kpi-amber"],
+    ["clock", "Đơn cần xử lý", waitConfirm + waitShip + shipping, [waitConfirm && `${waitConfirm} chờ xác nhận`, waitShip && `${waitShip} chờ giao`, shipping && `${shipping} đang giao`].filter(Boolean).join(" · "), "#h-pending", "Xem các đơn cần xử lý", "kpi-purple"],
+    ["warning", "Sắp hết hàng", lowStock.length, `Sản phẩm còn ≤ ${LOW_STOCK} cái`, "#h-stock", `Sản phẩm còn từ ${LOW_STOCK} cái trở xuống`, "kpi-amber"],
   ];
   $("kpis").innerHTML = kpis.map(([ic, label, value, sub, href, tip, color]) => `
     <a class="card kpi kpi-link" href="${href}" title="${tip}"><div class="kpi-icon ${color}">${icon(ic)}</div>
@@ -80,7 +81,7 @@
       <td><div class="cell-user"><span class="avatar">${initials(u.name)}</span><div><b>${u.name}</b><small>${u.email}</small></div></div></td>
       <td class="nowrap">${addr.ward}<br><small class="muted">${addr.city}</small></td>
       <td class="center num"><b>${count}</b> đơn</td>
-      <td class="right num"><b class="text-red">${money(total)}</b></td>
+      <td class="right num"><b>${money(total)}</b></td>
       <td class="right"><a class="btn btn-dark btn-sm" href="orders.html?user=${u.id}" data-view-orders="${u.name}">${icon("orders")} Xem danh sách đơn hàng</a></td>
     </tr>`;
   }, "khách đã mua hàng");
@@ -99,5 +100,5 @@
       <td class="center"><span class="chip ${p.stock <= 5 ? "chip-cancelled" : "chip-pending"}">Còn ${p.stock}</span></td>
       <td class="center num">${numberDot(p.sold)}</td>
       <td class="right"><a class="btn btn-outline btn-sm" href="product-form.html?id=${p.id}">${icon("edit")} Sửa</a></td>
-    </tr>`, "sản phẩm còn từ 15 trở xuống");
+    </tr>`, `sản phẩm còn từ ${LOW_STOCK} trở xuống`);
 })();

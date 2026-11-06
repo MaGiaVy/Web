@@ -4,6 +4,8 @@
   const myOrders = ORDERS.filter((o) => o.userId === user.id).sort((a, b) => b.datetime.localeCompare(a.datetime));
   const totalSpent = myOrders.filter((o) => o.status !== "cancelled").reduce((s, o) => s + o.total, 0);
   let current = "all";
+  const PER_PAGE = 5;
+  let pageNum = 1;
 
   document.getElementById("orders-sub").innerHTML = `Bạn có <b>${myOrders.length}</b> đơn hàng · Tổng chi tiêu <b class="text-red">${money(totalSpent)}</b>`;
 
@@ -17,7 +19,8 @@
   function renderList() {
     // Web tĩnh: bấm tab chỉ hiện thông báo, danh sách đơn giữ nguyên
     const list = myOrders;
-    document.getElementById("order-list").innerHTML = list.length ? list.map((o) => {
+    const start = (pageNum - 1) * PER_PAGE;
+    document.getElementById("order-list").innerHTML = list.length ? list.slice(start, start + PER_PAGE).map((o) => {
       const shown = o.items.slice(0, 2);
       const more = o.items.length - shown.length;
       return `
@@ -42,6 +45,11 @@
           </div>
         </article>`;
     }).join("") : `<div class="card empty-state">${icon("orders")}<h3>Không có đơn hàng nào</h3><p>Chưa có đơn hàng ở trạng thái này.</p></div>`;
+    renderPagination(document.getElementById("order-pages"), list.length, PER_PAGE, pageNum, (p) => {
+      pageNum = p;
+      renderList();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
   document.getElementById("status-tabs").addEventListener("click", (e) => {

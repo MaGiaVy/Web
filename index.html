@@ -3,98 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DVK Gunpla - Cửa hàng mô hình Gundam chính hãng</title>
-  <link rel="icon" href="assets/images/logo.svg">
+  <meta name="theme-color" content="#111111">
+  <title>Frame &amp; Form — Objects to Keep</title>
+  <link rel="icon" href="assets/images/frame-form.svg">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/home.css">
 </head>
-<body data-page="home">
+<body data-page="home" class="store-home">
   <div id="site-header"></div>
 
-  <main class="container">
-    <!-- Banner chính -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <span class="eyebrow">Gunpla chính hãng Bandai</span>
-          <h1>Lắp ráp <span>huyền thoại</span><br>của riêng bạn</h1>
-          <p>Hơn 50 mẫu Gundam từ HG cho người mới đến PG cho dân sưu tầm, kèm đầy đủ dụng cụ và sơn để hoàn thiện mô hình như ý.</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary btn-lg" href="pages/products.html">Mua sắm ngay <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="btn btn-outline btn-lg" href="pages/products.html?cat=PG">Xem dòng PG</a>
-          </div>
-          <div class="hero-stats">
-            <div><b>52+</b><span>Mẫu mô hình</span></div>
-            <div><b>6.000+</b><span>Khách hàng</span></div>
-            <div><b>100%</b><span>Hàng chính hãng</span></div>
-          </div>
-        </div>
+  <main>
+    <section class="hero hero-collectors" aria-labelledby="home-title">
+      <h1 class="hero-watermark" id="home-title">BEST<br>SELLERS</h1>
+      <div class="hero-inner container hero-carousel" id="hero-carousel">
+        <span class="hero-kicker">GÓC SƯU TẦM <i> / </i> 01</span>
+        <div class="hero-side hero-side-left" aria-hidden="true"><img class="hero-side-image-left" alt=""></div>
+        <button class="hero-arrow hero-arrow-left" id="hero-prev" type="button" aria-label="Mẫu nổi bật trước"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
         <div class="hero-art">
-          <img src="assets/images/hero.svg" alt="Mô hình RX-78-2 Gundam">
-          <div class="hero-tag t1"><b>RX-78-2</b>Gundam huyền thoại</div>
-          <div class="hero-tag t2"><b>Giảm đến 10%</b>Cho dòng PG</div>
+          <img src="assets/images/studio/p13.svg" alt="Hình minh họa mô hình trưng bày" fetchpriority="high">
+          <span class="hero-art-index">F&amp;F<br>01</span>
+        </div>
+        <button class="hero-arrow hero-arrow-right" id="hero-next" type="button" aria-label="Mẫu nổi bật tiếp theo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="hero-side hero-side-right" aria-hidden="true"><img class="hero-side-image-right" alt=""></div>
+        <div class="hero-copy">
+          <p>Mô hình lắp ráp, mẫu trưng bày và dụng cụ cho góc riêng của bạn.</p>
+          <a class="hero-cta-link" href="pages/products.html">Khám phá các mẫu <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
 
-    <!-- Cam kết -->
-    <section class="usp" id="usp"></section>
+    <div class="container home-content">
+      <section class="home-spotlight" aria-labelledby="spotlight-title">
+        <div class="home-spotlight-copy">
+          <span class="eyebrow">DANH MỤC NỔI BẬT</span>
+          <h2 id="spotlight-title">Góc trưng bày cho bộ sưu tập của bạn</h2>
+          <p>Mô hình có khung xương bên trong, cử động linh hoạt, nổi bật trên kệ, bàn làm việc hay tủ kính.</p>
+          <a href="pages/products.html?cat=MG">Xem mẫu trưng bày <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        <a class="home-spotlight-art" href="pages/product.html?id=23" aria-label="Xem Sazabi Ver.Ka">
+          <img src="assets/images/studio/p23.svg" alt="Hình minh họa Sazabi Ver.Ka">
+          <span><small>Mẫu trưng bày</small><b>Sazabi Ver.Ka</b><em>2.400.000đ</em></span>
+        </a>
+      </section>
 
-    <!-- Danh mục -->
-    <section class="section">
-      <div class="section-head">
-        <div><span class="eyebrow">Danh mục</span><h2>Chọn theo <span>phân loại</span></h2></div>
-        <a class="link" href="pages/products.html">Xem tất cả sản phẩm →</a>
-      </div>
-      <div class="cat-grid" id="home-categories"></div>
-    </section>
+      <section class="section home-bestsellers" aria-labelledby="bestsellers-title">
+        <div class="section-head">
+          <div><span class="eyebrow">Mẫu được chọn</span><h2 id="bestsellers-title">Mẫu <span>nổi bật</span></h2></div>
+          <a class="link" href="pages/products.html">Xem tất cả mẫu <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="product-grid" id="home-best"></div>
+      </section>
 
-    <!-- Bán chạy -->
-    <section class="section">
-      <div class="section-head">
-        <div><span class="eyebrow">Hot nhất</span><h2>Sản phẩm <span>bán chạy</span></h2><p>Những mẫu được cộng đồng Gunpla lựa chọn nhiều nhất</p></div>
-        <a class="link" href="pages/products.html">Xem thêm →</a>
-      </div>
-      <div class="product-grid" id="home-best"></div>
-    </section>
+      <section class="section home-categories" aria-labelledby="category-title">
+        <div class="section-head">
+          <div><span class="eyebrow">Chọn theo nhu cầu</span><h2 id="category-title">Tìm mẫu <span>phù hợp</span></h2></div>
+          <a class="link" href="pages/products.html">Xem tất cả mẫu <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="cat-grid" id="home-categories"></div>
+      </section>
 
-    <!-- Khuyến mãi -->
-    <section class="section promo">
-      <div class="promo-card promo-red">
-        <span class="eyebrow" style="color:#ffd2d6">Real Grade</span>
-        <h3>Nu Gundam RG</h3>
-        <p>Fin Funnel cỡ lớn, khung Psycho-frame chi tiết. Giảm giá 11% trong tháng này.</p>
-        <a class="btn btn-outline" href="pages/product.html?id=13">Xem chi tiết</a>
-        <img src="assets/images/products/p13.svg" alt="RG Nu Gundam">
-      </div>
-      <div class="promo-card promo-gold">
-        <span class="eyebrow" style="color:#fde68a">Perfect Grade</span>
-        <h3>PG Unleashed RX-78-2</h3>
-        <p>Đỉnh cao Gunpla với hơn 1.000 chi tiết và hệ thống đèn LED tích hợp.</p>
-        <a class="btn btn-outline" href="pages/product.html?id=31">Xem chi tiết</a>
-        <img src="assets/images/products/p31.svg" alt="PG Unleashed RX-78-2">
-      </div>
-    </section>
-
-    <!-- Hàng mới -->
-    <section class="section">
-      <div class="section-head">
-        <div><span class="eyebrow">Mới cập bến</span><h2>Hàng <span>mới về</span></h2></div>
-        <a class="link" href="pages/products.html">Xem thêm →</a>
-      </div>
-      <div class="product-grid" id="home-new"></div>
-    </section>
-
-    <!-- Hướng dẫn chọn dòng -->
-    <section class="section">
-      <div class="section-head">
-        <div><span class="eyebrow">Cẩm nang</span><h2>Nên chọn dòng <span>nào?</span></h2></div>
-      </div>
-      <div class="guide" id="home-guide"></div>
-    </section>
+    </div>
   </main>
 
   <div id="site-footer"></div>
-
   <script src="assets/js/data.js"></script>
   <script src="assets/js/common.js"></script>
   <script src="assets/js/layout.js"></script>

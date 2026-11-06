@@ -12,12 +12,30 @@ function setLoggedIn(value) {
 }
 
 // Trang bắt buộc đăng nhập: chưa đăng nhập thì chuyển về trang đăng nhập
+// Tên các trang riêng tư, dùng cho thông báo ở trang đăng nhập
+const PRIVATE_PAGES = {
+  account: "Tài khoản của tôi",
+  orders: "Lịch sử mua hàng",
+  "order-detail": "Chi tiết đơn hàng",
+  checkout: "Thanh toán",
+  "order-success": "Đặt hàng thành công",
+};
 (function guardPrivatePages() {
-  const privatePages = ["account", "orders", "order-detail", "checkout", "order-success"];
-  if (privatePages.includes(document.body.dataset.page) && !isLoggedIn()) {
-    location.replace(page("login.html") + (document.body.dataset.page === "checkout" ? "?redirect=checkout" : ""));
+  const current = document.body.dataset.page;
+  if (PRIVATE_PAGES[current] && !isLoggedIn()) {
+    // Ghi nhớ trang đang muốn xem (kèm ?id=... nếu có) để đăng nhập xong quay lại đúng trang đó
+    location.replace(page("login.html") + "?redirect=" + encodeURIComponent(current + location.search));
   }
 })();
+
+// Đọc tham số redirect trên trang đăng nhập: chỉ chấp nhận các trang riêng tư ở trên
+function loginRedirectTarget() {
+  const value = getParam("redirect");
+  if (!value) return null;
+  const [name, query = ""] = value.split("?");
+  if (!PRIVATE_PAGES[name]) return null;
+  return { label: PRIVATE_PAGES[name], href: `${name}.html${query ? "?" + query : ""}` };
+}
 
 function renderHeader() {
   const holder = document.getElementById("site-header");
@@ -32,36 +50,43 @@ function renderHeader() {
     `<a href="${href}" class="${active ? "active" : ""}">${extra}${label}</a>`;
 
   const nav = [
-    navItem(page("index.html"), "Trang chủ", currentPage === "home", icon("home")),
-    navItem(page("products.html"), "Tất cả sản phẩm", currentPage === "products" && !cat && getParam("q") === null, icon("grid")),
-    ...CATEGORIES.map((c) =>
-      navItem(`${page("products.html")}?cat=${c.id}`, c.id === "TOOL" ? "Dụng cụ & Sơn" : c.name, currentPage === "products" && cat === c.id)),
+    navItem(page("index.html"), "Trang ch\u1ee7", currentPage === "home", icon("home")),
+    navItem(page("products.html"), "T\u1ea5t c\u1ea3 m\u00f4 h\u00ecnh", currentPage === "products" && !cat && getParam("q") === null, icon("grid")),
+    `<div class="nav-drop">
+      <button type="button" class="nav-drop-btn${currentPage === "products" && cat ? " active" : ""}" aria-haspopup="true" aria-expanded="false">Danh m\u1ee5c ${icon("chevronDown")}</button>
+      <div class="nav-drop-menu" role="menu">
+        ${CATEGORIES.map((c) => `<a href="${page("products.html")}?cat=${c.id}" class="${cat === c.id ? "current" : ""}">${CATEGORY_LABELS[c.id]}</a>`).join("")}
+      </div>
+    </div>`,
+    navItem(page("sale.html"), "Khuy\u1ebfn m\u00e3i", currentPage === "sale"),
+    navItem(page("guide.html"), "H\u01b0\u1edbng d\u1eabn mua h\u00e0ng", currentPage === "guide"),
+    navItem(page("contact.html"), "Li\u00ean h\u1ec7", currentPage === "contact"),
   ].join("");
 
   holder.outerHTML = `
   <div class="topbar">
     <div class="container">
       <div class="topbar-left">
-        <span>${icon("phone")} Hotline: 1900 6868</span>
-        <span>${icon("truck")} Miễn phí giao hàng cho đơn từ 1.000.000đ</span>
+        ${PROMOTION.active && PROMOTION.showTopbar ? `<span class="topbar-promo">${icon("tag")} ${PROMOTION.name}: giảm đến ${maxSaleDiscount()}% <a href="${page("sale.html")}">Xem ngay <span aria-hidden="true">&#8599;</span></a></span>` : ""}
+        <span>${icon("truck")} Miễn phí giao hàng cho đơn từ ${money(STORE_INFO.freeShipFrom)}</span>
       </div>
       <div class="topbar-right">
-        ${loggedIn ? `<a href="${page("orders.html")}">${icon("orders")} Tra cứu đơn hàng</a>` : ""}
-        <a href="${ROOT}admin/login.html">${icon("dashboard")} Trang quản trị</a>
+        <span>${icon("phone")} Hotline ${STORE_INFO.hotline} <i>·</i> ${STORE_INFO.hours.split(",")[0]}</span>
       </div>
     </div>
   </div>
   <header class="site-header">
     <div class="header-main">
       <div class="container">
-        <a class="brand" href="${page("index.html")}" aria-label="DVK Gunpla - Trang chủ">
-          <img src="${asset("images/logo.svg")}" alt="Logo DVK Gunpla">
-          <span class="brand-text"><b>DVK <em>GUNPLA</em></b><small>Gundam Model Store</small></span>
+        <a class="brand" href="${page("index.html")}" aria-label="Frame & Form - Trang chủ">
+          <img src="${asset("images/frame-form.svg")}" alt="Biểu tượng Frame & Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>M&#212; H&#204;NH &amp; V&#7852;T PH&#7848;M S&#431;U T&#7846;M</small></span>
         </a>
         <form class="header-search" id="header-search" action="${page("products.html")}" method="get" role="search">
           ${icon("search")}
-          <input type="text" name="q" id="header-search-input" value="${escapeHtml(q)}" placeholder="Tìm mô hình Gundam, dụng cụ... (vd: Unicorn, Sazabi)" autocomplete="off">
-          <button type="submit">Tìm kiếm</button>
+          <input type="text" name="q" id="header-search-input" value="${escapeHtml(q)}" placeholder="T&#236;m m&#244; h&#236;nh, &#273;&#7891; ngh&#7873;..." autocomplete="off">
+          <button type="submit">T&#236;m ki&#7871;m</button>
+          <a class="header-search-advanced" href="${page("advanced-search.html")}">${icon("sliders")}<span>N\u00e2ng cao</span></a>
         </form>
         <div class="header-actions">
           ${loggedIn ? `
@@ -91,10 +116,25 @@ function renderHeader() {
     <nav class="header-nav">
       <div class="container">
         ${nav}
-        <a href="${page("advanced-search.html")}" class="nav-right ${currentPage === "advanced-search" ? "active" : ""}">${icon("sliders")} Tìm kiếm nâng cao</a>
       </div>
     </nav>
   </header>`;
+
+  // Nút "Danh mục": bấm để mở/đóng danh sách (không tải lại trang), bấm ra ngoài thì đóng
+  const navDrop = document.querySelector(".nav-drop");
+  if (navDrop) {
+    const navDropBtn = navDrop.querySelector(".nav-drop-btn");
+    navDropBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navDropBtn.setAttribute("aria-expanded", String(navDrop.classList.toggle("open")));
+    });
+    document.addEventListener("click", (e) => {
+      if (!navDrop.contains(e.target)) {
+        navDrop.classList.remove("open");
+        navDropBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 
   // Menu tài khoản
   const menu = document.getElementById("user-menu");
@@ -138,39 +178,45 @@ function renderFooter() {
     <div class="container footer-top">
       <div class="footer-brand">
         <a class="brand" href="${page("index.html")}">
-          <img src="${asset("images/logo.svg")}" alt="Logo DVK Gunpla">
-          <span class="brand-text"><b>DVK <em>GUNPLA</em></b><small>Gundam Model Store</small></span>
+          <img src="${asset("images/frame-form.svg")}" alt="Biểu tượng Frame & Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>M&#212; H&#204;NH &amp; V&#7852;T PH&#7848;M S&#431;U T&#7846;M</small></span>
         </a>
-        <p>Cửa hàng mô hình Gundam chính hãng Bandai: HG, RG, MG, PG, SD cùng dụng cụ và sơn chuyên dụng cho người chơi Gunpla.</p>
+        <p>Mô hình lắp ráp và vật phẩm trưng bày cho người yêu sưu tầm, từ mẫu gọn nhẹ cho người mới đến mô hình cỡ lớn cho tủ kính.</p>
+        <ul class="footer-promises">
+          <li><span class="footer-promise-icon">${icon("shield")}</span> Mô hình chính hãng, nguyên hộp</li>
+          <li><span class="footer-promise-icon">${icon("box")}</span> Đóng gói chống sốc khi giao hàng</li>
+          <li><span class="footer-promise-icon">${icon("refresh")}</span> Đổi trả trong ${STORE_INFO.returnDays} ngày</li>
+        </ul>
       </div>
       <div>
         <h4>Danh mục</h4>
-        <ul>${CATEGORIES.map((c) => `<li><a href="${page("products.html")}?cat=${c.id}">${c.id === "TOOL" ? "Dụng cụ & Sơn" : `${c.name} (${c.id})`}</a></li>`).join("")}</ul>
+        <ul>${CATEGORIES.map((c) => `<li><a href="${page("products.html")}?cat=${c.id}">${CATEGORY_LABELS[c.id]}</a></li>`).join("")}</ul>
       </div>
       <div>
         <h4>Hỗ trợ</h4>
         <ul>
           ${isLoggedIn() ? `<li><a href="${page("orders.html")}">Lịch sử mua hàng</a></li>
-          <li><a href="${page("account.html")}">Tài khoản của tôi</a></li>` : ""}
+          <li><a href="${page("account.html")}">Tài khoản của tôi</a></li>` : `<li><a href="${page("login.html")}">Đăng nhập</a></li>
+          <li><a href="${page("register.html")}">Đăng ký tài khoản</a></li>`}
           <li><a href="${page("cart.html")}">Giỏ hàng</a></li>
-          <li><a href="${page("advanced-search.html")}">Tìm kiếm nâng cao</a></li>
-          <li><a href="${ROOT}admin/login.html">Trang quản trị</a></li>
+          <li><a href="${page("guide.html")}">Hướng dẫn mua hàng</a></li>
+          <li><a href="${page("contact.html")}">Liên hệ</a></li>
         </ul>
       </div>
       <div>
         <h4>Liên hệ</h4>
         <ul class="footer-contact">
-          <li>${icon("map")} <span>273 An Dương Vương, Phường Chợ Quán, TP. Hồ Chí Minh</span></li>
-          <li>${icon("phone")} <span>1900 6868 (8:00 - 21:00)</span></li>
-          <li>${icon("mail")} <span>hotro@dvkgunpla.vn</span></li>
-          <li>${icon("users")} <span>Nhóm thực hiện: Đạt - Vỹ - Khang</span></li>
+          <li>${icon("map")} <span>${storeAddress()}</span></li>
+          <li>${icon("phone")} <span>Hotline: ${STORE_INFO.hotline}</span></li>
+          <li>${icon("mail")} <span>${STORE_INFO.email}</span></li>
+          <li>${icon("clock")} <span>${STORE_INFO.hours}</span></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <span>© 2026 DVK Gunpla - Đồ án Lập trình Web</span>
-        <span>Giao diện mẫu - dữ liệu minh họa</span>
+        <span>© 2026 Frame &amp; Form</span>
+        <span>M&#7895;i m&#244; h&#236;nh, m&#7897;t d&#7845;u &#7845;n ri&#234;ng.</span>
       </div>
     </div>
   </footer>`;

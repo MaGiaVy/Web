@@ -49,7 +49,7 @@
     $("upload-text").textContent = "Đổi ảnh khác";
     $("file-name").textContent = `Ảnh hiện tại: ${editing.image.split("/").pop()}`;
     showPreview(asset(editing.image));
-    document.title = `Sửa ${editing.name} - Quản trị DVK Gunpla`;
+    document.title = `Sửa ${editing.name} - Quản trị Frame & Form`;
   } else {
     $("form-title").innerHTML = `${icon("plus")} Thêm sản phẩm mới`;
     showPreview("");

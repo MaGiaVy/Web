@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khuyến mãi - Quản trị Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="promotions" data-title="Khuyến mãi" data-crumb="Khuyến mãi">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+
+        <!-- Chương trình đang chạy (hiện ở thanh đầu trang + trang Khuyến mãi của khách) -->
+        <form class="card" id="promo-form" autocomplete="off">
+          <div class="card-head"><h2 id="h-promo"></h2><span id="promo-status"></span></div>
+          <div class="card-pad">
+            <div class="form-grid">
+              <label class="field"><span>Tên chương trình</span><input class="input" id="pm-name"></label>
+              <label class="field"><span>Trạng thái</span>
+                <select class="select" id="pm-active"><option value="1">Đang chạy</option><option value="0">Tạm dừng</option></select>
+              </label>
+              <label class="field full"><span>Mô tả (hiện ở trang Khuyến mãi)</span><textarea class="textarea" id="pm-desc" rows="2"></textarea></label>
+              <label class="check-line full"><input type="checkbox" id="pm-topbar"> Hiện dòng thông báo chương trình trên thanh đen đầu trang</label>
+            </div>
+            <p class="form-note" id="pm-note"></p>
+            <div class="form-actions">
+              <a class="btn btn-outline" href="../pages/sale.html" target="_blank" id="pm-view"></a>
+              <button class="btn btn-primary" type="submit">Lưu chương trình</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Mã giảm giá -->
+        <section class="card">
+          <div class="card-head"><h2 id="h-coupons"></h2><button class="btn btn-primary btn-sm" type="button" id="cp-new"></button></div>
+          <form class="coupon-editor card-pad" id="cp-form" autocomplete="off" hidden>
+            <h3 id="cp-form-title">Tạo mã giảm giá mới</h3>
+            <div class="form-grid cols-3">
+              <label class="field"><span>Mã giảm giá</span><input class="input" id="cp-code" placeholder="Vd: GUNPLA10"></label>
+              <label class="field"><span>Loại ưu đãi</span>
+                <select class="select" id="cp-type"><option value="percent">Giảm theo %</option><option value="amount">Giảm số tiền</option><option value="ship">Miễn phí giao hàng</option></select>
+              </label>
+              <label class="field"><span>Giá trị giảm</span><input class="input" id="cp-value" placeholder="Vd: 10 (%) hoặc 50.000"></label>
+              <label class="field"><span>Giảm tối đa (đ)</span><input class="input" id="cp-max" placeholder="Vd: 200.000"></label>
+              <label class="field"><span>Đơn tối thiểu (đ)</span><input class="input" id="cp-min" placeholder="Vd: 1.500.000"></label>
+              <label class="field"><span>Số lượt dùng tối đa</span><input class="input" id="cp-limit" type="number" min="1" placeholder="Vd: 100"></label>
+              <label class="field full"><span>Mô tả cho khách</span><input class="input" id="cp-desc" placeholder="Vd: Giảm 10% cho đơn từ 1.500.000đ"></label>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-outline" type="button" id="cp-cancel">Hủy</button>
+              <button class="btn btn-primary" type="submit">Lưu mã</button>
+            </div>
+          </form>
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th>Mã</th><th>Ưu đãi</th><th>Điều kiện</th><th>Đã dùng</th><th>Trạng thái</th><th class="right">Thao tác</th></tr></thead>
+            <tbody id="cp-body"></tbody>
+          </table></div>
+          <div class="table-foot" id="cp-foot"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/admin/admin-layout.js"></script>
+  <script src="../assets/js/admin/promotions.js"></script>
+</body>
+</html>
