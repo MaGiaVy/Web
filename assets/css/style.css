@@ -912,9 +912,6 @@ body:not(.admin) .auth-eyebrow { position: absolute; top: 32px; left: 40px; colo
 body:not(.admin) .auth-art p { color: #c4c8d3; }
 body:not(.admin) .auth-form .eyebrow { color: #8a6645; }
 body:not(.admin) .auth-form input[type="checkbox"] { accent-color: #111; width: 16px; height: 16px; }
-body:not(.admin) .auth-alt { margin-top: 18px; font-size: 12.5px; color: #9a978f; }
-body:not(.admin) .auth-alt .link { color: #77746d; font-weight: 600; }
-body:not(.admin) .auth-alt .link:hover { color: #111; }
 body:not(.admin) .auth-form .form-grid { margin-bottom: 16px; }
 body:not(.admin) .auth-form .form-grid .field { margin-bottom: 0; }
 
@@ -941,3 +938,4 @@ body:not(.admin) .topbar-promo a:hover { color: #fff; border-color: #fff; }
 .sale-coupon-code { flex: none; padding: 8px 12px; background: #111; color: #fff; font-family: var(--font-display); font-size: 15px; letter-spacing: .06em; }
 .sale-coupon p { color: var(--text-2); font-size: 13.5px; line-height: 1.5; }
 .sale-coupon small { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
+.summary-note:empty { display: none; }

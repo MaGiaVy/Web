@@ -1,6 +1,6 @@
 // TRANG GIỎ HÀNG - dữ liệu mẫu, thay đổi chỉ hiển thị trên trang (không lưu)
 (function () {
-  const cart = SAMPLE_CART.map((item) => ({ ...item }));
+  const cart = currentCart().map((item) => ({ ...item }));
   const body = document.getElementById("cart-body");
 
   function render() {
@@ -23,7 +23,9 @@
           <td class="right num"><b class="text-red">${money(p.price * item.qty)}</b></td>
           <td class="right"><button class="icon-btn" data-remove title="Xóa khỏi giỏ">${icon("trash")}</button></td>
         </tr>`;
-    }).join("") : `<tr><td colspan="5"><div class="empty-state">${icon("cart")}<h3>Giỏ hàng đang trống</h3><p>Hãy chọn vài mẫu Gundam thật ngầu nhé!</p><br><a class="btn btn-dark" href="products.html">Mua sắm ngay</a></div></td></tr>`;
+    }).join("") : loggedInNow()
+      ? `<tr><td colspan="5"><div class="empty-state">${icon("cart")}<h3>Giỏ hàng đang trống</h3><p>Hãy chọn vài mẫu Gundam thật ngầu nhé!</p><br><a class="btn btn-dark" href="products.html">Mua sắm ngay</a></div></td></tr>`
+      : `<tr><td colspan="5"><div class="empty-state">${icon("cart")}<h3>Giỏ hàng đang trống</h3><p>Đăng nhập để xem giỏ hàng và đặt hàng.</p><br><a class="btn btn-dark" href="login.html">Đăng nhập</a></div></td></tr>`;
     updateSummary();
   }
 
@@ -36,7 +38,7 @@
     document.getElementById("sum-sub").textContent = money(sub);
     document.getElementById("sum-ship").textContent = ship ? money(ship) : "Miễn phí";
     document.getElementById("sum-total").textContent = money(sub + ship);
-    document.getElementById("ship-note").innerHTML = sub >= STORE_INFO.freeShipFrom
+    document.getElementById("ship-note").innerHTML = count === 0 ? "" : sub >= STORE_INFO.freeShipFrom
       ? `${icon("truck")}<span>Đơn hàng của bạn được <b>miễn phí vận chuyển</b>.</span>`
       : `${icon("truck")}<span>Mua thêm <b>${money(STORE_INFO.freeShipFrom - sub)}</b> để được miễn phí vận chuyển.</span>`;
     // Cập nhật số trên icon giỏ hàng của header cho khớp
@@ -72,6 +74,7 @@
     ? `Mã đang có: ${activeCoupons.map((c) => `<b>${c.code}</b>`).join(", ")}` : "";
   document.getElementById("coupon-form").addEventListener("submit", (e) => {
     e.preventDefault();
+    if (!loggedInNow()) return toast("Vui lòng đăng nhập", "Đăng nhập để dùng mã giảm giá", "warning");
     const code = document.getElementById("coupon-input").value.trim().toUpperCase();
     if (!code) return toast("Chưa nhập mã giảm giá", "Vui lòng nhập mã trước khi áp dụng", "warning");
     const c = COUPONS.find((x) => x.code === code);

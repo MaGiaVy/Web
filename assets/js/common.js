@@ -57,7 +57,10 @@ function getUser(id) { return USERS.find((u) => u.id === Number(id)); }
 function getOrder(id) { return ORDERS.find((o) => o.id === id); }
 function getCategory(id) { return CATEGORIES.find((c) => c.id === id); }
 function currentUser() { return getUser(CURRENT_USER_ID); }
-function cartCount() { return SAMPLE_CART.reduce((sum, item) => sum + item.qty, 0); }
+// Giỏ hàng mẫu thuộc về khách đã đăng nhập; chưa đăng nhập thì giỏ trống (0 sản phẩm)
+const loggedInNow = () => typeof isLoggedIn === "function" && isLoggedIn();
+function currentCart() { return loggedInNow() ? SAMPLE_CART : []; }
+function cartCount() { return currentCart().reduce((sum, item) => sum + item.qty, 0); }
 function fullAddress(a) { return `${a.street}, ${a.ward}, ${a.city}`; }
 function discountPercent(p) { return p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0; }
 function orderItemCount(order) { return order.items.reduce((s, i) => s + i.qty, 0); }
@@ -239,6 +242,7 @@ function bindAddToCart(scope = document) {
   scope.querySelectorAll("[data-add-cart]").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
+      if (!loggedInNow()) return toast("Vui lòng đăng nhập", "Đăng nhập để thêm sản phẩm vào giỏ hàng", "warning");
       const p = getProduct(btn.dataset.addCart);
       const qtyInput = document.querySelector("#qty-input");
       const qty = btn.dataset.useQty && qtyInput ? Number(qtyInput.value) || 1 : 1;

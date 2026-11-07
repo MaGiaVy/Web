@@ -95,6 +95,7 @@
   qtyInput.addEventListener("change", () => toast("Đã cập nhật số lượng", `Số lượng: ${setQty(qtyInput.value)}`, "info"));
 
   document.getElementById("buy-now").addEventListener("click", () => {
+    if (!loggedInNow()) return toast("Vui lòng đăng nhập", "Đăng nhập để mua hàng", "warning");
     toastThenGo("cart.html", "Đã thêm vào giỏ hàng", `Đang chuyển đến giỏ hàng...`);
   });
 
