@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+<defs>
+ <linearGradient id="s10bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf1f5"/><stop offset="1" stop-color="#c8d6df"/></linearGradient>
+ <linearGradient id="s10armor" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#da94a2"/><stop offset=".48" stop-color="#ba3852"/><stop offset="1" stop-color="#792435"/></linearGradient>
+ <linearGradient id="s10second" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7e8ba0"/><stop offset="1" stop-color="#1c2b44"/></linearGradient>
+ <linearGradient id="s10accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5d189"/><stop offset="1" stop-color="#b38a38"/></linearGradient>
+ <filter id="s10model" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="9" stdDeviation="6" flood-color="#28313c" flood-opacity=".24"/></filter>
+ <radialGradient id="s10light"><stop stop-color="#fff" stop-opacity=".92"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+ <linearGradient id="s10base" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#c8d6df"/></linearGradient>
+ <filter id="s10shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="15"/></filter>
+ <pattern id="s10grain" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".8" fill="#28313c" opacity=".09"/><circle cx="14" cy="13" r=".7" fill="#28313c" opacity=".06"/></pattern>
+</defs>
+<rect width="640" height="640" fill="url(#s10bg)"/>
+<rect width="640" height="640" fill="url(#s10grain)"/>
+<circle cx="322" cy="278" r="270" fill="url(#s10light)" opacity=".67"/>
+<path d="M0 478 Q180 446 320 470 T640 463 V640 H0Z" fill="#fff" opacity=".24"/>
+<text x="35" y="49" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="3" fill="#28313c" opacity=".58">FRAME &amp; FORM / STUDIO</text>
+<text x="605" y="57" text-anchor="end" font-family="Arial,sans-serif" font-size="47" font-weight="700" letter-spacing="-2" fill="#ba3852" opacity=".12">10</text>
+<path d="M34 67h572" stroke="#26323a" stroke-opacity=".14"/>
+<ellipse cx="320" cy="548" rx="152" ry="27" fill="#26323a" opacity=".18" filter="url(#s10shadow)"/>
+<path d="M176 512 213 488 H427 L464 512 440 530 H200Z" fill="url(#s10base)" stroke="#fff" stroke-opacity=".8" stroke-width="2"/>
+<path d="M200 530 H440 L426 555 H214Z" fill="#c8d6df" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
+<path d="M227 514 H413" stroke="#ba3852" stroke-opacity=".4" stroke-width="3"/>
+<g transform="translate(320 80) scale(1.1)" stroke-linejoin="round" stroke-linecap="round" filter="url(#s10model)">
+      <g stroke="#ba3852" stroke-width="5">
+        <path d="M-66 190 -116 151 -106 253 -77 275 M66 190 116 151 106 253 77 275" fill="url(#s10accent)" stroke="#ba3852" stroke-width="5"/><path d="M-105 225h24m162 0h-24" stroke="#edf1f5" stroke-width="8"/>
+        <path d="M-39 102 -20 87 H20 L39 102 31 134 H-31Z" fill="url(#s10second)"/>
+        <path d="M-17 112 -48 92 -27 123 M17 112 48 92 27 123" fill="url(#s10second)" stroke="#ba3852" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M-29 115 -22 91 -12 82 H12 L22 91 29 115 20 144 H-20Z" fill="url(#s10armor)"/>
+        <path d="M-15 107 H15 L19 129 H-19Z" fill="#edf1f5"/>
+        <path d="M-9 113 -2 111 0 121 -8 123 M9 113 2 111 0 121 8 123" fill="url(#s10accent)" stroke="none"/>
+        <path d="M-55 144 -29 137 H29 L55 144 67 195 49 229 H-49 L-67 195Z" fill="url(#s10armor)"/>
+        <path d="M-45 151 -26 147 -30 189 -53 195Z" fill="url(#s10second)" stroke="none"/>
+        <path d="M45 151 26 147 30 189 53 195Z" fill="url(#s10accent)" stroke="none"/>
+        <path d="M-30 157 H30 L24 187 H-24Z" fill="#edf1f5"/>
+        <path d="M-16 162 H16 L12 178 H-12Z" fill="url(#s10accent)" stroke="none"/>
+        <path d="M-48 229 H48 L37 253 0 265 -37 253Z" fill="url(#s10second)"/>
+        <path d="M-47 147 -80 151 -101 193 -89 217 -64 207 -54 179 M47 147 80 151 101 193 89 217 64 207 54 179" fill="url(#s10armor)"/>
+        <path d="M-94 193 -112 215 -98 235 -76 224 -65 207 M94 193 112 215 98 235 76 224 65 207" fill="url(#s10second)"/>
+        <path d="M-34 251 -2 258 -8 310 -20 344 -49 342 -53 324 -42 289Z M34 251 2 258 8 310 20 344 49 342 53 324 42 289Z" fill="url(#s10armor)"/>
+        <path d="M-43 294 -12 302 -20 322 -48 318 M43 294 12 302 20 322 48 318" fill="url(#s10second)" stroke="none"/>
+        <path d="M-49 335 -20 337 -18 365 -64 369 -72 359Z M49 335 20 337 18 365 64 369 72 359Z" fill="url(#s10accent)"/>
+        <path d="M-54 169 H-34 M54 169 H34 M-29 198 H29 M-18 236 H18" fill="none" stroke="#edf1f5" stroke-width="4" opacity=".9"/>
+      </g>
+      <path d="M-23 91 -13 84 H13 L23 91 M-43 154 -30 151 M43 154 30 151 M-38 275 -12 281 M38 275 12 281" fill="none" stroke="#fff" stroke-opacity=".65" stroke-width="4"/>
+      <path d="M-60 205 -79 218 M60 205 79 218" fill="none" stroke="#efb84a" stroke-width="6"/>
+      <rect x="-4" y="267" width="8" height="37" rx="4" fill="url(#s10accent)" stroke="none"/>
+    </g>
+<g fill="none" stroke="#34404a" stroke-opacity=".17"><path d="M28 115v-42h42M612 115V73h-42M28 523v42h42M612 523v42h-42" stroke-width="2"/></g>
+<text x="35" y="600" font-family="Arial,sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#28313c" opacity=".56">ORIGINAL CONCEPT ART</text>
+<text x="605" y="600" text-anchor="end" font-family="Arial,sans-serif" font-size="10" letter-spacing="1" fill="#28313c" opacity=".56">STUDIO STUDY / HG</text>
+</svg>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuần lễ Gunpla - Khuyến mãi - Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="sale" data-root="../">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <nav class="breadcrumb" id="breadcrumb"></nav>
+
+    <section class="info-banner">
+      <div>
+        <span class="info-eyebrow">CHƯƠNG TRÌNH ĐANG DIỄN RA</span>
+        <h1 id="promo-name"></h1>
+        <p><span id="promo-desc"></span> Giá đã giảm được hiển thị màu đỏ, giá gốc được gạch ngang.</p>
+      </div>
+      <ul class="info-banner-points">
+        <li id="sale-count"></li>
+        <li id="sale-max"></li>
+        <li id="sale-ship"></li>
+      </ul>
+    </section>
+
+    <div class="sale-coupons" id="sale-coupons"></div>
+
+    <div class="product-grid" id="product-list"></div>
+    <div id="pagination"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script>
+    // TRANG KHUYẾN MÃI: danh sách cố định các mẫu đang giảm giá (có giá gốc), giảm nhiều nhất xếp trước
+    (function () {
+      const PER_PAGE = 12;
+      const $ = (id) => document.getElementById(id);
+      const data = SHOP_PRODUCTS.filter((p) => p.oldPrice).sort((a, b) => discountPercent(b) - discountPercent(a));
+      let pageNum = 1;
+
+      $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<b>Khuyến mãi</b>`;
+      $("sale-count").innerHTML = `${icon("tag")} <span><b>${data.length}</b> mẫu đang giảm giá</span>`;
+      $("sale-max").innerHTML = `${icon("gift")} <span>Giảm đến <b>${maxSaleDiscount()}%</b></span>`;
+      $("sale-ship").innerHTML = `${icon("truck")} <span>Miễn phí giao hàng cho đơn từ <b>${money(STORE_INFO.freeShipFrom)}</b></span>`;
+      // Mã giảm giá đang chạy (nhập ở giỏ hàng)
+      $("sale-coupons").innerHTML = COUPONS.filter((c) => c.status === "active").map((c) => `
+        <div class="sale-coupon">
+          <span class="sale-coupon-code">${c.code}</span>
+          <p><b>${couponValueText(c)}</b><small>Đơn từ ${money(c.minOrder)} · Nhập mã ở giỏ hàng</small></p>
+        </div>`).join("");
+      $("promo-name").textContent = PROMOTION.name;
+      $("promo-desc").textContent = PROMOTION.desc;
+      document.title = `${PROMOTION.name} - Khuyến mãi - Frame & Form`;
+
+      function render() {
+        const start = (pageNum - 1) * PER_PAGE;
+        $("product-list").innerHTML = data.slice(start, start + PER_PAGE).map(productCard).join("");
+        bindAddToCart($("product-list"));
+        renderPagination($("pagination"), data.length, PER_PAGE, pageNum, (p) => {
+          pageNum = p;
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+      render();
+    })();
+  </script>
+</body>
+</html>

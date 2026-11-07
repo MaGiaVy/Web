@@ -11,7 +11,10 @@
     ["dashboard", "index.html", "dashboard", "Tổng quan"],
     ["products", "products.html", "box", "Sản phẩm"],
     ["users", "users.html", "users", "Người dùng"],
-    ["orders", "orders.html", "orders", "Đơn hàng", pending],
+    ["orders", "orders.html", "orders", "Đơn hàng", pending, "đơn chờ xác nhận"],
+    ["promotions", "promotions.html", "tag", "Khuyến mãi"],
+    ["emails", "emails.html", "mail", "Email khách hàng"],
+    ["messages", "messages.html", "note", "Lời nhắn", CONTACT_MESSAGES.filter((m) => m.status === "new").length, "lời nhắn mới chưa phản hồi"],
     ["statistics", "statistics.html", "chart", "Thống kê"],
   ];
 
@@ -19,16 +22,17 @@
   sidebar.outerHTML = `
     <aside class="sidebar">
       <a class="brand" href="index.html">
-        <img src="${asset("images/logo.svg")}" alt="Logo DVK Gunpla">
-        <span class="brand-text"><b>DVK <em>GUNPLA</em></b><small>Trang quản trị</small></span>
+        <img src="${asset("images/frame-form.svg")}" alt="Logo Frame & Form">
+        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
       </a>
       <div class="side-label">Quản lý</div>
       <nav class="side-nav">
-        ${links.map(([key, href, ic, label, badge]) =>
-          `<a href="${href}" class="${activePage === key ? "active" : ""}">${icon(ic)} ${label}${badge ? `<span class="badge">${badge}</span>` : ""}</a>`).join("")}
+        ${links.map(([key, href, ic, label, badge, tip]) =>
+          `<a href="${href}" class="${activePage === key ? "active" : ""}">${icon(ic)} ${label}${badge ? `<span class="badge" title="${badge} ${tip}">${badge}</span>` : ""}</a>`).join("")}
       </nav>
       <div class="side-label">Khác</div>
       <nav class="side-nav">
+        <a href="settings.html" class="${activePage === "settings" ? "active" : ""}">${icon("sliders")} Cài đặt cửa hàng</a>
         <a href="../index.html" target="_blank">${icon("store")} Xem trang bán hàng</a>
       </nav>
       <div class="side-foot side-nav">
@@ -37,7 +41,8 @@
     </aside>`;
 
   const days = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
-  const now = new Date();
+  // Ngày hiển thị = ngày của đơn mới nhất trong dữ liệu mẫu (cùng mốc với số liệu ở Tổng quan)
+  const now = new Date(ORDERS.map((o) => o.datetime.slice(0, 10)).sort().pop() + "T00:00:00");
   const today = `${days[now.getDay()]}, ${String(now.getDate()).padStart(2, "0")}/${String(now.getMonth() + 1).padStart(2, "0")}/${now.getFullYear()}`;
 
   document.getElementById("admin-topbar").outerHTML = `
@@ -50,7 +55,7 @@
         <span class="date">${icon("calendar")} ${today}</span>
         <div class="admin-user">
           <span class="avatar">A</span>
-          <div><b>Admin DVK</b><small>Quản trị viên</small></div>
+          <div><b>Admin F&F</b><small>Quản trị viên</small></div>
         </div>
         <button class="icon-btn" title="Đăng xuất" data-admin-logout>${icon("logout")}</button>
       </div>
@@ -112,4 +117,20 @@ async function askOrderStatus(order, value) {
     return toast("Đã hủy đơn hàng", `Đơn #${order.id} · Lý do: ${escapeHtml(box.querySelector('[name="cancel-reason"]:checked').value)}${note ? `<br>${escapeHtml(note)}` : ""}`);
   }
   toast(ORDER_ACTIONS[value].done, `Đơn #${order.id} · ${escapeHtml(getUser(order.userId).name)}`);
+}
+
+// ============================================================
+// DANH SÁCH CÓ PHÂN TRANG (5 dòng mỗi trang, giống trang Tổng quan)
+// Dùng cho: mã giảm giá, sản phẩm đang giảm giá, email, lời nhắn
+// ============================================================
+function pagedList(bodyEl, footEl, list, rowHtml, unit, perPage = 5) {
+  let current = 1;
+  const render = () => {
+    const pages = Math.max(1, Math.ceil(list.length / perPage));
+    const start = (current - 1) * perPage;
+    bodyEl.innerHTML = list.slice(start, start + perPage).map(rowHtml).join("");
+    footEl.innerHTML = `<span>Trang ${current}/${pages} · <b>${list.length}</b> ${unit}</span><div class="paged-nav"></div>`;
+    renderPagination(footEl.querySelector(".paged-nav"), list.length, perPage, current, (p) => { current = p; render(); });
+  };
+  render();
 }

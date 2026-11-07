@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email khách hàng - Quản trị Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="emails" data-title="Email khách hàng" data-crumb="Email khách hàng">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <div class="kpi-grid kpi-3" id="mail-kpis"></div>
+
+        <!-- Soạn email: bên trái nhập nội dung, bên phải xem trước -->
+        <form class="form-layout" id="mail-form" autocomplete="off">
+          <section class="card">
+            <div class="card-head"><h2 id="h-compose"></h2></div>
+            <div class="card-pad">
+              <div class="form-grid">
+                <label class="field full"><span>Tiêu đề email</span><input class="input" id="ml-subject"></label>
+                <label class="field"><span>Gửi đến</span><select class="select" id="ml-audience"></select></label>
+                <label class="field"><span>Đính kèm mã giảm giá</span><select class="select" id="ml-coupon"></select></label>
+                <label class="field full"><span>Nội dung</span><textarea class="textarea" id="ml-body" rows="7"></textarea></label>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-outline" type="button" id="ml-draft">Lưu nháp</button>
+                <button class="btn btn-primary" type="submit" id="ml-send"></button>
+              </div>
+            </div>
+          </section>
+          <aside class="card">
+            <div class="card-head"><h3>Xem trước email</h3></div>
+            <div class="mail-preview" id="ml-preview"></div>
+          </aside>
+        </form>
+
+        <section class="card">
+          <div class="card-head"><h2 id="h-campaigns"></h2></div>
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th>Tiêu đề</th><th>Gửi đến</th><th>Mã kèm theo</th><th>Ngày gửi</th><th class="center">Đã gửi</th><th class="center">Tỉ lệ mở</th><th>Trạng thái</th><th class="right">Thao tác</th></tr></thead>
+            <tbody id="mail-body"></tbody>
+          </table></div>
+          <div class="table-foot" id="mail-foot"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/admin/admin-layout.js"></script>
+  <script src="../assets/js/admin/emails.js"></script>
+</body>
+</html>

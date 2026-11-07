@@ -1,6 +1,6 @@
 // QUẢN LÝ NGƯỜI DÙNG: tìm kiếm (web tĩnh: chỉ hiện thông báo), thêm, xem, khóa (có lý do) / mở khóa, phân trang
 (function () {
-  const PER_PAGE = 10;
+  const PER_PAGE = 5;
   const $ = (id) => document.getElementById(id);
   const state = { page: 1 };
   const users = USERS.map((u) => ({ ...u }));

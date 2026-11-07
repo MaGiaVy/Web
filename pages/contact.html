@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên hệ - Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="contact" data-root="../">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <nav class="breadcrumb" id="breadcrumb"></nav>
+
+    <section class="info-banner">
+      <div>
+        <span class="info-eyebrow">VỀ FRAME &amp; FORM</span>
+        <h1>Liên hệ</h1>
+        <p>Frame &amp; Form là cửa hàng mô hình lắp ráp và vật phẩm trưng bày dành cho người yêu thích sưu tầm. Từ mẫu gọn nhẹ cho người mới đến mô hình cỡ lớn cho góc trưng bày, chúng tôi luôn sẵn sàng tư vấn để bạn chọn được mẫu phù hợp.</p>
+      </div>
+    </section>
+
+    <div class="contact-layout">
+      <section class="card info-card">
+        <div class="card-head"><h3>Thông tin cửa hàng</h3></div>
+        <div class="info-list" id="contact-info"></div>
+      </section>
+
+      <section class="card info-card">
+        <div class="card-head"><h3>Gửi lời nhắn cho chúng tôi</h3></div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-grid">
+            <label class="field"><span>Họ và tên</span><input class="input" id="ct-name" placeholder="Nguyễn Văn A"></label>
+            <label class="field"><span>Số điện thoại</span><input class="input" id="ct-phone" placeholder="09xx xxx xxx"></label>
+            <label class="field full"><span>Email</span><input class="input" id="ct-email" placeholder="email@vidu.com"></label>
+            <label class="field full"><span>Nội dung</span><textarea class="textarea" id="ct-message" placeholder="Bạn cần tư vấn mẫu nào?"></textarea></label>
+          </div>
+          <div class="contact-actions">
+            <button type="submit" class="btn btn-dark">Gửi lời nhắn</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script>
+    // TRANG LIÊN HỆ: thông tin tĩnh; gửi lời nhắn chỉ hiện thông báo (web tĩnh, không lưu)
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<b>Liên hệ</b>`;
+      $("contact-info").innerHTML = `
+        <div class="info-row">${icon("map")}<div><small>Địa chỉ</small><b>${storeAddress()}</b></div></div>
+        <div class="info-row">${icon("phone")}<div><small>Hotline</small><b>${STORE_INFO.hotline}</b></div></div>
+        <div class="info-row">${icon("mail")}<div><small>Email</small><b>${STORE_INFO.email}</b></div></div>
+        <div class="info-row">${icon("clock")}<div><small>Giờ mở cửa</small><b>${STORE_INFO.hours}</b></div></div>
+        <div class="info-row">${icon("truck")}<div><small>Giao hàng</small><b>Toàn quốc, miễn phí cho đơn từ ${money(STORE_INFO.freeShipFrom)}</b></div></div>`;
+      $("contact-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        toast("Đã gửi lời nhắn", "Frame & Form sẽ liên hệ lại với bạn sớm nhất.");
+      });
+    })();
+  </script>
+</body>
+</html>

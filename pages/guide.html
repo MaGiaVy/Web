@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng dẫn mua hàng - Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="guide" data-root="../">
+  <div id="site-header"></div>
+
+  <main class="container page">
+    <nav class="breadcrumb" id="breadcrumb"></nav>
+
+    <section class="info-banner">
+      <div>
+        <span class="info-eyebrow">MUA SẮM DỄ DÀNG</span>
+        <h1>Hướng dẫn mua hàng</h1>
+        <p>Chỉ với 4 bước để mang mẫu bạn thích về góc sưu tầm của mình.</p>
+      </div>
+    </section>
+
+    <ol class="guide-steps" id="guide-steps"></ol>
+
+    <div class="info-grid">
+      <section class="card info-card">
+        <div class="card-head"><h3 id="ship-title"></h3></div>
+        <ul class="info-bullets">
+          <li id="g-delivery"></li>
+          <li id="g-fee"></li>
+          <li id="g-free"></li>
+          <li>Bạn theo dõi trạng thái đơn trong mục <b>Lịch sử mua hàng</b>.</li>
+        </ul>
+      </section>
+      <section class="card info-card">
+        <div class="card-head"><h3 id="pay-title"></h3></div>
+        <ul class="info-bullets">
+          <li><b>Thanh toán khi nhận hàng (COD):</b> trả tiền mặt cho nhân viên giao hàng.</li>
+          <li><b>Chuyển khoản trực tuyến:</b> chuyển khoản theo thông tin hiển thị khi đặt hàng.</li>
+          <li>Hóa đơn được gửi kèm trong mỗi kiện hàng.</li>
+        </ul>
+      </section>
+      <section class="card info-card">
+        <div class="card-head"><h3 id="return-title"></h3></div>
+        <ul class="info-bullets">
+          <li id="g-return"></li>
+          <li>Sản phẩm còn nguyên hộp, chưa cắt runner.</li>
+          <li id="g-hotline"></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="info-cta">
+      <div>
+        <h3>Sẵn sàng chọn mẫu đầu tiên?</h3>
+        <p>Nếu mới bắt đầu, bạn nên chọn nhóm Mẫu gọn nhẹ: dễ lắp, giá mềm.</p>
+      </div>
+      <div class="info-cta-actions">
+        <a class="btn btn-dark" id="cta-easy" href="products.html?cat=HG">Xem Mẫu gọn nhẹ</a>
+        <a class="btn btn-outline" href="contact.html">Cần tư vấn thêm</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script>
+    // TRANG HƯỚNG DẪN MUA HÀNG: nội dung tĩnh, các nút chỉ dẫn sang trang có sẵn
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      $("breadcrumb").innerHTML = `<a href="${page("index.html")}">Trang chủ</a>${icon("chevronRight")}<b>Hướng dẫn mua hàng</b>`;
+      const steps = [
+        ["search", "Chọn mẫu", "Tìm theo tên, xem theo danh mục hoặc dùng bộ lọc nâng cao để chọn mẫu phù hợp.", "products.html", "Xem tất cả mô hình"],
+        ["cart", "Thêm vào giỏ", "Bấm “Thêm vào giỏ” ở thẻ sản phẩm hoặc trang chi tiết, điều chỉnh số lượng trong giỏ hàng.", "cart.html", "Mở giỏ hàng"],
+        ["map", "Đặt hàng", "Đăng nhập, chọn địa chỉ có sẵn hoặc nhập địa chỉ mới, rồi chọn cách thanh toán.", "login.html", "Đăng nhập"],
+        ["truck", "Nhận hàng", "Theo dõi trạng thái đơn trong Lịch sử mua hàng và nhận hàng tại nhà.", "orders.html", "Lịch sử mua hàng"],
+      ];
+      $("guide-steps").innerHTML = steps.map(([ic, title, text, href, link], i) => `
+        <li class="guide-step">
+          <span class="guide-step-no">0${i + 1}</span>
+          <span class="guide-step-icon">${icon(ic)}</span>
+          <h3>${title}</h3>
+          <p>${text}</p>
+          <a class="link" href="${href}">${link} →</a>
+        </li>`).join("");
+      $("g-delivery").innerHTML = `Giao hàng toàn quốc, thời gian dự kiến ${STORE_INFO.deliveryDays} ngày làm việc.`;
+      $("g-fee").innerHTML = `Phí giao hàng <b>${money(STORE_INFO.shipFee)}</b> cho mỗi đơn.`;
+      $("g-free").innerHTML = `<b>Miễn phí giao hàng</b> cho đơn từ <b>${money(STORE_INFO.freeShipFrom)}</b>.`;
+      $("g-return").innerHTML = `Đổi trả trong <b>${STORE_INFO.returnDays} ngày</b> nếu hộp bị móp, thiếu chi tiết hoặc giao sai mẫu.`;
+      $("g-hotline").innerHTML = `Liên hệ hotline <b>${STORE_INFO.hotline}</b> để được hướng dẫn.`;
+      $("ship-title").innerHTML = `${icon("truck")} Giao hàng`;
+      $("pay-title").innerHTML = `${icon("wallet")} Thanh toán`;
+      $("return-title").innerHTML = `${icon("refresh")} Đổi trả`;
+    })();
+  </script>
+</body>
+</html>

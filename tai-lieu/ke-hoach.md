@@ -25,7 +25,7 @@
 - Tài khoản (sửa tên, thêm địa chỉ), đăng ký/đăng nhập không ràng buộc.
 
 **Vỹ - Ảnh, kiểm thử, đề xuất**
-- **Tìm ảnh** cho 52 sản phẩm: lưu vào `assets/images/products/` tên `p01.jpg` ... `p52.jpg` (khớp mã trong `assets/js/data.js`), ảnh vuông khoảng 600×600, dung lượng dưới 200 KB, rồi đổi đuôi `.svg` → `.jpg` ở dòng `image:` trong `assets/js/data.js`. **Không dùng link ảnh trên mạng.** Ưu tiên ảnh nhóm tự chụp hoặc ảnh được phép dùng.
+- **Tìm ảnh** cho 52 sản phẩm: lưu vào `assets/images/studio/` tên `p01.jpg` ... `p52.jpg` (khớp mã trong `assets/js/data.js`), ảnh vuông khoảng 600×600, dung lượng dưới 200 KB, rồi đổi đuôi `.svg` → `.jpg` ở dòng `image:` trong `assets/js/data.js`. **Không dùng link ảnh trên mạng.** Ưu tiên ảnh nhóm tự chụp hoặc ảnh được phép dùng.
 - Rà dữ liệu mẫu: tên, giá, mô tả sản phẩm; tên phường/xã mới trong `LOCATIONS`.
 - **Kiểm thử** theo checklist bên dưới trên Chrome, tắt mạng, mở file trực tiếp; tải thử ZIP từ GitHub.
 - **Đề xuất** thêm chức năng hoặc chỉnh giao diện (ghi vào Issues kèm ảnh chụp), ví dụ: gợi ý khi gõ tìm kiếm, trang liên hệ, trang sửa sản phẩm giống trang xem sản phẩm, banner trang chủ.

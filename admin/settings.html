@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cài đặt cửa hàng - Quản trị Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin" data-root="../" data-admin-page="settings" data-title="Cài đặt cửa hàng" data-crumb="Cài đặt cửa hàng">
+  <div class="admin-shell">
+    <div id="admin-sidebar"></div>
+    <div class="admin-main">
+      <div id="admin-topbar"></div>
+      <main class="admin-content">
+        <form class="form-layout" id="settings-form" autocomplete="off">
+          <div class="checkout-stack">
+            <section class="card">
+              <div class="card-head"><h2 id="h-contact"></h2></div>
+              <div class="card-pad form-grid">
+                <label class="field full"><span>Số nhà, tên đường</span><input class="input" id="st-street"></label>
+                <label class="field"><span>Tỉnh / Thành phố</span><select class="select" id="st-city"></select></label>
+                <label class="field"><span>Phường / Xã</span><select class="select" id="st-ward"></select></label>
+                <label class="field"><span>Hotline</span><input class="input" id="st-hotline"></label>
+                <label class="field"><span>Email hỗ trợ</span><input class="input" id="st-email"></label>
+                <label class="field full"><span>Giờ mở cửa</span><input class="input" id="st-hours"></label>
+              </div>
+            </section>
+            <section class="card">
+              <div class="card-head"><h2 id="h-ship"></h2></div>
+              <div class="card-pad form-grid">
+                <label class="field"><span>Phí giao hàng mỗi đơn (đ)</span><input class="input" id="st-fee"></label>
+                <label class="field"><span>Miễn phí giao hàng cho đơn từ (đ)</span><input class="input" id="st-free"></label>
+                <label class="field"><span>Thời gian giao dự kiến (ngày làm việc)</span><input class="input" id="st-days"></label>
+                <label class="field"><span>Số ngày được đổi trả</span><input class="input" id="st-return" type="number" min="0"></label>
+              </div>
+            </section>
+            <div class="form-actions">
+              <button class="btn btn-outline" type="button" id="st-reset">Hủy thay đổi</button>
+              <button class="btn btn-primary" type="submit">Lưu cài đặt</button>
+            </div>
+          </div>
+
+          <aside class="card">
+            <div class="card-head"><h3>Khách sẽ thấy</h3></div>
+            <div class="card-pad">
+              <div class="settings-preview" id="st-preview"></div>
+              <p class="form-note" id="st-where"></p>
+            </div>
+          </aside>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/admin/admin-layout.js"></script>
+  <script src="../assets/js/admin/settings.js"></script>
+</body>
+</html>

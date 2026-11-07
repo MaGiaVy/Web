@@ -53,8 +53,8 @@
     const phone = $("pf-phone").value.trim();
     const birthday = $("pf-birthday").value;
     const changed = (name && name !== saved.name) || (email && email !== saved.email) || (phone && phone !== saved.phone) || (birthday && birthday !== saved.birthday);
-    // Không có gì mới so với lần lưu trước thì không báo lại
-    if (!changed) return;
+    // Không có gì mới so với lần lưu trước: vẫn báo để người dùng biết đã bấm
+    if (!changed) return toast("Chưa có thay đổi nào", "Thông tin của bạn vẫn như cũ", "info");
     // Ghi nhận giá trị mới làm mốc, thông báo 1 lần duy nhất
     if (name) saved.name = name;
     if (email) saved.email = email;

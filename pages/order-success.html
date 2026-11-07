@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đặt hàng thành công - DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
+  <title>Đặt hàng thành công - Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body data-page="order-success" data-root="../">
@@ -46,8 +46,8 @@
       const order = getOrder(LAST_ORDER_ID);
       document.getElementById("success-hero").innerHTML = `
         <div class="success-icon">${icon("check")}</div>
-        <h1>Đặt hàng thành công!</h1>
-        <p>Cảm ơn bạn đã mua sắm tại DVK Gunpla. Đơn hàng đã được lưu và đang chờ cửa hàng xác nhận.</p>
+        <h1>Đơn hàng mẫu đã được tạo</h1>
+        <p>Đây là luồng mô phỏng cho đồ án Frame &amp; Form. Không có giao dịch hoặc đơn hàng thật được xử lý.</p>
         <div class="order-code">Mã đơn hàng: <b>#${order.id}</b></div>
         <div class="success-actions">
           <a class="btn btn-dark" href="order-detail.html?id=${order.id}">${icon("orders")} Xem chi tiết đơn hàng</a>

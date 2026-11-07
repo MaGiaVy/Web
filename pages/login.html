@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng nhập - DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
+  <title>Đăng nhập - Frame & Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body data-page="login" data-root="../">
@@ -13,8 +13,9 @@
   <main class="container page">
     <div class="auth-wrap">
       <div class="auth-art">
-        <img src="../assets/images/hero.svg" alt="">
-        <h2>Chào mừng trở lại,<br>Pilot!</h2>
+        <span class="auth-eyebrow">FRAME &amp; FORM</span>
+        <div class="auth-art-card"><img src="../assets/images/studio/p23.svg" alt="Hình minh họa mô hình trưng bày"></div>
+        <h2>Chào mừng bạn trở lại!</h2>
         <p>Đăng nhập để đặt hàng, lưu địa chỉ và theo dõi lịch sử mua hàng của bạn.</p>
       </div>
       <!-- Không ràng buộc: không required, không kiểm tra định dạng -->
@@ -33,7 +34,6 @@
           <a class="link" href="#" id="forgot">Quên mật khẩu?</a>
         </div>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Đăng nhập</button>
-        <p class="auth-alt">Bạn là quản trị viên? <a class="link" href="../admin/login.html">Đăng nhập trang quản trị</a></p>
       </form>
     </div>
   </main>
@@ -44,12 +44,16 @@
   <script src="../assets/js/common.js"></script>
   <script src="../assets/js/layout.js"></script>
   <script>
+    // Bị chuyển đến từ trang cần đăng nhập: báo cho khách biết lý do
+    const target = loginRedirectTarget();
+    if (target) toast("Vui lòng đăng nhập", `Đăng nhập để xem ${target.label}`, "info");
+
     document.getElementById("login-form").addEventListener("submit", function (e) {
       e.preventDefault();
       setLoggedIn(true);
       const email = document.getElementById("login-email").value.trim();
-      const redirect = getParam("redirect") === "checkout" ? "checkout.html" : "../index.html";
-      toastThenGo(redirect, "Đăng nhập thành công", email ? "Xin chào " + escapeHtml(email) + "!" : "Chào mừng bạn quay lại DVK Gunpla!");
+      const redirect = target ? target.href : "../index.html";
+      toastThenGo(redirect, "Đăng nhập thành công", email ? "Xin chào " + escapeHtml(email) + "!" : "Chào mừng bạn quay lại Frame & Form!");
     });
     document.getElementById("forgot").addEventListener("click", function (e) {
       e.preventDefault();

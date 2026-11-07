@@ -230,3 +230,82 @@ body.admin { background: #f1f4f9; }
 .stat-table .share-pct { width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
 .kpi-link { padding: 20px 18px; gap: 14px; }
 .kpi-link .kpi-icon { width: 42px; height: 42px; }
+
+/* ---------- Điện thoại / máy tính bảng: thanh bên thành thanh ngang ---------- */
+@media (max-width: 860px) {
+  .admin-shell { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: static; height: auto; flex-direction: row; align-items: center; overflow-x: auto; gap: 4px; padding: 0 8px; }
+  .sidebar .brand { height: 60px; padding: 0 8px; border-bottom: 0; flex: none; }
+  .sidebar .brand-text { display: none; }
+  .side-label { display: none; }
+  .side-nav { display: flex; padding: 0; flex: none; }
+  .side-nav a { height: 40px; padding: 0 12px; white-space: nowrap; }
+  .side-nav a.active::before { display: none; }
+  .side-foot { margin-top: 0; padding: 0; border-top: 0; }
+  .admin-topbar { position: static; height: auto; min-height: 64px; padding: 10px 16px; flex-wrap: wrap; gap: 10px; }
+  .admin-topbar .date, .admin-user > div { display: none; }
+  .admin-user { padding-left: 0; border-left: 0; }
+  .admin-content { padding: 16px 16px 32px; gap: 16px; }
+  .admin .toast-stack { top: 16px; }
+  .od-layout { grid-template-columns: minmax(0, 1fr); }
+  .page-title, #od-actions, .toolbar-actions { flex-wrap: wrap; }
+  .toolbar .grow { min-width: 0; flex-basis: 100%; }
+}
+@media (max-width: 560px) {
+  .kpi-grid, .admin-products { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ============ Trang mới: Khuyến mãi, Email, Lời nhắn, Cài đặt ============ */
+.kpi-grid.kpi-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.form-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.check-line { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-2); cursor: pointer; }
+.check-line input { width: 16px; height: 16px; }
+.form-note { display: flex; align-items: center; gap: 8px; margin-top: 16px; padding: 10px 14px; border-radius: 10px; background: var(--blue-soft); color: #1e3a8a; font-size: 13px; }
+.form-note .icon { flex: none; font-size: 16px; }
+.cell-sub { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+
+/* Mã giảm giá */
+.coupon-code { display: inline-block; padding: 4px 10px; border: 1px dashed #94a3b8; border-radius: 6px; background: #f8fafc; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .05em; white-space: nowrap; }
+.usage { width: 110px; height: 6px; overflow: hidden; border-radius: 3px; background: #e5e9f0; }
+.usage span { display: block; height: 100%; border-radius: 3px; background: var(--blue); }
+.coupon-editor { border-bottom: 1px solid var(--line); background: #fafbfd; }
+.coupon-editor h3 { margin-bottom: 16px; font-size: 15px; }
+.coupon-editor .form-actions { margin-top: 16px; }
+
+/* Email: khung xem trước */
+.mail-preview { padding: 18px 20px 22px; }
+.mail-meta { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.mail-meta small { color: var(--muted); }
+.mail-sheet { margin-top: 16px; padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 13.5px; line-height: 1.7; }
+.mail-brand { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid #111; font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: .08em; }
+.mail-brand em { color: #a9885e; font-style: normal; }
+.mail-coupon { display: grid; gap: 2px; margin: 16px 0; padding: 14px; border: 1px dashed #c3a274; background: #faf8f4; text-align: center; }
+.mail-coupon small { color: var(--muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.mail-coupon b { font-family: var(--font-display); font-size: 22px; letter-spacing: .08em; }
+.mail-coupon span { color: var(--text-2); font-size: 12.5px; }
+.mail-btn { display: inline-block; margin-top: 4px; padding: 9px 18px; background: #111; color: #fff; font-weight: 700; font-size: 13px; }
+.mail-foot { display: block; margin-top: 16px; color: var(--muted); font-size: 11.5px; }
+
+/* Lời nhắn liên hệ */
+.message-list { display: grid; }
+.message-item { display: grid; grid-template-columns: 240px minmax(0, 1fr) 140px 200px; align-items: center; gap: 20px; padding: 18px 24px; border-bottom: 1px solid var(--line); }
+.message-item:last-child { border-bottom: 0; }
+.message-item.is-new { background: #fffbeb; }
+.message-text { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+.message-side { display: grid; justify-items: start; gap: 6px; }
+.message-side small { color: var(--muted); font-size: 12.5px; }
+.message-actions { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
+
+/* Cài đặt: xem trước */
+.settings-preview { display: grid; gap: 14px; }
+
+/* Quản lý sản phẩm: xem nhanh tất cả / đang giảm giá */
+.ap-views { display: flex; gap: 8px; }
+.ap-views button { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--text-2); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; }
+.ap-views button .icon { font-size: 16px; }
+.ap-views button span { min-width: 24px; padding: 1px 7px; border-radius: 10px; background: var(--bg); font-size: 12px; text-align: center; }
+.ap-views button:hover { border-color: var(--navy); color: var(--navy); }
+.ap-views button.active { border-color: var(--navy); background: var(--navy); color: #fff; }
+.ap-views button.active span { background: rgba(255,255,255,.18); color: #fff; }
+.ap-body .price .price-old { margin-left: 4px; font-size: 12.5px; font-weight: 500; }
+.ap-off { display: inline-block; margin-left: 4px; padding: 1px 6px; border-radius: 6px; background: var(--red-soft); color: var(--red); font-size: 12px; font-weight: 700; vertical-align: middle; }

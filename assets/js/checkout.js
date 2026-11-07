@@ -69,7 +69,7 @@
 
   // Tóm tắt đơn hàng từ giỏ hàng mẫu
   const sub = SAMPLE_CART.reduce((s, i) => s + getProduct(i.productId).price * i.qty, 0);
-  const ship = sub >= 1000000 ? 0 : 30000;
+  const ship = sub >= STORE_INFO.freeShipFrom ? 0 : STORE_INFO.shipFee;
   $("sum-title").textContent = `Đơn hàng (${cartCount()} sản phẩm)`;
   $("summary-items").innerHTML = SAMPLE_CART.map((i) => {
     const p = getProduct(i.productId);

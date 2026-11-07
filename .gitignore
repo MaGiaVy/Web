@@ -5,3 +5,6 @@ desktop.ini
 .vscode/
 .idea/
 *.log
+
+# File tạm của Word/Excel khi đang mở tài liệu
+~$*
