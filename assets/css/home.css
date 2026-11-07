@@ -89,3 +89,20 @@ body.store-home .home-spotlight-art em { color: #d9c19a; font-size: 15px; font-s
 /* Giá dưới ảnh hero */
 body.store-home .hero-copy p .hero-price { margin-top: 2px; color: #111; font-size: 15px; font-weight: 800; }
 
+/* Pure CSS Hero Carousel (0% JS) */
+.hero-radio { display: none; }
+.hero-slide { display: none; }
+#hero-s1:checked ~ .hero-slide-1,
+#hero-s2:checked ~ .hero-slide-2,
+#hero-s3:checked ~ .hero-slide-3,
+#hero-s4:checked ~ .hero-slide-4 {
+  display: contents;
+}
+@keyframes heroPopIn {
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.hero-slide .hero-art img,
+.hero-slide .hero-copy p {
+  animation: heroPopIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

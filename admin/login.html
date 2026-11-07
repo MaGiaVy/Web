@@ -3,36 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng nhập quản trị - Frame & Form</title>
+  <title>Đăng nhập quản trị - Frame &amp; Form</title>
   <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="admin" data-root="../">
+<body class="admin">
   <main class="admin-login">
-    <!-- Không ràng buộc: nhập gì cũng vào được -->
-    <form class="admin-login-box" id="admin-login-form" autocomplete="off" novalidate>
+    <form class="admin-login-box" action="index.html" autocomplete="off" novalidate>
       <a class="brand" href="../index.html">
-        <img src="../assets/images/frame-form.svg" alt="Logo Frame & Form">
-        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small style="color:var(--muted)">Trang quản trị</small></span>
+        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
+        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị hệ thống</small></span>
       </a>
+      <div style="text-align: center; margin-bottom: 14px;">
+        <span class="barbatos-badge"><span class="dot"></span> Barbatos Lupus Rex Mode</span>
+      </div>
       <h1>Đăng nhập quản trị</h1>
       <p>Dành riêng cho quản trị viên cửa hàng</p>
-      <label class="field"><span>Tên đăng nhập</span><input class="input" id="ad-user" value="admin" placeholder="Nhập tên đăng nhập"></label>
-      <label class="field"><span>Mật khẩu</span><input class="input" type="password" value="admin123" placeholder="Nhập mật khẩu"></label>
-      <button class="btn btn-dark btn-lg btn-block" type="submit">Đăng nhập</button>
+      <label class="field">
+        <span>Tên đăng nhập</span>
+        <input class="input" id="ad-user" name="username" value="admin" placeholder="Nhập tên đăng nhập">
+      </label>
+      <label class="field">
+        <span>Mật khẩu</span>
+        <input class="input" id="ad-pass" name="password" type="password" value="admin123" placeholder="Nhập mật khẩu">
+      </label>
+      <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top: 8px;">Đăng nhập</button>
       <p class="admin-login-foot"><a class="link" href="../index.html">← Quay về trang bán hàng</a></p>
     </form>
   </main>
-
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/common.js"></script>
-  <script>
-    document.getElementById("admin-login-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = document.getElementById("ad-user").value.trim() || "Admin";
-      toastThenGo("index.html", "Đăng nhập thành công", "Chào mừng " + escapeHtml(name) + " đến trang quản trị");
-    });
-  </script>
 </body>
 </html>

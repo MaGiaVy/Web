@@ -73,7 +73,7 @@
     if ($("of-status").value) parts.push($("of-status").selectedOptions[0].text);
     if (from || to) parts.push(`${from ? formatDate(from) : "..."} → ${to ? formatDate(to) : "..."}`);
     if ($("of-city").value) parts.push(($("of-district").value ? $("of-district").value + ", " : "") + $("of-city").value);
-    toast("Đã lọc đơn hàng", parts.length ? parts.join(" · ") : "Tất cả đơn hàng");
+    toast("Đã lọc danh sách đơn hàng!", parts.length ? parts.join(" · ") : "Tất cả đơn hàng");
   });
   $("of-reset").addEventListener("click", () => {
     $("order-filter").reset();

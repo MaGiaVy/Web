@@ -3,108 +3,661 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thống kê - Quản trị Frame & Form</title>
+  <title>Thống kê khách hàng - Quản trị Frame &amp; Form</title>
   <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="admin" data-root="../" data-admin-page="statistics" data-title="Thống kê khách hàng" data-crumb="Thống kê">
-  <div class="admin-shell">
-    <div id="admin-sidebar"></div>
-    <div class="admin-main">
-      <div id="admin-topbar"></div>
-      <main class="admin-content">
-        <form class="card toolbar" id="stat-form" autocomplete="off">
-          <label class="field"><span>Từ ngày</span><input class="input" type="date" id="st-from" value="2026-08-01"></label>
-          <label class="field"><span>Đến ngày</span><input class="input" type="date" id="st-to" value="2026-11-02"></label>
-          <div class="toolbar-actions">
-            <button class="btn btn-outline" type="button" data-preset="30">30 ngày gần nhất</button>
-            <button class="btn btn-outline" type="button" data-preset="month">Tháng này</button>
-            <button class="btn btn-primary" type="submit" id="st-submit">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê
-            </button>
-          </div>
-        </form>
+<body class="admin">
+  <!-- TOAST THỐNG KÊ DỮ LIỆU -->
+  <input type="checkbox" id="toast-stat" class="css-toggle" hidden>
+  <div class="css-toast">
+    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
+    <div class="toast-body"><b>Đã thống kê dữ liệu!</b><p>Cập nhật số liệu Top 5 khách hàng mua nhiều nhất trong kỳ.</p></div>
+    <label for="toast-stat" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+  </div>
 
-        <!-- Các chỉ số KPI mẫu (hard-code tĩnh) -->
-        <section class="kpi-grid" id="st-kpis">
-          <div class="card kpi">
-            <div class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div>
-            <div><div class="kpi-label">Doanh thu</div><div class="kpi-value">50.045.000đ</div></div>
+  <div class="admin-shell">
+    <!-- SIDEBAR LIQUID GLASS TĨNH -->
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
+        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+      </a>
+      <div class="side-label">Quản lý chính</div>
+      <nav class="side-nav">
+        <a href="index.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg> Tổng quan</a>
+        <a href="users.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg> Người dùng</a>
+        <a href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Sản phẩm</a>
+        <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Đơn hàng <span class="badge">4</span></a>
+        <a href="statistics.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê</a>
+      </nav>
+      <div class="side-label">Mở rộng</div>
+      <nav class="side-nav">
+        <a href="promotions.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Khuyến mãi</a>
+        <a href="emails.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email khách hàng</a>
+        <a href="messages.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn <span class="badge">3</span></a>
+        <a href="settings.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Cài đặt cửa hàng</a>
+      </nav>
+      <div class="side-foot side-nav">
+        <a href="../index.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Xem trang bán hàng</a>
+        <a href="login.html" style="color: #f87171;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <div class="crumb">Quản trị / Thống kê</div>
+          <h1>Thống kê khách hàng &amp; doanh số</h1>
+        </div>
+        <div class="right">
+          <span class="barbatos-badge"><span class="dot"></span> Barbatos Lupus Rex</span>
+          <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
+          <div class="admin-user">
+            <span class="avatar">A</span>
+            <div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
           </div>
-          <div class="card kpi">
-            <div class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></div>
-            <div><div class="kpi-label">Đơn hàng</div><div class="kpi-value">23</div></div>
-          </div>
-          <div class="card kpi">
-            <div class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg></div>
-            <div><div class="kpi-label">Khách đã mua</div><div class="kpi-value">8</div></div>
-          </div>
-          <div class="card kpi">
-            <div class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="15" r="6"/><path d="m8.5 10.5-3-7.5h4l2.5 5M15.5 10.5l3-7.5h-4L12 8"/></svg></div>
-            <div><div class="kpi-label">Top 5 khách chiếm</div><div class="kpi-value">90%</div></div>
+          <a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg></a>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <!-- THANH CÔNG CỤ LỌC THỜI GIAN -->
+        <section class="card toolbar">
+          <label class="field">
+            <span>Từ ngày</span>
+            <input class="input" type="date" id="st-from" value="2026-08-01">
+          </label>
+          <label class="field">
+            <span>Đến ngày</span>
+            <input class="input" type="date" id="st-to" value="2026-11-02">
+          </label>
+          <div class="toolbar-actions" style="margin-left: auto;">
+            <label for="toast-stat" class="btn btn-outline">30 ngày gần nhất</label>
+            <label for="toast-stat" class="btn btn-outline">Tháng này</label>
+            <label for="toast-stat" class="btn btn-primary" id="st-submit">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê
+            </label>
           </div>
         </section>
 
-        <!-- Bảng Top 5 khách hàng mua nhiều nhất (hard-code tĩnh) -->
-        <section class="card">
-          <div class="card-head">
-            <h2 id="st-title"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="15" r="6"/><path d="m8.5 10.5-3-7.5h4l2.5 5M15.5 10.5l3-7.5h-4L12 8"/></svg> Top 5 khách hàng mua nhiều nhất</h2>
+        <!-- 4 THẺ KPI LIQUID GLASS TĨNH -->
+        <section class="kpi-grid" id="st-kpis">
+          <div class="card kpi">
+            <div class="kpi-icon kpi-red"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div>
+            <div>
+              <div class="kpi-label">Doanh thu</div>
+              <div class="kpi-value" style="color: #f87171;">50.045.000đ</div>
+            </div>
           </div>
-          <div class="table-wrap"><table class="table stat-table">
-            <colgroup><col style="width:72px"><col style="width:250px"><col style="width:90px"><col><col style="width:150px"><col style="width:230px"></colgroup>
-            <thead><tr><th class="center">Hạng</th><th>Khách hàng</th><th class="center">Số đơn</th><th>Tỷ trọng</th><th class="right">Tổng mua</th><th class="right"></th></tr></thead>
-            <tbody id="st-body">
-              <tr>
-                <td class="center"><span class="rank rank-1">1</span></td>
-                <td><div class="cell-user"><span class="avatar">K</span><div><b>Bùi Tuấn Kiệt</b><small>tuankiet@gmail.com</small></div></div></td>
-                <td class="center num"><b>3</b></td>
-                <td><div class="share"><div class="share-bar"><span style="width:21%"></span></div><span class="share-pct">21%</span></div></td>
-                <td class="right num nowrap"><b class="text-red" style="font-size:16px">10.450.000đ</b></td>
-                <td class="right"><a class="btn btn-dark btn-sm" data-view="Bùi Tuấn Kiệt" href="orders.html?user=8&from=2026-08-01&to=2026-11-02"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng</a></td>
-              </tr>
-              <tr>
-                <td class="center"><span class="rank rank-2">2</span></td>
-                <td><div class="cell-user"><span class="avatar">B</span><div><b>Võ Quốc Bảo</b><small>quocbao@gmail.com</small></div></div></td>
-                <td class="center num"><b>4</b></td>
-                <td><div class="share"><div class="share-bar"><span style="width:20%"></span></div><span class="share-pct">20%</span></div></td>
-                <td class="right num nowrap"><b class="text-red" style="font-size:16px">9.915.000đ</b></td>
-                <td class="right"><a class="btn btn-dark btn-sm" data-view="Võ Quốc Bảo" href="orders.html?user=5&from=2026-08-01&to=2026-11-02"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng</a></td>
-              </tr>
-              <tr>
-                <td class="center"><span class="rank rank-3">3</span></td>
-                <td><div class="cell-user"><span class="avatar">H</span><div><b>Lê Gia Hân</b><small>giahan@gmail.com</small></div></div></td>
-                <td class="center num"><b>3</b></td>
-                <td><div class="share"><div class="share-bar"><span style="width:19%"></span></div><span class="share-pct">19%</span></div></td>
-                <td class="right num nowrap"><b class="text-red" style="font-size:16px">9.610.000đ</b></td>
-                <td class="right"><a class="btn btn-dark btn-sm" data-view="Lê Gia Hân" href="orders.html?user=2&from=2026-08-01&to=2026-11-02"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng</a></td>
-              </tr>
-              <tr>
-                <td class="center"><span class="rank rank-4">4</span></td>
-                <td><div class="cell-user"><span class="avatar">T</span><div><b>Phạm Thu Trang</b><small>thutrang@gmail.com</small></div></div></td>
-                <td class="center num"><b>4</b></td>
-                <td><div class="share"><div class="share-bar"><span style="width:19%"></span></div><span class="share-pct">19%</span></div></td>
-                <td class="right num nowrap"><b class="text-red" style="font-size:16px">9.430.000đ</b></td>
-                <td class="right"><a class="btn btn-dark btn-sm" data-view="Phạm Thu Trang" href="orders.html?user=4&from=2026-08-01&to=2026-11-02"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng</a></td>
-              </tr>
-              <tr>
-                <td class="center"><span class="rank rank-5">5</span></td>
-                <td><div class="cell-user"><span class="avatar">A</span><div><b>Nguyễn Minh Anh</b><small>minhanh@gmail.com</small></div></div></td>
-                <td class="center num"><b>4</b></td>
-                <td><div class="share"><div class="share-bar"><span style="width:11%"></span></div><span class="share-pct">11%</span></div></td>
-                <td class="right num nowrap"><b class="text-red" style="font-size:16px">5.470.000đ</b></td>
-                <td class="right"><a class="btn btn-dark btn-sm" data-view="Nguyễn Minh Anh" href="orders.html?user=1&from=2026-08-01&to=2026-11-02"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng</a></td>
-              </tr>
-            </tbody>
-          </table></div>
+          <div class="card kpi">
+            <div class="kpi-icon kpi-blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></div>
+            <div>
+              <div class="kpi-label">Đơn hàng</div>
+              <div class="kpi-value">23</div>
+            </div>
+          </div>
+          <div class="card kpi">
+            <div class="kpi-icon kpi-green"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg></div>
+            <div>
+              <div class="kpi-label">Khách đã mua</div>
+              <div class="kpi-value">8</div>
+            </div>
+          </div>
+          <div class="card kpi">
+            <div class="kpi-icon kpi-amber"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="6"/><path d="m8.5 10.5-3-7.5h4l2.5 5M15.5 10.5l3-7.5h-4L12 8"/></svg></div>
+            <div>
+              <div class="kpi-label">Top 5 khách chiếm</div>
+              <div class="kpi-value" style="color: #fde047;">90%</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- KHỐI 1: BIỂU ĐỒ DOANH SỐ LIQUID GLASS & CHỈ SỐ VẬN HÀNH -->
+        <section class="card" style="margin-top: 20px;">
+          <div class="card-head">
+            <div>
+              <h2>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+                Biểu đồ tăng trưởng doanh số 5 tháng gần nhất
+              </h2>
+              <small class="muted">Thống kê dữ liệu chu kỳ từ Tháng 07/2026 đến Tháng 11/2026</small>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="trend-tag trend-up"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 15 7-7 7 7"/></svg> Tăng trưởng +6.9%</span>
+            </div>
+          </div>
+          <div class="card-pad">
+            <!-- Biểu đồ cột Liquid Glass Pure CSS -->
+            <div class="liquid-chart-wrap">
+              <div class="liquid-chart-col">
+                <span class="chart-val">32.400.000đ</span>
+                <div class="liquid-chart-bar-glow chart-bar-jul" title="Tháng 07: 32.400.000đ (16 đơn)"></div>
+                <span class="chart-lbl">T07/2026</span>
+              </div>
+              <div class="liquid-chart-col">
+                <span class="chart-val">38.600.000đ</span>
+                <div class="liquid-chart-bar-glow chart-bar-aug" title="Tháng 08: 38.600.000đ (19 đơn)"></div>
+                <span class="chart-lbl">T08/2026</span>
+              </div>
+              <div class="liquid-chart-col">
+                <span class="chart-val">41.200.000đ</span>
+                <div class="liquid-chart-bar-glow chart-bar-sep" title="Tháng 09: 41.200.000đ (20 đơn)"></div>
+                <span class="chart-lbl">T09/2026</span>
+              </div>
+              <div class="liquid-chart-col">
+                <span class="chart-val">46.800.000đ</span>
+                <div class="liquid-chart-bar-glow chart-bar-oct" title="Tháng 10: 46.800.000đ (21 đơn)"></div>
+                <span class="chart-lbl">T10/2026</span>
+              </div>
+              <div class="liquid-chart-col">
+                <span class="chart-val" style="color: #fde047; font-size: 12.5px;">50.045.000đ ★</span>
+                <div class="liquid-chart-bar-glow chart-bar-nov" title="Tháng 11 (Kỳ hiện tại): 50.045.000đ (23 đơn)"></div>
+                <span class="chart-lbl" style="color: #fde047; font-weight: 700;">T11/2026 (Hiện tại)</span>
+              </div>
+            </div>
+
+            <!-- Dải 3 chỉ số tài chính và vận hành -->
+            <div class="stat-summary-strip">
+              <div class="stat-summary-box">
+                <div class="stat-summary-icon cyan">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="stat-summary-meta">
+                  <small>Giá trị đơn trung bình (AOV)</small>
+                  <b>2.175.000đ</b>
+                  <span class="trend-tag trend-up" style="font-size: 11px; margin-top: 4px;">↑ +12.4% so với T10</span>
+                </div>
+              </div>
+              <div class="stat-summary-box">
+                <div class="stat-summary-icon green">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m8 12 3 3 5-6"/><circle cx="12" cy="12" r="9"/></svg>
+                </div>
+                <div class="stat-summary-meta">
+                  <small>Tỷ lệ giao hàng thành công</small>
+                  <b>95.6%</b>
+                  <span class="trend-tag trend-up" style="font-size: 11px; margin-top: 4px;">↑ +3.2% so với T10</span>
+                </div>
+              </div>
+              <div class="stat-summary-box">
+                <div class="stat-summary-icon amber">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="stat-summary-meta">
+                  <small>Tỷ lệ khách quay lại mua</small>
+                  <b>62.5%</b>
+                  <span class="trend-tag trend-up" style="font-size: 11px; margin-top: 4px;">↑ +5.0% khách thân thiết</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- KHỐI 2 (LƯỚI ĐÔI): DOANH THU THEO PHÂN LOẠI & TÌNH TRẠNG ĐƠN HÀNG -->
+        <div class="stat-grid-duo" style="margin-top: 24px;">
+          <!-- Card Trái: Phân bổ theo phân loại Gunpla -->
+          <section class="card">
+            <div class="card-head">
+              <h2>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                Doanh số theo phân loại Gunpla
+              </h2>
+            </div>
+            <div class="table-wrap">
+              <table class="table stat-table">
+                <thead>
+                  <tr>
+                    <th>Phân loại</th>
+                    <th class="center">Đơn / Hộp</th>
+                    <th>Tỷ trọng doanh thu</th>
+                    <th class="right">Tổng tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="grade grade-MG">MG</span> <b>Master Grade</b></td>
+                    <td class="center num">9 đơn · <b>14 hộp</b></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 43.2%; background: linear-gradient(90deg, #8b5cf6, #c084fc); color: #8b5cf6;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #c4b5fd;">43.2%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">21.600.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="grade grade-PG">PG</span> <b>Perfect Grade</b></td>
+                    <td class="center num">2 đơn · <b>2 hộp</b></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 25.0%; background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #f59e0b;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #fde047;">25.0%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">12.500.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="grade grade-RG">RG</span> <b>Real Grade</b></td>
+                    <td class="center num">6 đơn · <b>8 hộp</b></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 16.9%; background: linear-gradient(90deg, #06b6d4, #22d3ee); color: #06b6d4;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #67e8f9;">16.9%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">8.450.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="grade grade-HG">HG</span> <b>High Grade</b></td>
+                    <td class="center num">5 đơn · <b>11 hộp</b></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 10.5%; background: linear-gradient(90deg, #ef4444, #f87171); color: #ef4444;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #fca5a5;">10.5%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">5.250.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="grade grade-SD">SD</span> <b>Super Deformed</b></td>
+                    <td class="center num">3 đơn · <b>6 hộp</b></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 2.9%; background: linear-gradient(90deg, #3b82f6, #60a5fa); color: #3b82f6;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #93c5fd;">2.9%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">1.450.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="grade grade-TOOL">TOOL</span> <b>Dụng cụ &amp; Sơn</b></td>
+                    <td class="center num">4 đơn · <b>9 món</b></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 1.5%; background: linear-gradient(90deg, #64748b, #94a3b8); color: #64748b;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #cbd5e1;">1.5%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">795.000đ</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Card Phải: Tình trạng xử lý đơn hàng -->
+          <section class="card">
+            <div class="card-head">
+              <h2>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+                Tình trạng xử lý đơn hàng
+              </h2>
+            </div>
+            <div class="table-wrap">
+              <table class="table stat-table">
+                <thead>
+                  <tr>
+                    <th>Trạng thái đơn</th>
+                    <th class="center">Số lượng</th>
+                    <th>Tỷ lệ hoàn thành</th>
+                    <th class="right">Giá trị đơn</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="badge" style="background: rgba(34, 197, 94, 0.25); color: #86efac; border: 1px solid rgba(74, 222, 128, 0.4);">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="font-size: 13px;"><path d="m8 12 3 3 5-6"/></svg>
+                        Đã giao thành công
+                      </span>
+                    </td>
+                    <td class="center num"><b style="color: #4ade80; font-size: 15px;">18</b> đơn</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 78.3%; background: linear-gradient(90deg, #10b981, #34d399); color: #10b981;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #86efac;">78.3%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b class="money-neon">39.200.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge" style="background: rgba(59, 130, 246, 0.25); color: #93c5fd; border: 1px solid rgba(96, 165, 250, 0.4);">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="font-size: 13px;"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+                        Đang vận chuyển
+                      </span>
+                    </td>
+                    <td class="center num"><b style="color: #60a5fa; font-size: 15px;">3</b> đơn</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 13.0%; background: linear-gradient(90deg, #3b82f6, #60a5fa); color: #3b82f6;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #93c5fd;">13.0%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">6.450.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge" style="background: rgba(245, 158, 11, 0.25); color: #fde047; border: 1px solid rgba(253, 224, 71, 0.4);">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="font-size: 13px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                        Đã xác nhận (chuẩn bị)
+                      </span>
+                    </td>
+                    <td class="center num"><b style="color: #fde047; font-size: 15px;">2</b> đơn</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 8.7%; background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #f59e0b;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #fde047;">8.7%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #ffffff;">4.395.000đ</b></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge" style="background: rgba(255, 255, 255, 0.08); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.15);">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="font-size: 13px;"><path d="M6 6l12 12M18 6 6 18"/></svg>
+                        Đơn hủy / hoàn trả
+                      </span>
+                    </td>
+                    <td class="center num"><b style="color: #94a3b8; font-size: 15px;">0</b> đơn</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 0%; color: #64748b;"></div></div>
+                        <span style="font-weight: 700; font-size: 12.5px; color: #64748b;">0%</span>
+                      </div>
+                    </td>
+                    <td class="right num"><b style="color: #94a3b8;">0đ</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- KHỐI 3: BẢNG TOP 5 MÔ HÌNH GUNDAM BÁN CHẠY NHẤT -->
+        <section class="card" style="margin-top: 24px;">
+          <div class="card-head">
+            <h2>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>
+              Top 5 mô hình Gunpla bán chạy nhất
+            </h2>
+            <span style="font-size: 13px; color: #cbd5e1; font-weight: 500;">Xếp theo doanh thu thực tế</span>
+          </div>
+          <div class="table-wrap">
+            <table class="table stat-table">
+              <colgroup>
+                <col style="width: 70px;">
+                <col style="width: 300px;">
+                <col style="width: 140px;">
+                <col style="width: 110px;">
+                <col style="width: 180px;">
+                <col style="width: 130px;">
+                <col style="width: 110px;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">Hạng</th>
+                  <th>Mô hình Gundam</th>
+                  <th>Phân loại</th>
+                  <th class="center">Đã bán</th>
+                  <th class="right">Tổng doanh thu</th>
+                  <th class="center">Tồn kho</th>
+                  <th class="right">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Hạng 1: Sazabi Ver.Ka -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-gold">#1</span></td>
+                  <td>
+                    <div class="cell-product">
+                      <img src="../assets/images/products/sazabi-verka.jpg" alt="Sazabi Ver.Ka">
+                      <div>
+                        <b>Sazabi Ver.Ka</b>
+                        <small>Mã GP0023 · 2.400.000đ</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="grade grade-MG">MG</span> Char's Counterattack</td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">61</b> hộp</td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 16px;">146.400.000đ</b></td>
+                  <td class="center"><span class="badge" style="background: rgba(245, 158, 11, 0.25); color: #fde047;">Còn 8</span></td>
+                  <td class="right"><a class="btn btn-dark btn-sm" href="product-edit.html">Xem chi tiết</a></td>
+                </tr>
+
+                <!-- Hạng 2: RX-78-2 Gundam Unleashed -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-silver">#2</span></td>
+                  <td>
+                    <div class="cell-product">
+                      <img src="../assets/images/products/rx78-2-unleashed.jpg" alt="RX-78-2 Gundam Unleashed">
+                      <div>
+                        <b>RX-78-2 Gundam Unleashed</b>
+                        <small>Mã GP0031 · 6.250.000đ</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="grade grade-PG">PG</span> Mobile Suit Gundam</td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">18</b> hộp</td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 16px;">112.500.000đ</b></td>
+                  <td class="center"><span class="badge" style="background: rgba(239, 68, 68, 0.25); color: #f87171;">Chỉ còn 5</span></td>
+                  <td class="right"><a class="btn btn-dark btn-sm" href="products.html">Xem chi tiết</a></td>
+                </tr>
+
+                <!-- Hạng 3: RX-78-2 Gundam (Revive) -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-bronze">#3</span></td>
+                  <td>
+                    <div class="cell-product">
+                      <img src="../assets/images/products/rx78-2.jpg" alt="RX-78-2 Gundam (Revive)">
+                      <div>
+                        <b>RX-78-2 Gundam (Revive)</b>
+                        <small>Mã GP0001 · 350.000đ</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="grade grade-HG">HG</span> Mobile Suit Gundam</td>
+                  <td class="center num"><b style="color: #4ade80; font-size: 15px;">318</b> hộp</td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 16px;">111.300.000đ</b></td>
+                  <td class="center"><span class="badge" style="background: rgba(34, 197, 94, 0.25); color: #86efac;">Còn 42</span></td>
+                  <td class="right"><a class="btn btn-dark btn-sm" href="products.html">Xem chi tiết</a></td>
+                </tr>
+
+                <!-- Hạng 4: Hi-Nu Gundam -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-sub">#4</span></td>
+                  <td>
+                    <div class="cell-product">
+                      <img src="../assets/images/products/hinu-verka.jpg" alt="Hi-Nu Gundam Ver.Ka">
+                      <div>
+                        <b>Hi-Nu Gundam Ver.Ka</b>
+                        <small>Mã GP0012 · 1.850.000đ</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="grade grade-MG">MG</span> Beltorchika's Children</td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">45</b> hộp</td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 16px;">83.250.000đ</b></td>
+                  <td class="center"><span class="badge" style="background: rgba(34, 197, 94, 0.25); color: #86efac;">Còn 14</span></td>
+                  <td class="right"><a class="btn btn-dark btn-sm" href="products.html">Xem chi tiết</a></td>
+                </tr>
+
+                <!-- Hạng 5: Gundam Barbatos -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-sub">#5</span></td>
+                  <td>
+                    <div class="cell-product">
+                      <img src="../assets/images/products/barbatos-mg.jpg" alt="Gundam Barbatos">
+                      <div>
+                        <b>Gundam Barbatos</b>
+                        <small>Mã GP0028 · 1.450.000đ</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="grade grade-MG">MG</span> Iron-Blooded Orphans</td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">36</b> hộp</td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 16px;">52.200.000đ</b></td>
+                  <td class="center"><span class="badge" style="background: rgba(34, 197, 94, 0.25); color: #86efac;">Còn 9</span></td>
+                  <td class="right"><a class="btn btn-dark btn-sm" href="products.html">Xem chi tiết</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- KHỐI 4: BẢNG TOP 5 KHÁCH HÀNG MUA NHIỀU NHẤT (HIỆN CÓ) -->
+        <section class="card" style="margin-top: 24px;">
+          <div class="card-head">
+            <h2 id="st-title">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="6"/><path d="m8.5 10.5-3-7.5h4l2.5 5M15.5 10.5l3-7.5h-4L12 8"/></svg>
+              Top 5 khách hàng mua nhiều nhất
+            </h2>
+            <span style="font-size: 13px; color: #cbd5e1; font-weight: 500;">Khoảng thời gian: 01/08/2026 — 02/11/2026</span>
+          </div>
+          <div class="table-wrap">
+            <table class="table stat-table">
+              <colgroup>
+                <col style="width: 80px;">
+                <col style="width: 260px;">
+                <col style="width: 110px;">
+                <col>
+                <col style="width: 170px;">
+                <col style="width: 220px;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center">Hạng</th>
+                  <th>Khách hàng</th>
+                  <th class="center">Số đơn</th>
+                  <th>Tỷ trọng đóng góp</th>
+                  <th class="right">Tổng mua</th>
+                  <th class="right">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="st-body">
+                <!-- Hạng 1 -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-gold">#1</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <span class="avatar" style="color: #fde047; border-color: rgba(250, 204, 21, 0.5);">K</span>
+                      <div><b>Bùi Tuấn Kiệt</b><small>tuankiet@gmail.com</small></div>
+                    </div>
+                  </td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">3</b> đơn</td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 21%; background: linear-gradient(90deg, #ef4444, #f59e0b); color: #ef4444;"></div></div>
+                      <span style="font-weight: 700; font-size: 13.5px; color: #fca5a5;">21%</span>
+                    </div>
+                  </td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 17px;">10.450.000đ</b></td>
+                  <td class="right">
+                    <a class="btn btn-dark btn-sm" href="orders.html">
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng
+                    </a>
+                  </td>
+                </tr>
+                <!-- Hạng 2 -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-silver">#2</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <span class="avatar" style="color: #60a5fa; border-color: rgba(96, 165, 250, 0.5);">B</span>
+                      <div><b>Võ Quốc Bảo</b><small>quocbao@gmail.com</small></div>
+                    </div>
+                  </td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">4</b> đơn</td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 20%; background: linear-gradient(90deg, #3b82f6, #60a5fa); color: #3b82f6;"></div></div>
+                      <span style="font-weight: 700; font-size: 13.5px; color: #93c5fd;">20%</span>
+                    </div>
+                  </td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 17px;">9.915.000đ</b></td>
+                  <td class="right">
+                    <a class="btn btn-dark btn-sm" href="orders.html">
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng
+                    </a>
+                  </td>
+                </tr>
+                <!-- Hạng 3 -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-bronze">#3</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <span class="avatar" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.5);">H</span>
+                      <div><b>Lê Gia Hân</b><small>giahan@gmail.com</small></div>
+                    </div>
+                  </td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">3</b> đơn</td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 19%; background: linear-gradient(90deg, #10b981, #34d399); color: #10b981;"></div></div>
+                      <span style="font-weight: 700; font-size: 13.5px; color: #86efac;">19%</span>
+                    </div>
+                  </td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 17px;">9.610.000đ</b></td>
+                  <td class="right">
+                    <a class="btn btn-dark btn-sm" href="orders.html">
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng
+                    </a>
+                  </td>
+                </tr>
+                <!-- Hạng 4 -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-sub">#4</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <span class="avatar" style="color: #c084fc; border-color: rgba(192, 132, 252, 0.5);">T</span>
+                      <div><b>Phạm Thu Trang</b><small>thutrang@gmail.com</small></div>
+                    </div>
+                  </td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">4</b> đơn</td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 19%; background: linear-gradient(90deg, #8b5cf6, #a78bfa); color: #8b5cf6;"></div></div>
+                      <span style="font-weight: 700; font-size: 13.5px; color: #c4b5fd;">19%</span>
+                    </div>
+                  </td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 17px;">9.430.000đ</b></td>
+                  <td class="right">
+                    <a class="btn btn-dark btn-sm" href="orders.html">
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng
+                    </a>
+                  </td>
+                </tr>
+                <!-- Hạng 5 -->
+                <tr>
+                  <td class="center"><span class="liquid-rank rank-sub">#5</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <span class="avatar" style="color: #e2e8f0; border-color: rgba(255, 255, 255, 0.4);">A</span>
+                      <div><b>Nguyễn Minh Anh</b><small>minhanh@gmail.com</small></div>
+                    </div>
+                  </td>
+                  <td class="center num"><b style="color: #60a5fa; font-size: 15px;">4</b> đơn</td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div class="liquid-bar-track"><div class="liquid-bar-fill" style="width: 11%; background: linear-gradient(90deg, #64748b, #94a3b8); color: #64748b;"></div></div>
+                      <span style="font-weight: 700; font-size: 13.5px; color: #cbd5e1;">11%</span>
+                    </div>
+                  </td>
+                  <td class="right num nowrap"><b class="money-neon" style="font-size: 17px;">5.470.000đ</b></td>
+                  <td class="right">
+                    <a class="btn btn-dark btn-sm" href="orders.html">
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Xem danh sách đơn hàng
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
       </main>
     </div>
   </div>
-
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/admin/admin-layout.js"></script>
-  <script src="../assets/js/admin/statistics.js"></script>
 </body>
 </html>

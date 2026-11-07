@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kết quả tìm kiếm người dùng - Quản trị Frame &amp; Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin">
+  <!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
+  <input type="radio" name="user-search-modal-state" id="modal-user-search-reset" class="css-toggle" checked hidden>
+
+  <!-- TOAST LỌC NGƯỜI DÙNG -->
+  <input type="checkbox" id="toast-filter-user" class="css-toggle" hidden>
+  <div class="css-toast">
+    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
+    <div class="toast-body"><b>Đã lọc danh sách người dùng!</b><p>Hiển thị kết quả lọc trên danh sách tìm kiếm.</p></div>
+    <label for="toast-filter-user" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+  </div>
+
+  <!-- TOAST CẬP NHẬT TRẠNG THÁI TÀI KHOẢN -->
+  <input type="radio" name="user-search-modal-state" id="toast-status-user" class="css-toggle" hidden>
+  <div class="css-toast">
+    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
+    <div class="toast-body"><b>Đã cập nhật trạng thái tài khoản!</b><p>Trạng thái khóa/mở khóa tài khoản đã được ghi nhận.</p></div>
+    <label for="modal-user-search-reset" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+  </div>
+
+  <!-- MODAL XÁC NHẬN KHÓA TÀI KHOẢN -->
+  <input type="radio" name="user-search-modal-state" id="modal-lock-user" class="css-toggle" hidden>
+  <div class="css-modal">
+    <div class="css-modal-box">
+      <div class="css-modal-icon danger"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+      <h3>Khóa tài khoản người dùng?</h3>
+      <p>Tài khoản này sẽ không thể đăng nhập và đặt hàng cho đến khi được mở khóa trở lại.</p>
+      <div class="lock-form">
+        <div class="field">
+          <span>Lý do khóa</span>
+          <div class="reason-grid">
+            <label class="reason-option"><input type="radio" name="lock-reason" value="Không nhận hàng COD" checked><span>Không nhận hàng COD</span></label>
+            <label class="reason-option"><input type="radio" name="lock-reason" value="Thông tin sai"><span>Thông tin sai</span></label>
+            <label class="reason-option"><input type="radio" name="lock-reason" value="Tài khoản ảo"><span>Tài khoản ảo</span></label>
+            <label class="reason-option"><input type="radio" name="lock-reason" value="Đánh giá sai sự thật"><span>Đánh giá sai sự thật</span></label>
+          </div>
+        </div>
+        <label class="field">
+          <span>Ghi chú chi tiết</span>
+          <textarea class="textarea" rows="2" placeholder="Nhập ghi chú thêm..."></textarea>
+        </label>
+      </div>
+      <div class="confirm-actions">
+        <label for="modal-user-search-reset" class="btn btn-outline">Hủy</label>
+        <label for="toast-status-user" class="btn btn-primary">Xác nhận khóa</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-shell">
+    <!-- SIDEBAR LIQUID GLASS TĨNH -->
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
+        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+      </a>
+      <div class="side-label">Quản lý chính</div>
+      <nav class="side-nav">
+        <a href="index.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg> Tổng quan</a>
+        <a href="users.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg> Người dùng</a>
+        <a href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Sản phẩm</a>
+        <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Đơn hàng <span class="badge">4</span></a>
+        <a href="statistics.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê</a>
+      </nav>
+      <div class="side-label">Mở rộng</div>
+      <nav class="side-nav">
+        <a href="promotions.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Khuyến mãi</a>
+        <a href="emails.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email khách hàng</a>
+        <a href="messages.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn <span class="badge">3</span></a>
+        <a href="settings.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Cài đặt cửa hàng</a>
+      </nav>
+      <div class="side-foot side-nav">
+        <a href="../index.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Xem trang bán hàng</a>
+        <a href="login.html" style="color: #f87171;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <div class="crumb">Quản trị / Người dùng / Tìm kiếm</div>
+          <h1>Kết quả tìm kiếm người dùng</h1>
+        </div>
+        <div class="right">
+          <span class="barbatos-badge"><span class="dot"></span> Barbatos Lupus Rex</span>
+          <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
+          <div class="admin-user">
+            <span class="avatar">A</span>
+            <div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+          </div>
+          <a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg></a>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <section class="card toolbar">
+          <form action="users-search.html" method="get" style="display: flex; align-items: flex-end; gap: 10px; flex: 2 1 320px;" autocomplete="off">
+            <label class="field" style="flex: 1;">
+              <span>Tìm theo tên, email hoặc số điện thoại</span>
+              <div class="search-input">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input class="input" id="us-key" name="q" value="Nguyễn" placeholder="Nhập từ khóa tìm kiếm...">
+              </div>
+            </label>
+            <button class="btn btn-dark" type="submit">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Tìm kiếm
+            </button>
+          </form>
+
+          <div style="display: flex; align-items: flex-end; gap: 10px; flex: 1 1 240px;">
+            <label class="field" style="flex: 1;">
+              <span>Trạng thái tài khoản</span>
+              <select class="select" id="us-status">
+                <option value="">Tất cả trạng thái</option>
+                <option value="active">Đang hoạt động</option>
+                <option value="locked">Đã khóa</option>
+              </select>
+            </label>
+            <label for="toast-filter-user" class="btn btn-outline">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 5h18l-7 8.5V20l-4-2v-4.5z"/></svg> Lọc
+            </label>
+          </div>
+
+          <a class="btn btn-primary" href="user-form.html" style="margin-left: auto;">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 5v14M5 12h14"/></svg> Thêm người dùng
+          </a>
+
+          <div class="toolbar-note">
+            <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Kết quả tìm kiếm: <b>2 người dùng</b> phù hợp</span>
+            <a class="link" href="users.html">← Xem tất cả người dùng</a>
+          </div>
+        </section>
+
+        <!-- BẢNG 2 NGƯỜI DÙNG MẪU KHỚP KẾT QUẢ TÌM KIẾM -->
+        <section class="card">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Người dùng</th>
+                  <th>Số điện thoại</th>
+                  <th>Địa chỉ mặc định</th>
+                  <th>Tham gia</th>
+                  <th class="center">Đơn</th>
+                  <th>Trạng thái</th>
+                  <th class="right">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="cell-user">
+                      <span class="avatar">A</span>
+                      <div><b>Nguyễn Minh Anh</b><small>minhanh@gmail.com</small></div>
+                    </div>
+                  </td>
+                  <td class="num nowrap">0901 234 567</td>
+                  <td class="cell-addr"><span>Phường Thủ Đức</span><small>TP. Hồ Chí Minh</small></td>
+                  <td class="nowrap">10/12/2025</td>
+                  <td class="center"><a class="link" href="orders.html">12 đơn</a></td>
+                  <td class="nowrap"><span class="chip chip-active">Hoạt động</span></td>
+                  <td>
+                    <div class="row-actions">
+                      <a class="btn btn-outline btn-sm" href="user-edit.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> Xem / Sửa</a>
+                      <label for="modal-lock-user" class="btn btn-sm btn-danger-outline"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Khóa</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-user">
+                      <span class="avatar">N</span>
+                      <div><b>Nguyễn Hoàng Nam</b><small>hoangnam@gmail.com</small></div>
+                    </div>
+                  </td>
+                  <td class="num nowrap">0989 027 413</td>
+                  <td class="cell-addr"><span>Phường Hiệp Bình</span><small>TP. Hồ Chí Minh</small></td>
+                  <td class="nowrap">12/09/2026</td>
+                  <td class="center"><a class="link" href="orders.html">0 đơn</a></td>
+                  <td class="nowrap"><span class="chip chip-active">Hoạt động</span></td>
+                  <td>
+                    <div class="row-actions">
+                      <a class="btn btn-outline btn-sm" href="user-edit.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> Xem / Sửa</a>
+                      <label for="modal-lock-user" class="btn btn-sm btn-danger-outline"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Khóa</label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span>Trang 1/1 · <b>2</b> người dùng phù hợp</span>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

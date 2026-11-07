@@ -24,7 +24,7 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const from = $("st-from").value, to = $("st-to").value;
-      toast("Đã thống kê thành công", `Khoảng thời gian: ${from ? formatDate(from) : "..."} đến ${to ? formatDate(to) : "..."}`);
+      toast("Đã thống kê dữ liệu!", `Khoảng thời gian: ${from ? formatDate(from) : "..."} đến ${to ? formatDate(to) : "..."}`);
     });
   }
 

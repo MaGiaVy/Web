@@ -3,60 +3,211 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cài đặt cửa hàng - Quản trị Frame & Form</title>
+  <title>Cài đặt cửa hàng - Quản trị Frame &amp; Form</title>
   <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
-<body class="admin" data-root="../" data-admin-page="settings" data-title="Cài đặt cửa hàng" data-crumb="Cài đặt cửa hàng">
+<body class="admin">
+  <!-- TOAST LƯU CÀI ĐẶT THÀNH CÔNG -->
+  <input type="checkbox" id="toast-save-settings" class="css-toggle" hidden>
+  <div class="css-toast">
+    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
+    <div class="toast-body"><b>Đã lưu cài đặt cửa hàng thành công!</b><p>Thông tin liên hệ và chính sách giao hàng đã được cập nhật.</p></div>
+    <label for="toast-save-settings" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+  </div>
+
+  <!-- TOAST KHÔI PHỤC MẶC ĐỊNH -->
+  <input type="checkbox" id="toast-reset-settings" class="css-toggle" hidden>
+  <div class="css-toast toast-info">
+    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></div>
+    <div class="toast-body"><b>Đã hủy thay đổi!</b><p>Thông tin cài đặt cửa hàng được giữ nguyên như ban đầu.</p></div>
+    <label for="toast-reset-settings" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+  </div>
+
   <div class="admin-shell">
-    <div id="admin-sidebar"></div>
+    <!-- SIDEBAR LIQUID GLASS TĨNH -->
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
+        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+      </a>
+      <div class="side-label">Quản lý chính</div>
+      <nav class="side-nav">
+        <a href="index.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg> Tổng quan</a>
+        <a href="users.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg> Người dùng</a>
+        <a href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Sản phẩm</a>
+        <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Đơn hàng <span class="badge">4</span></a>
+        <a href="statistics.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê</a>
+      </nav>
+      <div class="side-label">Mở rộng</div>
+      <nav class="side-nav">
+        <a href="promotions.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Khuyến mãi</a>
+        <a href="emails.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email khách hàng</a>
+        <a href="messages.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn <span class="badge">3</span></a>
+        <a href="settings.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Cài đặt cửa hàng</a>
+      </nav>
+      <div class="side-foot side-nav">
+        <a href="../index.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Xem trang bán hàng</a>
+        <a href="login.html" style="color: #f87171;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
     <div class="admin-main">
-      <div id="admin-topbar"></div>
+      <header class="admin-topbar">
+        <div>
+          <div class="crumb">Quản trị / Cài đặt cửa hàng</div>
+          <h1>Cài đặt cửa hàng</h1>
+        </div>
+        <div class="right">
+          <span class="barbatos-badge"><span class="dot"></span> Barbatos Lupus Rex</span>
+          <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
+          <div class="admin-user">
+            <span class="avatar">A</span>
+            <div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+          </div>
+          <a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg></a>
+        </div>
+      </header>
+
       <main class="admin-content">
-        <form class="form-layout" id="settings-form" autocomplete="off">
+        <div class="form-layout">
           <div class="checkout-stack">
+            <!-- THÔNG TIN LIÊN HỆ -->
             <section class="card">
-              <div class="card-head"><h2 id="h-contact"></h2></div>
+              <div class="card-head">
+                <h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Thông tin liên hệ</h2>
+              </div>
               <div class="card-pad form-grid">
-                <label class="field full"><span>Số nhà, tên đường</span><input class="input" id="st-street"></label>
-                <label class="field"><span>Tỉnh / Thành phố</span><select class="select" id="st-city"></select></label>
-                <label class="field"><span>Phường / Xã</span><select class="select" id="st-ward"></select></label>
-                <label class="field"><span>Hotline</span><input class="input" id="st-hotline"></label>
-                <label class="field"><span>Email hỗ trợ</span><input class="input" id="st-email"></label>
-                <label class="field full"><span>Giờ mở cửa</span><input class="input" id="st-hours"></label>
+                <label class="field full">
+                  <span>Số nhà, tên đường</span>
+                  <input class="input" id="st-street" value="12 Đường Mô Hình">
+                </label>
+                <label class="field">
+                  <span>Tỉnh / Thành phố</span>
+                  <select class="select" id="st-city">
+                    <option value="TP. Hồ Chí Minh" selected>TP. Hồ Chí Minh</option>
+                    <option value="Hà Nội">Hà Nội</option>
+                    <option value="Đà Nẵng">Đà Nẵng</option>
+                    <option value="Cần Thơ">Cần Thơ</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Phường / Xã</span>
+                  <select class="select" id="st-ward">
+                    <option value="Phường Sài Gòn" selected>Phường Sài Gòn</option>
+                    <option value="Phường Bến Thành">Phường Bến Thành</option>
+                    <option value="Phường Tân Định">Phường Tân Định</option>
+                    <option value="Phường Chợ Quán">Phường Chợ Quán</option>
+                    <option value="Phường Phú Thuận">Phường Phú Thuận</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Hotline</span>
+                  <input class="input" id="st-hotline" value="1900 6868">
+                </label>
+                <label class="field">
+                  <span>Email hỗ trợ</span>
+                  <input class="input" id="st-email" value="hotro@frameform.vn">
+                </label>
+                <label class="field full">
+                  <span>Giờ mở cửa</span>
+                  <input class="input" id="st-hours" value="8:00 – 21:00, mỗi ngày">
+                </label>
               </div>
             </section>
+
+            <!-- GIAO HÀNG & ĐỔI TRẢ -->
             <section class="card">
-              <div class="card-head"><h2 id="h-ship"></h2></div>
+              <div class="card-head">
+                <h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="6" width="13" height="10" rx="1"/><path d="M15 9h4l3 3v4h-7z"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="18.5" cy="17.5" r="2"/></svg> Giao hàng &amp; đổi trả</h2>
+              </div>
               <div class="card-pad form-grid">
-                <label class="field"><span>Phí giao hàng mỗi đơn (đ)</span><input class="input" id="st-fee"></label>
-                <label class="field"><span>Miễn phí giao hàng cho đơn từ (đ)</span><input class="input" id="st-free"></label>
-                <label class="field"><span>Thời gian giao dự kiến (ngày làm việc)</span><input class="input" id="st-days"></label>
-                <label class="field"><span>Số ngày được đổi trả</span><input class="input" id="st-return" type="number" min="0"></label>
+                <label class="field">
+                  <span>Phí giao hàng mỗi đơn (đ)</span>
+                  <input class="input" id="st-fee" value="30.000">
+                  <small class="price-hint">Đang áp dụng: <b>30.000đ</b></small>
+                </label>
+                <label class="field">
+                  <span>Miễn phí giao hàng cho đơn từ (đ)</span>
+                  <input class="input" id="st-free" value="1.000.000">
+                  <small class="price-hint">Đang áp dụng: <b>1.000.000đ</b></small>
+                </label>
+                <label class="field">
+                  <span>Thời gian giao dự kiến (ngày làm việc)</span>
+                  <input class="input" id="st-days" value="2 – 5">
+                </label>
+                <label class="field">
+                  <span>Số ngày được đổi trả</span>
+                  <input class="input" id="st-return" type="number" min="0" value="7">
+                </label>
               </div>
             </section>
+
             <div class="form-actions">
-              <button class="btn btn-outline" type="button" id="st-reset">Hủy thay đổi</button>
-              <button class="btn btn-primary" type="submit">Lưu cài đặt</button>
+              <label for="toast-reset-settings" class="btn btn-outline">Hủy thay đổi</label>
+              <label for="toast-save-settings" class="btn btn-primary"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Lưu cài đặt</label>
             </div>
           </div>
 
+          <!-- KHÁCH SẼ THẤY -->
           <aside class="card">
             <div class="card-head"><h3>Khách sẽ thấy</h3></div>
             <div class="card-pad">
-              <div class="settings-preview" id="st-preview"></div>
-              <p class="form-note" id="st-where"></p>
+              <div class="settings-preview">
+                <div class="info-row">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  <div>
+                    <small>Địa chỉ</small>
+                    <b>12 Đường Mô Hình, Phường Sài Gòn, TP. Hồ Chí Minh</b>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+                  <div>
+                    <small>Hotline</small>
+                    <b>1900 6868</b>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                  <div>
+                    <small>Email</small>
+                    <b>hotro@frameform.vn</b>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                  <div>
+                    <small>Giờ mở cửa</small>
+                    <b>8:00 – 21:00, mỗi ngày</b>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="6" width="13" height="10" rx="1"/><path d="M15 9h4l3 3v4h-7z"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="18.5" cy="17.5" r="2"/></svg>
+                  <div>
+                    <small>Giao hàng</small>
+                    <b>Phí <span class="money-neon">30.000đ</span>, miễn phí cho đơn từ <span class="money-neon">1.000.000đ</span></b>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 12a9 9 0 0 1-15.4 6.4L3 16M3 12a9 9 0 0 1 15.4-6.4L21 8"/><path d="M3 21v-5h5M21 3v5h-5"/></svg>
+                  <div>
+                    <small>Đổi trả</small>
+                    <b>Trong 7 ngày</b>
+                  </div>
+                </div>
+              </div>
+              <p class="form-note">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+                <span>Thông tin này hiển thị ở thanh đầu trang, chân trang, trang Liên hệ, Hướng dẫn mua hàng và Giỏ hàng.</span>
+              </p>
             </div>
           </aside>
-        </form>
+        </div>
       </main>
     </div>
   </div>
-
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/admin/admin-layout.js"></script>
-  <script src="../assets/js/admin/settings.js"></script>
 </body>
 </html>

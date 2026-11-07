@@ -150,7 +150,7 @@ p { margin: 0; }
 .cart-badge { position: absolute; top: -7px; right: -10px; min-width: 20px; height: 20px; padding: 0 5px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); font-size: 11px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
 .user-menu { position: relative; }
 .dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: 240px; padding: 8px; background: #fff; color: var(--text); border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--line); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: .15s; }
-.user-menu.open .dropdown { opacity: 1; visibility: visible; transform: none; }
+.user-menu.open .dropdown, .user-menu:hover .dropdown, .user-menu:focus-within .dropdown { opacity: 1; visibility: visible; transform: none; }
 .dropdown-head { padding: 10px 12px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
 .dropdown-head b { display: block; font-size: 14px; }
 .dropdown-head small { color: var(--muted); }
@@ -941,3 +941,9 @@ body:not(.admin) .topbar-promo a:hover { color: #fff; border-color: #fff; }
 .pd-stock b.out { color: var(--red); }
 .pd-policy div span { line-height: 1.4; }
 .pd-ship-list { display: grid; gap: 10px; margin: 0; padding-left: 20px; color: var(--text-2); line-height: 1.6; }
+
+/* ---------------- Tương tác thuần CSS (không cần JS) cho Thanh toán & Sổ địa chỉ ---------------- */
+.option:has(input:checked) { border-color: var(--blue); background: #f7faff; }
+#address-options:has(input[value="new"]:checked) + #new-address { display: block; }
+#payment-options:has(input[value="bank"]:checked) + #bank-box { display: flex; }
+#toggle-address-form:checked ~ #address-form { display: block; }
