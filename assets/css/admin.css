@@ -309,3 +309,53 @@ body.admin { background: #f1f4f9; }
 .ap-views button.active span { background: rgba(255,255,255,.18); color: #fff; }
 .ap-body .price .price-old { margin-left: 4px; font-size: 12.5px; font-weight: 500; }
 .ap-off { display: inline-block; margin-left: 4px; padding: 1px 6px; border-radius: 6px; background: var(--red-soft); color: var(--red); font-size: 12px; font-weight: 700; vertical-align: middle; }
+
+/* ============================================================
+   TÔNG MÀU ADMIN ĐỒNG BỘ VỚI TRANG KHÁCH: đen ấm, vàng đồng, nền be
+   (đổi biến màu cho riêng trang admin; màu trạng thái đơn giữ nguyên)
+   ============================================================ */
+body.admin {
+  --navy: #151413;
+  --navy-2: #1f1e1c;
+  --navy-3: #2c2a27;
+  --blue: #8a6645;
+  --blue-soft: #f4eee5;
+  --yellow: #c3a274;
+  --yellow-soft: #faf5ec;
+  --gray-soft: #f1eee8;
+  --bg: #f4f1ec;
+  --line: #e6e1d8;
+  --text: #1a1917;
+  --text-2: #3a3833;
+  --muted: #77746d;
+  background: #f6f4f0;
+}
+/* Thanh bên */
+body.admin .sidebar { color: #bdb7ad; }
+body.admin .side-label { color: #857f75; }
+body.admin .sidebar .brand-text b em { color: #c3a274; }
+body.admin .sidebar .brand-text small { color: #9a948a; }
+body.admin .side-nav a:hover { background: rgba(255, 255, 255, .05); }
+body.admin .side-nav a.active { background: rgba(195, 162, 116, .16); color: #fff; }
+body.admin .side-nav a.active::before { background: #c3a274; }
+/* Nút: nút chính màu đen như bên khách, đỏ chỉ dành cho xóa / cảnh báo */
+body.admin .btn-primary { background: #151413; color: #fff; }
+body.admin .btn-primary:hover { background: #2c2a27; box-shadow: 0 6px 16px rgba(21, 20, 19, .22); }
+body.admin .btn-blue:hover { background: #765639; }
+/* Ảnh đại diện, ô nhập, ghi chú, ô số liệu */
+body.admin .avatar { background: linear-gradient(135deg, #d9c19a, #a9885e); color: #fff; }
+body.admin .admin-user .avatar { background: #151413; color: #d9c19a; }
+body.admin .input:focus, body.admin .select:focus, body.admin .textarea:focus { box-shadow: 0 0 0 3px rgba(138, 102, 69, .14); }
+body.admin input[type="checkbox"], body.admin input[type="radio"] { accent-color: #151413; }
+body.admin .form-note { color: #6b4f33; }
+body.admin .kpi-icon, body.admin .kpi-icon.kpi-blue, body.admin .kpi-icon.kpi-purple { background: #f4eee5; color: #8a6645; }
+body.admin .kpi-icon.kpi-amber { background: var(--orange-soft); color: var(--orange); }
+/* Các chỗ còn ghi cứng màu xám xanh: đổi sang tông be */
+body.admin .table th { background: #faf8f4; }
+body.admin .ap-card.is-hidden { background: #f7f5f1; }
+body.admin .admin-login { background: radial-gradient(circle at 30% 20%, #3a3127, #151413 62%); }
+body.admin .del-effects.show { color: #6b4f33; }
+body.admin .coupon-code { border-color: #c3a274; background: #faf8f4; }
+body.admin .usage { background: #ece7de; }
+body.admin .coupon-editor { background: #faf8f4; }
+body.admin .admin-login-box .brand-text b em { color: #a9885e; }

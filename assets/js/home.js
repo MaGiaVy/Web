@@ -37,26 +37,26 @@
     </article>`;
   document.getElementById("home-best").innerHTML = best.map(homeProductCard).join("");
 
-  const featured = [37, 1, 2, 6, 3].map((id) => SHOP_PRODUCTS.find((product) => product.id === id)).filter(Boolean);
+  const featured = [22, 9, 23, 15].map((id) => SHOP_PRODUCTS.find((product) => product.id === id)).filter(Boolean);
   const hero = document.getElementById("hero-carousel");
   if (hero && featured.length) {
     const mainImage = hero.querySelector(".hero-art img");
-    const indexMark = hero.querySelector(".hero-art-index");
     const sideLeft = hero.querySelector(".hero-side-image-left");
     const sideRight = hero.querySelector(".hero-side-image-right");
     const caption = hero.querySelector(".hero-copy p");
     let activeIndex = 0;
     let isAnimating = false;
+    // Băng chuyền dùng ảnh nền trong suốt (products/cutout/*.webp) để mô hình đứng trực tiếp trên nền trang
+    const cutout = (product) => asset(product.image.replace("products/", "products/cutout/").replace(".jpg", ".webp"));
     const renderFeatured = (index) => {
       activeIndex = (index + featured.length) % featured.length;
       const current = featured[activeIndex];
       const previous = featured[(activeIndex - 1 + featured.length) % featured.length];
       const next = featured[(activeIndex + 1) % featured.length];
-      mainImage.src = asset(current.image);
+      mainImage.src = cutout(current);
       mainImage.alt = `Hình minh họa: ${current.name}`;
-      sideLeft.src = asset(previous.image);
-      sideRight.src = asset(next.image);
-      indexMark.innerHTML = `F&amp;F<br>${String(activeIndex + 1).padStart(2, "0")}`;
+      sideLeft.src = cutout(previous);
+      sideRight.src = cutout(next);
       caption.innerHTML = `${CATEGORY_LABELS[current.category] || "Mô hình sưu tầm"}<small>${escapeHtml(current.name)}</small><b class="hero-price">${money(current.price)}</b>`;
       hero.setAttribute("aria-label", `Mẫu nổi bật ${activeIndex + 1} trên ${featured.length}: ${current.name}`);
     };
@@ -68,36 +68,24 @@
         return;
       }
 
+      // Chuyển mẫu: trượt ngang + mờ dần, không phóng to/thu nhỏ
       isAnimating = true;
-      const centerCard = hero.querySelector(".hero-art");
-      const leftCard = hero.querySelector(".hero-side-left");
-      const rightCard = hero.querySelector(".hero-side-right");
-      const centerRect = centerCard.getBoundingClientRect();
-      const leftRect = leftCard.getBoundingClientRect();
-      const rightRect = rightCard.getBoundingClientRect();
-      const center = { x: centerRect.left + centerRect.width / 2, y: centerRect.top + centerRect.height / 2 };
-      const left = { x: leftRect.left + leftRect.width / 2, y: leftRect.top + leftRect.height / 2 };
-      const right = { x: rightRect.left + rightRect.width / 2, y: rightRect.top + rightRect.height / 2 };
-      const destinations = direction > 0
-        ? [[centerCard, left, .78], [rightCard, center, 1.24], [leftCard, { x: center.x * 2 - left.x, y: left.y }, 1]]
-        : [[centerCard, right, .78], [leftCard, center, 1.24], [rightCard, { x: center.x * 2 - right.x, y: right.y }, 1]];
-      const motions = destinations.map(([element, destination, scale]) => {
-        const rect = element.getBoundingClientRect();
-        const startTransform = getComputedStyle(element).transform;
-        const currentMatrix = new DOMMatrix(startTransform === "none" ? undefined : startTransform);
-        const layoutCenterX = rect.left + rect.width / 2 - currentMatrix.m41;
-        const layoutCenterY = rect.top + rect.height / 2 - currentMatrix.m42;
-        const dx = destination.x - layoutCenterX;
-        const dy = destination.y - layoutCenterY;
-        return element.animate([
-          { transform: startTransform === "none" ? "translate(0, 0)" : startTransform, opacity: 1 },
-          { transform: `translate(${dx * .72}px, ${dy * .72}px) scale(${scale * 1.06})`, opacity: .92, offset: .72 },
-          { transform: `translate(${dx}px, ${dy}px) scale(${scale})`, opacity: .88 },
-        ], { duration: 620, easing: "cubic-bezier(.12, .88, .22, 1)" });
-      });
-      Promise.all(motions.map((motion) => motion.finished)).then(() => {
+      const images = [mainImage, sideLeft, sideRight];
+      const shift = direction > 0 ? -36 : 36;
+      const timing = { duration: 220, easing: "ease-in", fill: "forwards" };
+      const outs = images.map((img) => img.animate([
+        { transform: "translateX(0)", opacity: 1 },
+        { transform: `translateX(${shift}px)`, opacity: 0 },
+      ], timing));
+      Promise.all(outs.map((a) => a.finished)).then(async () => {
         renderFeatured(nextIndex);
-        motions.forEach((motion) => motion.cancel());
+        await Promise.all(images.map((img) => img.decode().catch(() => {})));
+        outs.forEach((a) => a.cancel());
+        const ins = images.map((img) => img.animate([
+          { transform: `translateX(${-shift}px)`, opacity: 0 },
+          { transform: "translateX(0)", opacity: 1 },
+        ], { duration: 280, easing: "ease-out" }));
+        await Promise.all(ins.map((a) => a.finished));
         isAnimating = false;
       }).catch(() => { isAnimating = false; });
     };

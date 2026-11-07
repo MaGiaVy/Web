@@ -25,6 +25,19 @@ const PRICE_RANGES = [
 // Sản phẩm đã có người mua nên bị ẩn (không xóa được): admin vẫn thấy, khách hàng không thấy
 const HIDDEN_PRODUCT_IDS = [42, 43];
 
+// Ảnh thật của từng sản phẩm (assets/images/products/<tên>.jpg). Cùng một mẫu ở nhiều cấp dùng chung ảnh.
+const PRODUCT_PHOTOS = {
+  1: "rx78-2", 2: "aerial", 3: "barbatos-lupus-rex", 4: "zaku-char", 5: "calibarn", 6: "exia",
+  7: "strike-freedom", 8: "hi-nu-2", 9: "wing-zero-2", 10: "lfrith", 11: "rx78-2", 12: "strike-freedom",
+  13: "nu", 14: "hi-nu-2", 15: "wing-zero", 16: "sazabi", 17: "zaku-green", 18: "exia",
+  19: "hi-nu", 20: "destiny", 21: "freedom", 22: "barbatos", 23: "sazabi-verka", 24: "nu-verka",
+  25: "exia", 26: "zaku-green", 27: "destiny-2", 28: "strike-freedom-burst", 29: "wing-zero-2", 30: "rx78-2-ver3",
+  31: "rx78-2-unleashed", 32: "strike-freedom-burst", 33: "destiny-2", 34: "exia", 35: "00-raiser", 36: "wing-zero",
+  37: "sd-rx78-2", 38: "sd-strike-freedom", 39: "sd-unicorn", 40: "sd-sazabi", 41: "sd-barbatos", 42: "sd-wing-zero",
+  43: "sd-exia", 44: "sd-aerial", 45: "tool-nipper", 46: "tool-marker-set", 47: "tool-panel-line", 48: "tool-knife",
+  49: "tool-sandpaper", 50: "tool-top-coat", 51: "tool-base", 52: "tool-kit",
+};
+
 const PRODUCTS = [
   [1, "RX-78-2 Gundam (Revive)", "Mobile Suit Gundam", "HG", 350000, 390000, 42, 318, "gundam:rx78", "Phiên bản Revive của chiếc Gundam huyền thoại, khớp cử động tốt, màu nhựa chuẩn."],
   [2, "Gundam Aerial", "The Witch from Mercury", "HG", 420000, 0, 35, 276, "gundam:aerial", "Nhân vật chính của series Witch from Mercury với các khiên Bit có thể tháo rời."],
@@ -80,7 +93,7 @@ const PRODUCTS = [
   [52, "Bộ dụng cụ lắp ráp cơ bản 8 món", "Bộ dụng cụ", "TOOL", 320000, 350000, 35, 0, "tool:kit", "Hàng mới về - đủ kìm, dao, nhíp, nhám cho người mới."],
 ].map(([id, name, series, category, price, oldPrice, stock, sold, art, desc]) => ({
   id, name, series, category, price, oldPrice, stock, sold, art, desc,
-  image: "images/studio/p" + String(id).padStart(2, "0") + ".svg",
+  image: "images/products/" + PRODUCT_PHOTOS[id] + ".jpg",
   rating: sold > 250 ? 4.9 : sold > 0 ? 4.8 : 5.0,
   isNew: sold === 0,
   hidden: HIDDEN_PRODUCT_IDS.includes(id),

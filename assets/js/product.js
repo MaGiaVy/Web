@@ -2,7 +2,10 @@
 (function () {
   const p = getProduct(getParam("id")) || PRODUCTS[0];
   const cat = getCategory(p.category);
-  const catName = p.category === "TOOL" ? "Dụng cụ & Sơn" : `${cat.name} (${cat.id})`;
+  const catName = CATEGORY_LABELS[p.category];
+  const code = `GP${String(p.id).padStart(4, "0")}`; // cùng mã với trang quản trị
+  // Tình trạng kho: hết hàng / sắp hết (<= 5) / còn hàng
+  const stockText = p.stock <= 0 ? `<b class="out">Hết hàng</b>` : p.stock <= 5 ? `<b class="low">Sắp hết hàng</b> · chỉ còn ${p.stock} sản phẩm` : `<b>Còn hàng</b> · ${p.stock} sản phẩm có sẵn`;
   const off = discountPercent(p);
   document.title = `${p.name} - Frame & Form`;
 
@@ -11,8 +14,8 @@
 
   const isKit = p.category !== "TOOL";
   const specs = isKit
-    ? [["layers", "Phân loại", catName], ["ruler", "Tỷ lệ", cat.scale === "SD" ? "Super Deformed" : cat.scale], ["tag", "Series", p.series], ["image", "Hình ảnh", "Artwork concept"]]
-    : [["layers", "Phân loại", catName], ["tag", "Nhóm", p.series], ["image", "Hình ảnh", "Artwork concept"], ["note", "Dữ liệu", "Minh họa đồ án"]];
+    ? [["layers", "Phân loại", `${catName} (${cat.id})`], ["ruler", "Tỷ lệ", cat.scale === "SD" ? "Super Deformed (SD)" : cat.scale], ["tag", "Series", p.series], ["box", "Tình trạng", p.stock > 0 ? "Còn hàng" : "Hết hàng"]]
+    : [["layers", "Phân loại", catName], ["tag", "Nhóm", p.series], ["box", "Tình trạng", p.stock > 0 ? "Còn hàng" : "Hết hàng"], ["shield", "Chất lượng", "Hàng chính hãng"]];
 
   document.getElementById("product-detail").innerHTML = `
     <div class="card">
@@ -21,10 +24,10 @@
           <img src="${asset(p.image)}" alt="${escapeHtml(p.name)}">
         </div>
         <div class="pd-info">
-          <span class="grade grade-${p.category}">${isKit ? cat.name.toUpperCase() : "DỤNG CỤ & SƠN"}</span>
+          <span class="grade grade-${p.category}">${catName.toUpperCase()}</span>
           ${p.isNew ? `<span class="flag flag-new" style="margin-left:6px">Hàng mới</span>` : ""}
           <h1>${escapeHtml(p.name)}</h1>
-          <div class="pd-sub"><span>Hình minh họa concept</span><i></i><span>Mã mẫu: <b>FF${String(p.id).padStart(3, "0")}</b></span></div>
+          <div class="pd-sub"><span class="star">${icon("star")} ${p.rating.toFixed(1)}</span><i></i><span>Đã bán <b>${numberDot(p.sold)}</b></span><i></i><span>Mã SP: <b>${code}</b></span></div>
           <div class="pd-price">
             <span class="price">${money(p.price)}</span>
             ${p.oldPrice ? `<span class="price-old">${money(p.oldPrice)}</span><span class="flag flag-sale">Tiết kiệm ${off}%</span>` : ""}
@@ -42,36 +45,42 @@
             <button class="btn btn-dark" data-add-cart="${p.id}" data-use-qty="1">${icon("cart")} Thêm vào giỏ hàng</button>
             <button class="btn btn-primary" id="buy-now">Mua ngay</button>
           </div>
-          <p class="pd-stock">Tình trạng hiển thị: <b>Dữ liệu mẫu</b></p>
+          <p class="pd-stock">${stockText}</p>
           <div class="pd-policy">
-            <div>${icon("image")} Artwork concept nguyên bản</div>
-            <div>${icon("note")} Giá và tồn kho minh họa</div>
-            <div>${icon("info")} Luồng mua hàng mô phỏng</div>
+            <div>${icon("truck")}<span>Miễn phí giao hàng cho đơn từ ${money(STORE_INFO.freeShipFrom)}</span></div>
+            <div>${icon("refresh")}<span>Đổi trả trong ${STORE_INFO.returnDays} ngày</span></div>
+            <div>${icon("shield")}<span>Hàng chính hãng, nguyên hộp</span></div>
           </div>
         </div>
       </div>
       <div class="tabs" id="tabs">
         <button class="active" data-tab="desc">Mô tả sản phẩm</button>
         <button data-tab="spec">Thông số kỹ thuật</button>
-        <button data-tab="review">Ghi chú</button>
+        <button data-tab="review">Giao hàng &amp; đổi trả</button>
       </div>
       <div class="tab-panel" data-panel="desc">
         <p><b>${escapeHtml(p.name)}</b> - ${escapeHtml(p.desc)}</p>
         <p style="margin-top:10px">${isKit
-            ? `Bản minh họa thuộc nhóm <b>${cat.name}</b>, tỷ lệ tham khảo <b>${cat.scale}</b>. Nội dung sản phẩm và artwork được dùng để trình bày giao diện đồ án.`
-          : "Artwork concept cho nhóm dụng cụ hobby. Tên, giá và mô tả là dữ liệu minh họa cho giao diện đồ án."}</p>
+          ? `Mô hình lắp ráp dòng <b>${cat.name}</b>, tỷ lệ <b>${cat.scale}</b>, thuộc series <b>${escapeHtml(p.series)}</b>. Hộp gồm các khung nhựa (runner) đã phân màu, sách hướng dẫn lắp ráp và decal dán; không cần keo dán.`
+          : "Dụng cụ hỗ trợ lắp ráp và hoàn thiện mô hình, dùng được cho mọi dòng HG, RG, MG, PG và SD."}</p>
       </div>
       <div class="tab-panel" data-panel="spec" hidden>
         <table class="spec-table">
           <tr><td>Tên sản phẩm</td><td>${escapeHtml(p.name)}</td></tr>
           <tr><td>Phân loại</td><td>${catName}</td></tr>
-          ${isKit ? `<tr><td>Tỷ lệ tham khảo</td><td>${cat.scale}</td></tr><tr><td>Series mẫu</td><td>${escapeHtml(p.series)}</td></tr><tr><td>Hình ảnh</td><td>Artwork concept nguyên bản</td></tr>` : `<tr><td>Nhóm</td><td>${escapeHtml(p.series)}</td></tr>`}
-          <tr><td>Giá minh họa</td><td><b class="text-red">${money(p.price)}</b></td></tr>
-          <tr><td>Tồn kho mẫu</td><td>${p.stock} sản phẩm</td></tr>
+          ${isKit ? `<tr><td>Tỷ lệ</td><td>${cat.scale}</td></tr><tr><td>Series</td><td>${escapeHtml(p.series)}</td></tr>` : `<tr><td>Nhóm</td><td>${escapeHtml(p.series)}</td></tr>`}
+          <tr><td>Mã sản phẩm</td><td>${code}</td></tr>
+          <tr><td>Giá bán</td><td><b class="text-red">${money(p.price)}</b>${p.oldPrice ? ` <s class="muted">${money(p.oldPrice)}</s>` : ""}</td></tr>
+          <tr><td>Tình trạng kho</td><td>${p.stock > 0 ? `Còn ${p.stock} sản phẩm` : "Hết hàng"}</td></tr>
         </table>
       </div>
       <div class="tab-panel" data-panel="review" hidden>
-        <p>Đây là khu vực minh họa giao diện. Đồ án không thu thập đánh giá khách hàng thật.</p>
+        <ul class="pd-ship-list">
+          <li>Giao hàng toàn quốc, dự kiến ${STORE_INFO.deliveryDays} ngày làm việc. Phí giao hàng ${money(STORE_INFO.shipFee)}, <b>miễn phí cho đơn từ ${money(STORE_INFO.freeShipFrom)}</b>.</li>
+          <li>Thanh toán khi nhận hàng (COD) hoặc chuyển khoản.</li>
+          <li>Đổi trả trong <b>${STORE_INFO.returnDays} ngày</b> nếu hộp bị móp, thiếu chi tiết hoặc giao sai mẫu (sản phẩm còn nguyên hộp, chưa cắt runner).</li>
+          <li>Cần hỗ trợ? Gọi hotline <b>${STORE_INFO.hotline}</b> (${STORE_INFO.hours}).</li>
+        </ul>
       </div>
     </div>`;
 

@@ -46,8 +46,8 @@
       const order = getOrder(LAST_ORDER_ID);
       document.getElementById("success-hero").innerHTML = `
         <div class="success-icon">${icon("check")}</div>
-        <h1>Đơn hàng mẫu đã được tạo</h1>
-        <p>Đây là luồng mô phỏng cho đồ án Frame &amp; Form. Không có giao dịch hoặc đơn hàng thật được xử lý.</p>
+        <h1>Đặt hàng thành công!</h1>
+        <p>Cảm ơn bạn đã mua sắm tại Frame &amp; Form. Chúng tôi sẽ gọi điện xác nhận đơn hàng trong thời gian sớm nhất.</p>
         <div class="order-code">Mã đơn hàng: <b>#${order.id}</b></div>
         <div class="success-actions">
           <a class="btn btn-dark" href="order-detail.html?id=${order.id}">${icon("orders")} Xem chi tiết đơn hàng</a>
