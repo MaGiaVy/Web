@@ -249,5 +249,26 @@
     </div>
   </footer>
   <script src="../assets/js/common.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("tr").forEach((row) => {
+        const plus = row.querySelector("[data-plus]");
+        const minus = row.querySelector("[data-minus]");
+        if (!plus || !minus) return;
+
+        const nameEl = row.querySelector("a b") || row.querySelector("b");
+        const name = nameEl ? nameEl.textContent.trim() : "Sản phẩm";
+
+        plus.onclick = (e) => {
+          e.preventDefault();
+          toast("Đã thêm 1 sản phẩm", name, "success");
+        };
+        minus.onclick = (e) => {
+          e.preventDefault();
+          toast("Đã giảm 1 sản phẩm", name, "info");
+        };
+      });
+    });
+  </script>
 </body>
 </html>
