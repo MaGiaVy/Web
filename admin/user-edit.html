@@ -41,11 +41,10 @@
     <div class="admin-main">
       <header class="admin-topbar">
         <div>
-          <div class="crumb">Quản trị / Người dùng / Xem &amp; Cập nhật</div>
+          <div class="crumb">Quản trị / Người dùng / Xem thông tin</div>
           <h1>Thông tin người dùng</h1>
         </div>
         <div class="right">
-          <span class="barbatos-badge"><span class="dot"></span> Destiny Gundam</span>
           <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
           <div class="admin-user">
             <span class="avatar">A</span>
@@ -56,7 +55,7 @@
       </header>
 
       <main class="admin-content">
-        <form class="form-layout" action="users.html#saved-toast" autocomplete="off" novalidate>
+        <div class="form-layout">
           <div class="checkout-stack">
             <section class="card">
               <div class="card-head">
@@ -67,47 +66,29 @@
                 <div class="form-grid">
                   <label class="field">
                     <span>Họ và tên</span>
-                    <input class="input" id="uf-name" name="name" value="Nguyễn Minh Anh" placeholder="Nhập họ và tên">
+                    <input class="input" id="uf-name" name="name" value="Nguyễn Minh Anh" readonly>
                   </label>
                   <label class="field">
                     <span>Email</span>
-                    <input class="input" id="uf-email" name="email" value="minhanh@gmail.com" placeholder="Nhập email">
+                    <input class="input" id="uf-email" name="email" value="minhanh@gmail.com" readonly>
                   </label>
                   <label class="field">
                     <span>Số điện thoại</span>
-                    <input class="input" id="uf-phone" name="phone" value="0901 234 567" placeholder="Nhập số điện thoại">
-                  </label>
-                  <label class="field">
-                    <span>Mật khẩu (bỏ trống nếu không đổi)</span>
-                    <input class="input" id="uf-pass" name="password" type="password" value="123456" placeholder="Nhập mật khẩu mới">
+                    <input class="input" id="uf-phone" name="phone" value="0901 234 567" readonly>
                   </label>
                   <label class="field">
                     <span>Tỉnh / Thành phố</span>
-                    <select class="select" id="uf-city" name="city">
-                      <option value="TP. Hồ Chí Minh" selected>TP. Hồ Chí Minh</option>
-                      <option value="TP. Hà Nội">TP. Hà Nội</option>
-                      <option value="TP. Đà Nẵng">TP. Đà Nẵng</option>
-                    </select>
+                    <input class="input" id="uf-city" name="city" value="TP. Hồ Chí Minh" readonly>
                   </label>
                   <label class="field">
                     <span>Phường / Xã</span>
-                    <select class="select" id="uf-ward" name="ward">
-                      <option value="Phường Thủ Đức" selected>Phường Thủ Đức</option>
-                      <option value="Phường Sài Gòn">Phường Sài Gòn</option>
-                      <option value="Phường Bến Thành">Phường Bến Thành</option>
-                      <option value="Phường Tân Mỹ">Phường Tân Mỹ</option>
-                      <option value="Phường Gò Vấp">Phường Gò Vấp</option>
-                    </select>
+                    <input class="input" id="uf-ward" name="ward" value="Phường Thủ Đức" readonly>
                   </label>
                   <label class="field full">
                     <span>Số nhà, tên đường</span>
-                    <input class="input" id="uf-street" name="street" value="12 Võ Văn Ngân" placeholder="Vd: 12 Võ Văn Ngân">
+                    <input class="input" id="uf-street" name="street" value="12 Võ Văn Ngân" readonly>
                   </label>
                 </div>
-              </div>
-              <div class="sticky-actions">
-                <a class="btn btn-outline" href="users.html">Hủy</a>
-                <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
               </div>
             </section>
 
@@ -194,7 +175,7 @@
               </div>
             </section>
           </aside>
-        </form>
+        </div>
       </main>
     </div>
   </div>
