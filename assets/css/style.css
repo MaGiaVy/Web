@@ -947,3 +947,65 @@ body:not(.admin) .topbar-promo a:hover { color: #fff; border-color: #fff; }
 #address-options:has(input[value="new"]:checked) + #new-address { display: block; }
 #payment-options:has(input[value="bank"]:checked) + #bank-box { display: flex; }
 #toggle-address-form:checked ~ #address-form { display: block; }
+
+/* ---------------- Mục 5A: 3 Tab độc lập trong trang Tài khoản (Pure CSS Radio) ---------------- */
+.acc-tab-radio { display: none; }
+.account-nav label.account-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: var(--text-2);
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s, color .15s;
+}
+.account-nav label.account-nav-item:hover { background: var(--bg); }
+#acc-tab-profile:checked ~ .account-layout .account-nav label[for="acc-tab-profile"],
+#acc-tab-addresses:checked ~ .account-layout .account-nav label[for="acc-tab-addresses"],
+#acc-tab-password:checked ~ .account-layout .account-nav label[for="acc-tab-password"] {
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: 600;
+}
+#acc-tab-profile:checked ~ .account-layout .account-main > section:not(#profile),
+#acc-tab-addresses:checked ~ .account-layout .account-main > section:not(#addresses),
+#acc-tab-password:checked ~ .account-layout .account-main > section:not(#password) {
+  display: none;
+}
+
+/* ---------------- Mục 6: Hộp thoại xác nhận Hủy đơn hàng (Pure CSS Checkbox Modal) ---------------- */
+.cancel-modal-toggle,
+.cancel-state-toggle { display: none; }
+.css-confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  display: none;
+  place-items: center;
+  padding: 20px;
+  background: rgba(11, 21, 48, .55);
+  animation: fade .15s;
+}
+.cancel-modal-toggle:checked ~ .css-confirm-backdrop {
+  display: grid;
+}
+.cancel-state-toggle:checked ~ .css-confirm-backdrop {
+  display: none !important;
+}
+/* Đổi trạng thái đơn #DH26110201 sang Đã hủy sau khi bấm Đồng ý hủy */
+.chip-after-cancel { display: none; }
+.cancel-state-toggle:checked ~ * .chip-before-cancel,
+.cancel-state-toggle:checked ~ .chip-before-cancel {
+  display: none;
+}
+.cancel-state-toggle:checked ~ * .chip-after-cancel,
+.cancel-state-toggle:checked ~ .chip-after-cancel {
+  display: inline-flex;
+}
+.cancel-state-toggle:checked ~ * .btn-trigger-cancel,
+.cancel-state-toggle:checked ~ .btn-trigger-cancel {
+  display: none;
+}

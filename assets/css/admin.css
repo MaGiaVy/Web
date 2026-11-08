@@ -20,7 +20,7 @@
 /* ---------- Nền Gundam Barbatos cố định toàn màn hình ---------- */
 body.admin,
 body.liquid-glass-body {
-  background: #060913 url("../images/admin/barbatos-bg.jpg") no-repeat center center fixed;
+  background: #060913 url("../images/admin/wing-zero-bg.jpg") no-repeat center center fixed;
   background-size: cover;
   color: #ffffff;
   min-height: 100vh;

@@ -106,3 +106,15 @@ body.store-home .hero-copy p .hero-price { margin-top: 2px; color: #111; font-si
 .hero-slide .hero-copy p {
   animation: heroPopIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* Chống bôi xanh màn hình khi bấm nhanh liên tục vào mũi tên Best Sellers */
+body.store-home .hero-collectors,
+body.store-home .hero-collectors *,
+body.store-home .hero-arrow,
+body.store-home .hero-art,
+body.store-home .hero-side,
+body.store-home .hero-watermark {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}

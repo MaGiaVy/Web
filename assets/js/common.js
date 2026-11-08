@@ -57,3 +57,13 @@ function bindAddToCart(scope = document) {
 document.addEventListener("DOMContentLoaded", () => {
   bindAddToCart(document);
 });
+
+function syncAccountTabFromHash() {
+  const hash = location.hash.replace("#", "");
+  if (hash === "addresses" || hash === "password" || hash === "profile") {
+    const radio = document.getElementById("acc-tab-" + hash);
+    if (radio) radio.checked = true;
+  }
+}
+window.addEventListener("hashchange", syncAccountTabFromHash);
+document.addEventListener("DOMContentLoaded", syncAccountTabFromHash);
