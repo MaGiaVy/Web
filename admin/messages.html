@@ -1,227 +1,226 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lời nhắn liên hệ - Quản trị Frame &amp; Form</title>
-  <link rel="icon" href="../assets/images/frame-form.svg">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="admin">
-  <!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
-  <input type="radio" name="msg-modal-state" id="modal-msg-reset" class="css-toggle" checked hidden>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lời nhắn liên hệ - Quản trị Frame &amp; Form</title>
+<link href="../assets/images/frame-form.svg" rel="icon"/>
 
-  <!-- TOAST PHẢN HỒI THÀNH CÔNG -->
-  <input type="radio" name="msg-modal-state" id="toast-reply-msg" class="css-toggle" hidden>
-  <div class="css-toast">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
-    <div class="toast-body"><b>Đã gửi phản hồi thành công!</b><p>Email phản hồi đã được gửi tới khách hàng.</p></div>
-    <label for="modal-msg-reset" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
 
-  <!-- TOAST ĐÁNH DẤU ĐÃ PHẢN HỒI -->
-  <input type="checkbox" id="toast-done-msg" class="css-toggle" hidden>
-  <div class="css-toast">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
-    <div class="toast-body"><b>Đã đánh dấu đã phản hồi!</b><p>Trạng thái lời nhắn đã được ghi nhận xử lý.</p></div>
-    <label for="toast-done-msg" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
-
-  <!-- TOAST CHUYỂN TRANG -->
-  <input type="checkbox" id="toast-page" class="css-toggle" hidden>
-  <div class="css-toast toast-info">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></div>
-    <div class="toast-body"><b>Đã chuyển trang!</b><p>Đang hiển thị trang tiếp theo trong danh sách lời nhắn.</p></div>
-    <label for="toast-page" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
-
-  <!-- MODAL SOẠN PHẢN HỒI KHÁCH HÀNG -->
-  <input type="radio" name="msg-modal-state" id="modal-reply-msg" class="css-toggle" hidden>
-  <div class="css-modal">
-    <div class="css-modal-box">
-      <div class="css-modal-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
-      <h3>Phản hồi lời nhắn khách hàng</h3>
-      <p>Email phản hồi sẽ được gửi trực tiếp tới hộp thư của khách hàng.</p>
-      <div class="lock-form">
-        <label class="field">
-          <span>Nội dung phản hồi</span>
-          <textarea class="textarea" rows="4">Chào bạn,
+<link href="../assets/css/admin.css?v=202611" rel="stylesheet"/></head>
+<body class="admin"><input class="theme-toggle-input" hidden="" id="theme-dark" type="checkbox"/>
+<!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
+<input checked="" class="css-toggle" hidden="" id="modal-msg-reset" name="msg-modal-state" type="radio"/>
+<!-- TOAST PHẢN HỒI THÀNH CÔNG -->
+<input class="css-toggle" hidden="" id="toast-reply-msg" name="msg-modal-state" type="radio"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã gửi phản hồi thành công!</b><p>Email phản hồi đã được gửi tới khách hàng.</p></div>
+<label class="toast-close" for="modal-msg-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST ĐÁNH DẤU ĐÃ PHẢN HỒI -->
+<input class="css-toggle" hidden="" id="toast-done-msg" type="checkbox"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã đánh dấu đã phản hồi!</b><p>Trạng thái lời nhắn đã được ghi nhận xử lý.</p></div>
+<label class="toast-close" for="toast-done-msg" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST CHUYỂN TRANG -->
+<input class="css-toggle" hidden="" id="toast-page" type="checkbox"/>
+<div class="css-toast toast-info">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></div>
+<div class="toast-body"><b>Đã chuyển trang!</b><p>Đang hiển thị trang tiếp theo trong danh sách lời nhắn.</p></div>
+<label class="toast-close" for="toast-page" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- MODAL SOẠN PHẢN HỒI KHÁCH HÀNG -->
+<input class="css-toggle" hidden="" id="modal-reply-msg" name="msg-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg></div>
+<h3>Phản hồi lời nhắn khách hàng</h3>
+<p>Email phản hồi sẽ được gửi trực tiếp tới hộp thư của khách hàng.</p>
+<div class="lock-form">
+<label class="field">
+<span>Nội dung phản hồi</span>
+<textarea class="textarea" rows="4">Chào bạn,
 
 Cảm ơn bạn đã liên hệ Frame &amp; Form. Chúng tôi xin giải đáp thắc mắc của bạn như sau: </textarea>
-        </label>
-      </div>
-      <div class="confirm-actions">
-        <label for="modal-msg-reset" class="btn btn-outline">Hủy</label>
-        <label for="toast-reply-msg" class="btn btn-primary">Gửi phản hồi</label>
-      </div>
-    </div>
-  </div>
+</label>
+</div>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-msg-reset">Hủy</label>
+<label class="btn btn-primary" for="toast-reply-msg">Gửi phản hồi</label>
+</div>
+</div>
+</div>
+<div class="admin-shell">
+<!-- SIDEBAR LIQUID GLASS TĨNH -->
+<aside class="sidebar">
+<a class="brand" href="index.html">
+<img alt="Logo Frame &amp; Form" src="../assets/images/frame-form.svg"/>
+<span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+</a>
+<div class="side-label">Quản lý chính</div>
+<nav class="side-nav">
+<a href="index.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="1.5" width="8" x="3" y="3"></rect><rect height="6" rx="1.5" width="8" x="13" y="3"></rect><rect height="10" rx="1.5" width="8" x="13" y="11"></rect><rect height="6" rx="1.5" width="8" x="3" y="15"></rect></svg> Tổng quan</a>
+<a href="users.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg> Người dùng</a>
+<a href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg> Sản phẩm</a>
+<a href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Đơn hàng <span class="badge">4</span></a>
+<a href="statistics.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg> Thống kê</a>
+</nav>
+<div class="side-label">Mở rộng</div>
+<nav class="side-nav">
+<a href="promotions.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Khuyến mãi</a>
+<a href="emails.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Email khách hàng</a>
+<a class="active" href="messages.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn <span class="badge">3</span></a>
+<a href="settings.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg> Cài đặt cửa hàng</a>
+</nav>
+<div class="side-foot side-nav">
+<a href="../index.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"></path><path d="M9 20v-6h6v6"></path></svg> Xem trang bán hàng</a>
+<a href="login.html" style="color: var(--red);"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg> Đăng xuất</a>
+</div>
+</aside>
+<!-- KHU VỰC NỘI DUNG CHÍNH -->
+<div class="admin-main">
+<header class="admin-topbar">
+<div>
+<div class="crumb">Quản trị / Lời nhắn</div>
+<h1>Lời nhắn liên hệ</h1>
+</div>
+<div class="right">
+<span class="date"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg> Thứ Hai, 02/11/2026</span>
 
-  <div class="admin-shell">
-    <!-- SIDEBAR LIQUID GLASS TĨNH -->
-    <aside class="sidebar">
-      <a class="brand" href="index.html">
-        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
-        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
-      </a>
-      <div class="side-label">Quản lý chính</div>
-      <nav class="side-nav">
-        <a href="index.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg> Tổng quan</a>
-        <a href="users.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg> Người dùng</a>
-        <a href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Sản phẩm</a>
-        <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Đơn hàng <span class="badge">4</span></a>
-        <a href="statistics.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê</a>
-      </nav>
-      <div class="side-label">Mở rộng</div>
-      <nav class="side-nav">
-        <a href="promotions.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Khuyến mãi</a>
-        <a href="emails.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email khách hàng</a>
-        <a href="messages.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn <span class="badge">3</span></a>
-        <a href="settings.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Cài đặt cửa hàng</a>
-      </nav>
-      <div class="side-foot side-nav">
-        <a href="../index.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Xem trang bán hàng</a>
-        <a href="login.html" style="color: #f87171;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
-      </div>
-    </aside>
-
-    <!-- KHU VỰC NỘI DUNG CHÍNH -->
-    <div class="admin-main">
-      <header class="admin-topbar">
-        <div>
-          <div class="crumb">Quản trị / Lời nhắn</div>
-          <h1>Lời nhắn liên hệ</h1>
-        </div>
-        <div class="right">
-          <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
-          <div class="admin-user">
-            <span class="avatar">A</span>
-            <div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
-          </div>
-          <a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg></a>
-        </div>
-      </header>
-
-      <main class="admin-content">
-        <section class="card">
-          <div class="card-head">
-            <h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn từ khách <span class="muted">· 3 mới / 14 lời nhắn</span></h2>
-          </div>
-
-          <div class="message-list">
-            <!-- Lời nhắn 1 (Mới) -->
-            <article class="message-item is-new">
-              <div class="cell-user">
-                <span class="avatar">MT</span>
-                <div>
-                  <b>Mai Quốc Thịnh</b>
-                  <small>0981 777 345 · quocthinh@gmail.com</small>
-                </div>
-              </div>
-              <p class="message-text">Mã SINHVIEN có cần xuất trình thẻ sinh viên không ạ?</p>
-              <div class="message-side">
-                <small>21:30 - 02/11/2026</small>
-                <span class="chip chip-pending">Mới</span>
-              </div>
-              <div class="message-actions">
-                <label for="modal-reply-msg" class="btn btn-dark btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Phản hồi</label>
-                <label for="toast-done-msg" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Đánh dấu đã phản hồi</label>
-              </div>
-            </article>
-
-            <!-- Lời nhắn 2 (Mới) -->
-            <article class="message-item is-new">
-              <div class="cell-user">
-                <span class="avatar">ĐT</span>
-                <div>
-                  <b>Đỗ Thanh Tùng</b>
-                  <small>0938 112 233 · thanhtung@gmail.com</small>
-                </div>
-              </div>
-              <p class="message-text">Shop có còn mẫu Unicorn Gundam bản PG không? Mình muốn đặt trước 1 hộp.</p>
-              <div class="message-side">
-                <small>20:15 - 02/11/2026</small>
-                <span class="chip chip-pending">Mới</span>
-              </div>
-              <div class="message-actions">
-                <label for="modal-reply-msg" class="btn btn-dark btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Phản hồi</label>
-                <label for="toast-done-msg" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Đánh dấu đã phản hồi</label>
-              </div>
-            </article>
-
-            <!-- Lời nhắn 3 (Mới) -->
-            <article class="message-item is-new">
-              <div class="cell-user">
-                <span class="avatar">NA</span>
-                <div>
-                  <b>Nguyễn Minh Anh</b>
-                  <small>0901 234 567 · minhanh@gmail.com</small>
-                </div>
-              </div>
-              <p class="message-text">Mã GUNPLA10 có dùng chung với miễn phí giao hàng được không ạ?</p>
-              <div class="message-side">
-                <small>10:02 - 01/11/2026</small>
-                <span class="chip chip-pending">Mới</span>
-              </div>
-              <div class="message-actions">
-                <label for="modal-reply-msg" class="btn btn-dark btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Phản hồi</label>
-                <label for="toast-done-msg" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Đánh dấu đã phản hồi</label>
-              </div>
-            </article>
-
-            <!-- Lời nhắn 4 (Đã phản hồi) -->
-            <article class="message-item">
-              <div class="cell-user">
-                <span class="avatar">HN</span>
-                <div>
-                  <b>Hồ Bảo Ngọc</b>
-                  <small>0977 888 120 · baongoc@gmail.com</small>
-                </div>
-              </div>
-              <p class="message-text">Mình mới bắt đầu chơi, nên mua bộ dụng cụ nào trước?</p>
-              <div class="message-side">
-                <small>14:40 - 29/10/2026</small>
-                <span class="chip chip-delivered">Đã phản hồi</span>
-              </div>
-              <div class="message-actions">
-                <label for="modal-reply-msg" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Phản hồi</label>
-              </div>
-            </article>
-
-            <!-- Lời nhắn 5 (Đã phản hồi) -->
-            <article class="message-item">
-              <div class="cell-user">
-                <span class="avatar">VB</span>
-                <div>
-                  <b>Võ Quốc Bảo</b>
-                  <small>0908 777 888 · quocbao@gmail.com</small>
-                </div>
-              </div>
-              <p class="message-text">Hộp Sazabi nhận được bị móp góc, mình muốn đổi hộp mới.</p>
-              <div class="message-side">
-                <small>09:18 - 24/10/2026</small>
-                <span class="chip chip-delivered">Đã phản hồi</span>
-              </div>
-              <div class="message-actions">
-                <label for="modal-reply-msg" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Phản hồi</label>
-              </div>
-            </article>
-          </div>
-
-          <div class="table-foot">
-            <span>Trang 1/3 · <b>14</b> lời nhắn</span>
-            <div class="pagination">
-              <span class="page-btn disabled" aria-label="Trang trước">‹</span>
-              <span class="page-btn active">1</span>
-              <label for="toast-page" class="page-btn">2</label>
-              <label for="toast-page" class="page-btn">3</label>
-              <label for="toast-page" class="page-btn" aria-label="Trang sau">›</label>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  </div>
+<label class="theme-toggle-btn" for="theme-dark" title="Chuyển chế độ Sáng / Tối (Pure CSS)">
+<span class="lbl-dark">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    Tối
+  </span>
+<span class="lbl-light">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+    Sáng
+  </span>
+</label>
+<div class="admin-user">
+<span class="avatar">A</span>
+<div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+</div>
+<a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg></a>
+</div>
+</header>
+<main class="admin-content">
+<section class="card">
+<div class="card-head">
+<h2><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn từ khách <span class="muted">· 3 mới / 14 lời nhắn</span></h2>
+</div>
+<div class="message-list">
+<!-- Lời nhắn 1 (Mới) -->
+<article class="message-item is-new">
+<div class="cell-user">
+<span class="avatar">MT</span>
+<div>
+<b>Mai Quốc Thịnh</b>
+<small>0981 777 345 · quocthinh@gmail.com</small>
+</div>
+</div>
+<p class="message-text">Mã SINHVIEN có cần xuất trình thẻ sinh viên không ạ?</p>
+<div class="message-side">
+<small>21:30 - 02/11/2026</small>
+<span class="chip chip-pending">Mới</span>
+</div>
+<div class="message-actions">
+<label class="btn btn-dark btn-sm" for="modal-reply-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Phản hồi</label>
+<label class="btn btn-outline btn-sm" for="toast-done-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg> Đánh dấu đã phản hồi</label>
+</div>
+</article>
+<!-- Lời nhắn 2 (Mới) -->
+<article class="message-item is-new">
+<div class="cell-user">
+<span class="avatar">ĐT</span>
+<div>
+<b>Đỗ Thanh Tùng</b>
+<small>0938 112 233 · thanhtung@gmail.com</small>
+</div>
+</div>
+<p class="message-text">Shop có còn mẫu Unicorn Gundam bản PG không? Mình muốn đặt trước 1 hộp.</p>
+<div class="message-side">
+<small>20:15 - 02/11/2026</small>
+<span class="chip chip-pending">Mới</span>
+</div>
+<div class="message-actions">
+<label class="btn btn-dark btn-sm" for="modal-reply-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Phản hồi</label>
+<label class="btn btn-outline btn-sm" for="toast-done-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg> Đánh dấu đã phản hồi</label>
+</div>
+</article>
+<!-- Lời nhắn 3 (Mới) -->
+<article class="message-item is-new">
+<div class="cell-user">
+<span class="avatar">NA</span>
+<div>
+<b>Nguyễn Minh Anh</b>
+<small>0901 234 567 · minhanh@gmail.com</small>
+</div>
+</div>
+<p class="message-text">Mã GUNPLA10 có dùng chung với miễn phí giao hàng được không ạ?</p>
+<div class="message-side">
+<small>10:02 - 01/11/2026</small>
+<span class="chip chip-pending">Mới</span>
+</div>
+<div class="message-actions">
+<label class="btn btn-dark btn-sm" for="modal-reply-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Phản hồi</label>
+<label class="btn btn-outline btn-sm" for="toast-done-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg> Đánh dấu đã phản hồi</label>
+</div>
+</article>
+<!-- Lời nhắn 4 (Đã phản hồi) -->
+<article class="message-item">
+<div class="cell-user">
+<span class="avatar">HN</span>
+<div>
+<b>Hồ Bảo Ngọc</b>
+<small>0977 888 120 · baongoc@gmail.com</small>
+</div>
+</div>
+<p class="message-text">Mình mới bắt đầu chơi, nên mua bộ dụng cụ nào trước?</p>
+<div class="message-side">
+<small>14:40 - 29/10/2026</small>
+<span class="chip chip-delivered">Đã phản hồi</span>
+</div>
+<div class="message-actions">
+<label class="btn btn-outline btn-sm" for="modal-reply-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Phản hồi</label>
+</div>
+</article>
+<!-- Lời nhắn 5 (Đã phản hồi) -->
+<article class="message-item">
+<div class="cell-user">
+<span class="avatar">VB</span>
+<div>
+<b>Võ Quốc Bảo</b>
+<small>0908 777 888 · quocbao@gmail.com</small>
+</div>
+</div>
+<p class="message-text">Hộp Sazabi nhận được bị móp góc, mình muốn đổi hộp mới.</p>
+<div class="message-side">
+<small>09:18 - 24/10/2026</small>
+<span class="chip chip-delivered">Đã phản hồi</span>
+</div>
+<div class="message-actions">
+<label class="btn btn-outline btn-sm" for="modal-reply-msg"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Phản hồi</label>
+</div>
+</article>
+</div>
+<div class="table-foot">
+<span>Trang 1/3 · <b>14</b> lời nhắn</span>
+<div class="pagination">
+<span aria-label="Trang trước" class="page-btn disabled">‹</span>
+<span class="page-btn active">1</span>
+<label class="page-btn" for="toast-page">2</label>
+<label class="page-btn" for="toast-page">3</label>
+<label aria-label="Trang sau" class="page-btn" for="toast-page">›</label>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
 </body>
 </html>

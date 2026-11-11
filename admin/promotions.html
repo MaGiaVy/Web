@@ -1,275 +1,276 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Khuyến mãi - Quản trị Frame &amp; Form</title>
-  <link rel="icon" href="../assets/images/frame-form.svg">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="admin">
-  <!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
-  <input type="radio" name="promo-modal-state" id="modal-promo-reset" class="css-toggle" checked hidden>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Khuyến mãi - Quản trị Frame &amp; Form</title>
+<link href="../assets/images/frame-form.svg" rel="icon"/>
 
-  <!-- TOAST LƯU CHƯƠNG TRÌNH KHUYẾN MÃI -->
-  <input type="checkbox" id="toast-save-promo" class="css-toggle" hidden>
-  <div class="css-toast">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
-    <div class="toast-body"><b>Đã lưu chương trình khuyến mãi!</b><p>Tuần lễ Gunpla · Trạng thái: Đang chạy</p></div>
-    <label for="toast-save-promo" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
 
-  <!-- TOAST LƯU MÃ GIẢM GIÁ -->
-  <input type="checkbox" id="toast-save-coupon" class="css-toggle" hidden>
-  <div class="css-toast">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
-    <div class="toast-body"><b>Đã lưu mã giảm giá thành công!</b><p>Thông tin mã ưu đãi đã được cập nhật.</p></div>
-    <label for="toast-save-coupon" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
+<link href="../assets/css/admin.css?v=202611" rel="stylesheet"/></head>
+<body class="admin"><input class="theme-toggle-input" hidden="" id="theme-dark" type="checkbox"/>
+<!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
+<input checked="" class="css-toggle" hidden="" id="modal-promo-reset" name="promo-modal-state" type="radio"/>
+<!-- TOAST LƯU CHƯƠNG TRÌNH KHUYẾN MÃI -->
+<input class="css-toggle" hidden="" id="toast-save-promo" type="checkbox"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã lưu chương trình khuyến mãi!</b><p>Tuần lễ Gunpla · Trạng thái: Đang chạy</p></div>
+<label class="toast-close" for="toast-save-promo" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST LƯU MÃ GIẢM GIÁ -->
+<input class="css-toggle" hidden="" id="toast-save-coupon" type="checkbox"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã lưu mã giảm giá thành công!</b><p>Thông tin mã ưu đãi đã được cập nhật.</p></div>
+<label class="toast-close" for="toast-save-coupon" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST TẠM DỪNG / TIẾP TỤC MÃ GIẢM GIÁ -->
+<input class="css-toggle" hidden="" id="toast-toggle-coupon" name="promo-modal-state" type="radio"/>
+<div class="css-toast toast-info">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></div>
+<div class="toast-body"><b>Đã cập nhật trạng thái mã giảm giá!</b><p>Thay đổi đã được áp dụng cho giỏ hàng.</p></div>
+<label class="toast-close" for="modal-promo-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST CHUYỂN TRANG -->
+<input class="css-toggle" hidden="" id="toast-page" type="checkbox"/>
+<div class="css-toast toast-info">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></div>
+<div class="toast-body"><b>Đã chuyển trang!</b><p>Đang hiển thị trang tiếp theo trong danh sách mã giảm giá.</p></div>
+<label class="toast-close" for="toast-page" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- MODAL XÁC NHẬN TẠM DỪNG MÃ GIẢM GIÁ -->
+<input class="css-toggle" hidden="" id="modal-toggle-coupon" name="promo-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></div>
+<h3>Tạm dừng / Cho chạy lại mã giảm giá?</h3>
+<p>Khách hàng sẽ chỉ áp dụng được các mã đang ở trạng thái Đang chạy tại giỏ hàng.</p>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-promo-reset">Hủy</label>
+<label class="btn btn-primary" for="toast-toggle-coupon">Xác nhận</label>
+</div>
+</div>
+</div>
+<div class="admin-shell">
+<!-- SIDEBAR LIQUID GLASS TĨNH -->
+<aside class="sidebar">
+<a class="brand" href="index.html">
+<img alt="Logo Frame &amp; Form" src="../assets/images/frame-form.svg"/>
+<span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+</a>
+<div class="side-label">Quản lý chính</div>
+<nav class="side-nav">
+<a href="index.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="1.5" width="8" x="3" y="3"></rect><rect height="6" rx="1.5" width="8" x="13" y="3"></rect><rect height="10" rx="1.5" width="8" x="13" y="11"></rect><rect height="6" rx="1.5" width="8" x="3" y="15"></rect></svg> Tổng quan</a>
+<a href="users.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg> Người dùng</a>
+<a href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg> Sản phẩm</a>
+<a href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Đơn hàng <span class="badge">4</span></a>
+<a href="statistics.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg> Thống kê</a>
+</nav>
+<div class="side-label">Mở rộng</div>
+<nav class="side-nav">
+<a class="active" href="promotions.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Khuyến mãi</a>
+<a href="emails.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Email khách hàng</a>
+<a href="messages.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn <span class="badge">3</span></a>
+<a href="settings.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg> Cài đặt cửa hàng</a>
+</nav>
+<div class="side-foot side-nav">
+<a href="../index.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"></path><path d="M9 20v-6h6v6"></path></svg> Xem trang bán hàng</a>
+<a href="login.html" style="color: var(--red);"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg> Đăng xuất</a>
+</div>
+</aside>
+<!-- KHU VỰC NỘI DUNG CHÍNH -->
+<div class="admin-main">
+<header class="admin-topbar">
+<div>
+<div class="crumb">Quản trị / Khuyến mãi</div>
+<h1>Khuyến mãi &amp; Mã giảm giá</h1>
+</div>
+<div class="right">
+<span class="date"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg> Thứ Hai, 02/11/2026</span>
 
-  <!-- TOAST TẠM DỪNG / TIẾP TỤC MÃ GIẢM GIÁ -->
-  <input type="radio" name="promo-modal-state" id="toast-toggle-coupon" class="css-toggle" hidden>
-  <div class="css-toast toast-info">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></div>
-    <div class="toast-body"><b>Đã cập nhật trạng thái mã giảm giá!</b><p>Thay đổi đã được áp dụng cho giỏ hàng.</p></div>
-    <label for="modal-promo-reset" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
-
-  <!-- TOAST CHUYỂN TRANG -->
-  <input type="checkbox" id="toast-page" class="css-toggle" hidden>
-  <div class="css-toast toast-info">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></div>
-    <div class="toast-body"><b>Đã chuyển trang!</b><p>Đang hiển thị trang tiếp theo trong danh sách mã giảm giá.</p></div>
-    <label for="toast-page" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
-
-  <!-- MODAL XÁC NHẬN TẠM DỪNG MÃ GIẢM GIÁ -->
-  <input type="radio" name="promo-modal-state" id="modal-toggle-coupon" class="css-toggle" hidden>
-  <div class="css-modal">
-    <div class="css-modal-box">
-      <div class="css-modal-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-      <h3>Tạm dừng / Cho chạy lại mã giảm giá?</h3>
-      <p>Khách hàng sẽ chỉ áp dụng được các mã đang ở trạng thái Đang chạy tại giỏ hàng.</p>
-      <div class="confirm-actions">
-        <label for="modal-promo-reset" class="btn btn-outline">Hủy</label>
-        <label for="toast-toggle-coupon" class="btn btn-primary">Xác nhận</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="admin-shell">
-    <!-- SIDEBAR LIQUID GLASS TĨNH -->
-    <aside class="sidebar">
-      <a class="brand" href="index.html">
-        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
-        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
-      </a>
-      <div class="side-label">Quản lý chính</div>
-      <nav class="side-nav">
-        <a href="index.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg> Tổng quan</a>
-        <a href="users.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg> Người dùng</a>
-        <a href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Sản phẩm</a>
-        <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Đơn hàng <span class="badge">4</span></a>
-        <a href="statistics.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê</a>
-      </nav>
-      <div class="side-label">Mở rộng</div>
-      <nav class="side-nav">
-        <a href="promotions.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Khuyến mãi</a>
-        <a href="emails.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email khách hàng</a>
-        <a href="messages.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn <span class="badge">3</span></a>
-        <a href="settings.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Cài đặt cửa hàng</a>
-      </nav>
-      <div class="side-foot side-nav">
-        <a href="../index.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Xem trang bán hàng</a>
-        <a href="login.html" style="color: #f87171;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
-      </div>
-    </aside>
-
-    <!-- KHU VỰC NỘI DUNG CHÍNH -->
-    <div class="admin-main">
-      <header class="admin-topbar">
-        <div>
-          <div class="crumb">Quản trị / Khuyến mãi</div>
-          <h1>Khuyến mãi &amp; Mã giảm giá</h1>
-        </div>
-        <div class="right">
-          <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
-          <div class="admin-user">
-            <span class="avatar">A</span>
-            <div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
-          </div>
-          <a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg></a>
-        </div>
-      </header>
-
-      <main class="admin-content">
-        <!-- CHƯƠNG TRÌNH KHUYẾN MÃI ĐANG CHẠY -->
-        <section class="card">
-          <div class="card-head">
-            <h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8S10.5 3 8 4s0 4 4 4zM12 8s1.5-5 4-4 0 4-4 4z"/></svg> Chương trình khuyến mãi</h2>
-            <span class="chip chip-delivered">Đang chạy</span>
-          </div>
-          <div class="card-pad">
-            <div class="form-grid">
-              <label class="field">
-                <span>Tên chương trình</span>
-                <input class="input" id="pm-name" value="Tuần lễ Gunpla">
+<label class="theme-toggle-btn" for="theme-dark" title="Chuyển chế độ Sáng / Tối (Pure CSS)">
+<span class="lbl-dark">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    Tối
+  </span>
+<span class="lbl-light">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+    Sáng
+  </span>
+</label>
+<div class="admin-user">
+<span class="avatar">A</span>
+<div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+</div>
+<a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg></a>
+</div>
+</header>
+<main class="admin-content">
+<!-- CHƯƠNG TRÌNH KHUYẾN MÃI ĐANG CHẠY -->
+<section class="card">
+<div class="card-head">
+<h2><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="4" rx="1" width="18" x="3" y="8"></rect><path d="M5 12v8h14v-8M12 8v12M12 8S10.5 3 8 4s0 4 4 4zM12 8s1.5-5 4-4 0 4-4 4z"></path></svg> Chương trình khuyến mãi</h2>
+<span class="chip chip-delivered">Đang chạy</span>
+</div>
+<div class="card-pad">
+<div class="form-grid">
+<label class="field">
+<span>Tên chương trình</span>
+<input class="input" id="pm-name" value="Tuần lễ Gunpla"/>
+</label>
+<label class="field">
+<span>Trạng thái</span>
+<select class="select" id="pm-active">
+<option selected="" value="1">Đang chạy</option>
+<option value="0">Tạm dừng</option>
+</select>
+</label>
+<label class="field full">
+<span>Mô tả (hiện ở trang Khuyến mãi)</span>
+<textarea class="textarea" id="pm-desc" rows="2">Ưu đãi dành cho người yêu sưu tầm: nhiều mẫu được giảm giá tại Frame &amp; Form.</textarea>
+</label>
+<label class="check-line full">
+<input checked="" id="pm-topbar" type="checkbox"/> Hiện dòng thông báo chương trình trên thanh đen đầu trang
               </label>
-              <label class="field">
-                <span>Trạng thái</span>
-                <select class="select" id="pm-active">
-                  <option value="1" selected>Đang chạy</option>
-                  <option value="0">Tạm dừng</option>
-                </select>
-              </label>
-              <label class="field full">
-                <span>Mô tả (hiện ở trang Khuyến mãi)</span>
-                <textarea class="textarea" id="pm-desc" rows="2">Ưu đãi dành cho người yêu sưu tầm: nhiều mẫu được giảm giá tại Frame &amp; Form.</textarea>
-              </label>
-              <label class="check-line full">
-                <input type="checkbox" id="pm-topbar" checked> Hiện dòng thông báo chương trình trên thanh đen đầu trang
-              </label>
-            </div>
-            <p class="form-note">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
-              <span>Mức “giảm đến <b>11%</b>” được tính tự động từ giá gốc của <b>17</b> sản phẩm đang giảm giá. <a class="link" href="products.html">Xem các sản phẩm này →</a></span>
-            </p>
-            <div class="form-actions">
-              <a class="btn btn-outline" href="../pages/sale.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> Xem trang Khuyến mãi</a>
-              <label for="toast-save-promo" class="btn btn-primary">Lưu chương trình</label>
-            </div>
-          </div>
-        </section>
-
-        <!-- MÃ GIẢM GIÁ -->
-        <section class="card">
-          <div class="card-head">
-            <h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Mã giảm giá</h2>
-          </div>
-
-          <!-- BIỂU MẪU TẠO / CẬP NHẬT MÃ GIẢM GIÁ -->
-          <div class="coupon-editor card-pad">
-            <h3>Tạo / Cập nhật mã giảm giá</h3>
-            <div class="form-grid cols-3">
-              <label class="field">
-                <span>Mã giảm giá</span>
-                <input class="input" id="cp-code" value="GUNPLA10" placeholder="Vd: GUNPLA10">
-              </label>
-              <label class="field">
-                <span>Loại ưu đãi</span>
-                <select class="select" id="cp-type">
-                  <option value="percent" selected>Giảm theo %</option>
-                  <option value="amount">Giảm số tiền</option>
-                  <option value="ship">Miễn phí giao hàng</option>
-                </select>
-              </label>
-              <label class="field">
-                <span>Giá trị giảm</span>
-                <input class="input" id="cp-value" value="10" placeholder="Vd: 10 (%) hoặc 50.000">
-              </label>
-              <label class="field">
-                <span>Giảm tối đa (đ)</span>
-                <input class="input" id="cp-max" value="200.000" placeholder="Vd: 200.000">
-              </label>
-              <label class="field">
-                <span>Đơn tối thiểu (đ)</span>
-                <input class="input" id="cp-min" value="1.500.000" placeholder="Vd: 1.500.000">
-              </label>
-              <label class="field">
-                <span>Số lượt dùng tối đa</span>
-                <input class="input" id="cp-limit" type="number" min="1" value="100" placeholder="Vd: 100">
-              </label>
-              <label class="field full">
-                <span>Mô tả cho khách</span>
-                <input class="input" id="cp-desc" value="Giảm 10% (tối đa 200.000đ) cho đơn từ 1.500.000đ" placeholder="Vd: Giảm 10% cho đơn từ 1.500.000đ">
-              </label>
-            </div>
-            <div class="form-actions">
-              <label for="toast-save-coupon" class="btn btn-primary">Lưu mã giảm giá</label>
-            </div>
-          </div>
-
-          <!-- BẢNG DANH SÁCH MÃ GIẢM GIÁ -->
-          <div class="table-wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Mã</th>
-                  <th>Ưu đãi</th>
-                  <th>Điều kiện</th>
-                  <th>Đã dùng</th>
-                  <th>Trạng thái</th>
-                  <th class="right">Thao tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="coupon-code">GUNPLA10</span></td>
-                  <td><b>Giảm 10% (tối đa 200.000đ)</b><small class="cell-sub">Giảm 10% (tối đa 200.000đ) cho đơn từ 1.500.000đ</small></td>
-                  <td class="nowrap">Đơn từ 1.500.000đ</td>
-                  <td class="nowrap"><div class="usage"><span style="width: 18%;"></span></div><small class="cell-sub">18/100 lượt</small></td>
-                  <td><span class="chip chip-delivered">Đang chạy</span></td>
-                  <td class="right nowrap">
-                    <label for="modal-toggle-coupon" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Tạm dừng</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="coupon-code">MOIBATDAU</span></td>
-                  <td><b>Giảm 50.000đ</b><small class="cell-sub">Giảm 50.000đ cho đơn từ 500.000đ, dành cho người mới</small></td>
-                  <td class="nowrap">Đơn từ 500.000đ</td>
-                  <td class="nowrap"><div class="usage"><span style="width: 16%;"></span></div><small class="cell-sub">31/200 lượt</small></td>
-                  <td><span class="chip chip-delivered">Đang chạy</span></td>
-                  <td class="right nowrap">
-                    <label for="modal-toggle-coupon" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Tạm dừng</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="coupon-code">FREESHIP</span></td>
-                  <td><b>Miễn phí giao hàng</b><small class="cell-sub">Miễn phí giao hàng cho đơn từ 300.000đ</small></td>
-                  <td class="nowrap">Đơn từ 300.000đ</td>
-                  <td class="nowrap"><div class="usage"><span style="width: 28%;"></span></div><small class="cell-sub">42/150 lượt</small></td>
-                  <td><span class="chip chip-delivered">Đang chạy</span></td>
-                  <td class="right nowrap">
-                    <label for="modal-toggle-coupon" class="btn btn-outline btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Tạm dừng</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="coupon-code">PG500K</span></td>
-                  <td><b>Giảm 500.000đ</b><small class="cell-sub">Giảm 500.000đ cho đơn mô hình cỡ lớn từ 5.000.000đ</small></td>
-                  <td class="nowrap">Đơn từ 5.000.000đ</td>
-                  <td class="nowrap"><div class="usage"><span style="width: 15%;"></span></div><small class="cell-sub">3/20 lượt</small></td>
-                  <td><span class="chip chip-pending">Tạm dừng</span></td>
-                  <td class="right nowrap">
-                    <label for="modal-toggle-coupon" class="btn btn-blue btn-sm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg> Tiếp tục</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="coupon-code">THANG10</span></td>
-                  <td><b>Giảm 5% (tối đa 100.000đ)</b><small class="cell-sub">Giảm 5% cho đơn từ 800.000đ (chương trình tháng 10)</small></td>
-                  <td class="nowrap">Đơn từ 800.000đ</td>
-                  <td class="nowrap"><div class="usage"><span style="width: 100%;"></span></div><small class="cell-sub">60/60 lượt</small></td>
-                  <td><span class="chip chip-gray">Đã kết thúc</span></td>
-                  <td class="right nowrap">
-                    <span class="muted">Đã kết thúc</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="table-foot">
-            <span>Trang 1/3 · <b>12</b> mã giảm giá</span>
-            <div class="pagination">
-              <span class="page-btn disabled" aria-label="Trang trước">‹</span>
-              <span class="page-btn active">1</span>
-              <label for="toast-page" class="page-btn">2</label>
-              <label for="toast-page" class="page-btn">3</label>
-              <label for="toast-page" class="page-btn" aria-label="Trang sau">›</label>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  </div>
+</div>
+<p class="form-note">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>
+<span>Mức “giảm đến <b>11%</b>” được tính tự động từ giá gốc của <b>17</b> sản phẩm đang giảm giá. <a class="link" href="products.html">Xem các sản phẩm này →</a></span>
+</p>
+<div class="form-actions">
+<a class="btn btn-outline" href="../pages/sale.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Xem trang Khuyến mãi</a>
+<label class="btn btn-primary" for="toast-save-promo">Lưu chương trình</label>
+</div>
+</div>
+</section>
+<!-- MÃ GIẢM GIÁ -->
+<section class="card">
+<div class="card-head">
+<h2><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Mã giảm giá</h2>
+</div>
+<!-- BIỂU MẪU TẠO / CẬP NHẬT MÃ GIẢM GIÁ -->
+<div class="coupon-editor card-pad">
+<h3>Tạo / Cập nhật mã giảm giá</h3>
+<div class="form-grid cols-3">
+<label class="field">
+<span>Mã giảm giá</span>
+<input class="input" id="cp-code" placeholder="Vd: GUNPLA10" value="GUNPLA10"/>
+</label>
+<label class="field">
+<span>Loại ưu đãi</span>
+<select class="select" id="cp-type">
+<option selected="" value="percent">Giảm theo %</option>
+<option value="amount">Giảm số tiền</option>
+<option value="ship">Miễn phí giao hàng</option>
+</select>
+</label>
+<label class="field">
+<span>Giá trị giảm</span>
+<input class="input" id="cp-value" placeholder="Vd: 10 (%) hoặc 50.000" value="10"/>
+</label>
+<label class="field">
+<span>Giảm tối đa (đ)</span>
+<input class="input" id="cp-max" placeholder="Vd: 200.000" value="200.000"/>
+</label>
+<label class="field">
+<span>Đơn tối thiểu (đ)</span>
+<input class="input" id="cp-min" placeholder="Vd: 1.500.000" value="1.500.000"/>
+</label>
+<label class="field">
+<span>Số lượt dùng tối đa</span>
+<input class="input" id="cp-limit" min="1" placeholder="Vd: 100" type="number" value="100"/>
+</label>
+<label class="field full">
+<span>Mô tả cho khách</span>
+<input class="input" id="cp-desc" placeholder="Vd: Giảm 10% cho đơn từ 1.500.000đ" value="Giảm 10% (tối đa 200.000đ) cho đơn từ 1.500.000đ"/>
+</label>
+</div>
+<div class="form-actions">
+<label class="btn btn-primary" for="toast-save-coupon">Lưu mã giảm giá</label>
+</div>
+</div>
+<!-- BẢNG DANH SÁCH MÃ GIẢM GIÁ -->
+<div class="table-wrap">
+<table class="table">
+<thead>
+<tr>
+<th>Mã</th>
+<th>Ưu đãi</th>
+<th>Điều kiện</th>
+<th>Đã dùng</th>
+<th>Trạng thái</th>
+<th class="right">Thao tác</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="coupon-code">GUNPLA10</span></td>
+<td><b>Giảm 10% (tối đa 200.000đ)</b><small class="cell-sub">Giảm 10% (tối đa 200.000đ) cho đơn từ 1.500.000đ</small></td>
+<td class="nowrap">Đơn từ 1.500.000đ</td>
+<td class="nowrap"><div class="usage"><span style="width: 18%;"></span></div><small class="cell-sub">18/100 lượt</small></td>
+<td><span class="chip chip-delivered">Đang chạy</span></td>
+<td class="right nowrap">
+<label class="btn btn-outline btn-sm" for="modal-toggle-coupon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg> Tạm dừng</label>
+</td>
+</tr>
+<tr>
+<td><span class="coupon-code">MOIBATDAU</span></td>
+<td><b>Giảm 50.000đ</b><small class="cell-sub">Giảm 50.000đ cho đơn từ 500.000đ, dành cho người mới</small></td>
+<td class="nowrap">Đơn từ 500.000đ</td>
+<td class="nowrap"><div class="usage"><span style="width: 16%;"></span></div><small class="cell-sub">31/200 lượt</small></td>
+<td><span class="chip chip-delivered">Đang chạy</span></td>
+<td class="right nowrap">
+<label class="btn btn-outline btn-sm" for="modal-toggle-coupon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg> Tạm dừng</label>
+</td>
+</tr>
+<tr>
+<td><span class="coupon-code">FREESHIP</span></td>
+<td><b>Miễn phí giao hàng</b><small class="cell-sub">Miễn phí giao hàng cho đơn từ 300.000đ</small></td>
+<td class="nowrap">Đơn từ 300.000đ</td>
+<td class="nowrap"><div class="usage"><span style="width: 28%;"></span></div><small class="cell-sub">42/150 lượt</small></td>
+<td><span class="chip chip-delivered">Đang chạy</span></td>
+<td class="right nowrap">
+<label class="btn btn-outline btn-sm" for="modal-toggle-coupon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg> Tạm dừng</label>
+</td>
+</tr>
+<tr>
+<td><span class="coupon-code">PG500K</span></td>
+<td><b>Giảm 500.000đ</b><small class="cell-sub">Giảm 500.000đ cho đơn mô hình cỡ lớn từ 5.000.000đ</small></td>
+<td class="nowrap">Đơn từ 5.000.000đ</td>
+<td class="nowrap"><div class="usage"><span style="width: 15%;"></span></div><small class="cell-sub">3/20 lượt</small></td>
+<td><span class="chip chip-pending">Tạm dừng</span></td>
+<td class="right nowrap">
+<label class="btn btn-blue btn-sm" for="modal-toggle-coupon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg> Tiếp tục</label>
+</td>
+</tr>
+<tr>
+<td><span class="coupon-code">THANG10</span></td>
+<td><b>Giảm 5% (tối đa 100.000đ)</b><small class="cell-sub">Giảm 5% cho đơn từ 800.000đ (chương trình tháng 10)</small></td>
+<td class="nowrap">Đơn từ 800.000đ</td>
+<td class="nowrap"><div class="usage"><span style="width: 100%;"></span></div><small class="cell-sub">60/60 lượt</small></td>
+<td><span class="chip chip-gray">Đã kết thúc</span></td>
+<td class="right nowrap">
+<span class="muted">Đã kết thúc</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-foot">
+<span>Trang 1/3 · <b>12</b> mã giảm giá</span>
+<div class="pagination">
+<span aria-label="Trang trước" class="page-btn disabled">‹</span>
+<span class="page-btn active">1</span>
+<label class="page-btn" for="toast-page">2</label>
+<label class="page-btn" for="toast-page">3</label>
+<label aria-label="Trang sau" class="page-btn" for="toast-page">›</label>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
 </body>
 </html>

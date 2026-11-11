@@ -1,326 +1,325 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đơn #DH26110201 - Quản trị Frame &amp; Form</title>
-  <link rel="icon" href="../assets/images/frame-form.svg">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="admin">
-  <!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
-  <input type="radio" name="order-modal-state" id="modal-order-reset" class="css-toggle" checked hidden>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đơn #DH26110201 - Quản trị Frame &amp; Form</title>
+<link href="../assets/images/frame-form.svg" rel="icon"/>
 
-  <!-- TOAST IN HÓA ĐƠN -->
-  <input type="checkbox" id="toast-print" class="css-toggle" hidden>
-  <div class="css-toast toast-info">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></div>
-    <div class="toast-body"><b>Đã gửi lệnh in hóa đơn!</b><p>Đơn hàng #DH26110201 · Khách hàng: Nguyễn Minh Anh</p></div>
-    <label for="toast-print" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
 
-  <!-- TOAST CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG -->
-  <input type="radio" name="order-modal-state" id="toast-order-status" class="css-toggle" hidden>
-  <div class="css-toast">
-    <div class="toast-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
-    <div class="toast-body"><b>Đã cập nhật trạng thái đơn hàng!</b><p>Đơn #DH26110201 · Nguyễn Minh Anh</p></div>
-    <label for="modal-order-reset" class="toast-close" title="Đóng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
-  </div>
+<link href="../assets/css/admin.css?v=202611" rel="stylesheet"/></head>
+<body class="admin"><input class="theme-toggle-input" hidden="" id="theme-dark" type="checkbox"/>
+<!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
+<input checked="" class="css-toggle" hidden="" id="modal-order-reset" name="order-modal-state" type="radio"/>
+<!-- TOAST IN HÓA ĐƠN -->
+<input class="css-toggle" hidden="" id="toast-print" type="checkbox"/>
+<div class="css-toast toast-info">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></div>
+<div class="toast-body"><b>Đã gửi lệnh in hóa đơn!</b><p>Đơn hàng #DH26110201 · Khách hàng: Nguyễn Minh Anh</p></div>
+<label class="toast-close" for="toast-print" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG -->
+<input class="css-toggle" hidden="" id="toast-order-status" name="order-modal-state" type="radio"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã cập nhật trạng thái đơn hàng!</b><p>Đơn #DH26110201 · Nguyễn Minh Anh</p></div>
+<label class="toast-close" for="modal-order-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- MODAL XÁC NHẬN ĐƠN HÀNG -->
+<input class="css-toggle" hidden="" id="modal-confirm-order" name="order-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="m5 12 5 5L20 7"></path></svg></div>
+<h3>Xác nhận đơn hàng?</h3>
+<p>Đơn <b>#DH26110201</b> sẽ chuyển sang <b>“Đã xác nhận”</b>.<br/>Sau khi cập nhật sẽ không quay lại bước trước được.</p>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-order-reset">Để sau</label>
+<label class="btn btn-primary" for="toast-order-status">Xác nhận</label>
+</div>
+</div>
+</div>
+<!-- MODAL GIAO CHO VẬN CHUYỂN -->
+<input class="css-toggle" hidden="" id="modal-ship-order" name="order-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17" cy="17.5" r="1.8"></circle></svg></div>
+<h3>Giao cho vận chuyển?</h3>
+<p>Đơn <b>#DH26110201</b> sẽ chuyển sang <b>“Đang giao”</b>.<br/>Sau khi cập nhật sẽ không quay lại bước trước được.</p>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-order-reset">Để sau</label>
+<label class="btn btn-primary" for="toast-order-status">Giao hàng</label>
+</div>
+</div>
+</div>
+<!-- MODAL XÁC NHẬN ĐÃ GIAO HÀNG -->
+<input class="css-toggle" hidden="" id="modal-deliver-order" name="order-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<h3>Xác nhận đã giao hàng?</h3>
+<p>Đơn <b>#DH26110201</b> sẽ chuyển sang <b>“Đã giao thành công”</b>.<br/>Sau khi cập nhật sẽ không quay lại bước trước được.</p>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-order-reset">Để sau</label>
+<label class="btn btn-primary" for="toast-order-status">Đã giao</label>
+</div>
+</div>
+</div>
+<!-- MODAL HỦY ĐƠN HÀNG (CÓ RADIO CHỌN LÝ DO HỦY) -->
+<input class="css-toggle" hidden="" id="modal-cancel-order" name="order-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon danger"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></div>
+<h3>Hủy đơn hàng này?</h3>
+<p>Đơn <b>#DH26110201</b> sẽ bị hủy và không khôi phục lại được.</p>
+<div class="lock-form">
+<div class="field">
+<span>Lý do hủy</span>
+<div class="reason-grid">
+<label class="reason-option"><input checked="" name="cancel-reason" type="radio" value="Khách yêu cầu hủy"/><span>Khách yêu cầu hủy</span></label>
+<label class="reason-option"><input name="cancel-reason" type="radio" value="Không liên lạc được khách"/><span>Không liên lạc được khách</span></label>
+<label class="reason-option"><input name="cancel-reason" type="radio" value="Sản phẩm hết hàng"/><span>Sản phẩm hết hàng</span></label>
+<label class="reason-option"><input name="cancel-reason" type="radio" value="Sai thông tin giao hàng"/><span>Sai thông tin giao hàng</span></label>
+<label class="reason-option"><input name="cancel-reason" type="radio" value="Khách không nhận hàng"/><span>Khách không nhận hàng</span></label>
+<label class="reason-option"><input name="cancel-reason" type="radio" value="Lý do khác"/><span>Lý do khác</span></label>
+</div>
+</div>
+<label class="field">
+<span>Ghi chú</span>
+<textarea class="textarea" placeholder="Vd: Khách gọi điện báo đổi ý" rows="2"></textarea>
+</label>
+</div>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-order-reset">Không hủy</label>
+<label class="btn btn-danger" for="toast-order-status">Hủy đơn</label>
+</div>
+</div>
+</div>
+<div class="admin-shell">
+<!-- SIDEBAR LIQUID GLASS TĨNH -->
+<aside class="sidebar">
+<a class="brand" href="index.html">
+<img alt="Logo Frame &amp; Form" src="../assets/images/frame-form.svg"/>
+<span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+</a>
+<div class="side-label">Quản lý chính</div>
+<nav class="side-nav">
+<a href="index.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="1.5" width="8" x="3" y="3"></rect><rect height="6" rx="1.5" width="8" x="13" y="3"></rect><rect height="10" rx="1.5" width="8" x="13" y="11"></rect><rect height="6" rx="1.5" width="8" x="3" y="15"></rect></svg> Tổng quan</a>
+<a href="users.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg> Người dùng</a>
+<a href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg> Sản phẩm</a>
+<a class="active" href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Đơn hàng <span class="badge">4</span></a>
+<a href="statistics.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg> Thống kê</a>
+</nav>
+<div class="side-label">Mở rộng</div>
+<nav class="side-nav">
+<a href="promotions.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Khuyến mãi</a>
+<a href="emails.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Email khách hàng</a>
+<a href="messages.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn <span class="badge">3</span></a>
+<a href="settings.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg> Cài đặt cửa hàng</a>
+</nav>
+<div class="side-foot side-nav">
+<a href="../index.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"></path><path d="M9 20v-6h6v6"></path></svg> Xem trang bán hàng</a>
+<a href="login.html" style="color: var(--red);"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg> Đăng xuất</a>
+</div>
+</aside>
+<!-- KHU VỰC NỘI DUNG CHÍNH -->
+<div class="admin-main">
+<header class="admin-topbar">
+<div>
+<div class="crumb">Quản trị / Đơn hàng / Chi tiết</div>
+<h1>Chi tiết đơn hàng</h1>
+</div>
+<div class="right">
+<span class="date"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg> Thứ Hai, 02/11/2026</span>
 
-  <!-- MODAL XÁC NHẬN ĐƠN HÀNG -->
-  <input type="radio" name="order-modal-state" id="modal-confirm-order" class="css-toggle" hidden>
-  <div class="css-modal">
-    <div class="css-modal-box">
-      <div class="css-modal-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m5 12 5 5L20 7"/></svg></div>
-      <h3>Xác nhận đơn hàng?</h3>
-      <p>Đơn <b>#DH26110201</b> sẽ chuyển sang <b>“Đã xác nhận”</b>.<br>Sau khi cập nhật sẽ không quay lại bước trước được.</p>
-      <div class="confirm-actions">
-        <label for="modal-order-reset" class="btn btn-outline">Để sau</label>
-        <label for="toast-order-status" class="btn btn-primary">Xác nhận</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL GIAO CHO VẬN CHUYỂN -->
-  <input type="radio" name="order-modal-state" id="modal-ship-order" class="css-toggle" hidden>
-  <div class="css-modal">
-    <div class="css-modal-box">
-      <div class="css-modal-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div>
-      <h3>Giao cho vận chuyển?</h3>
-      <p>Đơn <b>#DH26110201</b> sẽ chuyển sang <b>“Đang giao”</b>.<br>Sau khi cập nhật sẽ không quay lại bước trước được.</p>
-      <div class="confirm-actions">
-        <label for="modal-order-reset" class="btn btn-outline">Để sau</label>
-        <label for="toast-order-status" class="btn btn-primary">Giao hàng</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL XÁC NHẬN ĐÃ GIAO HÀNG -->
-  <input type="radio" name="order-modal-state" id="modal-deliver-order" class="css-toggle" hidden>
-  <div class="css-modal">
-    <div class="css-modal-box">
-      <div class="css-modal-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
-      <h3>Xác nhận đã giao hàng?</h3>
-      <p>Đơn <b>#DH26110201</b> sẽ chuyển sang <b>“Đã giao thành công”</b>.<br>Sau khi cập nhật sẽ không quay lại bước trước được.</p>
-      <div class="confirm-actions">
-        <label for="modal-order-reset" class="btn btn-outline">Để sau</label>
-        <label for="toast-order-status" class="btn btn-primary">Đã giao</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL HỦY ĐƠN HÀNG (CÓ RADIO CHỌN LÝ DO HỦY) -->
-  <input type="radio" name="order-modal-state" id="modal-cancel-order" class="css-toggle" hidden>
-  <div class="css-modal">
-    <div class="css-modal-box">
-      <div class="css-modal-icon danger"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg></div>
-      <h3>Hủy đơn hàng này?</h3>
-      <p>Đơn <b>#DH26110201</b> sẽ bị hủy và không khôi phục lại được.</p>
-      <div class="lock-form">
-        <div class="field">
-          <span>Lý do hủy</span>
-          <div class="reason-grid">
-            <label class="reason-option"><input type="radio" name="cancel-reason" value="Khách yêu cầu hủy" checked><span>Khách yêu cầu hủy</span></label>
-            <label class="reason-option"><input type="radio" name="cancel-reason" value="Không liên lạc được khách"><span>Không liên lạc được khách</span></label>
-            <label class="reason-option"><input type="radio" name="cancel-reason" value="Sản phẩm hết hàng"><span>Sản phẩm hết hàng</span></label>
-            <label class="reason-option"><input type="radio" name="cancel-reason" value="Sai thông tin giao hàng"><span>Sai thông tin giao hàng</span></label>
-            <label class="reason-option"><input type="radio" name="cancel-reason" value="Khách không nhận hàng"><span>Khách không nhận hàng</span></label>
-            <label class="reason-option"><input type="radio" name="cancel-reason" value="Lý do khác"><span>Lý do khác</span></label>
-          </div>
-        </div>
-        <label class="field">
-          <span>Ghi chú</span>
-          <textarea class="textarea" rows="2" placeholder="Vd: Khách gọi điện báo đổi ý"></textarea>
-        </label>
-      </div>
-      <div class="confirm-actions">
-        <label for="modal-order-reset" class="btn btn-outline">Không hủy</label>
-        <label for="toast-order-status" class="btn btn-danger">Hủy đơn</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="admin-shell">
-    <!-- SIDEBAR LIQUID GLASS TĨNH -->
-    <aside class="sidebar">
-      <a class="brand" href="index.html">
-        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
-        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
-      </a>
-      <div class="side-label">Quản lý chính</div>
-      <nav class="side-nav">
-        <a href="index.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg> Tổng quan</a>
-        <a href="users.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg> Người dùng</a>
-        <a href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Sản phẩm</a>
-        <a href="orders.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Đơn hàng <span class="badge">4</span></a>
-        <a href="statistics.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê</a>
-      </nav>
-      <div class="side-label">Mở rộng</div>
-      <nav class="side-nav">
-        <a href="promotions.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Khuyến mãi</a>
-        <a href="emails.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email khách hàng</a>
-        <a href="messages.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn <span class="badge">3</span></a>
-        <a href="settings.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Cài đặt cửa hàng</a>
-      </nav>
-      <div class="side-foot side-nav">
-        <a href="../index.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Xem trang bán hàng</a>
-        <a href="login.html" style="color: #f87171;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
-      </div>
-    </aside>
-
-    <!-- KHU VỰC NỘI DUNG CHÍNH -->
-    <div class="admin-main">
-      <header class="admin-topbar">
-        <div>
-          <div class="crumb">Quản trị / Đơn hàng / Chi tiết</div>
-          <h1>Chi tiết đơn hàng</h1>
-        </div>
-        <div class="right">
-          <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
-          <div class="admin-user">
-            <span class="avatar">A</span>
-            <div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
-          </div>
-          <a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg></a>
-        </div>
-      </header>
-
-      <main class="admin-content">
-        <div class="page-title" style="margin: 0;">
-          <div>
-            <h1 style="font-size: 24px; color: #fff;">Đơn hàng #DH26110201 &nbsp;<span class="chip chip-pending">Chưa xác nhận</span></h1>
-            <p style="color: #cbd5e1;">Đặt lúc 10:05 - 02/11/2026 · 4 sản phẩm</p>
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <a class="btn btn-outline" href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Danh sách đơn</a>
-            <label for="toast-print" class="btn btn-dark"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"/></svg> In hóa đơn</label>
-          </div>
-        </div>
-
-        <div class="detail-layout od-layout">
-          <div class="checkout-stack">
-            <!-- TIMELINE 4 BƯỚC -->
-            <section class="card">
-              <div class="card-head"><h3>Tiến trình đơn hàng</h3></div>
-              <div class="timeline">
-                <div class="tl-step current">
-                  <div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></div>
-                  <b>Chưa xác nhận</b>
-                  <small>10:05 - 02/11/2026</small>
-                </div>
-                <div class="tl-step">
-                  <div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></div>
-                  <b>Đã xác nhận</b>
-                  <small>Đang chuẩn bị hàng</small>
-                </div>
-                <div class="tl-step">
-                  <div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div>
-                  <b>Đang giao</b>
-                  <small>Đang vận chuyển</small>
-                </div>
-                <div class="tl-step">
-                  <div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
-                  <b>Đã giao thành công</b>
-                  <small>Hoàn tất</small>
-                </div>
-              </div>
-            </section>
-
-            <!-- BẢNG 3 SẢN PHẨM TRONG ĐƠN -->
-            <section class="card">
-              <div class="card-head"><h3>Sản phẩm trong đơn</h3></div>
-              <div class="table-wrap">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Sản phẩm</th>
-                      <th class="right">Đơn giá</th>
-                      <th class="center">Số lượng</th>
-                      <th class="right">Thành tiền</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="cell-product">
-                          <img src="../assets/images/products/nu.jpg" alt="Nu Gundam">
-                          <div>
-                            <a href="product-edit.html"><b>Nu Gundam</b></a>
-                            <small><span class="grade grade-RG">RG</span> Char's Counterattack</small>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="right num">1.150.000đ</td>
-                      <td class="center num">1</td>
-                      <td class="right num"><b class="money-neon">1.150.000đ</b></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="cell-product">
-                          <img src="../assets/images/products/sd-rx78-2.jpg" alt="SDEX RX-78-2 Gundam">
-                          <div>
-                            <a href="product-edit.html"><b>SDEX RX-78-2 Gundam</b></a>
-                            <small><span class="grade grade-SD">SD</span> Mobile Suit Gundam</small>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="right num">180.000đ</td>
-                      <td class="center num">2</td>
-                      <td class="right num">
-                        <b class="money-neon">360.000đ</b>
-                        <small class="line-calc" style="color:#94a3b8;">180.000đ × 2</small>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="cell-product">
-                          <img src="../assets/images/products/tool-sandpaper.jpg" alt="Bộ giấy nhám 6 cấp độ">
-                          <div>
-                            <a href="product-edit.html"><b>Bộ giấy nhám 6 cấp độ</b></a>
-                            <small><span class="grade grade-TOOL">TOOL</span> Dụng cụ mài</small>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="right num">60.000đ</td>
-                      <td class="center num">1</td>
-                      <td class="right num"><b class="money-neon">60.000đ</b></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="od-totals">
-                <div class="od-sum">
-                  <div class="od-sum-row"><span>Tiền hàng (4 sản phẩm)</span><b>1.570.000đ</b></div>
-                  <div class="od-sum-row"><span>Phí vận chuyển <small style="color:#94a3b8;">(đơn từ 1.000.000đ)</small></span><b>Miễn phí</b></div>
-                </div>
-                <div class="od-sum-total">
-                  <span>Tổng thanh toán</span>
-                  <b>1.570.000đ</b>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          <!-- CỘT PHẢI: XỬ LÝ ĐƠN & THÔNG TIN KHÁCH -->
-          <aside class="checkout-stack">
-            <section class="card">
-              <div class="card-head"><h3>Xử lý đơn hàng</h3></div>
-              <div class="card-pad status-actions">
-                <label for="modal-confirm-order" class="btn btn-primary btn-block">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m5 12 5 5L20 7"/></svg> Xác nhận đơn hàng
+<label class="theme-toggle-btn" for="theme-dark" title="Chuyển chế độ Sáng / Tối (Pure CSS)">
+<span class="lbl-dark">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    Tối
+  </span>
+<span class="lbl-light">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+    Sáng
+  </span>
+</label>
+<div class="admin-user">
+<span class="avatar">A</span>
+<div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+</div>
+<a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg></a>
+</div>
+</header>
+<main class="admin-content">
+<div class="page-title" style="margin: 0;">
+<div>
+<h1 style="font-size: 24px; color: var(--text-head);">Đơn hàng #DH26110201  <span class="chip chip-pending">Chưa xác nhận</span></h1>
+<p style="color: var(--text-2);">Đặt lúc 10:05 - 02/11/2026 · 4 sản phẩm</p>
+</div>
+<div style="display: flex; gap: 10px;">
+<a class="btn btn-outline" href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg> Danh sách đơn</a>
+<label class="btn btn-dark" for="toast-print"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"></path></svg> In hóa đơn</label>
+</div>
+</div>
+<div class="detail-layout od-layout">
+<div class="checkout-stack">
+<!-- TIMELINE 4 BƯỚC -->
+<section class="card">
+<div class="card-head"><h3>Tiến trình đơn hàng</h3></div>
+<div class="timeline">
+<div class="tl-step current">
+<div class="tl-dot"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg></div>
+<b>Chưa xác nhận</b>
+<small>10:05 - 02/11/2026</small>
+</div>
+<div class="tl-step">
+<div class="tl-dot"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></div>
+<b>Đã xác nhận</b>
+<small>Đang chuẩn bị hàng</small>
+</div>
+<div class="tl-step">
+<div class="tl-dot"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17" cy="17.5" r="1.8"></circle></svg></div>
+<b>Đang giao</b>
+<small>Đang vận chuyển</small>
+</div>
+<div class="tl-step">
+<div class="tl-dot"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<b>Đã giao thành công</b>
+<small>Hoàn tất</small>
+</div>
+</div>
+</section>
+<!-- BẢNG 3 SẢN PHẨM TRONG ĐƠN -->
+<section class="card">
+<div class="card-head"><h3>Sản phẩm trong đơn</h3></div>
+<div class="table-wrap">
+<table class="table">
+<thead>
+<tr>
+<th>Sản phẩm</th>
+<th class="right">Đơn giá</th>
+<th class="center">Số lượng</th>
+<th class="right">Thành tiền</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<div class="cell-product">
+<img alt="Nu Gundam" src="../assets/images/products/nu.jpg"/>
+<div>
+<a href="product-edit.html"><b>Nu Gundam</b></a>
+<small><span class="grade grade-RG">RG</span> Char's Counterattack</small>
+</div>
+</div>
+</td>
+<td class="right num">1.150.000đ</td>
+<td class="center num">1</td>
+<td class="right num"><b class="money-neon">1.150.000đ</b></td>
+</tr>
+<tr>
+<td>
+<div class="cell-product">
+<img alt="SDEX RX-78-2 Gundam" src="../assets/images/products/sd-rx78-2.jpg"/>
+<div>
+<a href="product-edit.html"><b>SDEX RX-78-2 Gundam</b></a>
+<small><span class="grade grade-SD">SD</span> Mobile Suit Gundam</small>
+</div>
+</div>
+</td>
+<td class="right num">180.000đ</td>
+<td class="center num">2</td>
+<td class="right num">
+<b class="money-neon">360.000đ</b>
+<small class="line-calc" style="color: var(--muted);">180.000đ × 2</small>
+</td>
+</tr>
+<tr>
+<td>
+<div class="cell-product">
+<img alt="Bộ giấy nhám 6 cấp độ" src="../assets/images/products/tool-sandpaper.jpg"/>
+<div>
+<a href="product-edit.html"><b>Bộ giấy nhám 6 cấp độ</b></a>
+<small><span class="grade grade-TOOL">TOOL</span> Dụng cụ mài</small>
+</div>
+</div>
+</td>
+<td class="right num">60.000đ</td>
+<td class="center num">1</td>
+<td class="right num"><b class="money-neon">60.000đ</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="od-totals">
+<div class="od-sum">
+<div class="od-sum-row"><span>Tiền hàng (4 sản phẩm)</span><b>1.570.000đ</b></div>
+<div class="od-sum-row"><span>Phí vận chuyển <small style="color: var(--muted);">(đơn từ 1.000.000đ)</small></span><b>Miễn phí</b></div>
+</div>
+<div class="od-sum-total">
+<span>Tổng thanh toán</span>
+<b>1.570.000đ</b>
+</div>
+</div>
+</section>
+</div>
+<!-- CỘT PHẢI: XỬ LÝ ĐƠN & THÔNG TIN KHÁCH -->
+<aside class="checkout-stack">
+<section class="card">
+<div class="card-head"><h3>Xử lý đơn hàng</h3></div>
+<div class="card-pad status-actions">
+<label class="btn btn-primary btn-block" for="modal-confirm-order">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="m5 12 5 5L20 7"></path></svg> Xác nhận đơn hàng
                 </label>
-                <label for="modal-ship-order" class="btn btn-dark btn-block">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg> Giao cho vận chuyển
+<label class="btn btn-dark btn-block" for="modal-ship-order">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17" cy="17.5" r="1.8"></circle></svg> Giao cho vận chuyển
                 </label>
-                <label for="modal-deliver-order" class="btn btn-blue btn-block">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Xác nhận đã giao hàng
+<label class="btn btn-blue btn-block" for="modal-deliver-order">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg> Xác nhận đã giao hàng
                 </label>
-                <label for="modal-cancel-order" class="btn btn-danger-outline btn-block">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6 6 18"/></svg> Hủy đơn hàng
+<label class="btn btn-danger-outline btn-block" for="modal-cancel-order">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg> Hủy đơn hàng
                 </label>
-                <p class="status-hint">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+<p class="status-hint">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>
                   Trạng thái đã cập nhật thì không quay lại bước trước được.
                 </p>
-              </div>
-              <div style="padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.14); font-size: 12.5px; display: grid; gap: 8px;">
-                <b style="color: #fff;">Quy trình (chỉ cập nhật xuôi):</b>
-                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
-                  <span class="chip chip-pending">Chưa xác nhận</span> →
+</div>
+<div style="padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.14); font-size: 12.5px; display: grid; gap: 8px;">
+<b style="color: var(--text-head);">Quy trình (chỉ cập nhật xuôi):</b>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+<span class="chip chip-pending">Chưa xác nhận</span> →
                   <span class="chip chip-confirmed">Đã xác nhận</span> →
                   <span class="chip chip-shipping">Đang giao</span> →
                   <span class="chip chip-delivered">Đã giao thành công</span>
-                </div>
-                <div class="muted">Đơn chưa giao có thể chuyển sang <span class="chip chip-cancelled">Đã hủy</span></div>
-              </div>
-            </section>
-
-            <section class="card">
-              <div class="card-head"><h3>Thông tin đơn hàng</h3></div>
-              <div>
-                <div class="od-section">
-                  <h4><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg> Khách hàng</h4>
-                  <b>Nguyễn Minh Anh</b>
-                  <span>minhanh@gmail.com · 0901 234 567</span>
-                  <a class="link" href="orders.html">Xem các đơn khác của khách ›</a>
-                </div>
-                <div class="od-section">
-                  <h4><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg> Giao đến</h4>
-                  <b>Nguyễn Minh Anh · 0901 234 567</b>
-                  <span>12 Võ Văn Ngân, Phường Thủ Đức, TP. Hồ Chí Minh</span>
-                  <p class="od-note"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Gọi trước khi giao</p>
-                </div>
-                <div class="od-section">
-                  <h4><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 10 12 4l9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/></svg> Thanh toán</h4>
-                  <b>Chuyển khoản trực tuyến</b>
-                </div>
-              </div>
-            </section>
-          </aside>
-        </div>
-      </main>
-    </div>
-  </div>
+</div>
+<div class="muted">Đơn chưa giao có thể chuyển sang <span class="chip chip-cancelled">Đã hủy</span></div>
+</div>
+</section>
+<section class="card">
+<div class="card-head"><h3>Thông tin đơn hàng</h3></div>
+<div>
+<div class="od-section">
+<h4><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg> Khách hàng</h4>
+<b>Nguyễn Minh Anh</b>
+<span>minhanh@gmail.com · 0901 234 567</span>
+<a class="link" href="orders.html">Xem các đơn khác của khách ›</a>
+</div>
+<div class="od-section">
+<h4><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"></path><circle cx="7" cy="17.5" r="1.8"></circle><circle cx="17" cy="17.5" r="1.8"></circle></svg> Giao đến</h4>
+<b>Nguyễn Minh Anh · 0901 234 567</b>
+<span>12 Võ Văn Ngân, Phường Thủ Đức, TP. Hồ Chí Minh</span>
+<p class="od-note"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Gọi trước khi giao</p>
+</div>
+<div class="od-section">
+<h4><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"></path></svg> Thanh toán</h4>
+<b>Chuyển khoản trực tuyến</b>
+</div>
+</div>
+</section>
+</aside>
+</div>
+</main>
+</div>
+</div>
 </body>
 </html>

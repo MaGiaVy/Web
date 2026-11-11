@@ -1,140 +1,149 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thêm người dùng - Quản trị Frame &amp; Form</title>
-  <link rel="icon" href="../assets/images/frame-form.svg">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="admin">
-  <div class="admin-shell">
-    <!-- SIDEBAR LIQUID GLASS TĨNH -->
-    <aside class="sidebar">
-      <a class="brand" href="index.html">
-        <img src="../assets/images/frame-form.svg" alt="Logo Frame &amp; Form">
-        <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
-      </a>
-      <div class="side-label">Quản lý chính</div>
-      <nav class="side-nav">
-        <a href="index.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg> Tổng quan</a>
-        <a href="users.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"/></svg> Người dùng</a>
-        <a href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg> Sản phẩm</a>
-        <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Đơn hàng <span class="badge">4</span></a>
-        <a href="statistics.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Thống kê</a>
-      </nav>
-      <div class="side-label">Mở rộng</div>
-      <nav class="side-nav">
-        <a href="promotions.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Khuyến mãi</a>
-        <a href="emails.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email khách hàng</a>
-        <a href="messages.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg> Lời nhắn <span class="badge">3</span></a>
-        <a href="settings.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg> Cài đặt cửa hàng</a>
-      </nav>
-      <div class="side-foot side-nav">
-        <a href="../index.html" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg> Xem trang bán hàng</a>
-        <a href="login.html" style="color: #f87171;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
-      </div>
-    </aside>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thêm người dùng - Quản trị Frame &amp; Form</title>
+<link href="../assets/images/frame-form.svg" rel="icon"/>
 
-    <!-- KHU VỰC NỘI DUNG CHÍNH -->
-    <div class="admin-main">
-      <header class="admin-topbar">
-        <div>
-          <div class="crumb">Quản trị / Người dùng / Biểu mẫu</div>
-          <h1>Thêm người dùng mới</h1>
-        </div>
-        <div class="right">
-          <span class="date"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Thứ Hai, 02/11/2026</span>
-          <div class="admin-user">
-            <span class="avatar">A</span>
-            <div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
-          </div>
-          <a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg></a>
-        </div>
-      </header>
 
-      <main class="admin-content">
-        <form class="form-layout" action="users.html#saved-toast" autocomplete="off" novalidate>
-          <div class="checkout-stack">
-            <section class="card">
-              <div class="card-head">
-                <h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 5v14M5 12h14"/></svg> Thêm người dùng mới</h2>
-                <a class="link" href="users.html">← Quay lại danh sách</a>
-              </div>
-              <div class="card-pad">
-                <div class="form-grid">
-                  <label class="field">
-                    <span>Họ và tên</span>
-                    <input class="input" id="uf-name" name="name" placeholder="Nhập họ và tên">
-                  </label>
-                  <label class="field">
-                    <span>Email</span>
-                    <input class="input" id="uf-email" name="email" placeholder="Nhập địa chỉ email">
-                  </label>
-                  <label class="field">
-                    <span>Số điện thoại</span>
-                    <input class="input" id="uf-phone" name="phone" placeholder="Nhập số điện thoại">
-                  </label>
-                  <label class="field">
-                    <span>Mật khẩu khởi tạo</span>
-                    <input class="input" id="uf-pass" name="password" type="password" placeholder="Nhập mật khẩu">
-                  </label>
-                  <label class="field">
-                    <span>Tỉnh / Thành phố</span>
-                    <select class="select" id="uf-city" name="city">
-                      <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
-                      <option value="TP. Hà Nội">TP. Hà Nội</option>
-                      <option value="TP. Đà Nẵng">TP. Đà Nẵng</option>
-                    </select>
-                  </label>
-                  <label class="field">
-                    <span>Phường / Xã</span>
-                    <select class="select" id="uf-ward" name="ward">
-                      <option value="Phường Thủ Đức">Phường Thủ Đức</option>
-                      <option value="Phường Sài Gòn">Phường Sài Gòn</option>
-                      <option value="Phường Bến Thành">Phường Bến Thành</option>
-                      <option value="Phường Tân Mỹ">Phường Tân Mỹ</option>
-                      <option value="Phường Gò Vấp">Phường Gò Vấp</option>
-                      <option value="Phường Yên Hòa">Phường Yên Hòa</option>
-                      <option value="Phường Cầu Giấy">Phường Cầu Giấy</option>
-                      <option value="Phường Hải Châu">Phường Hải Châu</option>
-                    </select>
-                  </label>
-                  <label class="field full">
-                    <span>Số nhà, tên đường</span>
-                    <input class="input" id="uf-street" name="street" placeholder="Vd: 12 Võ Văn Ngân">
-                  </label>
-                </div>
-              </div>
-              <div class="sticky-actions">
-                <a class="btn btn-outline" href="users.html">Hủy</a>
-                <button class="btn btn-primary" type="submit">Lưu người dùng</button>
-              </div>
-            </section>
-          </div>
+<link href="../assets/css/admin.css?v=202611" rel="stylesheet"/></head>
+<body class="admin"><input class="theme-toggle-input" hidden="" id="theme-dark" type="checkbox"/>
+<div class="admin-shell">
+<!-- SIDEBAR LIQUID GLASS TĨNH -->
+<aside class="sidebar">
+<a class="brand" href="index.html">
+<img alt="Logo Frame &amp; Form" src="../assets/images/frame-form.svg"/>
+<span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+</a>
+<div class="side-label">Quản lý chính</div>
+<nav class="side-nav">
+<a href="index.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="1.5" width="8" x="3" y="3"></rect><rect height="6" rx="1.5" width="8" x="13" y="3"></rect><rect height="10" rx="1.5" width="8" x="13" y="11"></rect><rect height="6" rx="1.5" width="8" x="3" y="15"></rect></svg> Tổng quan</a>
+<a class="active" href="users.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg> Người dùng</a>
+<a href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg> Sản phẩm</a>
+<a href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Đơn hàng <span class="badge">4</span></a>
+<a href="statistics.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg> Thống kê</a>
+</nav>
+<div class="side-label">Mở rộng</div>
+<nav class="side-nav">
+<a href="promotions.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Khuyến mãi</a>
+<a href="emails.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Email khách hàng</a>
+<a href="messages.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn <span class="badge">3</span></a>
+<a href="settings.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg> Cài đặt cửa hàng</a>
+</nav>
+<div class="side-foot side-nav">
+<a href="../index.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"></path><path d="M9 20v-6h6v6"></path></svg> Xem trang bán hàng</a>
+<a href="login.html" style="color: var(--red);"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg> Đăng xuất</a>
+</div>
+</aside>
+<!-- KHU VỰC NỘI DUNG CHÍNH -->
+<div class="admin-main">
+<header class="admin-topbar">
+<div>
+<div class="crumb">Quản trị / Người dùng / Biểu mẫu</div>
+<h1>Thêm người dùng mới</h1>
+</div>
+<div class="right">
+<span class="date"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg> Thứ Hai, 02/11/2026</span>
 
-          <!-- KHUNG XEM TRƯỚC BÊN PHẢI -->
-          <aside class="checkout-stack">
-            <section class="card">
-              <div class="card-head"><h3>Thông tin tài khoản</h3></div>
-              <div class="card-pad" style="text-align: center;">
-                <span class="avatar" style="width: 72px; height: 72px; font-size: 26px; margin: 0 auto 12px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff;">U</span>
-                <b style="font-size: 17px; display: block;">Người dùng mới</b>
-                <p class="muted" style="margin-top: 4px;">email@vidu.com</p>
-                <p class="muted">Số điện thoại liên hệ</p>
-                <div class="uf-addr">
-                  <b>Địa chỉ mặc định</b>
-                  <span>Phường Thủ Đức</span>
-                  <span>TP. Hồ Chí Minh</span>
-                </div>
-                <p style="margin-top: 14px;"><span class="chip chip-active">Hoạt động</span></p>
-              </div>
-            </section>
-          </aside>
-        </form>
-      </main>
-    </div>
-  </div>
+<label class="theme-toggle-btn" for="theme-dark" title="Chuyển chế độ Sáng / Tối (Pure CSS)">
+<span class="lbl-dark">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    Tối
+  </span>
+<span class="lbl-light">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+    Sáng
+  </span>
+</label>
+<div class="admin-user">
+<span class="avatar">A</span>
+<div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+</div>
+<a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg></a>
+</div>
+</header>
+<main class="admin-content">
+<form action="users.html#saved-toast" autocomplete="off" class="form-layout" novalidate="">
+<div class="checkout-stack">
+<section class="card">
+<div class="card-head">
+<h2><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg> Thêm người dùng mới</h2>
+<a class="link" href="users.html">← Quay lại danh sách</a>
+</div>
+<div class="card-pad">
+<div class="form-grid">
+<label class="field">
+<span>Họ và tên</span>
+<input class="input" id="uf-name" name="name" placeholder="Nhập họ và tên"/>
+</label>
+<label class="field">
+<span>Email</span>
+<input class="input" id="uf-email" name="email" placeholder="Nhập địa chỉ email"/>
+</label>
+<label class="field">
+<span>Số điện thoại</span>
+<input class="input" id="uf-phone" name="phone" placeholder="Nhập số điện thoại"/>
+</label>
+<label class="field">
+<span>Mật khẩu khởi tạo</span>
+<input class="input" id="uf-pass" name="password" placeholder="Nhập mật khẩu" type="password"/>
+</label>
+<label class="field">
+<span>Tỉnh / Thành phố</span>
+<select class="select" id="uf-city" name="city">
+<option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+<option value="TP. Hà Nội">TP. Hà Nội</option>
+<option value="TP. Đà Nẵng">TP. Đà Nẵng</option>
+</select>
+</label>
+<label class="field">
+<span>Phường / Xã</span>
+<select class="select" id="uf-ward" name="ward">
+<option value="Phường Thủ Đức">Phường Thủ Đức</option>
+<option value="Phường Sài Gòn">Phường Sài Gòn</option>
+<option value="Phường Bến Thành">Phường Bến Thành</option>
+<option value="Phường Tân Mỹ">Phường Tân Mỹ</option>
+<option value="Phường Gò Vấp">Phường Gò Vấp</option>
+<option value="Phường Yên Hòa">Phường Yên Hòa</option>
+<option value="Phường Cầu Giấy">Phường Cầu Giấy</option>
+<option value="Phường Hải Châu">Phường Hải Châu</option>
+</select>
+</label>
+<label class="field full">
+<span>Số nhà, tên đường</span>
+<input class="input" id="uf-street" name="street" placeholder="Vd: 12 Võ Văn Ngân"/>
+</label>
+</div>
+</div>
+<div class="sticky-actions">
+<a class="btn btn-outline" href="users.html">Hủy</a>
+<button class="btn btn-primary" type="submit">Lưu người dùng</button>
+</div>
+</section>
+</div>
+<!-- KHUNG XEM TRƯỚC BÊN PHẢI -->
+<aside class="checkout-stack">
+<section class="card">
+<div class="card-head"><h3>Thông tin tài khoản</h3></div>
+<div class="card-pad" style="text-align: center;">
+<span class="avatar" style="width: 72px; height: 72px; font-size: 26px; margin: 0 auto 12px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff;">U</span>
+<b style="font-size: 17px; display: block;">Người dùng mới</b>
+<p class="muted" style="margin-top: 4px;">email@vidu.com</p>
+<p class="muted">Số điện thoại liên hệ</p>
+<div class="uf-addr">
+<b>Địa chỉ mặc định</b>
+<span>Phường Thủ Đức</span>
+<span>TP. Hồ Chí Minh</span>
+</div>
+<p style="margin-top: 14px;"><span class="chip chip-active">Hoạt động</span></p>
+</div>
+</section>
+</aside>
+</form>
+</main>
+</div>
+</div>
 </body>
 </html>
