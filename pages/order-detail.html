@@ -3,43 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi tiết đơn hàng - DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
+  <title>Chi tiết đơn hàng - Frame &amp; Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body data-page="order-detail" data-root="../">
-  <div id="site-header"></div>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <span class="topbar-promo"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Tuần lễ Gunpla: giảm đến 15% <a href="sale.html">Xem ngay <span aria-hidden="true">&#8599;</span></a></span>
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg> Miễn phí giao hàng cho đơn từ 1.000.000đ</span>
+      </div>
+      <div class="topbar-right">
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Hotline 0901 234 567 <i>·</i> 08:30 - 21:30</span>
+      </div>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="header-main">
+      <div class="container">
+        <a class="brand" href="../index1.html" aria-label="Frame &amp; Form - Trang chủ">
+          <img src="../assets/images/frame-form.svg" alt="Biểu tượng Frame &amp; Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>MÔ HÌNH &amp; VẬT PHẨM SƯU TẦM</small></span>
+        </a>
+        <form class="header-search" id="header-search" action="search-result.html" method="get" role="search">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" name="q" id="header-search-input" value="" placeholder="Tìm mô hình, đồ nghề..." autocomplete="off">
+          <button type="submit">Tìm kiếm</button>
+          <a class="header-search-advanced" href="advanced-search.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Nâng cao</span></a>
+        </form>
+        <div class="header-actions">
+          <div class="user-menu" id="user-menu">
+            <button class="header-action" id="user-menu-btn" type="button" aria-haspopup="true">
+              <span class="avatar" id="header-avatar">A</span>
+              <span class="header-action-text"><small>Xin chào,</small><b id="header-user-name">Nguyễn Minh Anh</b></span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="dropdown" role="menu">
+              <div class="dropdown-head"><b id="dropdown-user-name">Nguyễn Minh Anh</b><small>minhanh@gmail.com</small></div>
+              <a href="account.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg> Tài khoản của tôi</a>
+              <a href="account.html#addresses"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg> Sổ địa chỉ</a>
+              <a href="account.html#password"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg> Đổi mật khẩu</a>
+              <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Lịch sử mua hàng</a>
+              <a href="../index.html" class="danger"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg> Đăng xuất</a>
+            </div>
+          </div>
+          <a class="header-action" href="cart.html" aria-label="Giỏ hàng">
+            <span class="cart-icon-wrap"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.8 1.8 0 0 0 1.8 1.4h8.6a1.8 1.8 0 0 0 1.7-1.3L21.5 7H6"/></svg><span class="cart-badge" id="cart-badge">4</span></span>
+            <span class="header-action-text"><small>Giỏ hàng</small><b>4 sản phẩm</b></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <div class="container">
+        <a href="../index1.html" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>Trang chủ</a>
+        <a href="products.html" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Tất cả mô hình</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-btn" aria-haspopup="true" aria-expanded="false">Danh mục <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="nav-drop-menu" role="menu">
+            <a href="products-hg.html">Mẫu gọn nhẹ</a>
+            <a href="products-rg.html">Mẫu nhiều chi tiết</a>
+            <a href="products-mg.html">Mẫu trưng bày</a>
+            <a href="products-pg.html">Mô hình cỡ lớn</a>
+            <a href="products-sd.html">Mẫu mini</a>
+            <a href="products-tool.html">Đồ nghề lắp ráp</a>
+          </div>
+        </div>
+        <a href="sale.html" class="">Khuyến mãi</a>
+        <a href="guide.html" class="">Hướng dẫn mua hàng</a>
+        <a href="contact.html" class="">Liên hệ</a>
+      </div>
+    </nav>
+  </header>
 
   <main class="container page">
-    <nav class="breadcrumb" id="breadcrumb"></nav>
+    <nav class="breadcrumb" id="breadcrumb"><a href="../index1.html">Trang chủ</a><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg><a href="orders.html">Lịch sử mua hàng</a><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg><b>#DH26110201</b></nav>
+    <input type="checkbox" id="modal-cancel-dh26110201" class="cancel-modal-toggle">
+    <input type="checkbox" id="state-cancelled-dh26110201" class="cancel-state-toggle">
+    <div class="css-confirm-backdrop" role="dialog" aria-modal="true" aria-labelledby="cancel-modal-title">
+      <div class="confirm-box danger">
+        <div class="confirm-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.5"/></svg></div>
+        <h3 id="cancel-modal-title">Hủy đơn hàng #DH26110201?</h3>
+        <p>Bạn có chắc chắn muốn hủy đơn hàng này không? Thao tác này không thể hoàn tác.</p>
+        <div class="confirm-actions">
+          <label for="modal-cancel-dh26110201" class="btn btn-outline" style="cursor:pointer">Không, quay lại</label>
+          <label for="state-cancelled-dh26110201" class="btn btn-primary" style="cursor:pointer" onclick="document.getElementById('modal-cancel-dh26110201').checked=false; toast('Đã hủy đơn hàng #DH26110201', 'Trạng thái đơn hàng đã chuyển sang Đã hủy', 'warning')">Đồng ý hủy</label>
+        </div>
+      </div>
+    </div>
     <div class="page-title">
-      <div><h1 id="od-title">Chi tiết đơn hàng</h1><p id="od-sub"></p></div>
-      <div style="display:flex;gap:10px" id="od-actions"></div>
+      <div>
+        <h1 id="od-title">Đơn hàng #DH26110201 &nbsp;<span class="chip chip-pending chip-before-cancel">Chưa xác nhận</span><span class="chip chip-cancelled chip-after-cancel">Đã hủy</span></h1>
+        <p id="od-sub">Đặt lúc 10:05 - 02/11/2026 · 4 sản phẩm</p>
+      </div>
+      <div style="display:flex;gap:8px" id="od-actions">
+        <a class="btn btn-outline btn-sm" href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Quay lại lịch sử</a>
+        <label for="modal-cancel-dh26110201" class="btn btn-outline btn-sm btn-trigger-cancel" id="od-cancel" style="cursor:pointer"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg> Hủy đơn</label>
+        <button class="btn btn-primary btn-sm" id="od-rebuy" onclick="toast('Đã thêm vào giỏ hàng', '4 sản phẩm từ đơn #DH26110201')"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"/></svg> Mua lại</button>
+      </div>
     </div>
 
     <div class="detail-layout">
       <div class="checkout-stack">
-        <section class="card" id="od-timeline"></section>
-        <section class="card">
-          <div class="card-head"><h3>Sản phẩm trong đơn</h3></div>
-          <div id="od-items"></div>
-        </section>
+        <div class="card" id="od-timeline">
+          <div class="card-head"><h3>Trạng thái đơn hàng</h3></div>
+          <div class="timeline">
+            <div class="tl-step current"><div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></div><b>Chưa xác nhận</b><small>10:05 - 02/11/2026</small></div>
+            <div class="tl-step "><div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></div><b>Đã xác nhận</b><small>Đang chuẩn bị hàng</small></div>
+            <div class="tl-step "><div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div><b>Đang giao</b><small>Đang vận chuyển</small></div>
+            <div class="tl-step "><div class="tl-dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div><b>Đã giao thành công</b><small>Hoàn tất</small></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Danh sách sản phẩm</h3></div>
+          <div id="od-items">
+            <div class="table-wrap"><table class="table">
+              <thead><tr><th>Sản phẩm</th><th class="right">Đơn giá</th><th class="center">Số lượng</th><th class="right">Thành tiền</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="cell-product"><img src="../assets/images/products/nu.jpg" alt="Nu Gundam"><div><a href="product.html"><b>Nu Gundam</b></a><small><span class="grade grade-RG">RG</span> Char's Counterattack</small></div></div></td>
+                  <td class="right num">1.150.000đ</td>
+                  <td class="center num">1</td>
+                  <td class="right num"><b>1.150.000đ</b></td>
+                </tr>
+                <tr>
+                  <td><div class="cell-product"><img src="../assets/images/products/sd-rx78-2.jpg" alt="SDEX RX-78-2 Gundam"><div><a href="product.html"><b>SDEX RX-78-2 Gundam</b></a><small><span class="grade grade-SD">SD</span> Mobile Suit Gundam</small></div></div></td>
+                  <td class="right num">180.000đ</td>
+                  <td class="center num">2</td>
+                  <td class="right num"><b>360.000đ</b><small class="line-calc">180.000đ × 2</small></td>
+                </tr>
+                <tr>
+                  <td><div class="cell-product"><img src="../assets/images/products/tool-sandpaper.jpg" alt="Bộ giấy nhám 6 cấp độ"><div><a href="product.html"><b>Bộ giấy nhám 6 cấp độ</b></a><small><span class="grade grade-TOOL">TOOL</span> Dụng cụ mài</small></div></div></td>
+                  <td class="right num">60.000đ</td>
+                  <td class="center num">1</td>
+                  <td class="right num"><b>60.000đ</b></td>
+                </tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
       </div>
+
       <aside class="checkout-stack">
-        <section class="card">
-          <div class="card-head"><h3>Thông tin nhận hàng</h3></div>
-          <div class="info-list" id="od-info"></div>
-        </section>
-        <section class="card" id="od-totals"></section>
+        <div class="card">
+          <div class="card-head"><h3>Thông tin giao hàng</h3></div>
+          <div class="info-list" id="od-info">
+            <div class="info-row"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><div><small>Người nhận</small><b>Nguyễn Minh Anh</b></div></div>
+            <div class="info-row"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><div><small>Số điện thoại</small><b>0901 234 567</b></div></div>
+            <div class="info-row"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><small>Địa chỉ giao hàng</small><b>12 Võ Văn Ngân, Phường Thủ Đức, TP. Hồ Chí Minh</b></div></div>
+            <div class="info-row"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/></svg><div><small>Hình thức thanh toán</small><b>Tiền mặt khi nhận hàng (COD)</b></div></div>
+            <div class="info-row"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg><div><small>Ghi chú</small><b>Gọi trước khi giao</b></div></div>
+          </div>
+        </div>
+        <div class="card" id="od-totals">
+          <div class="card-head"><h3>Thanh toán</h3></div>
+          <div class="summary-body">
+            <div class="summary-row"><span>Tạm tính (4 sản phẩm)</span><b>1.570.000đ</b></div>
+            <div class="summary-row"><span>Phí vận chuyển</span><b>Miễn phí</b></div>
+            <div class="summary-total"><span>Tổng cộng</span><b>1.570.000đ</b></div>
+          </div>
+        </div>
       </aside>
     </div>
   </main>
-
-  <div id="site-footer"></div>
-
-  <script src="../assets/js/data.js"></script>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="../index1.html">
+          <img src="../assets/images/frame-form.svg" alt="Biểu tượng Frame &amp; Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>MÔ HÌNH &amp; VẬT PHẨM SƯU TẦM</small></span>
+        </a>
+        <p>Mô hình lắp ráp và vật phẩm trưng bày cho người yêu sưu tầm, từ mẫu gọn nhẹ cho người mới đến mô hình cỡ lớn cho tủ kính.</p>
+        <ul class="footer-promises">
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span> Mô hình chính hãng, nguyên hộp</li>
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></span> Đóng gói chống sốc khi giao hàng</li>
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"/></svg></span> Đổi trả trong 7 ngày</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Danh mục</h4>
+        <ul>
+          <li><a href="products-hg.html">Mẫu gọn nhẹ (HG)</a></li>
+          <li><a href="products-rg.html">Mẫu nhiều chi tiết (RG)</a></li>
+          <li><a href="products-mg.html">Mẫu trưng bày (MG)</a></li>
+          <li><a href="products-pg.html">Mô hình cỡ lớn (PG)</a></li>
+          <li><a href="products-sd.html">Mẫu mini (SD)</a></li>
+          <li><a href="products-tool.html">Đồ nghề lắp ráp (TOOL)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <ul>
+          <li><a href="orders.html">Lịch sử mua hàng</a></li>
+          <li><a href="account.html">Tài khoản của tôi</a></li>
+          <li><a href="cart.html">Giỏ hàng</a></li>
+          <li><a href="guide.html">Hướng dẫn mua hàng</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <ul class="footer-contact">
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg> <span>273 An Dương Vương, Phường Chợ Quán, TP. Hồ Chí Minh</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> <span>Hotline: 0901 234 567</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> <span>contact@frameform.vn</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> <span>08:30 - 21:30, Thứ 2 - Chủ nhật</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>© 2026 Frame &amp; Form</span>
+        <span>Mỗi mô hình, một dấu ấn riêng.</span>
+      </div>
+    </div>
+  </footer>
   <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/layout.js"></script>
-  <script src="../assets/js/order-detail.js"></script>
 </body>
 </html>

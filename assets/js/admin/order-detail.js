@@ -5,7 +5,7 @@
   const u = getUser(order.userId);
   // Giữ tên phường / thành phố trên cùng 1 dòng (không bị cắt "TP. / Hồ Chí Minh")
   const keepTogether = (text) => escapeHtml(text).replace(/ /g, "&nbsp;");
-  document.title = `Đơn #${order.id} - Quản trị DVK Gunpla`;
+  document.title = `Đơn #${order.id} - Quản trị Frame & Form`;
 
   function renderHead() {
     $("od-title").innerHTML = `Đơn hàng #${order.id} &nbsp;${statusChip(order.status)}`;

@@ -4,7 +4,9 @@
 (function () {
   const PER_PAGE = 12;
   const $ = (id) => document.getElementById(id);
-  const state = { page: 1, search: null }; // search: điều kiện đã tìm (null = đang xem tất cả)
+  // search: điều kiện đã tìm (null = không tìm); view: "all" tất cả | "sale" đang giảm giá
+  const state = { page: 1, search: null, view: getParam("view") === "sale" ? "sale" : "all" };
+  const onSale = () => PRODUCTS.filter((p) => p.oldPrice).sort((a, b) => discountPercent(b) - discountPercent(a));
 
   $("add-product").innerHTML = `${icon("plus")} Thêm sản phẩm`;
   $("ps-cat").innerHTML = `<option value="">Tất cả loại (${PRODUCTS.length})</option>` +
@@ -14,6 +16,7 @@
   // (SEARCH_RESULT_IDS trong data.js, dùng chung với trang tìm kiếm bên khách hàng)
   function filtered() {
     if (state.search) return SEARCH_RESULT_IDS.map(getProduct);
+    if (state.view === "sale") return onSale();
     return PRODUCTS.slice().sort((a, b) => b.id - a.id);
   }
   const catText = () => $("ps-cat").selectedOptions[0].text.split(" - ")[0].replace(/ \(\d+\)$/, "");
@@ -30,7 +33,7 @@
         <div class="ap-body">
           <div class="top"><span class="grade grade-${p.category}">${p.category}</span><span>Mã: GP${String(p.id).padStart(4, "0")}</span></div>
           <h3 title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</h3>
-          <span class="price">${money(p.price)}</span>
+          <span class="price">${money(p.price)}${p.oldPrice ? ` <s class="price-old">${money(p.oldPrice)}</s> <span class="ap-off">-${discountPercent(p)}%</span>` : ""}</span>
           <div class="ap-stats">
             <div><small>Tồn kho</small><b>${p.stock}</b></div>
             <div><small>Đã bán</small><b>${numberDot(p.sold)}</b></div>
@@ -48,7 +51,24 @@
       </article>`;
   }
 
+  function renderViews() {
+    const views = [["all", "Tất cả sản phẩm", PRODUCTS.length], ["sale", "Đang giảm giá", onSale().length]];
+    $("ps-views").innerHTML = views.map(([k, label, n]) =>
+      `<button type="button" data-view="${k}" class="${!state.search && state.view === k ? "active" : ""}">${k === "sale" ? icon("tag") : icon("grid")} ${label} <span>${n}</span></button>`).join("");
+  }
+  $("ps-views").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-view]");
+    if (!btn) return;
+    state.view = btn.dataset.view;
+    state.search = null;
+    state.page = 1;
+    $("product-filter").reset();
+    render();
+    toast(state.view === "sale" ? "Đang xem sản phẩm đang giảm giá" : "Đang xem tất cả sản phẩm", `${filtered().length} sản phẩm`, "info");
+  });
+
   function render() {
+    renderViews();
     const items = filtered();
     const pages = Math.max(1, Math.ceil(items.length / PER_PAGE));
     if (state.page > pages) state.page = pages;
@@ -90,6 +110,7 @@
   function showAll() {
     $("product-filter").reset();
     state.search = null;
+    state.view = "all";
     state.page = 1;
     render();
     toast("Đã đặt lại", "Đang hiển thị tất cả sản phẩm", "info");

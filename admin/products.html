@@ -1,51 +1,707 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản lý sản phẩm - Quản trị DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="admin" data-root="../" data-admin-page="products" data-title="Quản lý sản phẩm" data-crumb="Sản phẩm">
-  <div class="admin-shell">
-    <div id="admin-sidebar"></div>
-    <div class="admin-main">
-      <div id="admin-topbar"></div>
-      <main class="admin-content">
-        <!-- Tìm kiếm + lọc theo loại sản phẩm -->
-        <form class="card toolbar" id="product-filter" autocomplete="off">
-          <label class="field grow"><span>Tìm theo tên sản phẩm</span>
-            <div class="search-input"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="input" id="ps-name" placeholder="Nhập tên sản phẩm..."></div>
-          </label>
-          <label class="field"><span>Loại sản phẩm</span><select class="select" id="ps-cat"></select></label>
-          <label class="field"><span>Sắp xếp</span>
-            <select class="select" id="ps-sort">
-              <option value="new">Mới thêm gần đây</option>
-              <option value="name">Tên A - Z</option>
-              <option value="price-asc">Giá tăng dần</option>
-              <option value="price-desc">Giá giảm dần</option>
-              <option value="stock">Tồn kho ít nhất</option>
-            </select>
-          </label>
-          <div class="toolbar-actions">
-            <button class="btn btn-outline" type="button" id="ps-reset">Đặt lại</button>
-            <button class="btn btn-dark" type="submit">Tìm kiếm</button>
-            <a class="btn btn-primary" href="product-form.html" id="add-product" style="margin-left: auto;"></a>
-          </div>
-          <div class="toolbar-note" id="ps-note"></div>
-        </form>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quản lý sản phẩm - Quản trị Frame &amp; Form</title>
+<link href="../assets/images/frame-form.svg" rel="icon"/>
 
-        <section class="admin-products" id="admin-products"></section>
-        <div id="ps-pagination"></div>
-      </main>
-    </div>
-  </div>
 
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/admin/admin-layout.js"></script>
-  <script src="../assets/js/admin/products.js"></script>
+<link href="../assets/css/admin.css?v=202611" rel="stylesheet"/></head>
+<body class="admin"><input class="theme-toggle-input" hidden="" id="theme-dark" type="checkbox"/>
+<!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST SẢN PHẨM -->
+<input checked="" class="css-toggle" hidden="" id="modal-prod-reset" name="prod-modal-state" type="radio"/>
+<!-- ĐIỂM NEO #saved-toast CỐ ĐỊNH (KHÔNG GÂY CUỘN GIẬT TRANG) -->
+<div class="saved-anchor" id="saved-toast"></div>
+<input class="css-toggle" hidden="" id="close-saved-toast" type="checkbox"/>
+<div class="css-toast toast-saved">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã lưu thông tin thành công!</b><p>Dữ liệu sản phẩm đã được cập nhật vào danh sách.</p></div>
+<a class="toast-close" href="products.html" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></a>
+</div>
+<!-- TOAST LỌC SẢN PHẨM -->
+<input class="css-toggle" hidden="" id="toast-filter-prod" type="checkbox"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã lọc danh sách sản phẩm!</b><p>Hiển thị danh sách sản phẩm theo loại và thứ tự sắp xếp.</p></div>
+<label class="toast-close" for="toast-filter-prod" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST XÓA SẢN PHẨM -->
+<input class="css-toggle" hidden="" id="toast-del-prod" name="prod-modal-state" type="radio"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã xóa vĩnh viễn sản phẩm!</b><p>Sản phẩm chưa có giao dịch đã được xóa khỏi hệ thống.</p></div>
+<label class="toast-close" for="modal-prod-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST ẨN SẢN PHẨM -->
+<input class="css-toggle" hidden="" id="toast-hide-prod" name="prod-modal-state" type="radio"/>
+<div class="css-toast toast-warning">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã ẩn sản phẩm khỏi trang bán hàng!</b><p>Các đơn hàng cũ có sản phẩm này vẫn được bảo toàn.</p></div>
+<label class="toast-close" for="modal-prod-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST MỞ BÁN LẠI SẢN PHẨM -->
+<input class="css-toggle" hidden="" id="toast-show-prod" name="prod-modal-state" type="radio"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã mở bán lại sản phẩm!</b><p>Sản phẩm đã hiển thị trở lại trên trang khách hàng.</p></div>
+<label class="toast-close" for="modal-prod-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST CHUYỂN TRANG -->
+<input class="css-toggle" hidden="" id="toast-page" type="checkbox"/>
+<div class="css-toast toast-info">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></div>
+<div class="toast-body"><b>Đã chuyển trang!</b><p>Đang hiển thị trang tiếp theo trong danh sách sản phẩm.</p></div>
+<label class="toast-close" for="toast-page" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- MODAL XÁC NHẬN XÓA VĨNH VIỄN SẢN PHẨM (CHUNG CHO TẤT CẢ SẢN PHẨM) -->
+<input class="css-toggle" hidden="" id="modal-del-prod" name="prod-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon danger"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></div>
+<h3>Xóa vĩnh viễn sản phẩm?</h3>
+<p>Sản phẩm chưa có lượt mua nào trên hệ thống nên sẽ bị xóa hẳn khỏi danh mục.</p>
+<ul class="del-effects danger">
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg> Xóa hết thông tin, hình ảnh và phân loại</li>
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M12 3 2 20h20z"></path><path d="M12 10v4M12 17v.5"></path></svg> Không thể khôi phục sau khi xóa</li>
+</ul>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-prod-reset">Không, giữ lại</label>
+<label class="btn btn-primary" for="toast-del-prod">Xóa vĩnh viễn</label>
+</div>
+</div>
+</div>
+<!-- MODAL XÁC NHẬN ẨN SẢN PHẨM (CHUNG CHO TẤT CẢ SẢN PHẨM) -->
+<input class="css-toggle" hidden="" id="modal-hide-prod" name="prod-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 5.4-1.6"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg></div>
+<h3>Ẩn sản phẩm đã chọn?</h3>
+<p>Sản phẩm đã có lượt mua trên hệ thống nên không thể xóa vĩnh viễn, chỉ có thể ẩn khỏi cửa hàng.</p>
+<ul class="del-effects">
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Khách hàng không còn thấy và mua được sản phẩm</li>
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Các đơn hàng cũ vẫn giữ nguyên thông tin</li>
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4"></path></svg> Có thể mở bán lại bất cứ lúc nào</li>
+</ul>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-prod-reset">Không, giữ lại</label>
+<label class="btn btn-primary" for="toast-hide-prod">Ẩn sản phẩm</label>
+</div>
+</div>
+</div>
+<!-- MODAL XÁC NHẬN MỞ BÁN LẠI SẢN PHẨM (CHUNG CHO TẤT CẢ SẢN PHẨM) -->
+<input class="css-toggle" hidden="" id="modal-show-prod" name="prod-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
+<h3>Mở bán lại sản phẩm?</h3>
+<p>Sản phẩm đang bị ẩn sẽ được kích hoạt hiển thị trở lại trên trang bán hàng của khách.</p>
+<ul class="del-effects show">
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Hiển thị lại trên trang bán hàng</li>
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2.5 3h2.6l2.4 11.2a1.8 1.8 0 0 0 1.8 1.4h8.6a1.8 1.8 0 0 0 1.7-1.3L21.5 7H6"></path></svg> Khách hàng có thể tìm thấy và đặt mua</li>
+</ul>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-prod-reset">Không, vẫn ẩn</label>
+<label class="btn btn-blue" for="toast-show-prod">Mở bán lại</label>
+</div>
+</div>
+</div>
+<div class="admin-shell">
+<!-- SIDEBAR LIQUID GLASS TĨNH -->
+<aside class="sidebar">
+<a class="brand" href="index.html">
+<img alt="Logo Frame &amp; Form" src="../assets/images/frame-form.svg"/>
+<span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+</a>
+<div class="side-label">Quản lý chính</div>
+<nav class="side-nav">
+<a href="index.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="1.5" width="8" x="3" y="3"></rect><rect height="6" rx="1.5" width="8" x="13" y="3"></rect><rect height="10" rx="1.5" width="8" x="13" y="11"></rect><rect height="6" rx="1.5" width="8" x="3" y="15"></rect></svg> Tổng quan</a>
+<a href="users.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg> Người dùng</a>
+<a class="active" href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg> Sản phẩm</a>
+<a href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Đơn hàng <span class="badge">4</span></a>
+<a href="statistics.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg> Thống kê</a>
+</nav>
+<div class="side-label">Mở rộng</div>
+<nav class="side-nav">
+<a href="promotions.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Khuyến mãi</a>
+<a href="emails.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Email khách hàng</a>
+<a href="messages.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn <span class="badge">3</span></a>
+<a href="settings.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg> Cài đặt cửa hàng</a>
+</nav>
+<div class="side-foot side-nav">
+<a href="../index.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"></path><path d="M9 20v-6h6v6"></path></svg> Xem trang bán hàng</a>
+<a href="login.html" style="color: var(--red);"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg> Đăng xuất</a>
+</div>
+</aside>
+<!-- KHU VỰC NỘI DUNG CHÍNH -->
+<div class="admin-main">
+<header class="admin-topbar">
+<div>
+<div class="crumb">Quản trị / Sản phẩm</div>
+<h1>Quản lý sản phẩm</h1>
+</div>
+<div class="right">
+<span class="date"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg> Thứ Hai, 02/11/2026</span>
+
+<label class="theme-toggle-btn" for="theme-dark" title="Chuyển chế độ Sáng / Tối (Pure CSS)">
+<span class="lbl-dark">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    Tối
+  </span>
+<span class="lbl-light">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+    Sáng
+  </span>
+</label>
+<div class="admin-user">
+<span class="avatar">A</span>
+<div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+</div>
+<a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg></a>
+</div>
+</header>
+<main class="admin-content">
+<section aria-label="4 mẫu trang chủ user" class="hero-showcase-card">
+<input checked="" class="hero-radio" id="hero-s1" name="hero-slide" type="radio"/>
+<input class="hero-radio" id="hero-s2" name="hero-slide" type="radio"/>
+<input class="hero-radio" id="hero-s3" name="hero-slide" type="radio"/>
+<input class="hero-radio" id="hero-s4" name="hero-slide" type="radio"/>
+<div class="hero-watermark-bg">BEST SELLERS</div>
+<div class="hero-stage-left">
+<div class="hero-slide-copy s1">
+<span class="hero-kicker-pill">GÓC SƯU TẦM / 01 · TRANG CHỦ USER</span>
+<h2>Gundam Barbatos</h2>
+<div class="hero-stage-meta">
+<span class="grade grade-MG">MG 1/100</span>
+<span>Iron-Blooded Orphans · Mã: GP0022</span>
+</div>
+<div class="hero-stage-price-row">
+<span class="hero-stage-price">1.150.000đ</span>
+<span class="hero-stage-old">1.250.000đ</span>
+</div>
+<div class="hero-stock-line">Tồn kho thực tế: <b class="in">48 hộp</b> · Đã bán: <b>142 hộp</b></div>
+<div class="hero-stage-actions">
+<a class="btn btn-primary btn-sm" href="product-edit.html">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg>
+          Sửa
+        </a>
+</div>
+</div>
+<div class="hero-slide-copy s2">
+<span class="hero-kicker-pill">GÓC SƯU TẦM / 02 · TRANG CHỦ USER</span>
+<h2>Sazabi Ver.Ka</h2>
+<div class="hero-stage-meta">
+<span class="grade grade-MG">MG 1/100</span>
+<span>Char's Counterattack · Mã: GP0023</span>
+</div>
+<div class="hero-stage-price-row">
+<span class="hero-stage-price">2.400.000đ</span>
+<span class="hero-stage-old">2.650.000đ</span>
+</div>
+<div class="hero-stock-line">Tồn kho thực tế: <b class="in">08 hộp</b> · Đã bán: <b>61 hộp</b></div>
+<div class="hero-stage-actions">
+<a class="btn btn-primary btn-sm" href="product-edit.html">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg>
+          Sửa
+        </a>
+</div>
+</div>
+<div class="hero-slide-copy s3">
+<span class="hero-kicker-pill">GÓC SƯU TẦM / 03 · TRANG CHỦ USER</span>
+<h2>Wing Zero EW Ver.Ka</h2>
+<div class="hero-stage-meta">
+<span class="grade grade-MG">MG 1/100</span>
+<span>Endless Waltz · Mã: GP0018</span>
+</div>
+<div class="hero-stage-price-row">
+<span class="hero-stage-price">1.500.000đ</span>
+<span class="hero-stage-old">1.650.000đ</span>
+</div>
+<div class="hero-stock-line">Tồn kho thực tế: <b class="in">18 hộp</b> · Đã bán: <b>94 hộp</b></div>
+<div class="hero-stage-actions">
+<a class="btn btn-primary btn-sm" href="product-edit.html">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg>
+          Sửa
+        </a>
+</div>
+</div>
+<div class="hero-slide-copy s4">
+<span class="hero-kicker-pill">GÓC SƯU TẦM / 04 · TRANG CHỦ USER</span>
+<h2>Wing Zero EW</h2>
+<div class="hero-stage-meta">
+<span class="grade grade-RG">RG 1/144</span>
+<span>Endless Waltz · Mã: GP0015</span>
+</div>
+<div class="hero-stage-price-row">
+<span class="hero-stage-price">780.000đ</span>
+<span class="hero-stage-old">850.000đ</span>
+</div>
+<div class="hero-stock-line">Tồn kho thực tế: <b class="in">22 hộp</b> · Đã bán: <b>118 hộp</b></div>
+<div class="hero-stage-actions">
+<a class="btn btn-primary btn-sm" href="product-edit.html">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg>
+          Sửa
+        </a>
+</div>
+</div>
+</div>
+<div class="hero-stage-center">
+<div class="hero-pedestal-glow"></div>
+<div class="hero-slide-visual v1">
+<label class="hero-nav-arrow prev" for="hero-s4" title="Mẫu trước">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+</label>
+<img alt="Gundam Barbatos" class="hero-cutout-img" src="../assets/images/products/cutout/barbatos.webp"/>
+<label class="hero-nav-arrow next" for="hero-s2" title="Mẫu tiếp theo">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</label>
+</div>
+<div class="hero-slide-visual v2">
+<label class="hero-nav-arrow prev" for="hero-s1" title="Mẫu trước">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+</label>
+<img alt="Sazabi Ver.Ka" class="hero-cutout-img" src="../assets/images/products/cutout/sazabi-verka.webp"/>
+<label class="hero-nav-arrow next" for="hero-s3" title="Mẫu tiếp theo">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</label>
+</div>
+<div class="hero-slide-visual v3">
+<label class="hero-nav-arrow prev" for="hero-s2" title="Mẫu trước">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+</label>
+<img alt="Wing Zero EW Ver.Ka" class="hero-cutout-img" src="../assets/images/products/cutout/wing-zero-2.webp"/>
+<label class="hero-nav-arrow next" for="hero-s4" title="Mẫu tiếp theo">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</label>
+</div>
+<div class="hero-slide-visual v4">
+<label class="hero-nav-arrow prev" for="hero-s3" title="Mẫu trước">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+</label>
+<img alt="Wing Zero EW RG" class="hero-cutout-img" src="../assets/images/products/cutout/wing-zero.webp"/>
+<label class="hero-nav-arrow next" for="hero-s1" title="Mẫu tiếp theo">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</label>
+</div>
+</div>
+<div class="hero-stage-right">
+<div class="hero-list-title">4 MẪU TRANG CHỦ USER:</div>
+<label class="hero-thumb-selector hs1" for="hero-s1">
+<img alt="Gundam Barbatos" src="../assets/images/products/barbatos.jpg"/>
+<div><b>01. Gundam Barbatos (MG)</b><small>1.150.000đ · Còn 48 hộp</small></div>
+</label>
+<label class="hero-thumb-selector hs2" for="hero-s2">
+<img alt="Sazabi Ver.Ka" src="../assets/images/products/sazabi-verka.jpg"/>
+<div><b>02. Sazabi Ver.Ka (MG)</b><small>2.400.000đ · Còn 08 hộp</small></div>
+</label>
+<label class="hero-thumb-selector hs3" for="hero-s3">
+<img alt="Wing Zero EW Ver.Ka" src="../assets/images/products/wing-zero-2.jpg"/>
+<div><b>03. Wing Zero EW Ver.Ka (MG)</b><small>1.500.000đ · Còn 18 hộp</small></div>
+</label>
+<label class="hero-thumb-selector hs4" for="hero-s4">
+<img alt="Wing Zero EW" src="../assets/images/products/wing-zero.jpg"/>
+<div><b>04. Wing Zero EW (RG)</b><small>780.000đ · Còn 22 hộp</small></div>
+</label>
+</div>
+</section>
+
+<!-- THANH CÔNG CỤ TÌM KIẾM & BỘ LỌC SẢN PHẨM -->
+<section class="card toolbar">
+<form action="products-search.html" autocomplete="off" method="get" style="display: flex; align-items: flex-end; gap: 10px; flex: 2 1 300px;">
+<label class="field" style="flex: 1;">
+<span>Tìm theo tên sản phẩm</span>
+<div class="search-input">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+<input class="input" id="ps-name" name="q" placeholder="Nhập tên sản phẩm..."/>
+</div>
+</label>
+<button class="btn btn-dark" type="submit">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg> Tìm kiếm
+            </button>
+</form>
+<label class="field">
+<span>Loại sản phẩm</span>
+<select class="select" id="ps-cat">
+<option value="">Tất cả loại (52)</option>
+<option value="HG">High Grade (HG) - 10</option>
+<option value="RG">Real Grade (RG) - 10</option>
+<option value="MG">Master Grade (MG) - 10</option>
+<option value="PG">Perfect Grade (PG) - 6</option>
+<option value="SD">Super Deformed (SD) - 8</option>
+<option value="TOOL">Dụng cụ &amp; Sơn - 8</option>
+</select>
+</label>
+<label class="field">
+<span>Sắp xếp</span>
+<select class="select" id="ps-sort">
+<option value="new">Mới thêm gần đây</option>
+<option value="name">Tên A - Z</option>
+<option value="price-asc">Giá tăng dần</option>
+<option value="price-desc">Giá giảm dần</option>
+<option value="stock">Tồn kho ít nhất</option>
+</select>
+</label>
+<div class="toolbar-actions" style="margin-left: auto;">
+<label class="btn btn-outline" for="toast-filter-prod">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 5h18l-7 8.5V20l-4-2v-4.5z"></path></svg> Lọc sản phẩm
+            </label>
+<a class="btn btn-primary" href="product-form.html" style="margin-left: auto;">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg> Thêm sản phẩm
+            </a>
+</div>
+</section>
+<!-- CHẾ ĐỘ XEM NHANH -->
+<nav aria-label="Xem nhanh" class="ap-views">
+<a class="active" href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="7" rx="1.5" width="7" x="4" y="4"></rect><rect height="7" rx="1.5" width="7" x="13" y="4"></rect><rect height="7" rx="1.5" width="7" x="4" y="13"></rect><rect height="7" rx="1.5" width="7" x="13" y="13"></rect></svg> Tất cả sản phẩm <span>52</span></a>
+<label for="toast-filter-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Đang giảm giá <span>17</span></label>
+</nav>
+<!-- LƯỚI 12 THẺ SẢN PHẨM TĨNH -->
+<section class="admin-products"><article class="ap-card">
+<div class="ap-thumb">
+<img alt="Gundam Barbatos" src="../assets/images/products/barbatos.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-MG">MG</span><span>Mã: GP0022</span></div>
+<h3 title="Gundam Barbatos">Gundam Barbatos</h3>
+<span class="price">1.150.000đ <s class="price-old">1.250.000đ</s> <span class="ap-off">-8%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>48</b></div>
+<div><small>Đã bán</small><b>142</b></div>
+<div><small>Đánh giá</small><b>4.9</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article><article class="ap-card">
+<div class="ap-thumb">
+<img alt="Wing Zero EW Ver.Ka" src="../assets/images/products/wing-zero-2.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-MG">MG</span><span>Mã: GP0018</span></div>
+<h3 title="Wing Zero EW Ver.Ka">Wing Zero EW Ver.Ka</h3>
+<span class="price">1.500.000đ <s class="price-old">1.650.000đ</s> <span class="ap-off">-9%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>18</b></div>
+<div><small>Đã bán</small><b>94</b></div>
+<div><small>Đánh giá</small><b>4.9</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article><article class="ap-card">
+<div class="ap-thumb">
+<img alt="Wing Zero EW" src="../assets/images/products/wing-zero.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-RG">RG</span><span>Mã: GP0015</span></div>
+<h3 title="Wing Zero EW">Wing Zero EW</h3>
+<span class="price">780.000đ <s class="price-old">850.000đ</s> <span class="ap-off">-8%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>22</b></div>
+<div><small>Đã bán</small><b>118</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article><article class="ap-card">
+<div class="ap-thumb">
+<img alt="Gundam Calibarn" src="../assets/images/products/calibarn.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-HG">HG</span><span>Mã: GP0004</span></div>
+<h3 title="Gundam Calibarn">Gundam Calibarn</h3>
+<span class="price">490.000đ</span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>31</b></div>
+<div><small>Đã bán</small><b>165</b></div>
+<div><small>Đánh giá</small><b>4.9</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 1: GP0023 Sazabi Ver.Ka (Đã bán -> Ẩn) -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Sazabi Ver.Ka" src="../assets/images/products/sazabi-verka.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-MG">MG</span><span>Mã: GP0023</span></div>
+<h3 title="Sazabi Ver.Ka">Sazabi Ver.Ka</h3>
+<span class="price">2.400.000đ <s class="price-old">2.650.000đ</s> <span class="ap-off">-9%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>8</b></div>
+<div><small>Đã bán</small><b>61</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 2: GP0003 Gundam Destiny Gundam -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Gundam Destiny Gundam" src="../assets/images/products/barbatos-lupus-rex.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-HG">HG</span><span>Mã: GP0003</span></div>
+<h3 title="Gundam Destiny Gundam">Gundam Destiny Gundam</h3>
+<span class="price">380.000đ</span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>28</b></div>
+<div><small>Đã bán</small><b>201</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 3: GP0031 RX-78-2 Gundam Unleashed -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="RX-78-2 Gundam Unleashed" src="../assets/images/products/rx78-2-unleashed.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-PG">PG</span><span>Mã: GP0031</span></div>
+<h3 title="RX-78-2 Gundam Unleashed">RX-78-2 Gundam Unleashed</h3>
+<span class="price">6.500.000đ <s class="price-old">7.200.000đ</s> <span class="ap-off">-10%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>5</b></div>
+<div><small>Đã bán</small><b>23</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 4: GP0030 RX-78-2 Gundam Ver.3.0 (Chưa bán -> Xóa) -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="RX-78-2 Gundam Ver.3.0" src="../assets/images/products/rx78-2-ver3.jpg"/>
+<span class="ap-status chip chip-pending">Chưa bán</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-MG">MG</span><span>Mã: GP0030</span></div>
+<h3 title="RX-78-2 Gundam Ver.3.0">RX-78-2 Gundam Ver.3.0</h3>
+<span class="price">1.050.000đ</span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>16</b></div>
+<div><small>Đã bán</small><b>0</b></div>
+<div><small>Đánh giá</small><b>5.0</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-danger-outline btn-sm" for="modal-del-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg> Xóa</label>
+</div>
+</article>
+<!-- Card 5: GP0013 Nu Gundam -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Nu Gundam" src="../assets/images/products/nu.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-RG">RG</span><span>Mã: GP0013</span></div>
+<h3 title="Nu Gundam">Nu Gundam</h3>
+<span class="price">1.150.000đ <s class="price-old">1.290.000đ</s> <span class="ap-off">-11%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>15</b></div>
+<div><small>Đã bán</small><b>132</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 6: GP0019 Hi-Nu Gundam -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Hi-Nu Gundam" src="../assets/images/products/hi-nu.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-RG">RG</span><span>Mã: GP0019</span></div>
+<h3 title="Hi-Nu Gundam">Hi-Nu Gundam</h3>
+<span class="price">1.250.000đ <s class="price-old">1.350.000đ</s> <span class="ap-off">-7%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>14</b></div>
+<div><small>Đã bán</small><b>93</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 7: GP0021 Freedom Gundam Ver.2.0 -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Freedom Gundam Ver.2.0" src="../assets/images/products/freedom.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-MG">MG</span><span>Mã: GP0021</span></div>
+<h3 title="Freedom Gundam Ver.2.0">Freedom Gundam Ver.2.0</h3>
+<span class="price">1.250.000đ <s class="price-old">1.390.000đ</s> <span class="ap-off">-10%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>14</b></div>
+<div><small>Đã bán</small><b>88</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 8: GP0042 SDEX Destiny Gundam (Đang ẩn -> Mở bán) -->
+<article class="ap-card is-hidden">
+<div class="ap-thumb">
+<img alt="SDEX Destiny Gundam" src="../assets/images/products/sd-wing-zero.jpg"/>
+<span class="ap-status chip chip-hidden">Đang ẩn</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-SD">SD</span><span>Mã: GP0042</span></div>
+<h3 title="SDEX Destiny Gundam">SDEX Destiny Gundam</h3>
+<span class="price">180.000đ</span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>47</b></div>
+<div><small>Đã bán</small><b>210</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-blue btn-sm" for="modal-show-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Mở bán</label>
+</div>
+</article>
+<!-- Card 9: GP0002 Gundam Aerial -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Gundam Aerial" src="../assets/images/products/aerial.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-HG">HG</span><span>Mã: GP0002</span></div>
+<h3 title="Gundam Aerial">Gundam Aerial</h3>
+<span class="price">420.000đ</span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>35</b></div>
+<div><small>Đã bán</small><b>276</b></div>
+<div><small>Đánh giá</small><b>4.9</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 10: GP0010 Gundam Lfrith (Chưa bán -> Xóa) -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Gundam Lfrith" src="../assets/images/products/lfrith.jpg"/>
+<span class="ap-status chip chip-pending">Chưa bán</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-HG">HG</span><span>Mã: GP0010</span></div>
+<h3 title="Gundam Lfrith">Gundam Lfrith</h3>
+<span class="price">390.000đ</span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>20</b></div>
+<div><small>Đã bán</small><b>0</b></div>
+<div><small>Đánh giá</small><b>5.0</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-danger-outline btn-sm" for="modal-del-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg> Xóa</label>
+</div>
+</article>
+<!-- Card 11: GP0045 Kìm cắt GodHand SPN-120 -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Kìm cắt GodHand SPN-120" src="../assets/images/products/tool-nipper.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-TOOL">TOOL</span><span>Mã: GP0045</span></div>
+<h3 title="Kìm cắt GodHand SPN-120">Kìm cắt GodHand SPN-120</h3>
+<span class="price">1.150.000đ <s class="price-old">1.250.000đ</s> <span class="ap-off">-8%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>14</b></div>
+<div><small>Đã bán</small><b>96</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 12: GP0052 Bộ dụng cụ lắp ráp cơ bản 8 món (Chưa bán -> Xóa) -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="Bộ dụng cụ lắp ráp cơ bản 8 món" src="../assets/images/products/tool-kit.jpg"/>
+<span class="ap-status chip chip-pending">Chưa bán</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-TOOL">TOOL</span><span>Mã: GP0052</span></div>
+<h3 title="Bộ dụng cụ lắp ráp cơ bản 8 món">Bộ dụng cụ lắp ráp cơ bản 8 món</h3>
+<span class="price">320.000đ <s class="price-old">350.000đ</s> <span class="ap-off">-9%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>35</b></div>
+<div><small>Đã bán</small><b>0</b></div>
+<div><small>Đánh giá</small><b>5.0</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-danger-outline btn-sm" for="modal-del-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg> Xóa</label>
+</div>
+</article>
+</section>
+<!-- THANH PHÂN TRANG TĨNH -->
+<div class="card table-foot">
+<span>Hiển thị 1 - 12 trong tổng số <b>52</b> sản phẩm</span>
+<div class="pagination">
+<span aria-label="Trang trước" class="page-btn disabled">‹</span>
+<span class="page-btn active">1</span>
+<label class="page-btn" for="toast-page">2</label>
+<label class="page-btn" for="toast-page">3</label>
+<label class="page-btn" for="toast-page">4</label>
+<label class="page-btn" for="toast-page">5</label>
+<label aria-label="Trang sau" class="page-btn" for="toast-page">›</label>
+</div>
+</div>
+</main>
+</div>
+</div>
 </body>
 </html>

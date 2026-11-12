@@ -1,0 +1,120 @@
+/* Homepage-only merchandising layout */
+body.store-home .hero-collectors { min-height: 620px; }
+body.store-home .hero-collectors .hero-inner { min-height: 620px; }
+body.store-home .hero-watermark { top: 58px; color: #08090c; font-family: var(--font); font-size: clamp(76px, 10vw, 138px); font-weight: 900; letter-spacing: -.065em; line-height: .88; }
+
+body.store-home .home-spotlight {
+  position: relative;
+  display: flex;
+  min-height: 174px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  overflow: hidden;
+  margin: 28px 0 42px;
+  padding: 25px 34px;
+  background: linear-gradient(112deg, #101116 0%, #151923 65%, #202b46 100%);
+  color: #fff;
+}
+body.store-home .home-spotlight::after {
+  position: absolute;
+  top: -120px;
+  right: 15%;
+  width: 380px;
+  height: 380px;
+  border: 1px solid rgba(174, 192, 255, .18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 38px rgba(174, 192, 255, .035), 0 0 0 84px rgba(174, 192, 255, .025);
+  content: "";
+}
+body.store-home .home-spotlight-copy { position: relative; z-index: 1; max-width: 680px; }
+body.store-home .home-spotlight .eyebrow { color: #a8b7ff; font-size: 9px; letter-spacing: .17em; }
+body.store-home .home-spotlight .eyebrow i { margin: 0 7px; color: #6f85ff; font-style: normal; }
+body.store-home .home-spotlight h2 { margin: 11px 0 6px; color: #fff; font-family: var(--font-display); font-size: clamp(28px, 3.6vw, 46px); letter-spacing: -.045em; line-height: 1.05; }
+body.store-home .home-spotlight p { margin: 0; color: #c4c8d3; font-size: 12px; }
+body.store-home .home-spotlight-copy > a { display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; padding-bottom: 3px; border-bottom: 1px solid #aebdff; color: #fff; font-size: 11px; font-weight: 700; }
+body.store-home .hero-copy p { display: flex; flex-direction: column; gap: 3px; }
+body.store-home .hero-copy p small { color: #737987; font-size: 10px; }
+body.store-home .home-spotlight-mark { position: relative; z-index: 1; display: flex; width: 190px; min-width: 160px; flex-direction: column; align-items: flex-end; color: #aebdff; }
+body.store-home .home-spotlight-mark span { font-size: 8px; letter-spacing: .2em; line-height: 1.5; text-align: right; }
+body.store-home .home-spotlight-mark b { color: rgba(255,255,255,.92); font-family: var(--font-display); font-size: 72px; letter-spacing: -.08em; line-height: .95; }
+body.store-home .home-spotlight-mark small { color: #aeb5c8; font-size: 8px; letter-spacing: .17em; }
+
+body.store-home .home-bestsellers { margin-top: 0; }
+body.store-home .home-categories { margin-top: 52px; }
+body.store-home .cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+body.store-home .category-feature { display: flex; min-width: 0; flex-direction: column; gap: 0; padding: 0; border: 1px solid #e5e7ec; background: #fff; }
+body.store-home .category-feature:hover { border-color: #cbd2e6; }
+body.store-home .category-feature-image { aspect-ratio: 1.65 / 1; padding: 0; background: #eae8e2; }
+body.store-home .category-feature-copy { min-height: 126px; padding: 13px 34px 15px 14px; }
+body.store-home .category-arrow { top: 43px; right: 12px; }
+
+@media (max-width: 860px) {
+  body.store-home .hero-watermark { top: 62px; font-size: clamp(64px, 11vw, 104px); }
+  body.store-home .hero-collectors,
+  body.store-home .hero-collectors .hero-inner { min-height: 610px; }
+  body.store-home .home-spotlight { min-height: 160px; margin-top: 24px; padding: 22px 24px; }
+  body.store-home .home-spotlight-mark { width: 130px; min-width: 120px; }
+  body.store-home .home-spotlight-mark b { font-size: 58px; }
+  body.store-home .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  body.store-home .hero-watermark { top: 48px; font-size: clamp(38px, 10.5vw, 54px); line-height: .9; }
+  body.store-home .home-spotlight { min-height: 0; margin: 18px 0 32px; padding: 22px 18px; }
+  body.store-home .home-spotlight-mark { width: 80px; min-width: 80px; }
+  body.store-home .home-spotlight-mark b { font-size: 46px; }
+  body.store-home .home-spotlight-mark span,
+  body.store-home .home-spotlight-mark small { font-size: 6px; }
+  body.store-home .home-spotlight p { max-width: 290px; font-size: 11px; line-height: 1.55; }
+  body.store-home .cat-grid { grid-template-columns: 1fr; gap: 12px; }
+  body.store-home .category-feature { display: grid; grid-template-columns: 42% 1fr; gap: 12px; padding: 0; }
+  body.store-home .category-feature-image { aspect-ratio: 1 / 1; }
+  body.store-home .category-feature-copy { min-height: 0; padding: 9px 20px 9px 0; }
+  body.store-home .category-feature-copy b { font-size: 15px; }
+  body.store-home .category-feature-copy small { font-size: 9px; }
+}
+
+/* Banner danh mục: ảnh mẫu bên phải thay cho số trang trí */
+body.store-home .home-spotlight-copy h2 { font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.03em; }
+body.store-home .home-spotlight-copy p { max-width: 520px; font-size: 13px; line-height: 1.6; }
+body.store-home .home-spotlight-art { position: relative; z-index: 1; display: flex; align-items: center; gap: 18px; flex: none; padding: 10px 22px 10px 10px; border: 1px solid rgba(174, 192, 255, .22); background: rgba(255, 255, 255, .04); transition: border-color .15s, background .15s; }
+body.store-home .home-spotlight-art:hover { border-color: rgba(174, 192, 255, .55); background: rgba(255, 255, 255, .08); }
+body.store-home .home-spotlight-art img { width: 120px; height: 120px; object-fit: cover; }
+body.store-home .home-spotlight-art span { display: flex; flex-direction: column; gap: 4px; }
+body.store-home .home-spotlight-art small { color: #a8b7ff; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+body.store-home .home-spotlight-art b { color: #fff; font-size: 16px; }
+body.store-home .home-spotlight-art em { color: #d9c19a; font-size: 15px; font-style: normal; font-weight: 700; }
+
+/* Giá dưới ảnh hero */
+body.store-home .hero-copy p .hero-price { margin-top: 2px; color: #111; font-size: 15px; font-weight: 800; }
+
+/* Pure CSS Hero Carousel (0% JS) */
+.hero-radio { display: none; }
+.hero-slide { display: none; }
+#hero-s1:checked ~ .hero-slide-1,
+#hero-s2:checked ~ .hero-slide-2,
+#hero-s3:checked ~ .hero-slide-3,
+#hero-s4:checked ~ .hero-slide-4 {
+  display: contents;
+}
+@keyframes heroPopIn {
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.hero-slide .hero-art img,
+.hero-slide .hero-copy p {
+  animation: heroPopIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Chống bôi xanh màn hình khi bấm nhanh liên tục vào mũi tên Best Sellers */
+body.store-home .hero-collectors,
+body.store-home .hero-collectors *,
+body.store-home .hero-arrow,
+body.store-home .hero-art,
+body.store-home .hero-side,
+body.store-home .hero-watermark {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}

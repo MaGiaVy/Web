@@ -1,46 +1,313 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản lý người dùng - Quản trị DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
-<body class="admin" data-root="../" data-admin-page="users" data-title="Quản lý người dùng" data-crumb="Người dùng">
-  <div class="admin-shell">
-    <div id="admin-sidebar"></div>
-    <div class="admin-main">
-      <div id="admin-topbar"></div>
-      <main class="admin-content">
-        <form class="card toolbar" id="user-filter" autocomplete="off">
-          <label class="field grow"><span>Tìm theo tên, email hoặc số điện thoại</span>
-            <div class="search-input"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="input" id="us-key" placeholder="Nhập từ khóa..."></div>
-          </label>
-          <label class="field"><span>Trạng thái</span>
-            <select class="select" id="us-status"><option value="">Tất cả</option><option value="active">Đang hoạt động</option><option value="locked">Đã khóa</option></select>
-          </label>
-          <div class="toolbar-actions">
-            <button class="btn btn-dark" type="submit">Tìm kiếm</button>
-            <a class="btn btn-primary" href="user-form.html" id="add-user"></a>
-          </div>
-        </form>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quản lý người dùng - Quản trị Frame &amp; Form</title>
+<link href="../assets/images/frame-form.svg" rel="icon"/>
 
-        <section class="card">
-          <div class="table-wrap"><table class="table">
-            <thead><tr><th>Người dùng</th><th>Số điện thoại</th><th>Địa chỉ mặc định</th><th>Tham gia</th><th class="center">Đơn</th><th>Trạng thái</th><th class="right">Thao tác</th></tr></thead>
-            <tbody id="user-body"></tbody>
-          </table></div>
-          <div class="table-foot" id="user-foot"></div>
-        </section>
-      </main>
-    </div>
-  </div>
 
-  <script src="../assets/js/data.js"></script>
-  <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/admin/admin-layout.js"></script>
-  <script src="../assets/js/admin/users.js"></script>
+<link href="../assets/css/admin.css?v=202611" rel="stylesheet"/></head>
+<body class="admin"><input class="theme-toggle-input" hidden="" id="theme-dark" type="checkbox"/>
+<!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST NGƯỜI DÙNG -->
+<input checked="" class="css-toggle" hidden="" id="modal-user-reset" name="user-modal-state" type="radio"/>
+<!-- ĐIỂM NEO #saved-toast CỐ ĐỊNH (KHÔNG GÂY CUỘN GIẬT TRANG) -->
+<div class="saved-anchor" id="saved-toast"></div>
+<input class="css-toggle" hidden="" id="close-saved-toast" type="checkbox"/>
+<div class="css-toast toast-saved">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã lưu thông tin thành công!</b><p>Dữ liệu người dùng đã được cập nhật vào hệ thống.</p></div>
+<a class="toast-close" href="users.html" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></a>
+</div>
+<!-- TOAST LỌC NGƯỜI DÙNG -->
+<input class="css-toggle" hidden="" id="toast-filter-user" type="checkbox"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã lọc danh sách người dùng!</b><p>Hiển thị danh sách người dùng theo trạng thái đã chọn.</p></div>
+<label class="toast-close" for="toast-filter-user" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST CẬP NHẬT TRẠNG THÁI TÀI KHOẢN -->
+<input class="css-toggle" hidden="" id="toast-status-user" name="user-modal-state" type="radio"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã cập nhật trạng thái tài khoản!</b><p>Trạng thái khóa/mở khóa tài khoản đã được ghi nhận.</p></div>
+<label class="toast-close" for="modal-user-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST CHUYỂN TRANG -->
+<input class="css-toggle" hidden="" id="toast-page" type="checkbox"/>
+<div class="css-toast toast-info">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></div>
+<div class="toast-body"><b>Đã chuyển trang!</b><p>Đang hiển thị trang tiếp theo trong danh sách người dùng.</p></div>
+<label class="toast-close" for="toast-page" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- MODAL XÁC NHẬN KHÓA TÀI KHOẢN (CÓ RADIO LÝ DO KHÓA) -->
+<input class="css-toggle" hidden="" id="modal-lock-user" name="user-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon danger"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></div>
+<h3>Khóa tài khoản người dùng?</h3>
+<p>Tài khoản này sẽ không thể đăng nhập và đặt hàng cho đến khi được mở khóa trở lại.</p>
+<div class="lock-form">
+<div class="field">
+<span>Lý do khóa</span>
+<div class="reason-grid">
+<label class="reason-option"><input checked="" name="lock-reason" type="radio" value="Không nhận hàng COD"/><span>Không nhận hàng COD</span></label>
+<label class="reason-option"><input name="lock-reason" type="radio" value="Thông tin sai"/><span>Thông tin sai</span></label>
+<label class="reason-option"><input name="lock-reason" type="radio" value="Tài khoản ảo"/><span>Tài khoản ảo</span></label>
+<label class="reason-option"><input name="lock-reason" type="radio" value="Đánh giá sai sự thật"/><span>Đánh giá sai sự thật</span></label>
+<label class="reason-option"><input name="lock-reason" type="radio" value="Khách yêu cầu khóa"/><span>Khách yêu cầu khóa</span></label>
+<label class="reason-option"><input name="lock-reason" type="radio" value="Lý do khác"/><span>Lý do khác</span></label>
+</div>
+</div>
+<label class="field">
+<span>Ghi chú chi tiết</span>
+<textarea class="textarea" placeholder="Vd: Liên hệ hotline 1900 6868 để được hỗ trợ mở khóa" rows="2"></textarea>
+</label>
+</div>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-user-reset">Hủy</label>
+<label class="btn btn-primary" for="toast-status-user">Xác nhận khóa</label>
+</div>
+</div>
+</div>
+<!-- MODAL XÁC NHẬN MỞ KHÓA TÀI KHOẢN -->
+<input class="css-toggle" hidden="" id="modal-unlock-user" name="user-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg></div>
+<h3>Mở khóa tài khoản?</h3>
+<p>Tài khoản người dùng đã chọn sẽ được phép đăng nhập và đặt mua hàng trở lại bình thường.</p>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-user-reset">Hủy</label>
+<label class="btn btn-blue" for="toast-status-user">Xác nhận mở khóa</label>
+</div>
+</div>
+</div>
+<div class="admin-shell">
+<!-- SIDEBAR LIQUID GLASS TĨNH -->
+<aside class="sidebar">
+<a class="brand" href="index.html">
+<img alt="Logo Frame &amp; Form" src="../assets/images/frame-form.svg"/>
+<span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+</a>
+<div class="side-label">Quản lý chính</div>
+<nav class="side-nav">
+<a href="index.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="1.5" width="8" x="3" y="3"></rect><rect height="6" rx="1.5" width="8" x="13" y="3"></rect><rect height="10" rx="1.5" width="8" x="13" y="11"></rect><rect height="6" rx="1.5" width="8" x="3" y="15"></rect></svg> Tổng quan</a>
+<a class="active" href="users.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg> Người dùng</a>
+<a href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg> Sản phẩm</a>
+<a href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Đơn hàng <span class="badge">4</span></a>
+<a href="statistics.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg> Thống kê</a>
+</nav>
+<div class="side-label">Mở rộng</div>
+<nav class="side-nav">
+<a href="promotions.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Khuyến mãi</a>
+<a href="emails.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Email khách hàng</a>
+<a href="messages.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn <span class="badge">3</span></a>
+<a href="settings.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg> Cài đặt cửa hàng</a>
+</nav>
+<div class="side-foot side-nav">
+<a href="../index.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"></path><path d="M9 20v-6h6v6"></path></svg> Xem trang bán hàng</a>
+<a href="login.html" style="color: var(--red);"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg> Đăng xuất</a>
+</div>
+</aside>
+<!-- KHU VỰC NỘI DUNG CHÍNH -->
+<div class="admin-main">
+<header class="admin-topbar">
+<div>
+<div class="crumb">Quản trị / Người dùng</div>
+<h1>Quản lý người dùng</h1>
+</div>
+<div class="right">
+<span class="date"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg> Thứ Hai, 02/11/2026</span>
+
+<label class="theme-toggle-btn" for="theme-dark" title="Chuyển chế độ Sáng / Tối (Pure CSS)">
+<span class="lbl-dark">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    Tối
+  </span>
+<span class="lbl-light">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+    Sáng
+  </span>
+</label>
+<div class="admin-user">
+<span class="avatar">A</span>
+<div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+</div>
+<a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg></a>
+</div>
+</header>
+<main class="admin-content">
+<!-- THANH CÔNG CỤ TÁCH RÕ TÌM KIẾM & LỌC TRẠNG THÁI -->
+<section class="card toolbar">
+<form action="users-search.html" autocomplete="off" method="get" style="display: flex; align-items: flex-end; gap: 10px; flex: 2 1 320px;">
+<label class="field" style="flex: 1;">
+<span>Tìm theo tên, email hoặc số điện thoại</span>
+<div class="search-input">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+<input class="input" id="us-key" name="q" placeholder="Nhập từ khóa tìm kiếm..."/>
+</div>
+</label>
+<button class="btn btn-dark" type="submit">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg> Tìm kiếm
+            </button>
+</form>
+<div style="display: flex; align-items: flex-end; gap: 10px; flex: 1 1 240px;">
+<label class="field" style="flex: 1;">
+<span>Trạng thái tài khoản</span>
+<select class="select" id="us-status">
+<option value="">Tất cả trạng thái</option>
+<option value="active">Đang hoạt động</option>
+<option value="locked">Đã khóa</option>
+</select>
+</label>
+<label class="btn btn-outline" for="toast-filter-user">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 5h18l-7 8.5V20l-4-2v-4.5z"></path></svg> Lọc
+            </label>
+</div>
+<a class="btn btn-primary" href="user-form.html" style="margin-left: auto;">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg> Thêm người dùng
+          </a>
+</section>
+<!-- BẢNG DANH SÁCH 5 NGƯỜI DÙNG MẪU -->
+<section class="card">
+<div class="table-wrap">
+<table class="table">
+<thead>
+<tr>
+<th>Người dùng</th>
+<th>Số điện thoại</th>
+<th>Địa chỉ mặc định</th>
+<th>Tham gia</th>
+<th class="center">Đơn</th>
+<th>Trạng thái</th>
+<th class="right">Thao tác</th>
+</tr>
+</thead>
+<tbody>
+<!-- User 1 -->
+<tr>
+<td>
+<div class="cell-user">
+<span class="avatar">A</span>
+<div><b>Nguyễn Minh Anh</b><small>minhanh@gmail.com</small></div>
+</div>
+</td>
+<td class="num nowrap">0901 234 567</td>
+<td class="cell-addr"><span>Phường Thủ Đức</span><small>TP. Hồ Chí Minh</small></td>
+<td class="nowrap">10/12/2025</td>
+<td class="center"><a class="link" href="orders.html">12 đơn</a></td>
+<td class="nowrap"><span class="chip chip-active">Hoạt động</span></td>
+<td>
+<div class="row-actions">
+<a class="btn btn-outline btn-sm" href="user-edit.html" title="Xem thông tin người dùng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Xem</a>
+<label class="btn btn-sm btn-danger-outline" for="modal-lock-user"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg> Khóa</label>
+</div>
+</td>
+</tr>
+<!-- User 2 -->
+<tr>
+<td>
+<div class="cell-user">
+<span class="avatar">H</span>
+<div><b>Lê Gia Hân</b><small>giahan@gmail.com</small></div>
+</div>
+</td>
+<td class="num nowrap">0912 345 678</td>
+<td class="cell-addr"><span>Phường Yên Hòa</span><small>TP. Hà Nội</small></td>
+<td class="nowrap">05/01/2026</td>
+<td class="center"><a class="link" href="orders.html">3 đơn</a></td>
+<td class="nowrap"><span class="chip chip-active">Hoạt động</span></td>
+<td>
+<div class="row-actions">
+<a class="btn btn-outline btn-sm" href="user-edit.html" title="Xem thông tin người dùng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Xem</a>
+<label class="btn btn-sm btn-danger-outline" for="modal-lock-user"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg> Khóa</label>
+</div>
+</td>
+</tr>
+<!-- User 3 (Locked) -->
+<tr class="is-locked">
+<td>
+<div class="cell-user">
+<span class="avatar">K</span>
+<div><b>Trần Minh Khoa</b><small>minhkhoa@gmail.com</small></div>
+</div>
+</td>
+<td class="num nowrap">0987 654 321</td>
+<td class="cell-addr"><span>Phường Thạnh Mỹ Tây</span><small>TP. Hồ Chí Minh</small></td>
+<td class="nowrap">14/02/2026</td>
+<td class="center"><a class="link" href="orders.html">3 đơn</a></td>
+<td class="nowrap">
+<span class="chip chip-locked">Đã khóa</span>
+<small class="lock-reason" title="Khóa ngày 03/10/2026 · 2 đơn COD liên tiếp không nhận hàng">Không nhận hàng COD</small>
+</td>
+<td>
+<div class="row-actions">
+<a class="btn btn-outline btn-sm" href="user-edit.html" title="Xem thông tin người dùng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Xem</a>
+<label class="btn btn-sm btn-blue" for="modal-unlock-user"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 7.5-2"></path></svg> Mở khóa</label>
+</div>
+</td>
+</tr>
+<!-- User 4 -->
+<tr>
+<td>
+<div class="cell-user">
+<span class="avatar">T</span>
+<div><b>Phạm Thu Trang</b><small>thutrang@gmail.com</small></div>
+</div>
+</td>
+<td class="num nowrap">0935 111 222</td>
+<td class="cell-addr"><span>Phường Hải Châu</span><small>TP. Đà Nẵng</small></td>
+<td class="nowrap">01/03/2026</td>
+<td class="center"><a class="link" href="orders.html">4 đơn</a></td>
+<td class="nowrap"><span class="chip chip-active">Hoạt động</span></td>
+<td>
+<div class="row-actions">
+<a class="btn btn-outline btn-sm" href="user-edit.html" title="Xem thông tin người dùng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Xem</a>
+<label class="btn btn-sm btn-danger-outline" for="modal-lock-user"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg> Khóa</label>
+</div>
+</td>
+</tr>
+<!-- User 5 -->
+<tr>
+<td>
+<div class="cell-user">
+<span class="avatar">B</span>
+<div><b>Võ Quốc Bảo</b><small>quocbao@gmail.com</small></div>
+</div>
+</td>
+<td class="num nowrap">0908 777 888</td>
+<td class="cell-addr"><span>Phường Tân Mỹ</span><small>TP. Hồ Chí Minh</small></td>
+<td class="nowrap">22/03/2026</td>
+<td class="center"><a class="link" href="orders.html">4 đơn</a></td>
+<td class="nowrap"><span class="chip chip-active">Hoạt động</span></td>
+<td>
+<div class="row-actions">
+<a class="btn btn-outline btn-sm" href="user-edit.html" title="Xem thông tin người dùng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> Xem</a>
+<label class="btn btn-sm btn-danger-outline" for="modal-lock-user"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg> Khóa</label>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-foot">
+<span>Trang 1/6 · <b>30</b> người dùng (24 đang hoạt động · 6 đã khóa)</span>
+<div class="pagination">
+<span aria-label="Trang trước" class="page-btn disabled">‹</span>
+<span class="page-btn active">1</span>
+<label class="page-btn" for="toast-page">2</label>
+<label class="page-btn" for="toast-page">3</label>
+<label class="page-btn" for="toast-page">4</label>
+<label class="page-btn" for="toast-page">5</label>
+<label class="page-btn" for="toast-page">6</label>
+<label aria-label="Trang sau" class="page-btn" for="toast-page">›</label>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
 </body>
 </html>

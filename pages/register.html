@@ -3,50 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng ký - DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
+  <title>Đăng ký tài khoản - Frame &amp; Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body data-page="register" data-root="../">
-  <div id="site-header"></div>
-
-  <main class="container page">
-    <div class="auth-wrap">
-      <div class="auth-art">
-        <img src="../assets/images/hero.svg" alt="">
-        <h2>Gia nhập cộng đồng<br>DVK Gunpla</h2>
-        <p>Tạo tài khoản để mua hàng nhanh hơn, lưu nhiều địa chỉ và nhận ưu đãi dành riêng cho thành viên.</p>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <span class="topbar-promo"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Tuần lễ Gunpla: giảm đến 15% <a href="sale.html">Xem ngay <span aria-hidden="true">&#8599;</span></a></span>
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg> Miễn phí giao hàng cho đơn từ 1.000.000đ</span>
       </div>
-      <!-- Không ràng buộc: không required, không kiểm tra định dạng -->
-      <form class="auth-form" id="register-form" autocomplete="off" novalidate>
-        <span class="eyebrow">Người mua hàng</span>
-        <h1>Đăng ký tài khoản</h1>
-        <p>Đã có tài khoản? <a class="link" href="login.html">Đăng nhập</a></p>
-        <div class="form-grid">
-          <label class="field full"><span>Họ và tên</span><input class="input" id="rg-name" placeholder="Nhập họ và tên"></label>
-          <label class="field"><span>Email</span><input class="input" placeholder="Nhập email"></label>
-          <label class="field"><span>Số điện thoại</span><input class="input" placeholder="Nhập số điện thoại"></label>
-          <label class="field full"><span>Địa chỉ</span><input class="input" placeholder="Số nhà, tên đường, phường/xã, tỉnh/thành phố"></label>
-          <label class="field"><span>Mật khẩu</span><input class="input" type="password" placeholder="Nhập mật khẩu"></label>
-          <label class="field"><span>Nhập lại mật khẩu</span><input class="input" type="password" placeholder="Nhập lại mật khẩu"></label>
+      <div class="topbar-right">
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Hotline 0901 234 567 <i>·</i> 08:30 - 21:30</span>
+      </div>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="header-main">
+      <div class="container">
+        <a class="brand" href="../index.html" aria-label="Frame &amp; Form - Trang chủ">
+          <img src="../assets/images/frame-form.svg" alt="Biểu tượng Frame &amp; Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>MÔ HÌNH &amp; VẬT PHẨM SƯU TẦM</small></span>
+        </a>
+        <form class="header-search" id="header-search" action="search-result.html" method="get" role="search">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" name="q" id="header-search-input" value="" placeholder="Tìm mô hình, đồ nghề..." autocomplete="off">
+          <button type="submit">Tìm kiếm</button>
+          <a class="header-search-advanced" href="advanced-search.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Nâng cao</span></a>
+        </form>
+        <div class="header-actions">
+          <a class="header-action" href="login.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5M15 12H4"/></svg><span class="header-action-text"><b>Đăng nhập</b></span></a>
+          <a class="btn btn-primary btn-sm" href="register.html">Đăng ký</a>
+          <a class="header-action" href="cart.html" aria-label="Giỏ hàng">
+            <span class="cart-icon-wrap"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.8 1.8 0 0 0 1.8 1.4h8.6a1.8 1.8 0 0 0 1.7-1.3L21.5 7H6"/></svg><span class="cart-badge" id="cart-badge">0</span></span>
+            <span class="header-action-text"><small>Giỏ hàng</small><b>0 sản phẩm</b></span>
+          </a>
         </div>
-        <div class="auth-row" style="margin-top:16px"><label><input type="checkbox" checked> Tôi đồng ý với điều khoản sử dụng của DVK Gunpla</label></div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Tạo tài khoản</button>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <div class="container">
+        <a href="../index.html" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>Trang chủ</a>
+        <a href="products.html" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Tất cả mô hình</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-btn" aria-haspopup="true" aria-expanded="false">Danh mục <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="nav-drop-menu" role="menu">
+            <a href="products-hg.html">Mẫu gọn nhẹ (HG)</a>
+            <a href="products-rg.html">Mẫu nhiều chi tiết (RG)</a>
+            <a href="products-mg.html">Mẫu trưng bày (MG)</a>
+            <a href="products-pg.html">Mô hình cỡ lớn (PG)</a>
+            <a href="products-sd.html">Mẫu mini (SD)</a>
+            <a href="products-tool.html">Đồ nghề lắp ráp (TOOL)</a>
+          </div>
+        </div>
+        <a href="sale.html" class="">Khuyến mãi</a>
+        <a href="guide.html" class="">Hướng dẫn mua hàng</a>
+        <a href="contact.html" class="">Liên hệ</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container page auth-page">
+    <div class="auth-card card" style="max-width:460px;margin:32px auto;padding:36px">
+      <div class="auth-head" style="text-align:center;margin-bottom:24px">
+        <h1 style="font-size:24px;margin-bottom:6px">Đăng ký tài khoản mới</h1>
+        <p style="color:var(--muted);font-size:14px">Tham gia cùng hơn 10.000 Builder đam mê Gunpla.</p>
+      </div>
+
+      <form class="auth-form" action="../index1.html" method="get">
+        <label class="field">
+          <span>Họ và tên</span>
+          <input class="input" type="text" placeholder="Vd: Nguyễn Minh Anh" required>
+        </label>
+        <label class="field">
+          <span>Số điện thoại</span>
+          <input class="input" type="tel" placeholder="Nhập số điện thoại" required>
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input class="input" type="email" placeholder="name@example.com" required>
+        </label>
+        <label class="field">
+          <span>Mật khẩu</span>
+          <input class="input" type="password" placeholder="Tối thiểu 6 ký tự" required>
+        </label>
+        <div style="margin:14px 0 20px;font-size:13px;color:var(--muted)">
+          <label style="display:flex;align-items:flex-start;gap:6px;cursor:pointer"><input type="checkbox" checked style="margin-top:2px"> Tôi đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của Frame &amp; Form.</label>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit">Đăng ký tài khoản</button>
       </form>
+
+      <div style="text-align:center;margin-top:20px;font-size:13.5px;color:var(--muted)">
+        Đã có tài khoản? <a href="login.html" style="font-weight:600;color:var(--blue,#2563eb)">Đăng nhập</a>
+      </div>
     </div>
   </main>
-
-  <div id="site-footer"></div>
-
-  <script src="../assets/js/data.js"></script>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html">
+          <img src="../assets/images/frame-form.svg" alt="Biểu tượng Frame &amp; Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>MÔ HÌNH &amp; VẬT PHẨM SƯU TẦM</small></span>
+        </a>
+        <p>Mô hình lắp ráp và vật phẩm trưng bày cho người yêu sưu tầm, từ mẫu gọn nhẹ cho người mới đến mô hình cỡ lớn cho tủ kính.</p>
+        <ul class="footer-promises">
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span> Mô hình chính hãng, nguyên hộp</li>
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></span> Đóng gói chống sốc khi giao hàng</li>
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"/></svg></span> Đổi trả trong 7 ngày</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Danh mục</h4>
+        <ul>
+          <li><a href="products-hg.html">Mẫu gọn nhẹ (HG)</a></li>
+          <li><a href="products-rg.html">Mẫu nhiều chi tiết (RG)</a></li>
+          <li><a href="products-mg.html">Mẫu trưng bày (MG)</a></li>
+          <li><a href="products-pg.html">Mô hình cỡ lớn (PG)</a></li>
+          <li><a href="products-sd.html">Mẫu mini (SD)</a></li>
+          <li><a href="products-tool.html">Đồ nghề lắp ráp (TOOL)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <ul>
+          <li><a href="login.html">Đăng nhập</a></li>
+          <li><a href="register.html">Đăng ký tài khoản</a></li>
+          <li><a href="cart.html">Giỏ hàng</a></li>
+          <li><a href="guide.html">Hướng dẫn mua hàng</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <ul class="footer-contact">
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg> <span>273 An Dương Vương, Phường Chợ Quán, TP. Hồ Chí Minh</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> <span>Hotline: 0901 234 567</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> <span>contact@frameform.vn</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> <span>08:30 - 21:30, Thứ 2 - Chủ nhật</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>© 2026 Frame &amp; Form</span>
+        <span>Mỗi mô hình, một dấu ấn riêng.</span>
+      </div>
+    </div>
+  </footer>
   <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/layout.js"></script>
-  <script>
-    document.getElementById("register-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = document.getElementById("rg-name").value.trim();
-      toastThenGo("login.html", "Đăng ký thành công", (name ? escapeHtml(name) + ", t" : "T") + "ài khoản đã được tạo. Mời bạn đăng nhập.");
-    });
-  </script>
 </body>
 </html>

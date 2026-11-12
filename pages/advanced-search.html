@@ -3,54 +3,193 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tìm kiếm nâng cao - DVK Gunpla</title>
-  <link rel="icon" href="../assets/images/logo.svg">
+  <title>Tìm kiếm nâng cao - Frame &amp; Form</title>
+  <link rel="icon" href="../assets/images/frame-form.svg">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body data-page="advanced-search" data-root="../">
-  <div id="site-header"></div>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <span class="topbar-promo"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg> Tuần lễ Gunpla: giảm đến 15% <a href="sale.html">Xem ngay <span aria-hidden="true">&#8599;</span></a></span>
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg> Miễn phí giao hàng cho đơn từ 1.000.000đ</span>
+      </div>
+      <div class="topbar-right">
+        <span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Hotline 0901 234 567 <i>·</i> 08:30 - 21:30</span>
+      </div>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="header-main">
+      <div class="container">
+        <a class="brand" href="../index1.html" aria-label="Frame &amp; Form - Trang chủ">
+          <img src="../assets/images/frame-form.svg" alt="Biểu tượng Frame &amp; Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>MÔ HÌNH &amp; VẬT PHẨM SƯU TẦM</small></span>
+        </a>
+        <form class="header-search" id="header-search" action="search-result.html" method="get" role="search">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" name="q" id="header-search-input" value="" placeholder="Tìm mô hình, đồ nghề..." autocomplete="off">
+          <button type="submit">Tìm kiếm</button>
+          <a class="header-search-advanced" href="advanced-search.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Nâng cao</span></a>
+        </form>
+        <div class="header-actions">
+          <div class="user-menu" id="user-menu">
+            <button class="header-action" id="user-menu-btn" type="button" aria-haspopup="true">
+              <span class="avatar" id="header-avatar">A</span>
+              <span class="header-action-text"><small>Xin chào,</small><b id="header-user-name">Nguyễn Minh Anh</b></span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="dropdown" role="menu">
+              <div class="dropdown-head"><b id="dropdown-user-name">Nguyễn Minh Anh</b><small>minhanh@gmail.com</small></div>
+              <a href="account.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Tài khoản của tôi</a>
+              <a href="account.html#addresses"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg> Sổ địa chỉ</a>
+              <a href="account.html#password"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg> Đổi mật khẩu</a>
+              <a href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Lịch sử mua hàng</a>
+              <a href="../index.html" class="danger" style="display:flex;align-items:center;gap:8px;padding:8px 16px;color:var(--red,#dc2626);"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Đăng xuất</a>
+            </div>
+          </div>
+          <a class="header-action" href="cart.html" aria-label="Giỏ hàng">
+            <span class="cart-icon-wrap"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.8 1.8 0 0 0 1.8 1.4h8.6a1.8 1.8 0 0 0 1.7-1.3L21.5 7H6"/></svg><span class="cart-badge" id="cart-badge">4</span></span>
+            <span class="header-action-text"><small>Giỏ hàng</small><b>4 sản phẩm</b></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <div class="container">
+        <a href="../index1.html" class=""><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>Trang chủ</a>
+        <a href="products.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Tất cả mô hình</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-btn" aria-haspopup="true" aria-expanded="false">Danh mục <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="nav-drop-menu" role="menu">
+            <a href="products-hg.html">Mẫu gọn nhẹ (HG)</a>
+            <a href="products-rg.html">Mẫu nhiều chi tiết (RG)</a>
+            <a href="products-mg.html">Mẫu trưng bày (MG)</a>
+            <a href="products-pg.html">Mô hình cỡ lớn (PG)</a>
+            <a href="products-sd.html">Mẫu mini (SD)</a>
+            <a href="products-tool.html">Đồ nghề lắp ráp (TOOL)</a>
+          </div>
+        </div>
+        <a href="sale.html" class="">Khuyến mãi</a>
+        <a href="guide.html" class="">Hướng dẫn mua hàng</a>
+        <a href="contact.html" class="">Liên hệ</a>
+      </div>
+    </nav>
+  </header>
 
   <main class="container page">
-    <nav class="breadcrumb"><a href="../index.html">Trang chủ</a><span>›</span><b>Tìm kiếm nâng cao</b></nav>
+    <nav class="breadcrumb">
+      <a href="../index1.html">Trang chủ</a>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m9 18 6-6-6-6"/></svg>
+      <b>Tìm kiếm nâng cao</b>
+    </nav>
 
     <div class="adv-wrap">
       <div class="page-title">
         <div><h1>Tìm kiếm nâng cao</h1><p>Kết hợp nhiều điều kiện trong 1 lần tìm: tên sản phẩm, phân loại và khoảng giá.</p></div>
       </div>
 
-      <!-- Tìm kiếm nâng cao: tên + phân loại + khoảng giá -->
-      <form class="card adv-form" id="adv-form" autocomplete="off">
+      <form class="card adv-form" action="search-result.html" method="get" autocomplete="off">
         <div class="form-grid">
-          <label class="field full"><span>Tên sản phẩm</span><input class="input" id="a-name" placeholder="Nhập tên sản phẩm, vd: Freedom, Unicorn..."></label>
-          <label class="field"><span>Phân loại</span><select class="select" id="a-cat"></select></label>
-          <label class="field"><span>Khoảng giá</span><select class="select" id="a-range"></select></label>
+          <label class="field full"><span>Tên sản phẩm</span><input class="input" name="q" value="" placeholder="Nhập tên sản phẩm, vd: Freedom, Unicorn..."></label>
+          <label class="field"><span>Phân loại</span>
+            <select class="select" name="loai">
+              <option value="">Tất cả phân loại</option>
+              <option value="HG">Mẫu gọn nhẹ (HG)</option>
+              <option value="RG">Mẫu nhiều chi tiết (RG)</option>
+              <option value="MG">Mẫu trưng bày (MG)</option>
+              <option value="PG">Mô hình cỡ lớn (PG)</option>
+              <option value="SD">Mẫu mini (SD)</option>
+              <option value="TOOL">Đồ nghề lắp ráp (TOOL)</option>
+            </select>
+          </label>
+          <label class="field"><span>Khoảng giá</span>
+            <select class="select" name="range" id="adv-range" onchange="if(this.value){document.getElementById('adv-min').value='';document.getElementById('adv-max').value='';}">
+              <option value="" selected>Tất cả mức giá</option>
+              <option value="under500">Dưới 500.000đ</option>
+              <option value="500-1m">500.000đ - 1.000.000đ</option>
+              <option value="1m-2m">1.000.000đ - 2.000.000đ</option>
+              <option value="over2m">Trên 2.000.000đ</option>
+            </select>
+          </label>
           <div class="field full"><span>Hoặc nhập khoảng giá (đ)</span>
             <div class="price-inputs">
-              <div class="money-input"><input class="input" id="a-min" placeholder="Giá từ, vd: 500.000"><em>đ</em></div>
+              <div class="money-input"><input class="input" name="tu" id="adv-min" placeholder="Giá từ, vd: 500.000" oninput="if(this.value.trim()!=='')document.getElementById('adv-range').value='';" onfocus="document.getElementById('adv-range').value='';"><em>đ</em></div>
               <span>—</span>
-              <div class="money-input"><input class="input" id="a-max" placeholder="Giá đến, vd: 1.000.000"><em>đ</em></div>
+              <div class="money-input"><input class="input" name="den" id="adv-max" placeholder="Giá đến, vd: 2.000.000" oninput="if(this.value.trim()!=='')document.getElementById('adv-range').value='';" onfocus="document.getElementById('adv-range').value='';"><em>đ</em></div>
             </div>
           </div>
         </div>
         <div class="adv-actions">
           <span class="filter-hint">Mẹo: nhấn Enter trong ô bất kỳ để tìm nhanh.</span>
-          <button type="button" class="btn btn-outline" id="a-reset">Xóa điều kiện</button>
-          <button type="submit" class="btn btn-primary btn-lg" id="a-submit">Tìm kiếm</button>
+          <button type="reset" class="btn btn-outline" onclick="toast('Đã xóa điều kiện', 'Form đã được làm mới', 'info')">Xóa điều kiện</button>
+          <button type="submit" class="btn btn-primary btn-lg"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Tìm kiếm</button>
         </div>
       </form>
 
       <section class="card adv-quick">
-        <h3>Tìm nhanh theo phân loại</h3>
-        <div class="adv-chips" id="a-quick"></div>
+        <h3>Gợi ý tìm kiếm</h3>
+        <div class="adv-chips">
+          <a class="adv-chip" href="search-result.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Freedom</a>
+          <a class="adv-chip" href="search-result.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Unicorn</a>
+          <a class="adv-chip" href="search-result.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Sazabi</a>
+          <a class="adv-chip" href="search-result.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Barbatos</a>
+          <a class="adv-chip" href="search-result.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Kìm cắt</a>
+        </div>
       </section>
     </div>
   </main>
-
-  <div id="site-footer"></div>
-
-  <script src="../assets/js/data.js"></script>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="../index1.html">
+          <img src="../assets/images/frame-form.svg" alt="Biểu tượng Frame &amp; Form">
+          <span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>MÔ HÌNH &amp; VẬT PHẨM SƯU TẦM</small></span>
+        </a>
+        <p>Mô hình lắp ráp và vật phẩm trưng bày cho người yêu sưu tầm, từ mẫu gọn nhẹ cho người mới đến mô hình cỡ lớn cho tủ kính.</p>
+        <ul class="footer-promises">
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span> Mô hình chính hãng, nguyên hộp</li>
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></span> Đóng gói chống sốc khi giao hàng</li>
+          <li><span class="footer-promise-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"/></svg></span> Đổi trả trong 7 ngày</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Danh mục</h4>
+        <ul>
+          <li><a href="products-hg.html">Mẫu gọn nhẹ (HG)</a></li>
+          <li><a href="products-rg.html">Mẫu nhiều chi tiết (RG)</a></li>
+          <li><a href="products-mg.html">Mẫu trưng bày (MG)</a></li>
+          <li><a href="products-pg.html">Mô hình cỡ lớn (PG)</a></li>
+          <li><a href="products-sd.html">Mẫu mini (SD)</a></li>
+          <li><a href="products-tool.html">Đồ nghề lắp ráp (TOOL)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <ul>
+          <li><a href="orders.html">Lịch sử mua hàng</a></li>
+          <li><a href="account.html">Tài khoản của tôi</a></li>
+          <li><a href="cart.html">Giỏ hàng</a></li>
+          <li><a href="guide.html">Hướng dẫn mua hàng</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <ul class="footer-contact">
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg> <span>273 An Dương Vương, Phường Chợ Quán, TP. Hồ Chí Minh</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> <span>Hotline: 0901 234 567</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> <span>contact@frameform.vn</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> <span>08:30 - 21:30, Thứ 2 - Chủ nhật</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>© 2026 Frame &amp; Form</span>
+        <span>Mỗi mô hình, một dấu ấn riêng.</span>
+      </div>
+    </div>
+  </footer>
   <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/layout.js"></script>
-  <script src="../assets/js/advanced-search.js"></script>
 </body>
 </html>

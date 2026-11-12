@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kết quả tìm kiếm sản phẩm - Quản trị Frame &amp; Form</title>
+<link href="../assets/images/frame-form.svg" rel="icon"/>
+
+
+<link href="../assets/css/admin.css?v=202611" rel="stylesheet"/></head>
+<body class="admin"><input class="theme-toggle-input" hidden="" id="theme-dark" type="checkbox"/>
+<!-- TRẠNG THÁI RESET CHO MODAL VÀ TOAST -->
+<input checked="" class="css-toggle" hidden="" id="modal-prod-search-reset" name="prod-search-modal-state" type="radio"/>
+<!-- TOAST LỌC SẢN PHẨM -->
+<input class="css-toggle" hidden="" id="toast-filter-prod" type="checkbox"/>
+<div class="css-toast">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã lọc danh sách sản phẩm!</b><p>Hiển thị kết quả theo điều kiện đã chọn.</p></div>
+<label class="toast-close" for="toast-filter-prod" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- TOAST ẨN SẢN PHẨM -->
+<input class="css-toggle" hidden="" id="toast-hide-prod" name="prod-search-modal-state" type="radio"/>
+<div class="css-toast toast-warning">
+<div class="toast-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div>
+<div class="toast-body"><b>Đã ẩn sản phẩm khỏi trang bán hàng!</b><p>Các đơn hàng cũ có sản phẩm này vẫn được bảo toàn.</p></div>
+<label class="toast-close" for="modal-prod-search-reset" title="Đóng"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></label>
+</div>
+<!-- MODAL XÁC NHẬN ẨN SẢN PHẨM (CHUNG CHO TẤT CẢ SẢN PHẨM) -->
+<input class="css-toggle" hidden="" id="modal-hide-prod" name="prod-search-modal-state" type="radio"/>
+<div class="css-modal">
+<div class="css-modal-box">
+<div class="css-modal-icon"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 5.4-1.6"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg></div>
+<h3>Ẩn sản phẩm đã chọn?</h3>
+<p>Sản phẩm đã có lượt mua trên hệ thống nên không thể xóa vĩnh viễn, chỉ có thể ẩn khỏi cửa hàng.</p>
+<ul class="del-effects">
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Khách hàng không còn thấy và mua được sản phẩm</li>
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Các đơn hàng cũ vẫn giữ nguyên thông tin</li>
+<li><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4"></path></svg> Có thể mở bán lại bất cứ lúc nào</li>
+</ul>
+<div class="confirm-actions">
+<label class="btn btn-outline" for="modal-prod-search-reset">Không, giữ lại</label>
+<label class="btn btn-primary" for="toast-hide-prod">Ẩn sản phẩm</label>
+</div>
+</div>
+</div>
+<div class="admin-shell">
+<!-- SIDEBAR LIQUID GLASS TĨNH -->
+<aside class="sidebar">
+<a class="brand" href="index.html">
+<img alt="Logo Frame &amp; Form" src="../assets/images/frame-form.svg"/>
+<span class="brand-text"><b>FRAME <em>&amp; FORM</em></b><small>Trang quản trị</small></span>
+</a>
+<div class="side-label">Quản lý chính</div>
+<nav class="side-nav">
+<a href="index.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="10" rx="1.5" width="8" x="3" y="3"></rect><rect height="6" rx="1.5" width="8" x="13" y="3"></rect><rect height="10" rx="1.5" width="8" x="13" y="11"></rect><rect height="6" rx="1.5" width="8" x="3" y="15"></rect></svg> Tổng quan</a>
+<a href="users.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg> Người dùng</a>
+<a class="active" href="products.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg> Sản phẩm</a>
+<a href="orders.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M9 8h6M9 12h6M9 16h4"></path></svg> Đơn hàng <span class="badge">4</span></a>
+<a href="statistics.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg> Thống kê</a>
+</nav>
+<div class="side-label">Mở rộng</div>
+<nav class="side-nav">
+<a href="promotions.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg> Khuyến mãi</a>
+<a href="emails.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg> Email khách hàng</a>
+<a href="messages.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"></path><path d="M15 20v-4h4M9 9h6M9 13h4"></path></svg> Lời nhắn <span class="badge">3</span></a>
+<a href="settings.html"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg> Cài đặt cửa hàng</a>
+</nav>
+<div class="side-foot side-nav">
+<a href="../index.html" target="_blank"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16"></path><path d="M9 20v-6h6v6"></path></svg> Xem trang bán hàng</a>
+<a href="login.html" style="color: var(--red);"><svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg> Đăng xuất</a>
+</div>
+</aside>
+<!-- KHU VỰC NỘI DUNG CHÍNH -->
+<div class="admin-main">
+<header class="admin-topbar">
+<div>
+<div class="crumb">Quản trị / Sản phẩm / Tìm kiếm</div>
+<h1>Kết quả tìm kiếm sản phẩm</h1>
+</div>
+<div class="right">
+<span class="date"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg> Thứ Hai, 02/11/2026</span>
+
+<label class="theme-toggle-btn" for="theme-dark" title="Chuyển chế độ Sáng / Tối (Pure CSS)">
+<span class="lbl-dark">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    Tối
+  </span>
+<span class="lbl-light">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+    Sáng
+  </span>
+</label>
+<div class="admin-user">
+<span class="avatar">A</span>
+<div><b>Admin F&amp;F</b><small>Quản trị viên</small></div>
+</div>
+<a class="icon-btn" href="login.html" title="Đăng xuất"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l5-5-5-5M15 12H4"></path></svg></a>
+</div>
+</header>
+<main class="admin-content">
+<section class="card toolbar">
+<form action="products-search.html" autocomplete="off" method="get" style="display: flex; align-items: flex-end; gap: 10px; flex: 2 1 300px;">
+<label class="field" style="flex: 1;">
+<span>Tìm theo tên sản phẩm</span>
+<div class="search-input">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+<input class="input" id="ps-name" name="q" placeholder="Nhập tên sản phẩm..." value="RX-78-2"/>
+</div>
+</label>
+<button class="btn btn-dark" type="submit">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg> Tìm kiếm
+            </button>
+</form>
+<label class="field">
+<span>Loại sản phẩm</span>
+<select class="select" id="ps-cat">
+<option value="">Tất cả loại (52)</option>
+<option value="HG">High Grade (HG)</option>
+<option value="RG">Real Grade (RG)</option>
+<option value="MG">Master Grade (MG)</option>
+<option value="PG">Perfect Grade (PG)</option>
+<option value="SD">Super Deformed (SD)</option>
+</select>
+</label>
+<label class="field">
+<span>Sắp xếp</span>
+<select class="select" id="ps-sort">
+<option value="new">Mới thêm gần đây</option>
+<option value="name">Tên A - Z</option>
+<option value="price-asc">Giá tăng dần</option>
+<option value="price-desc">Giá giảm dần</option>
+</select>
+</label>
+<div class="toolbar-actions" style="margin-left: auto;">
+<label class="btn btn-outline" for="toast-filter-prod">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 5h18l-7 8.5V20l-4-2v-4.5z"></path></svg> Lọc sản phẩm
+            </label>
+<a class="btn btn-primary" href="product-form.html" style="margin-left: auto;">
+<svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg> Thêm sản phẩm
+            </a>
+</div>
+<div class="toolbar-note">
+<span><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg> Kết quả tìm kiếm: <b>4 sản phẩm</b></span>
+<a class="link" href="products.html">← Xem tất cả sản phẩm</a>
+</div>
+</section>
+<!-- LƯỚI 4 SẢN PHẨM MẪU -->
+<section class="admin-products">
+<!-- Card 1 -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="RX-78-2 Gundam (Revive)" src="../assets/images/products/rx78-2.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-HG">HG</span><span>Mã: GP0001</span></div>
+<h3 title="RX-78-2 Gundam (Revive)">RX-78-2 Gundam (Revive)</h3>
+<span class="price">350.000đ <s class="price-old">390.000đ</s> <span class="ap-off">-10%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>42</b></div>
+<div><small>Đã bán</small><b>318</b></div>
+<div><small>Đánh giá</small><b>4.9</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="RX-78-2 Gundam Ver.2.0" src="../assets/images/products/rx78-2.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-RG">RG</span><span>Mã: GP0011</span></div>
+<h3 title="RX-78-2 Gundam Ver.2.0">RX-78-2 Gundam Ver.2.0</h3>
+<span class="price">750.000đ <s class="price-old">820.000đ</s> <span class="ap-off">-9%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>26</b></div>
+<div><small>Đã bán</small><b>154</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="RX-78-2 Gundam Unleashed" src="../assets/images/products/rx78-2-unleashed.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-PG">PG</span><span>Mã: GP0031</span></div>
+<h3 title="RX-78-2 Gundam Unleashed">RX-78-2 Gundam Unleashed</h3>
+<span class="price">6.500.000đ <s class="price-old">7.200.000đ</s> <span class="ap-off">-10%</span></span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>5</b></div>
+<div><small>Đã bán</small><b>23</b></div>
+<div><small>Đánh giá</small><b>4.8</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="ap-card">
+<div class="ap-thumb">
+<img alt="SDEX RX-78-2 Gundam" src="../assets/images/products/sd-rx78-2.jpg"/>
+<span class="ap-status chip chip-delivered">Đã có người mua</span>
+</div>
+<div class="ap-body">
+<div class="top"><span class="grade grade-SD">SD</span><span>Mã: GP0037</span></div>
+<h3 title="SDEX RX-78-2 Gundam">SDEX RX-78-2 Gundam</h3>
+<span class="price">180.000đ</span>
+<div class="ap-stats">
+<div><small>Tồn kho</small><b>60</b></div>
+<div><small>Đã bán</small><b>412</b></div>
+<div><small>Đánh giá</small><b>4.9</b></div>
+</div>
+</div>
+<div class="ap-actions">
+<a class="btn btn-outline btn-sm" href="product-edit.html"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="m13.5 6.5 4 4"></path></svg> Sửa</a>
+<label class="btn btn-warning-outline btn-sm" for="modal-hide-prod"><svg class="icon" fill="none" stroke="currentColor" stroke-width="1.9" viewbox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1"></path></svg> Ẩn</label>
+</div>
+</article>
+</section>
+</main>
+</div>
+</div>
+</body>
+</html>

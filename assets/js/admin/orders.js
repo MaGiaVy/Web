@@ -21,9 +21,12 @@
   fillDistricts();
   $("of-city").addEventListener("change", fillDistricts);
 
-  // Danh sách cố định (không lọc thật). Chỉ khi mở từ trang khách hàng thì hiện đơn của khách đó
+  // Danh sách cố định (không lọc thật). Chỉ khi mở từ trang khách hàng thì hiện đơn của khách đó;
+  // mở từ Thống kê (có kèm from/to) thì chỉ hiện các đơn đã mua trong kỳ thống kê, khớp số đơn ở bảng Top 5
+  const statFrom = filterUser && getParam("from"), statTo = filterUser && getParam("to");
   function filtered() {
-    return orders.filter((o) => !filterUser || o.userId === filterUser.id);
+    return orders.filter((o) => !filterUser || (o.userId === filterUser.id && (!statFrom ||
+      (o.status !== "cancelled" && o.datetime.slice(0, 10) >= statFrom && o.datetime.slice(0, 10) <= statTo))));
   }
 
   function row(o) {
@@ -51,7 +54,7 @@
 
     // Chỉ hiện dòng này khi đang xem đơn của 1 khách (từ trang Người dùng / Thống kê)
     $("of-note").innerHTML = filterUser
-      ? `<div class="search-result-bar"><span>${icon("user")}<span>Đơn hàng của khách <b>${escapeHtml(filterUser.name)}</b>: <b>${list.length}</b> đơn</span></span>
+      ? `<div class="search-result-bar"><span>${icon("user")}<span>Đơn hàng của khách <b>${escapeHtml(filterUser.name)}</b>${statFrom ? ` từ ${formatDate(statFrom)} đến ${formatDate(statTo)} (không tính đơn hủy)` : ""}: <b>${list.length}</b> đơn · tổng <b>${money(list.reduce((s, o) => s + o.total, 0))}</b></span></span>
           <a class="link" href="orders.html" style="margin-left:auto">← Xem tất cả đơn hàng</a></div>`
       : "";
 
@@ -70,7 +73,7 @@
     if ($("of-status").value) parts.push($("of-status").selectedOptions[0].text);
     if (from || to) parts.push(`${from ? formatDate(from) : "..."} → ${to ? formatDate(to) : "..."}`);
     if ($("of-city").value) parts.push(($("of-district").value ? $("of-district").value + ", " : "") + $("of-city").value);
-    toast("Đã lọc đơn hàng", parts.length ? parts.join(" · ") : "Tất cả đơn hàng");
+    toast("Đã lọc danh sách đơn hàng!", parts.length ? parts.join(" · ") : "Tất cả đơn hàng");
   });
   $("of-reset").addEventListener("click", () => {
     $("order-filter").reset();
