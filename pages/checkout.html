@@ -155,15 +155,15 @@
                 <div class="field"><label>Họ tên người nhận <i>*</i></label><input class="input" id="na-name" value="Nguyễn Minh Anh" placeholder="Nguyễn Văn A"></div>
                 <div class="field"><label>Số điện thoại <i>*</i></label><input class="input" id="na-phone" value="0901 234 567" placeholder="09xx xxx xxx"></div>
                 <div class="field"><label>Tỉnh / Thành phố <i>*</i></label>
-                  <select class="select" id="na-city">
+                  <select class="select city-pick" id="na-city">
                     <option value="">-- Chọn Tỉnh / Thành phố --</option>
                     <option value="TP. Hồ Chí Minh" selected>TP. Hồ Chí Minh</option>
                     <option value="TP. Hà Nội">TP. Hà Nội</option>
                     <option value="TP. Đà Nẵng">TP. Đà Nẵng</option>
                   </select>
                 </div>
-                <div class="field"><label>Phường / Xã <i>*</i></label>
-                  <select class="select" id="na-ward">
+                <div class="field ward-field"><label>Phường / Xã <i>*</i></label>
+                  <select class="select ward-hcm" id="na-ward">
                     <option value="">-- Chọn Phường / Xã --</option>
                     <option value="Phường Sài Gòn">Phường Sài Gòn</option>
                     <option value="Phường Tân Định">Phường Tân Định</option>
@@ -183,6 +183,23 @@
                     <option value="Phường Hiệp Bình">Phường Hiệp Bình</option>
                     <option value="Phường Tăng Nhơn Phú">Phường Tăng Nhơn Phú</option>
                     <option value="Phường Linh Xuân">Phường Linh Xuân</option>
+                  </select>
+                  <select class="select ward-hn" aria-label="Phường / Xã của TP. Hà Nội">
+                    <option value="" selected>-- Chọn Phường / Xã --</option>
+                    <option>Phường Hoàn Kiếm</option><option>Phường Cửa Nam</option><option>Phường Ba Đình</option><option>Phường Ngọc Hà</option>
+                    <option>Phường Giảng Võ</option><option>Phường Hai Bà Trưng</option><option>Phường Bạch Mai</option><option>Phường Đống Đa</option>
+                    <option>Phường Láng</option><option>Phường Cầu Giấy</option><option>Phường Nghĩa Đô</option><option>Phường Yên Hòa</option>
+                    <option>Phường Thanh Xuân</option><option>Phường Hà Đông</option><option>Phường Long Biên</option><option>Phường Tây Hồ</option>
+                  </select>
+                  <select class="select ward-dn" aria-label="Phường / Xã của TP. Đà Nẵng">
+                    <option value="" selected>-- Chọn Phường / Xã --</option>
+                    <option>Phường Hải Châu</option><option>Phường Hòa Cường</option><option>Phường Thanh Khê</option><option>Phường An Khê</option>
+                    <option>Phường An Hải</option><option>Phường Sơn Trà</option><option>Phường Ngũ Hành Sơn</option><option>Phường Hòa Khánh</option>
+                    <option>Phường Hải Vân</option><option>Phường Liên Chiểu</option><option>Phường Cẩm Lệ</option><option>Phường Hòa Xuân</option>
+                    <option>Phường Hội An</option>
+                  </select>
+                  <select class="select ward-none" disabled aria-label="Chọn Tỉnh / Thành phố trước">
+                    <option>-- Chọn Tỉnh / Thành phố trước --</option>
                   </select>
                 </div>
                 <div class="field full"><label>Số nhà, tên đường <i>*</i></label><input class="input" id="na-street" placeholder="Ví dụ: 12 Võ Văn Ngân"></div>

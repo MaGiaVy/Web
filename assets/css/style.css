@@ -44,9 +44,48 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: var(--font); font-size: 14px; line-height: 1.55; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
 /* Đoạn văn tự tránh dòng cuối chỉ có 1 chữ lẻ (Chrome 117+; trình duyệt cũ bỏ qua, không ảnh hưởng gì) */
-body:not(.admin) :is(p, li, dd) { text-wrap: pretty; }
+body:not(.admin) { text-wrap: pretty; }
 /* Tiêu đề + dòng chào căn giữa của trang đăng nhập/đăng ký: chia đều các dòng cho cân */
 body:not(.admin) .auth-head :is(h1, p) { text-wrap: balance; }
+
+/* Ô Phường/Xã đổi theo Tỉnh/Thành đã chọn (CSS thuần, dùng :has).
+   Mặc định chỉ hiện danh sách của TP. Hồ Chí Minh; trình duyệt không hỗ trợ :has thì giữ nguyên như vậy. */
+.ward-field select:not(.ward-hcm) { display: none; }
+@supports selector(:has(*)) {
+  .form-grid:has(.city-pick option[value="TP. Hà Nội"]:checked) .ward-field .ward-hcm,
+  .form-grid:has(.city-pick option[value="TP. Đà Nẵng"]:checked) .ward-field .ward-hcm,
+  .form-grid:has(.city-pick option[value=""]:checked) .ward-field .ward-hcm { display: none; }
+  .form-grid:has(.city-pick option[value="TP. Hà Nội"]:checked) .ward-field .ward-hn,
+  .form-grid:has(.city-pick option[value="TP. Đà Nẵng"]:checked) .ward-field .ward-dn,
+  .form-grid:has(.city-pick option[value=""]:checked) .ward-field .ward-none { display: inline-flex; }
+}
+
+/* Danh sách Phường/Xã xổ xuống ngay dưới ô, chỉ cao khoảng 6 dòng, còn lại kéo thanh cuộn
+   (Chrome 135+ "base-select"; trình duyệt cũ bỏ qua và dùng danh sách mặc định) */
+@supports (appearance: base-select) {
+  .ward-field select,
+  .ward-field select::picker(select) { appearance: base-select; }
+  .ward-field select::picker-icon { display: none; }
+  .ward-field select { align-items: center; line-height: 1.2; }
+  .ward-field select::picker(select) {
+    box-sizing: border-box;
+    max-height: 252px;
+    margin-top: 6px;
+    padding: 6px;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow-lg);
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: none;
+  }
+  .ward-field select option { padding: 9px 12px; border-radius: var(--radius-sm); font-size: 14px; cursor: pointer; }
+  .ward-field select option::checkmark { display: none; }
+  .ward-field select option:hover,
+  .ward-field select option:focus-visible { background: var(--bg); }
+  .ward-field select option:checked { background: var(--blue-soft); color: var(--blue); font-weight: 600; }
+}
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
