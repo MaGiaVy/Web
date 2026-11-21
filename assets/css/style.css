@@ -43,6 +43,10 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: var(--font); font-size: 14px; line-height: 1.55; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
+/* Đoạn văn tự tránh dòng cuối chỉ có 1 chữ lẻ (Chrome 117+; trình duyệt cũ bỏ qua, không ảnh hưởng gì) */
+body:not(.admin) :is(p, li, dd) { text-wrap: pretty; }
+/* Tiêu đề + dòng chào căn giữa của trang đăng nhập/đăng ký: chia đều các dòng cho cân */
+body:not(.admin) .auth-head :is(h1, p) { text-wrap: balance; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
