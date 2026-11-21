@@ -585,12 +585,21 @@ h1, h2, h3, h4, p { margin: 0; }
 .kpi-grid.kpi-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+/* Thẻ KPI dạng lưới 3 hàng, cột chữ không còn bị kẹp giữa biểu tượng và biểu đồ cột:
+   [icon] NHÃN
+   GIÁ TRỊ ............ [biểu đồ cột]
+   ghi chú */
 .card.kpi {
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icon label label"
+    "value value bars"
+    "sub sub sub";
+  align-items: center;
+  align-content: start;
+  column-gap: 14px;
   padding: 18px 20px;
   overflow: visible;
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
@@ -601,6 +610,7 @@ h1, h2, h3, h4, p { margin: 0; }
   box-shadow: var(--shadow-lg);
 }
 .kpi-icon {
+  grid-area: icon;
   width: 40px;
   height: 40px;
   border-radius: 10px;
@@ -615,11 +625,9 @@ h1, h2, h3, h4, p { margin: 0; }
 .kpi-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
 .kpi-red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
 
-.card.kpi > div:not(.kpi-icon):not(.micro-bars-box) {
-  flex: 1;
-  min-width: 0;
-}
+.card.kpi > div:not(.kpi-icon):not(.micro-bars-box) { display: contents; }
 .kpi-label {
+  grid-area: label;
   font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
@@ -627,28 +635,28 @@ h1, h2, h3, h4, p { margin: 0; }
   color: var(--muted);
 }
 .kpi-value {
+  grid-area: value;
   font-family: var(--font-display);
   font-size: 25px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-head);
-  margin: 6px 0 4px;
+  margin: 14px 0 0;
 }
 .kpi-sub {
+  grid-area: sub;
+  margin-top: 4px;
   font-size: 12px;
+  line-height: 1.45;
   color: var(--muted);
 }
-.kpi-link {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--primary);
-}
-.kpi-link:hover { text-decoration: underline; }
+/* Cả thẻ là một liên kết: không gạch chân chữ khi rê chuột */
+.kpi-link { color: inherit; text-decoration: none; }
+.kpi-link:hover { text-decoration: none; }
 
 /* 7-BAR LINEAR SPARKLINE INSIDE KPI */
 .micro-bars-box {
+  grid-area: bars;
   display: flex;
   align-items: flex-end;
   gap: 3.5px;
@@ -657,7 +665,7 @@ h1, h2, h3, h4, p { margin: 0; }
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: 6px;
-  align-self: flex-end;
+  align-self: end;
   flex-shrink: 0;
 }
 .micro-bars-box span {
@@ -844,7 +852,12 @@ h1, h2, h3, h4, p { margin: 0; }
   border-radius: 16px;
   box-shadow: var(--shadow-sm);
   overflow: hidden;
+  /* Chuyển mẫu bằng mũi tên/danh sách: bấm nhanh hoặc bấm đúp không bị bôi xanh chữ và ảnh */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
+.hero-showcase-card img { -webkit-user-drag: none; user-drag: none; }
 .hero-watermark-bg {
   position: absolute;
   left: 50%;
@@ -1318,6 +1331,9 @@ h1, h2, h3, h4, p { margin: 0; }
   text-align: left;
   white-space: nowrap;
 }
+/* Tiêu đề cột căn theo đúng cột dữ liệu bên dưới (trước đây bị quy tắc text-align: left đè) */
+.table thead th.right { text-align: right; }
+.table thead th.center { text-align: center; }
 .table tbody td {
   padding: 13px 16px;
   border-bottom: 1px solid var(--row-border);
@@ -1384,9 +1400,21 @@ h1, h2, h3, h4, p { margin: 0; }
   color: var(--text-head);
 }
 .cell-product small,
-.cell-sub,
-.cell-addr {
+.cell-sub {
   display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+/* Ô địa chỉ: giữ nguyên là ô bảng (không đặt block lên <td>), dòng trên là phường/xã, dòng dưới là tỉnh/thành */
+.cell-addr span {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-head);
+}
+.cell-addr small {
+  display: block;
+  margin-top: 2px;
   font-size: 12px;
   color: var(--muted);
 }
@@ -1665,26 +1693,14 @@ h1, h2, h3, h4, p { margin: 0; }
   gap: 8px;
   color: var(--muted);
   font-size: 13px;
+  text-align: center;
 }
 .upload-box .placeholder .icon { font-size: 38px; opacity: 0.55; }
-.upload-preview {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 18px;
-  border-radius: 10px;
-  background: var(--emerald-bg);
-  border: 1px dashed var(--emerald-border);
-  color: var(--emerald);
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-}
+/* Chưa chọn file: hiện khung trống. Đã chọn file (:valid): hiện ảnh xem trước. 100% CSS */
+.upload-box .upload-sample { display: none; }
 .css-file-input { display: none; }
-.css-file-input:valid ~ .upload-box .placeholder,
-.css-file-input:valid ~ .upload-box > img { display: none; }
-.css-file-input:valid ~ .upload-box .upload-preview { display: flex; }
+.css-file-input:valid ~ .upload-box .placeholder { display: none; }
+.css-file-input:valid ~ .upload-box .upload-sample { display: block; }
 
 .file-label {
   display: flex;
@@ -1726,8 +1742,23 @@ h1, h2, h3, h4, p { margin: 0; }
   color: var(--text-head);
 }
 .spec-box-head .icon { color: var(--primary); font-size: 16px; }
-.money-input { font-family: var(--font-display); font-weight: 700; }
+.money-input { position: relative; display: flex; align-items: center; font-family: var(--font-display); font-weight: 700; }
+.money-input .input { padding-right: 34px; font-variant-numeric: tabular-nums; }
+.money-input em { position: absolute; right: 14px; font-style: normal; font-weight: 700; color: var(--muted); pointer-events: none; user-select: none; }
 .line-calc { font-family: var(--font-display); font-weight: 700; color: var(--emerald); }
+/* Chú thích "đơn giá × số lượng" nằm dòng riêng dưới thành tiền, không dính vào cùng dòng */
+td .line-calc { display: block; margin-top: 2px; font-family: var(--font); font-size: 11.5px; font-weight: 500; }
+
+/* Đầu trang chi tiết: tiêu đề + trạng thái bên trái, nút thao tác bên phải */
+.page-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+}
+.page-title h1 { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; line-height: 1.25; }
+.page-title p { margin-top: 4px; font-size: 13px; }
 
 /* KHUNG CHỈNH SỬA ĐỒNG BỘ BỐ CỤC TRANG KHÁCH (PRODUCT EDIT / ADD) */
 .pf-section-box {
@@ -1810,7 +1841,27 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 
 /* ---------- ORDER DETAIL & TIMELINE ---------- */
-.od-section { margin-bottom: 18px; }
+.od-section {
+  display: grid;
+  gap: 4px;
+  padding: 16px 22px;
+  font-size: 13.5px;
+}
+.od-section + .od-section { border-top: 1px dashed var(--border-strong); }
+.od-section h4 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.od-section b { font-weight: 600; color: var(--text-head); }
+.od-section span { color: var(--text-2); }
+.od-section .link { justify-self: start; margin-top: 2px; }
 .od-totals {
   padding: 16px 22px;
   border-top: 1px solid var(--border);
@@ -1834,6 +1885,9 @@ h1, h2, h3, h4, p { margin: 0; }
   color: var(--text-head);
 }
 .od-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 10px 14px;
   border-radius: 9px;
   background: var(--amber-bg);
@@ -2131,20 +2185,52 @@ h1, h2, h3, h4, p { margin: 0; }
 .mail-foot { font-size: 11.5px; color: var(--muted); }
 
 .message-list { display: flex; flex-direction: column; }
+/* Kiểu hộp thư, mỗi lời nhắn 3 dòng, nội dung luôn được chiếm trọn chiều ngang nên tin dài vẫn dễ đọc:
+   Dòng 1: tên + liên hệ ........ giờ gửi + trạng thái
+   Dòng 2: nội dung (tự xuống dòng theo độ dài)
+   Dòng 3: nút thao tác, luôn thẳng hàng với nội dung */
 .message-item {
   display: grid;
-  grid-template-columns: 230px 1fr auto auto;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "avatar who side"
+    "avatar text text"
+    "avatar actions actions";
+  column-gap: 14px;
+  row-gap: 8px;
   align-items: center;
-  gap: 16px;
-  padding: 16px 22px;
+  padding: 16px 24px 14px;
   border-bottom: 1px solid var(--row-border);
 }
 .message-item:last-child { border-bottom: none; }
-.message-item.is-new { background: var(--primary-sub); }
-.message-text { font-size: 13.5px; color: var(--text-head); }
-.message-side { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-.message-side small { font-size: 11.5px; color: var(--muted); }
-.message-actions { display: flex; gap: 8px; }
+.message-item.is-new { background: var(--primary-sub); box-shadow: inset 3px 0 0 var(--primary); }
+.message-item .cell-user { display: contents; }
+.message-item .cell-user .avatar { grid-area: avatar; align-self: start; }
+.message-item .cell-user > div {
+  grid-area: who;
+  display: flex;
+  align-items: baseline;
+  gap: 4px 12px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.message-item .cell-user small { font-size: 12.5px; }
+.message-text {
+  grid-area: text;
+  max-width: 80ch;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+.message-item.is-new .message-text { color: var(--text-head); font-weight: 500; }
+.message-side { grid-area: side; display: flex; flex-direction: row; align-items: center; gap: 10px; }
+.message-side small { font-size: 12px; color: var(--muted); }
+.message-actions { grid-area: actions; display: flex; align-items: center; justify-content: flex-start; gap: 6px; }
+/* Nút phụ "Đánh dấu đã phản hồi" nhẹ hơn: không viền, chỉ hiện nền khi rê chuột */
+.message-item.is-new .message-actions .btn-outline { border-color: transparent; background: transparent; color: var(--muted); }
+.message-item.is-new .message-actions .btn-outline:hover { background: var(--bg-subtle); color: var(--text-head); }
 
 .settings-preview { display: flex; flex-direction: column; }
 
@@ -2259,38 +2345,50 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .lock-form { display: flex; flex-direction: column; gap: 10px; text-align: left; }
 
+/* Thông báo: góc trên bên phải, viền trái màu theo loại, giống thông báo phía khách */
 .css-toast {
   position: fixed;
-  right: 22px;
-  bottom: 22px;
+  top: 96px;
+  right: 20px;
   z-index: 1050;
   display: none;
   align-items: flex-start;
   gap: 12px;
-  max-width: 360px;
+  width: 360px;
+  max-width: calc(100vw - 40px);
   padding: 14px 16px;
   border-radius: 12px;
   background: var(--modal-bg);
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--emerald);
   box-shadow: var(--shadow-lg);
+  animation: admin-toast-in 0.25s ease-out;
 }
+.css-toast.toast-info { border-left-color: var(--primary); }
+.css-toast.toast-warning { border-left-color: var(--amber); }
 .css-toggle:checked + .css-toast,
 .saved-anchor:target ~ .toast-saved { display: flex; }
+@keyframes admin-toast-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: none; }
+}
 
 .toast-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
   background: var(--emerald-bg);
   color: var(--emerald);
   flex-shrink: 0;
 }
+.toast-icon .icon { font-size: 16px; }
 .toast-info .toast-icon { background: var(--primary-sub); color: var(--primary); }
 .toast-warning .toast-icon { background: var(--amber-bg); color: var(--amber); }
-.toast-body b { display: block; font-size: 13.5px; color: var(--text-head); }
-.toast-body p { font-size: 12.5px; color: var(--muted); }
+.toast-body { flex: 1; min-width: 0; }
+.toast-body b { display: block; margin-bottom: 2px; font-size: 14px; color: var(--text-head); }
+.toast-body p { font-size: 13px; color: var(--muted); }
 .toast-close {
   color: var(--muted);
   cursor: pointer;
@@ -2316,8 +2414,11 @@ h1, h2, h3, h4, p { margin: 0; }
   .stat-grid-duo,
   .hero-showcase-card { grid-template-columns: 1fr; }
   .admin-products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .message-item { grid-template-columns: 1fr; }
-  .message-side { align-items: flex-start; text-align: left; }
+  .message-item {
+    grid-template-columns: 38px minmax(0, 1fr);
+    grid-template-areas: "avatar who" "avatar side" "avatar text" "avatar actions";
+  }
+  .message-side { justify-content: flex-start; }
   .cols-3, .stat-summary-strip { grid-template-columns: 1fr; }
   .stat-month-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

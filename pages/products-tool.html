@@ -349,16 +349,8 @@
     const maxPages = 1;
     function switchPage(p) {
       if (p < 1 || p > maxPages) return;
-      curPage = p;
-      document.querySelectorAll('#pagination .pagination button[data-p]').forEach(b => {
-        b.classList.toggle('active', parseInt(b.getAttribute('data-p')) === p);
-      });
-      const prev = document.getElementById('btn-prev');
-      const next = document.getElementById('btn-next');
-      if (prev) prev.disabled = (curPage === 1);
-      if (next) next.disabled = (curPage === maxPages);
-      toast(`Đã chuyển sang Trang ${p}!`, 'Đang hiển thị danh sách các mô hình Gunpla tuyển chọn', 'info');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Trang tĩnh: chỉ báo thông báo, danh sách và nút trang 1 giữ nguyên
+      toast('Phân trang kết quả', `Trang ${p} / ${maxPages}`, 'info');
     }
   </script>
 </body>
